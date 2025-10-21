@@ -1049,7 +1049,11 @@
 }
 
 .input-field--start-icon .input-icon {
+  position: absolute;
   left: 12px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 /* Legacy support for existing .input-with-close */
@@ -2968,6 +2972,15 @@ body.modal-open {
 .tab-group + .tab-content-container {
   margin-top: 16px;
   width: 100%;
+}
+
+/* Component Content Container (No Tab Mode) */
+.component-content-container {
+  margin-top: 24px;
+  width: 100%;
+  min-height: 400px;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 .tab-content-panel .btn--tab_util {
   position: absolute;

@@ -31,8 +31,8 @@ class ComponentEngine {
   }
 
   /**
-   * JSON 데이터 로딩
-   * @param {string} path - JSON 파일 경로
+   * JSON 데이터 로딩 (전역 데이터 또는 fetch)
+   * @param {string} path - JSON 파일 경로 또는 컴포넌트 타입
    * @returns {Promise<Object>} - 로드된 데이터
    */
   async loadData(path) {
@@ -42,6 +42,31 @@ class ComponentEngine {
       return this.dataCache.get(path);
     }
 
+    // 1. 전역 ComponentData에서 먼저 확인 (로컬 파일 지원)
+    if (typeof window !== "undefined" && window.ComponentData) {
+      // path가 컴포넌트 타입인 경우 (예: 'typography')
+      if (window.ComponentData[path]) {
+        const data = window.ComponentData[path];
+        this.dataCache.set(path, data);
+        console.log(
+          `[ComponentEngine] Loaded data from ComponentData: ${path}`
+        );
+        return data;
+      }
+
+      // path가 파일 경로인 경우 파일명에서 타입 추출
+      const match = path.match(/\/([^/]+)\.(?:json|data\.js)$/);
+      if (match && window.ComponentData[match[1]]) {
+        const data = window.ComponentData[match[1]];
+        this.dataCache.set(path, data);
+        console.log(
+          `[ComponentEngine] Loaded data from ComponentData: ${match[1]}`
+        );
+        return data;
+      }
+    }
+
+    // 2. fetch로 JSON 파일 로드 (서버 환경)
     try {
       const response = await fetch(path);
       if (!response.ok) {
@@ -51,7 +76,7 @@ class ComponentEngine {
       }
       const data = await response.json();
       this.dataCache.set(path, data);
-      console.log(`[ComponentEngine] Loaded data: ${path}`);
+      console.log(`[ComponentEngine] Loaded data via fetch: ${path}`);
       return data;
     } catch (error) {
       console.error(
@@ -124,6 +149,12 @@ class ComponentEngine {
 
     targetElement.innerHTML = html;
     console.log(`[ComponentEngine] Mounted ${type} to`, targetElement);
+
+    // 렌더러의 afterRender 메서드 호출 (있는 경우)
+    const renderer = this.renderers.get(type);
+    if (renderer && typeof renderer.afterRender === "function") {
+      renderer.afterRender(targetElement, data);
+    }
   }
 
   /**

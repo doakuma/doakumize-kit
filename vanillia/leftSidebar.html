@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT서비스 AI비서</title>
+    <link rel="stylesheet" href="resources/styles/common.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- lnb -->
+      <aside class="lnb">
+        <!-- isShrink 추가 삭제  -->
+        <div class="lnb-content">
+          <header class="lnb-header">
+            <button class="btn btn--small btn--only-icon" data-lnb-expand>
+              <i class="icon icon--medium icon--lnb"></i>
+            </button>
+            <h1 class="text-h4">AI Prompt Studio</h1>
+            <button class="btn btn--small btn--only-icon" data-lnb-fold>
+              <i class="icon icon--expanding"></i>
+            </button>
+          </header>
+          <main class="lnb-body">
+            <div class="lnb-body-util">
+              <button class="btn btn--point btn--medium">
+                <i class="icon icon--addpjt"></i>
+                <span class="lnb-body-text">프로젝트 등록</span>
+              </button>
+            </div>
+            <div class="lnb-body-menu">
+              <h2 class="text-body-sm">등록된 프로젝트</h2>
+              <div class="lnb-body-menu-list-wrapper">
+                <nav class="lnb-body-menu-list">
+                  <!-- 프로젝트 1 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--basic">Basic</div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--premium">
+                        Premium
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 프로젝트 2 -->
+                  <div class="lnb-menu-item">
+                    <div class="lnb-menu-item__header">
+                      <div class="chip chip--rounded chip--standard">
+                        Standard
+                      </div>
+                      <button class="lnb-menu-item__link" type="button">
+                        <span class="lnb-menu-item__text">프로젝트 이름</span>
+                      </button>
+                      <button class="lnb-menu-item__toggle" type="button">
+                        <i class="icon icon--chevron-down"></i>
+                      </button>
+                    </div>
+                    <div class="lnb-menu-item__submenu">
+                      <ul class="lnb-submenu">
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>대시보드</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>API 관리</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>분석</span>
+                          </a>
+                        </li>
+                        <li class="lnb-submenu__item">
+                          <a href="#" class="lnb-submenu__link">
+                            <span>멤버 관리</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </main>
+          <footer class="lnb-footer">
+            <ul class="lnb-footer-util">
+              <li class="lnb-footer-util__item">
+                <button class="lnb-footer-util__link">
+                  <i class="icon icon--small icon--aI-talk"></i>
+                  Talk to AI
+                </button>
+              </li>
+              <li class="lnb-footer-util__item">
+                <button class="lnb-footer-util__link">
+                  <i class="icon icon--small icon--api-history"></i>
+                  호출 이력
+                </button>
+              </li>
+              <li class="lnb-footer-util__item">
+                <button class="lnb-footer-util__link">
+                  <i class="icon icon--small icon--chart"></i>
+                  비용 대시보드
+                </button>
+              </li>
+            </ul>
+            <div class="lnb-footer-user">
+              <i class="icon icon--medium icon--user"></i>
+              <span class="lnb-footer-user__text text-body-xs">관리자</span>
+              <span class="lnb-footer-user__plan text-body-xs">Premium</span>
+            </div>
+          </footer>
+        </div>
+      </aside>
+      <!--// lnb -->
+
+      <!-- content -->
+      <main id="content">
+        <div class="content-inner">
+          <header class="content-header">
+            <h2 class="tit-header">LNB</h2>
+            <p class="txt-header">
+              프로젝트는 여러 API를 묶어 관리하는 작업 공간입니다. 이름, 설명,
+              환경 등을 설정하면 이후 API 추가 시 자동으로 적용됩니다.
+            </p>
+          </header>
+        </div>
+      </main>
+      <!--// content -->
+    </div>
+    <!-- scripts -->
+    <script src="resources/js/common.js"></script>
+  </body>
+</html>
