@@ -171,7 +171,8 @@
   mask-position: center;
 }
 .content-inner.content-inner--components {
-  width: 1140px;
+  max-width: 1140px;
+  width: 100%;
 }
 
 .component-code-toggle {
