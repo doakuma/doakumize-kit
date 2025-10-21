@@ -1,0 +1,380 @@
+/* ========================================
+ * Component Navigation Styles
+ * ======================================== */
+.component-navigation {
+  padding: 24px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-primary);
+}
+
+.component-nav-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.component-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.component-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.component-nav-item:hover:not(.component-nav-item--disabled) {
+  border-color: var(--primary-500);
+  background: var(--primary-50);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.component-nav-item--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.component-nav-item.active {
+  border-color: var(--primary-500);
+  background: var(--primary-50);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.component-nav-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.component-nav-content {
+  flex: 1;
+}
+
+.component-nav-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.component-nav-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ========================================
+ * Component Demo Styles
+ * ======================================== */
+.component-section {
+  padding: 24px;
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  background-color: var(--bg-primary);
+}
+
+.component-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.component-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 24px 0 8px 0;
+}
+
+.component-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.component-grid {
+  --minmax: 200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--minmax), 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.component-grid.component-grid--icon {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.component-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  background-color: var(--bg-primary);
+}
+
+.component-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.component-source-template {
+  display: none;
+}
+
+.component-label {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-secondary);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.variant-group {
+  margin-bottom: 32px;
+}
+.btn .icon {
+  background-color: currentColor;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+.content-inner.content-inner--components {
+  width: 1140px;
+}
+
+.component-code-toggle {
+  align-self: flex-end;
+  width: auto;
+  justify-content: center;
+  gap: 4px;
+}
+
+.component-code {
+  margin-top: 8px;
+  background: var(--gray-900);
+  border-radius: 6px;
+  padding: 16px;
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+  width: 100%;
+}
+
+.component-code pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.component-code code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--gray-100);
+  white-space: pre;
+  display: block;
+}
+
+.component-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.component-code-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.component-code-copy {
+  font-size: 12px;
+  padding: 4px 8px;
+  background: var(--gray-800);
+  color: var(--gray-300);
+  border: 1px solid var(--gray-700);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.component-code-copy:hover {
+  background: var(--gray-700);
+  color: var(--gray-100);
+  border-color: var(--gray-600);
+}
+
+.component-code-copy.copied {
+  background: var(--success-600);
+  color: white;
+  border-color: var(--success-600);
+}
+
+/* Syntax highlighting */
+.component-code .token-tag {
+  color: #7dd3fc;
+}
+.component-code .token-attr {
+  color: #a78bfa;
+}
+.component-code .token-value {
+  color: #fbbf24;
+}
+.component-code .token-text {
+  color: #d1d5db;
+}
+
+/* ========================================
+ * Icon Component Styles
+ * ======================================== */
+.component-category-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 32px 0 16px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-secondary);
+}
+
+.component-category-title:first-of-type {
+  margin-top: 16px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.icon-clickable {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-primary);
+}
+
+.icon-clickable:hover {
+  background-color: var(--primary-50);
+  border-color: var(--primary-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-clickable.icon-selected {
+  background-color: var(--primary-100);
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 2px var(--primary-200);
+}
+
+/* Icon Code Display Area - Modal Version */
+.icon-code-display {
+  margin: 0;
+  padding: 20px;
+  background: var(--gray-900);
+  border-radius: 8px;
+  border: 1px solid var(--gray-700);
+}
+
+.icon-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-700);
+}
+
+.icon-code-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-200);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.icon-code-content {
+  margin: 0;
+  padding: 16px;
+  background: var(--gray-950);
+  border-radius: 6px;
+  overflow-x: auto;
+  max-height: 300px;
+}
+
+.icon-code-content code {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--gray-100);
+  white-space: pre;
+  display: block;
+}
+
+/* Icon Modal - 추가 스타일 */
+#iconCodeModal .modal__body {
+  padding: 32px;
+}
+
+#iconCodeModal .icon-preview-container {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--gray-50);
+  border-radius: 8px;
+}
+
+#iconCodeModal .icon-preview-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+#iconCodeModal .icon-preview-item {
+  text-align: center;
+}
+
+#iconCodeModal .icon-preview-label {
+  font-size: 11px;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
+#iconCodeModal .modal__body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
