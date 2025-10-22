@@ -403,35 +403,83 @@
    * 문자 수 카운터가 있는 입력 필드의 실시간 카운팅과 포커스 상태를 관리합니다.
    */
   function initInputCounters() {
+    // 초기 카운터 값 설정
     const inputsWithCounters = document.querySelectorAll(
-      ".input-field--with-counter .input, .input-field--with-counter textarea"
+      ".input-field--with-counter:not([data-counter-initialized]) .input, .input-field--with-counter:not([data-counter-initialized]) textarea"
     );
 
     inputsWithCounters.forEach((input) => {
-      const counter = input.parentElement.querySelector(".input-counter");
+      const inputField = input.closest(".input-field--with-counter");
+      if (!inputField) return;
+
+      const counter = inputField.querySelector(".input-counter");
       const maxLength = input.getAttribute("maxlength") || 500;
 
-      function updateCounter() {
-        const currentLength = input.value.length;
-        counter.textContent = `${currentLength}/${maxLength}`;
-
-        // 상위 input-field에 focused 클래스 토글
-        const inputField = input.closest(".input-field--with-counter");
-        if (input === document.activeElement) {
-          inputField.classList.add("input-field--focused");
-        } else {
-          inputField.classList.remove("input-field--focused");
-        }
-      }
+      if (!counter) return;
 
       // 초기 카운터 설정
-      updateCounter();
+      const currentLength = input.value.length;
+      counter.textContent = `${currentLength}/${maxLength}`;
 
-      // 이벤트 리스너
-      input.addEventListener("input", updateCounter);
-      input.addEventListener("focus", updateCounter);
-      input.addEventListener("blur", updateCounter);
+      // 초기화 완료 표시
+      inputField.setAttribute("data-counter-initialized", "true");
     });
+
+    console.log(
+      `[Common] Initialized ${inputsWithCounters.length} input counter(s)`
+    );
+  }
+
+  /**
+   * Input Counter 이벤트 위임 (동적으로 추가된 input에도 적용)
+   */
+  function initInputCounterEventDelegation() {
+    // input 이벤트
+    document.addEventListener("input", function (e) {
+      const input = e.target;
+      if (input.classList.contains("input") || input.tagName === "TEXTAREA") {
+        const inputField = input.closest(".input-field--with-counter");
+        if (inputField) {
+          const counter = inputField.querySelector(".input-counter");
+          const maxLength = input.getAttribute("maxlength") || 500;
+
+          if (counter) {
+            const currentLength = input.value.length;
+            counter.textContent = `${currentLength}/${maxLength}`;
+          }
+        }
+      }
+    });
+
+    // focus 이벤트
+    document.addEventListener(
+      "focus",
+      function (e) {
+        const input = e.target;
+        if (input.classList.contains("input") || input.tagName === "TEXTAREA") {
+          const inputField = input.closest(".input-field--with-counter");
+          if (inputField) {
+            inputField.classList.add("input-field--focused");
+          }
+        }
+      },
+      true
+    ); // capture phase
+
+    // blur 이벤트
+    document.addEventListener(
+      "blur",
+      function (e) {
+        const input = e.target;
+        if (input.classList.contains("input") || input.tagName === "TEXTAREA") {
+          const inputField = input.closest(".input-field--with-counter");
+          if (inputField) {
+            inputField.classList.remove("input-field--focused");
+          }
+        }
+      },
+      true
+    ); // capture phase
   }
 
   /**
@@ -602,19 +650,48 @@
    * 전체 선택/해제, indeterminate 상태 관리
    */
   function initCheckboxGroups() {
-    document.querySelectorAll(".chk-group").forEach((group) => {
+    // 초기 상태 설정
+    const groups = document.querySelectorAll(
+      ".chk-group:not([data-chkgroup-initialized])"
+    );
+
+    groups.forEach((group) => {
       const selectAll = group.querySelector(".chk-group__all");
       const items = group.querySelectorAll(".chk-group__item");
 
       if (!selectAll || items.length === 0) return;
 
-      // 전체 선택 체크박스 클릭 시
-      selectAll.addEventListener("change", function () {
+      // 초기 상태 설정
+      updateSelectAllState(selectAll, items);
+
+      // 초기화 완료 표시
+      group.setAttribute("data-chkgroup-initialized", "true");
+    });
+
+    console.log(`[Common] Initialized ${groups.length} checkbox group(s)`);
+  }
+
+  /**
+   * Checkbox Group 이벤트 위임 (동적으로 추가된 체크박스에도 적용)
+   */
+  function initCheckboxGroupEventDelegation() {
+    // change 이벤트 위임
+    document.addEventListener("change", function (e) {
+      // 전체 선택 체크박스
+      if (e.target.classList.contains("chk-group__all")) {
+        const selectAll = e.target;
+        const group = selectAll.closest(".chk-group");
+        if (!group) return;
+
+        const items = group.querySelectorAll(".chk-group__item");
+
+        // 모든 아이템 체크 상태 동기화
         items.forEach((item) => {
           if (!item.disabled) {
             item.checked = selectAll.checked;
           }
         });
+
         updateSelectAllState(selectAll, items);
 
         // 커스텀 이벤트 발생
@@ -628,11 +705,18 @@
             },
           })
         );
-      });
+      }
 
-      // 개별 체크박스 클릭 시
-      items.forEach((item) => {
-        item.addEventListener("change", function () {
+      // 개별 체크박스
+      if (e.target.classList.contains("chk-group__item")) {
+        const item = e.target;
+        const group = item.closest(".chk-group");
+        if (!group) return;
+
+        const selectAll = group.querySelector(".chk-group__all");
+        const items = group.querySelectorAll(".chk-group__item");
+
+        if (selectAll && items.length > 0) {
           updateSelectAllState(selectAll, items);
 
           // 커스텀 이벤트 발생
@@ -646,29 +730,28 @@
               },
             })
           );
-        });
-      });
-
-      // 초기 상태 설정
-      updateSelectAllState(selectAll, items);
-    });
-
-    // 전체 선택 상태 업데이트 함수
-    function updateSelectAllState(selectAll, items) {
-      const enabledItems = Array.from(items).filter((item) => !item.disabled);
-      const checkedCount = enabledItems.filter((item) => item.checked).length;
-      const totalCount = enabledItems.length;
-
-      if (checkedCount === 0) {
-        selectAll.checked = false;
-        selectAll.indeterminate = false;
-      } else if (checkedCount === totalCount) {
-        selectAll.checked = true;
-        selectAll.indeterminate = false;
-      } else {
-        selectAll.checked = false;
-        selectAll.indeterminate = true;
+        }
       }
+    });
+  }
+
+  /**
+   * 전체 선택 상태 업데이트 함수
+   */
+  function updateSelectAllState(selectAll, items) {
+    const enabledItems = Array.from(items).filter((item) => !item.disabled);
+    const checkedCount = enabledItems.filter((item) => item.checked).length;
+    const totalCount = enabledItems.length;
+
+    if (checkedCount === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else if (checkedCount === totalCount) {
+      selectAll.checked = true;
+      selectAll.indeterminate = false;
+    } else {
+      selectAll.checked = false;
+      selectAll.indeterminate = true;
     }
   }
 
@@ -676,8 +759,11 @@
    * Popover 기능
    * 타겟 엘리먼트에 마우스 오버 시 팝오버를 표시합니다.
    * 하나의 전역 팝오버를 재사용하여 data 속성으로 컨텐츠를 동적 렌더링
+   * 이벤트 위임 방식으로 동적으로 추가된 요소도 자동 지원
    */
   function initPopovers() {
+    console.log("[Common] Initializing Popover with event delegation...");
+
     // 전역 팝오버 엘리먼트 생성 (하나만 재사용)
     let globalPopover = document.getElementById("global-popover");
     if (!globalPopover) {
@@ -708,10 +794,16 @@
       clearPopoverState();
     }
 
-    // 모든 popover 트리거 초기화
-    document.querySelectorAll("[data-popover]").forEach((trigger) => {
-      // 마우스 엔터 이벤트
-      trigger.addEventListener("mouseenter", function () {
+    // 이벤트 위임: document에서 mouseover/mouseout으로 처리
+    document.addEventListener("mouseover", function (e) {
+      const trigger = e.target.closest("[data-popover]");
+
+      if (trigger) {
+        // 이미 같은 트리거에 대해 처리 중이면 무시
+        if (currentTrigger === trigger) {
+          return;
+        }
+
         clearTimeout(hideTimeout);
         currentTrigger = trigger;
         currentAction = trigger.getAttribute("data-popover-action");
@@ -722,10 +814,18 @@
         showTimeout = setTimeout(() => {
           showPopover(trigger, globalPopover);
         }, delay);
-      });
+      }
+    });
 
-      // 마우스 리브 이벤트
-      trigger.addEventListener("mouseleave", function () {
+    document.addEventListener("mouseout", function (e) {
+      const trigger = e.target.closest("[data-popover]");
+
+      if (trigger) {
+        // relatedTarget이 트리거 내부 요소면 무시 (자식 요소로 이동한 경우)
+        if (trigger.contains(e.relatedTarget)) {
+          return;
+        }
+
         clearTimeout(showTimeout);
 
         // action이 "close"인 경우 자동으로 닫히지 않음
@@ -734,7 +834,7 @@
             closePopover();
           }, 100);
         }
-      });
+      }
     });
 
     // 팝오버에 마우스 오버 시 유지
@@ -761,6 +861,8 @@
         closePopover();
       }
     });
+
+    console.log("[Common] Popover event delegation initialized");
   }
 
   /**
@@ -1099,45 +1201,24 @@
 
   /**
    * 탭 컴포넌트 초기화
+   * 이벤트는 이벤트 위임으로 처리되므로, 여기서는 초기 상태만 설정
    */
   function initTabs() {
-    const tabGroups = document.querySelectorAll(".tab-group");
+    const tabGroups = document.querySelectorAll(
+      ".tab-group:not([data-tab-initialized])"
+    );
 
     tabGroups.forEach((group) => {
-      initTabGroup(group);
+      const tabs = group.querySelectorAll(".tab");
+
+      // 기본 활성 탭 설정
+      setDefaultActiveTab(group, tabs);
+
+      // 초기화 완료 표시
+      group.setAttribute("data-tab-initialized", "true");
     });
-  }
 
-  /**
-   * 개별 탭 그룹 초기화
-   * @param {HTMLElement} tabGroup - 탭 그룹 요소
-   */
-  function initTabGroup(tabGroup) {
-    const tabs = tabGroup.querySelectorAll(".tab");
-
-    // 기본 활성 탭 설정
-    setDefaultActiveTab(tabGroup, tabs);
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", function (e) {
-        e.preventDefault();
-        selectTab(tabGroup, this);
-      });
-
-      // 키보드 접근성
-      tab.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          selectTab(tabGroup, this);
-        }
-
-        // 화살표 키로 탭 간 이동
-        if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-          e.preventDefault();
-          navigateTabs(tabGroup, this, e.key);
-        }
-      });
-    });
+    console.log(`[Common] Initialized ${tabGroups.length} tab group(s)`);
   }
 
   /**
@@ -1638,9 +1719,15 @@
   /**
    * Slider Component 기능
    * 슬라이더의 실시간 값 업데이트, 포맷팅, 트랙 오버레이 업데이트 등을 처리합니다.
+   * 이벤트 위임 방식으로 동적으로 추가된 슬라이더도 자동 지원
    */
   function initSliders() {
-    document.querySelectorAll(".slider-container").forEach((container) => {
+    // 초기 값 설정
+    const sliders = document.querySelectorAll(
+      ".slider-container:not([data-slider-initialized])"
+    );
+
+    sliders.forEach((container) => {
       const slider = container.querySelector(".slider-input");
       const valueDisplay = container.querySelector(".slider-current-value");
       const trackOverlay = container.querySelector(".slider-track-overlay");
@@ -1651,39 +1738,73 @@
       // 초기 값 설정
       updateSliderDisplay(slider, valueDisplay, trackOverlay, unitText);
 
-      // input 이벤트 (드래그 중 실시간 업데이트)
-      slider.addEventListener("input", function () {
-        updateSliderDisplay(this, valueDisplay, trackOverlay, unitText);
+      // 초기화 완료 표시
+      container.setAttribute("data-slider-initialized", "true");
+    });
+
+    console.log(`[Common] Initialized ${sliders.length} slider(s)`);
+  }
+
+  /**
+   * Slider 이벤트 위임 (동적으로 추가된 슬라이더에도 적용)
+   */
+  function initSliderEventDelegation() {
+    // input 이벤트 (드래그 중 실시간 업데이트) - 이벤트 위임
+    document.addEventListener("input", function (e) {
+      if (e.target.classList.contains("slider-input")) {
+        const slider = e.target;
+        const container = slider.closest(".slider-container");
+        if (!container) return;
+
+        const valueDisplay = container.querySelector(".slider-current-value");
+        const trackOverlay = container.querySelector(".slider-track-overlay");
+        const unitText = container.querySelector(".slider-unit-text");
+
+        if (!valueDisplay) return;
+
+        updateSliderDisplay(slider, valueDisplay, trackOverlay, unitText);
 
         // 커스텀 이벤트 발생
         container.dispatchEvent(
           new CustomEvent("slider:input", {
             detail: {
               container,
-              slider: this,
-              value: parseInt(this.value),
+              slider: slider,
+              value: parseFloat(slider.value), // 소수점 지원
               formattedValue: valueDisplay.textContent,
             },
           })
         );
-      });
+      }
+    });
 
-      // change 이벤트 (값 변경 완료)
-      slider.addEventListener("change", function () {
-        updateSliderDisplay(this, valueDisplay, trackOverlay, unitText);
+    // change 이벤트 (값 변경 완료) - 이벤트 위임
+    document.addEventListener("change", function (e) {
+      if (e.target.classList.contains("slider-input")) {
+        const slider = e.target;
+        const container = slider.closest(".slider-container");
+        if (!container) return;
+
+        const valueDisplay = container.querySelector(".slider-current-value");
+        const trackOverlay = container.querySelector(".slider-track-overlay");
+        const unitText = container.querySelector(".slider-unit-text");
+
+        if (!valueDisplay) return;
+
+        updateSliderDisplay(slider, valueDisplay, trackOverlay, unitText);
 
         // 커스텀 이벤트 발생
         container.dispatchEvent(
           new CustomEvent("slider:change", {
             detail: {
               container,
-              slider: this,
-              value: parseInt(this.value),
+              slider: slider,
+              value: parseFloat(slider.value), // 소수점 지원
               formattedValue: valueDisplay.textContent,
             },
           })
         );
-      });
+      }
     });
   }
 
@@ -1695,9 +1816,9 @@
    * @param {HTMLElement} unitText - 단위 텍스트 요소
    */
   function updateSliderDisplay(slider, valueDisplay, trackOverlay, unitText) {
-    const value = slider.value;
-    const max = parseInt(slider.max);
-    const min = parseInt(slider.min);
+    const value = parseFloat(slider.value); // 소수점 지원
+    const max = parseFloat(slider.max);
+    const min = parseFloat(slider.min);
 
     // 값 포맷팅
     const formattedValue = formatSliderValue(value, unitText?.textContent);
@@ -1712,36 +1833,42 @@
 
   /**
    * 슬라이더 값 포맷팅
-   * @param {number} value - 원시 값
+   * @param {number|string} value - 원시 값 (문자열도 허용)
    * @param {string} unit - 단위 텍스트
    * @returns {string} 포맷팅된 값
    */
   function formatSliderValue(value, unit) {
-    if (!unit) return value.toString();
+    // 안전하게 number로 변환
+    const numValue = typeof value === "string" ? parseFloat(value) : value;
+
+    if (isNaN(numValue)) return "0";
+    if (!unit) return numValue.toString();
 
     // 단위별 포맷팅
     switch (unit.toLowerCase()) {
       case "tokens/minute":
-        if (value >= 1000) {
-          const formatted = value / 1000;
+        if (numValue >= 1000) {
+          const formatted = numValue / 1000;
           // 소수점이 0인 경우 정수로 표시, 아니면 소수점 1자리까지
           return formatted % 1 === 0
             ? formatted + "K"
             : formatted.toFixed(1) + "K";
         }
-        return value.toString();
+        return numValue.toString();
 
       case "파일 크기":
         // 소수점이 있는 경우 소수점 1자리까지 표시
-        return value % 1 === 0 ? value + "MB" : value.toFixed(1) + "MB";
+        return numValue % 1 === 0
+          ? numValue + "MB"
+          : numValue.toFixed(1) + "MB";
 
       case "진행률":
         // 소수점이 있는 경우 소수점 1자리까지 표시
-        return value % 1 === 0 ? value + "%" : value.toFixed(1) + "%";
+        return numValue % 1 === 0 ? numValue + "%" : numValue.toFixed(1) + "%";
 
       default:
         // 기본적으로 소수점이 있으면 1자리까지 표시
-        return value % 1 === 0 ? value.toString() : value.toFixed(1);
+        return numValue % 1 === 0 ? numValue.toString() : numValue.toFixed(1);
     }
   }
 
@@ -1805,25 +1932,92 @@
     });
   }
 
+  /**
+   * 탭 클릭 이벤트 위임 (동적으로 추가된 탭에도 적용)
+   */
+  function initTabEventDelegation() {
+    // 탭 클릭 이벤트
+    document.addEventListener("click", function (e) {
+      const tab = e.target.closest(".tab");
+      if (tab) {
+        const tabGroup = tab.closest(".tab-group");
+        if (tabGroup) {
+          e.preventDefault();
+          selectTab(tabGroup, tab);
+        }
+      }
+    });
+
+    // 탭 키보드 접근성
+    document.addEventListener("keydown", function (e) {
+      const tab = e.target.closest(".tab");
+      if (tab) {
+        const tabGroup = tab.closest(".tab-group");
+        if (tabGroup) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            selectTab(tabGroup, tab);
+          }
+
+          // 화살표 키로 탭 간 이동
+          if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+            e.preventDefault();
+            navigateTabs(tabGroup, tab, e.key);
+          }
+        }
+      }
+    });
+  }
+
   // DOM이 준비되면 모든 기능들을 초기화
   document.addEventListener("DOMContentLoaded", function () {
+    console.log("[Common] Initializing all components...");
+
+    // 이벤트 위임 방식 (한 번만 등록, 모든 동적 요소 지원)
     initInputCloseButtons();
     initChipRemoveButtons();
     initChipInputHandlers();
-    initInputCounters();
+    initInputCounterEventDelegation();
     initDropdownHandlers();
     initDropdownCloseButtons();
     initChipDropdownHandlers();
-    initDropdowns();
-    initCheckboxGroups();
+    initCheckboxGroupEventDelegation();
     initPopovers();
     initModals();
-    initTabs();
+    initTabEventDelegation();
+    initSliderEventDelegation();
     initLnbMenu();
     initLnbToggle();
     initAccordions();
+    initFileCardClickEvent();
+
+    // 초기 상태 설정 (기존 요소들)
+    initInputCounters();
+    initDropdowns();
+    initCheckboxGroups();
+    initTabs();
     initAccordionDefaults();
     initSliders();
-    initFileCardClickEvent();
+
+    console.log("[Common] All components initialized successfully");
   });
+
+  /**
+   * 동적으로 추가된 컴포넌트 초기화
+   * 이벤트는 이미 위임으로 처리되므로, 초기 상태만 설정
+   */
+  window.initDynamicComponents = function () {
+    console.log("[Common] Initializing dynamic components...");
+
+    // 초기 상태 설정 (이벤트는 위임으로 이미 처리됨)
+    initTabs(); // 기본 활성 탭 설정
+    initSliders(); // 슬라이더 초기 값 설정
+    initInputCounters(); // 입력 필드 카운터 초기 값 설정
+    initCheckboxGroups(); // 체크박스 그룹 초기 상태 설정
+
+    // 아래는 이미 이벤트 위임으로 처리되어 추가 작업 불필요:
+    // - Popover, Dropdown, Modal, Accordion, etc.
+
+    console.log("[Common] Dynamic components initialized");
+  };
 })();

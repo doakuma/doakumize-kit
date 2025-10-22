@@ -401,6 +401,11 @@ function showComponent(componentId) {
         if (typeof window.addCodeToggleButtons === "function") {
           window.addCodeToggleButtons(section);
         }
+
+        // 동적으로 추가된 컴포넌트의 초기 상태 설정
+        if (typeof window.initDynamicComponents === "function") {
+          window.initDynamicComponents();
+        }
       } else {
         console.warn("[ComponentsPage] componentEngine not found");
       }

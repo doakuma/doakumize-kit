@@ -138,6 +138,12 @@ async function autoMountComponents() {
       if (typeof window.addCodeToggleButtons === "function") {
         window.addCodeToggleButtons(element);
       }
+
+      // 동적으로 추가된 컴포넌트의 초기 상태 설정
+      // (이벤트는 이미 위임으로 처리되므로 초기 상태만 설정)
+      if (typeof window.initDynamicComponents === "function") {
+        window.initDynamicComponents();
+      }
     } catch (error) {
       console.error(
         `[Init] Failed to mount ${componentType} component:`,

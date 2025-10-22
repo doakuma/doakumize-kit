@@ -1,10 +1,11 @@
 # 🎨 Vanillia Component System
 
-Vanilla JavaScript 기반의 경량 UI 컴포넌트 렌더링 시스템입니다.
+- Vanilla JavaScript 기반의 경량 UI 컴포넌트 렌더링 시스템입니다.
+  https://doakuma.github.io/doakumize-kit/vanillia/components.html
 
 ## 📌 개요
 
-Vanillia는 JSON 데이터 기반으로 UI 컴포넌트를 렌더링하는 Component Engine 패턴을 사용합니다.  
+Vanillia는 JSON 데이터 기반으로 UI 컴포넌트를 렌더링하는 Component Engine 패턴을 사용합니다.
 외부 라이브러리 의존성 없이 순수 JavaScript로 구현되어 있으며, 일관된 디자인 시스템을 제공합니다.
 
 ## 🚀 주요 기능
@@ -268,5 +269,5 @@ await componentEngine.render(type, data, false);
 
 ---
 
-**Akumize Design System v1.0**  
+**Akumize Design System v1.0**
 Built with ❤️ using Vanilla JavaScript
