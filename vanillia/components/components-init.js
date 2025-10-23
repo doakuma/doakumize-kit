@@ -48,6 +48,11 @@ async function initializeComponents() {
     componentEngine.registerRenderer("color", colorRenderer);
     console.log("[Init] ✓ ColorRenderer registered for 'color' component");
 
+    // Spacing 컴포넌트: Spacing 시스템 렌더링 및 복사 기능
+    const spacingRenderer = new SpacingRenderer();
+    componentEngine.registerRenderer("spacing", spacingRenderer);
+    console.log("[Init] ✓ SpacingRenderer registered for 'spacing' component");
+
     // 추가 전용 렌더러 (필요시 추가)
     // componentEngine.registerRenderer('tab', new TabRenderer());
 

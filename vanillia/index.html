@@ -99,183 +99,14 @@
             <h2 class="text-h2">컴포넌트 라이브러리</h2>
 
             <!-- 카테고리 카드들 -->
-            <div class="categories-grid">
-              <!-- Category 1: Foundation -->
-              <div class="category-card">
-                <h3 class="category-title">
-                  Foundation
-                  <span class="category-count">(2/5 완성)</span>
-                </h3>
-                <div class="component-list">
-                  <span class="component-item component-item--completed"
-                    >Typography ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Icon ✅</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Color 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Spacing 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Grid 🚧</span
-                  >
-                </div>
-              </div>
-
-              <!-- Category 2: Form Controls -->
-              <div class="category-card">
-                <h3 class="category-title">
-                  Form Controls
-                  <span class="category-count">(6/11 완성)</span>
-                </h3>
-                <div class="component-list">
-                  <span class="component-item component-item--completed"
-                    >Button ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Input ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Checkbox ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Radio ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Dropdown ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Slider ✅</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Switch 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Textarea 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >File Upload 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Date Picker 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Search Input 🚧</span
-                  >
-                </div>
-              </div>
-
-              <!-- Category 3: Data Display -->
-              <div class="category-card">
-                <h3 class="category-title">
-                  Data Display
-                  <span class="category-count">(3/11 완성)</span>
-                </h3>
-                <div class="component-list">
-                  <span class="component-item component-item--completed"
-                    >Chip ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Table ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >File Card ✅</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Badge 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Tooltip 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Card 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Avatar 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Progress Bar 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >List 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Skeleton 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Empty State 🚧</span
-                  >
-                </div>
-              </div>
-
-              <!-- Category 4: Feedback -->
-              <div class="category-card">
-                <h3 class="category-title">
-                  Feedback
-                  <span class="category-count">(2/6 완성)</span>
-                </h3>
-                <div class="component-list">
-                  <span class="component-item component-item--completed"
-                    >Modal ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Popover ✅</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Toast 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Alert 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Dialog 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Loading Spinner 🚧</span
-                  >
-                </div>
-              </div>
-
-              <!-- Category 5: Navigation -->
-              <div class="category-card">
-                <h3 class="category-title">
-                  Navigation
-                  <span class="category-count">(2/6 완성)</span>
-                </h3>
-                <div class="component-list">
-                  <span class="component-item component-item--completed"
-                    >Tab ✅</span
-                  >
-                  <span class="component-item component-item--completed"
-                    >Accordion ✅</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Breadcrumb 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Pagination 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Menu 🚧</span
-                  >
-                  <span class="component-item component-item--pending"
-                    >Stepper 🚧</span
-                  >
-                </div>
-              </div>
+            <!-- 카테고리 카드들 (동적 생성) -->
+            <div class="categories-grid" id="categoriesGrid">
+              <!-- JavaScript로 동적 생성됨 -->
             </div>
 
-            <!-- 진행률 -->
-            <div class="progress-section">
-              <p class="progress-text">
-                진행률: <strong>15/39 Components (38%)</strong>
-              </p>
-              <div class="progress-bar-track">
-                <div class="progress-bar-fill" style="width: 38%"></div>
-              </div>
+            <!-- 진행률 (동적 생성) -->
+            <div class="progress-section" id="progressSection">
+              <!-- JavaScript로 동적 생성됨 -->
             </div>
 
             <!-- CTA 버튼 -->
@@ -375,6 +206,7 @@
     </div>
 
     <!-- Scripts -->
-    <!-- <script src="resources/js/index.js"></script> -->
+    <script src="resources/js/components-config.js"></script>
+    <script src="resources/js/index.js"></script>
   </body>
 </html>

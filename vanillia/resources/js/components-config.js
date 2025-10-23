@@ -46,8 +46,7 @@ const COMPONENT_LIST = [
     id: "spacing",
     name: "Spacing",
     category: COMPONENT_CATEGORIES.FOUNDATION,
-    enabled: false,
-    order: 4,
+    order: 2,
   },
   {
     id: "grid",

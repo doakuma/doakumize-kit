@@ -160,4 +160,56 @@
   --ls-tight: -0.02em;
   --ls-normal: 0;
   --ls-wide: 0.02em;
+
+  /* ========================================
+   * Spacing System
+   * Base Unit: 4px (--spacing-base)
+   * Scale: 배수 기반 확장 (0.5x ~ 20x)
+   * ======================================== */
+
+  /* Base Unit */
+  --spacing-base: 4px;
+
+  /* Spacing Scale (4px 기반 배수) */
+  --spacing-0: 0;
+  --spacing-1: calc(var(--spacing-base) * 0.5); /* 2px */
+  --spacing-2: var(--spacing-base); /* 4px */
+  --spacing-3: calc(var(--spacing-base) * 2); /* 8px */
+  --spacing-4: calc(var(--spacing-base) * 3); /* 12px */
+  --spacing-5: calc(var(--spacing-base) * 4); /* 16px */
+  --spacing-6: calc(var(--spacing-base) * 5); /* 20px */
+  --spacing-7: calc(var(--spacing-base) * 6); /* 24px */
+  --spacing-8: calc(var(--spacing-base) * 8); /* 32px */
+  --spacing-9: calc(var(--spacing-base) * 10); /* 40px */
+  --spacing-10: calc(var(--spacing-base) * 12); /* 48px */
+  --spacing-11: calc(var(--spacing-base) * 14); /* 56px */
+  --spacing-12: calc(var(--spacing-base) * 16); /* 64px */
+  --spacing-13: calc(var(--spacing-base) * 20); /* 80px */
+  --spacing-14: calc(var(--spacing-base) * 24); /* 96px */
+  --spacing-15: calc(var(--spacing-base) * 32); /* 128px */
+
+  /* Semantic Spacing (용도별 별칭) */
+  /* Component Internal Spacing */
+  --spacing-xs: var(--spacing-2); /* 4px - 아주 작은 여백 (아이콘-텍스트) */
+  --spacing-sm: var(--spacing-3); /* 8px - 작은 여백 (버튼 패딩) */
+  --spacing-md: var(--spacing-5); /* 16px - 중간 여백 (카드 패딩) */
+  --spacing-lg: var(--spacing-7); /* 24px - 큰 여백 (섹션 여백) */
+  --spacing-xl: var(--spacing-8); /* 32px - 아주 큰 여백 (페이지 여백) */
+  --spacing-2xl: var(--spacing-10); /* 48px - 매우 큰 여백 */
+  --spacing-3xl: var(--spacing-12); /* 64px - 초대형 여백 */
+
+  /* Layout Spacing (레이아웃 전용) */
+  --layout-gutter: var(--spacing-5); /* 16px - 그리드 거터 */
+  --layout-container: var(--spacing-8); /* 32px - 컨테이너 패딩 */
+  --layout-section: var(--spacing-10); /* 48px - 섹션 간격 */
+
+  /* Component Specific Spacing */
+  --spacing-input-padding-x: var(--spacing-4); /* 12px - Input 가로 패딩 */
+  --spacing-input-padding-y: var(--spacing-3); /* 8px - Input 세로 패딩 */
+  --spacing-button-padding-x: var(--spacing-5); /* 16px - Button 가로 패딩 */
+  --spacing-button-padding-y: var(--spacing-3); /* 8px - Button 세로 패딩 */
+  --spacing-card-padding: var(--spacing-6); /* 20px - Card 패딩 */
+  --spacing-modal-padding: var(--spacing-7); /* 24px - Modal 패딩 */
+  --spacing-icon-gap: var(--spacing-2); /* 4px - 아이콘과 텍스트 간격 */
+  --spacing-list-item-gap: var(--spacing-4); /* 12px - 리스트 아이템 간격 */
 }
