@@ -358,6 +358,12 @@ function showComponent(componentId) {
     return;
   }
 
+  // 기본 환영 섹션 숨기기
+  const welcomeSection = document.getElementById("defaultWelcomeSection");
+  if (welcomeSection) {
+    welcomeSection.style.display = "none";
+  }
+
   // 제목과 설명 업데이트
   const title = document.getElementById("currentComponentTitle");
   const description = document.getElementById("currentComponentDescription");
@@ -375,8 +381,9 @@ function showComponent(componentId) {
   container.style.transition = "opacity 0.2s ease-in-out";
 
   setTimeout(async () => {
-    // 기존 컨텐츠 제거
-    container.innerHTML = "";
+    // 기존 컴포넌트 섹션만 제거 (welcomeSection은 유지)
+    const existingSections = container.querySelectorAll(".component-section");
+    existingSections.forEach((section) => section.remove());
 
     // 새 컴포넌트 섹션 생성
     const section = document.createElement("section");
@@ -500,11 +507,11 @@ function initComponentsPage() {
   renderCategoryNavigation();
   initComponentSearch();
 
-  // 2. 첫 번째 활성화된 컴포넌트 표시
-  const firstComponent = window.ComponentConfig.getEnabledComponents()[0];
-  if (firstComponent) {
-    showComponent(firstComponent.id);
-  }
+  // 2. 첫 번째 활성화된 컴포넌트 표시 (비활성화 - 사용자가 선택할 때만 표시)
+  // const firstComponent = window.ComponentConfig.getEnabledComponents()[0];
+  // if (firstComponent) {
+  //   showComponent(firstComponent.id);
+  // }
 
   // 3. 라이브러리 적용 전 원본 소스 보존
   if (typeof window.initComponentSourcePreservation === "function") {

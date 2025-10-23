@@ -12,11 +12,20 @@
       type="text/css"
       href="resources/styles/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="resources/styles/select/select2.min.css" />
-    <link rel="stylesheet" href="resources/styles/common.css" />
-    <link rel="stylesheet" href="resources/styles/examples.css" />
+    <link rel="stylesheet" href="components/styles/components.css" />
+    <link rel="stylesheet" href="components/styles/common.css" />
   </head>
   <body>
     <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <!-- Logo & Navigation -->
+        <h1 class="text-h1"><a href="./index.html">Akumize Studio</a></h1>
+        <!-- <nav class="box-gnb">
+          <a href="/vanillia/components.html" class="btn-gnb">Components</a>
+        </nav> -->
+      </header>
+
       <!-- lnb -->
       <aside class="lnb">
         <!-- isShrink 추가 삭제  -->
@@ -61,7 +70,7 @@
       <!-- content -->
       <main id="content">
         <div class="content-inner content-inner--components">
-          <header
+          <!-- <header
             class="content-header"
             style="
               position: sticky;
@@ -70,20 +79,181 @@
               padding-top: 20px;
               background-color: var(--gray-50);
             ">
-            <h2 class="tit-header" id="currentComponentTitle">
+            <h2 class="text-h1" id="currentComponentTitle">
               Akumize Components
             </h2>
-            <p class="txt-header" id="currentComponentDescription">
+            <p class="text-body-lg" id="currentComponentDescription">
               사용되는 모든 UI 컴포넌트들을 확인하고 테스트할 수 있습니다.<br />
               각 컴포넌트는 다양한 상태와 변형을 지원하며, 일관된 디자인
               시스템을 기반으로 구축되었습니다.
             </p>
-          </header>
+          </header> -->
 
           <!-- Component Content Container -->
           <div
             id="componentContentContainer"
             class="component-content-container">
+            <!-- Default Welcome Section -->
+            <div id="defaultWelcomeSection" class="welcome-section">
+              <div class="welcome-content">
+                <!-- Header -->
+                <div class="welcome-header">
+                  <div class="welcome-icon">
+                    <i
+                      class="icon icon--xlarge icon--code"
+                      style="width: 64px; height: 64px"></i>
+                  </div>
+                  <h3 class="text-h2">Akumize Component System</h3>
+                  <p
+                    class="text-body-md text-secondary"
+                    style="
+                      margin-top: 12px;
+                      max-width: 600px;
+                      margin-left: auto;
+                      margin-right: auto;
+                    ">
+                    왼쪽 메뉴에서 확인하고 싶은 컴포넌트를 선택하면<br />
+                    다양한 변형과 사용 예시를 확인할 수 있습니다.
+                  </p>
+                </div>
+
+                <!-- Info Cards Grid -->
+                <div class="welcome-grid">
+                  <!-- Card 1: 시스템 소개 -->
+                  <div class="welcome-card">
+                    <header class="welcome-card__header">
+                      <div class="welcome-card__icon">
+                        <i class="icon icon--large icon--dashboard"></i>
+                      </div>
+                      <h4 class="welcome-card__title">컴포넌트 시스템 소개</h4>
+                    </header>
+                    <p class="welcome-card__description">
+                      일관성 있고 재사용 가능한 UI 컴포넌트 라이브러리로, 빠르고
+                      효율적인 개발을 지원합니다.
+                    </p>
+                    <ul class="welcome-card__list">
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span>디자인 시스템 기반의 일관된 UI/UX</span>
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span>재사용 가능한 모듈형 컴포넌트</span>
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span>접근성과 사용성을 고려한 설계</span>
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span>실시간 미리보기 및 코드 확인</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Card 2: 컴포넌트 종류 -->
+                  <div class="welcome-card">
+                    <header class="welcome-card__header">
+                      <div class="welcome-card__icon">
+                        <i class="icon icon--large icon--code"></i>
+                      </div>
+                      <h4 class="welcome-card__title">컴포넌트 종류</h4>
+                    </header>
+                    <p class="welcome-card__description">
+                      다양한 UI 요구사항을 충족하는 15가지 이상의 컴포넌트를
+                      제공합니다.
+                    </p>
+                    <ul class="welcome-card__list">
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>기본:</strong> Button, Input, Checkbox,
+                          Radio</span
+                        >
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>선택:</strong> Dropdown, Slider, Tab</span
+                        >
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>표시:</strong> Table, Chip, File Card,
+                          Icon</span
+                        >
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>레이아웃:</strong> Modal, Popover,
+                          Accordion</span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Card 3: 스타일 변경 방법 -->
+                  <div class="welcome-card">
+                    <header class="welcome-card__header">
+                      <div class="welcome-card__icon">
+                        <i class="icon icon--large icon--settings"></i>
+                      </div>
+                      <h4 class="welcome-card__title">스타일 변경 방법</h4>
+                    </header>
+                    <p class="welcome-card__description">
+                      CSS 변수를 활용하여 전체 시스템의 스타일을
+                      <span class="welcome-highlight">한 곳에서</span> 쉽게
+                      관리할 수 있습니다.
+                    </p>
+                    <ul class="welcome-card__list">
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>Color:</strong> --primary-*, --gray-*,
+                          --success-*</span
+                        >
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>Typography:</strong> --h1~h5, --body-*,
+                          --sub-*</span
+                        >
+                      </li>
+                      <li class="welcome-card__list-item">
+                        <i class="icon icon--small icon--check-primary"></i>
+                        <span
+                          ><strong>Semantic:</strong> --text-*, --bg-*,
+                          --border-*</span
+                        >
+                      </li>
+                    </ul>
+                    <div class="welcome-code-example">
+                      <span class="welcome-code-example__comment"
+                        >/* variables.css에서 변경 */</span
+                      >
+                      <div>
+                        <span class="welcome-code-example__property"
+                          >--primary-500</span
+                        >:
+                        <span class="welcome-code-example__value">#6366f1</span
+                        >;
+                      </div>
+                      <div>
+                        <span class="welcome-code-example__property"
+                          >--text-primary</span
+                        >:
+                        <span class="welcome-code-example__value"
+                          >var(--gray-900)</span
+                        >;
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- 
               ⚙️ 컴포넌트 섹션은 ComponentConfig에서 자동 생성됩니다.
               LNB에서 선택한 컴포넌트만 표시됩니다.
@@ -92,6 +262,76 @@
         </div>
       </main>
       <!--// content -->
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Section 1: Logo & Info -->
+            <div class="footer-section">
+              <h3 class="footer-logo">Doakumize Kit</h3>
+              <p class="footer-description">
+                반복 작업은 줄이고, 커스터마이징은 자유롭게
+              </p>
+              <p class="footer-version">v1.0.0</p>
+            </div>
+
+            <!-- Section 2: Links -->
+            <div class="footer-section">
+              <h4 class="footer-title">Links</h4>
+              <ul class="footer-links">
+                <li><a href="components.html">Components</a></li>
+                <li><a href="README.md">Documentation</a></li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/projects"
+                    target="_blank"
+                    rel="noopener"
+                    >Roadmap</a
+                  >
+                </li>
+                <li><a href="LICENSE">License</a></li>
+              </ul>
+            </div>
+
+            <!-- Section 3: Community -->
+            <div class="footer-section">
+              <h4 class="footer-title">Community</h4>
+              <ul class="footer-links">
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit"
+                    target="_blank"
+                    rel="noopener"
+                    >GitHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/discussions"
+                    target="_blank"
+                    rel="noopener"
+                    >Discussions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/issues"
+                    target="_blank"
+                    rel="noopener"
+                    >Issues</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bottom -->
+          <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 Doakumize Kit. MIT License.</p>
+            <p class="footer-credit">Built with ❤️ by Doakuma</p>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <!-- Modals will be auto-rendered here by components-init.js -->
