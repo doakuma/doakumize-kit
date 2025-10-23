@@ -110,7 +110,6 @@ const COMPONENT_LIST = [
     id: "textarea",
     name: "Textarea",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: false,
     order: 13,
   },
   {
