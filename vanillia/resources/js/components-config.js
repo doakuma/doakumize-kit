@@ -49,13 +49,6 @@ const COMPONENT_LIST = [
     order: 2,
   },
   {
-    id: "grid",
-    name: "Grid",
-    category: COMPONENT_CATEGORIES.FOUNDATION,
-    enabled: false,
-    order: 5,
-  },
-  {
     id: "icon",
     name: "Icon",
     category: COMPONENT_CATEGORIES.FOUNDATION,
@@ -107,12 +100,10 @@ const COMPONENT_LIST = [
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
     order: 11,
   },
-  // TODO: 추가 예정 컴포넌트
   {
     id: "switch",
     name: "Switch",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: false,
     order: 12,
   },
   {

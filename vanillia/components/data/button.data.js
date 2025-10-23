@@ -148,26 +148,6 @@ window.ComponentData.button = {
         },
       ],
     },
-    {
-      title: "Toggle (토글 스위치)",
-      items: [
-        {
-          preview:
-            '<div class="toggle-field"><input id="toggle-demo-off" class="toggle-input" type="checkbox" /><label for="toggle-demo-off" class="toggle" aria-label="기본 토글"></label></div>',
-          label: "OFF",
-        },
-        {
-          preview:
-            '<div class="toggle-field"><input id="toggle-demo-on" class="toggle-input" type="checkbox" checked /><label for="toggle-demo-on" class="toggle" aria-label="기본 토글"></label></div>',
-          label: "ON",
-        },
-        {
-          preview:
-            '<div class="toggle-field"><input id="toggle-demo-disabled" class="toggle-input" type="checkbox" disabled /><label for="toggle-demo-disabled" class="toggle" aria-label="비활성 토글"></label></div>',
-          label: "disabled",
-        },
-      ],
-    },
   ],
 };
 

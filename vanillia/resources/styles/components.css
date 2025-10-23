@@ -3783,6 +3783,18 @@ table.dataTable.no-footer {
   color: var(--gray-700);
 }
 
+/* Single Label Variants */
+/* .toggle-field.toggle-field__single:has(.toggle-label__left)
+  .toggle-label__left {
+  order: -1;
+  color: var(--gray-700);
+} */
+/* .toggle-field.toggle-field__single:has(.toggle-label__right)
+  .toggle-label__right {
+  order: 0;
+  color: var(--gray-700);
+} */
+
 /* Thumb */
 .toggle::after {
   content: "";
@@ -3821,6 +3833,27 @@ table.dataTable.no-footer {
 }
 .toggle-input:checked ~ .toggle-label__right {
   color: var(--gray-700);
+}
+
+/* Single Label (단일 레이블) */
+/* .toggle-field__single .toggle-label__left {
+  color: var(--gray-700);
+}
+.toggle-field__single .toggle-label__right {
+  color: var(--gray-700);
+} */
+.toggle-field.toggle-field__single:has(.toggle-label__left)
+  .toggle-label__left {
+  color: var(--gray-500);
+}
+.toggle-field__single .toggle-input:checked ~ .toggle-label__left {
+  color: var(--gray-700);
+}
+.toggle-field__single .toggle-input:checked ~ .toggle-label__right {
+  color: var(--gray-700);
+}
+.toggle-field.toggle-field__single:has(.toggle-label__left) .toggle {
+  transform: rotate(180deg);
 }
 
 /* Size: Large */
