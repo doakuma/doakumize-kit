@@ -155,11 +155,9 @@ class IconRenderer {
       .join("");
 
     return `
-      <section class="component-section">
-        <h3 class="component-title">${escapedTitle}</h3>
-        ${escapedDescription}
-        ${variantsHtml}
-      </section>
+      <h3 class="component-title">${escapedTitle}</h3>
+      ${escapedDescription}
+      ${variantsHtml}
     `;
   }
 

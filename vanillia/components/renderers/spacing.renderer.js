@@ -234,10 +234,8 @@ class SpacingRenderer {
       .join("");
 
     return `
-      <section class="component-section">
-        <h3 class="component-title">${escapedTitle}</h3>
-        ${variantsHtml}
-      </section>
+      <h3 class="component-title">${escapedTitle}</h3>
+      ${variantsHtml}
     `;
   }
 
