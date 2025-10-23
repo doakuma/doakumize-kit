@@ -37,24 +37,10 @@ const COMPONENT_LIST = [
   // 1️⃣ Foundation (기초)
   // ========================================
   {
-    id: "typography",
-    name: "Typography",
-    category: COMPONENT_CATEGORIES.FOUNDATION,
-    order: 1,
-  },
-  {
-    id: "icon",
-    name: "Icon",
-    category: COMPONENT_CATEGORIES.FOUNDATION,
-    order: 2,
-  },
-  // TODO: 추가 예정 컴포넌트
-  {
     id: "color",
     name: "Color",
     category: COMPONENT_CATEGORIES.FOUNDATION,
-    enabled: false,
-    order: 3,
+    order: 1,
   },
   {
     id: "spacing",
@@ -69,6 +55,18 @@ const COMPONENT_LIST = [
     category: COMPONENT_CATEGORIES.FOUNDATION,
     enabled: false,
     order: 5,
+  },
+  {
+    id: "icon",
+    name: "Icon",
+    category: COMPONENT_CATEGORIES.FOUNDATION,
+    order: 2,
+  },
+  {
+    id: "typography",
+    name: "Typography",
+    category: COMPONENT_CATEGORIES.FOUNDATION,
+    order: 3,
   },
 
   // ========================================

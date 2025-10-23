@@ -43,6 +43,11 @@ async function initializeComponents() {
     componentEngine.registerRenderer("icon", iconRenderer);
     console.log("[Init] ✓ IconRenderer registered for 'icon' component");
 
+    // Color 컴포넌트: 컬러 팔레트 렌더링 및 복사 기능
+    const colorRenderer = new ColorRenderer();
+    componentEngine.registerRenderer("color", colorRenderer);
+    console.log("[Init] ✓ ColorRenderer registered for 'color' component");
+
     // 추가 전용 렌더러 (필요시 추가)
     // componentEngine.registerRenderer('tab', new TabRenderer());
 

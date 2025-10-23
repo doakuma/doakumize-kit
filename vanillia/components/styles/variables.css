@@ -1,51 +1,76 @@
 /**
  * AI Prompt Studio - Color Palette Variables
- * 이미지 가이드에 따라 정확한 컬러 시스템을 구축합니다.
+ * HSL 기반 동적 컬러 시스템
+ * 
+ * 📌 사용법:
+ * - 기준 HSL 값(h, s)만 변경하면 전체 스케일 자동 업데이트
+ * - 개별 색상 오버라이드 가능
+ * - 나중에 SCSS 전환 시 믹스인으로 간소화 가능
  */
 :root {
   /* ========================================
    * Gray Scale Palette
+   * Base: hsl(200, 15%, 65%) ≈ #96a3ab
    * ======================================== */
-  --gray-0: #ffffff;
-  --gray-50: #f6fafb;
-  --gray-100: #ecf3f6;
-  --gray-150: #e8eff3;
-  --gray-200: #dfe8ed;
-  --gray-300: #cfd9e0;
-  --gray-400: #b7c4cc;
-  --gray-500: #96a3ab;
-  --gray-600: #607279;
-  --gray-700: #445158;
-  --gray-800: #2f3e44;
-  --gray-900: #1c292f;
+  --gray-h: 200;
+  --gray-s: 15%;
+
+  --gray-0: #ffffff; /* 특수 케이스: 순백색 */
+  --gray-50: hsl(var(--gray-h), calc(var(--gray-s) * 0.8), 98%);
+  --gray-100: hsl(var(--gray-h), calc(var(--gray-s) * 0.9), 95%);
+  --gray-150: hsl(var(--gray-h), var(--gray-s), 93%);
+  --gray-200: hsl(var(--gray-h), var(--gray-s), 90%);
+  --gray-300: hsl(var(--gray-h), var(--gray-s), 85%);
+  --gray-400: hsl(var(--gray-h), var(--gray-s), 75%);
+  --gray-500: hsl(var(--gray-h), var(--gray-s), 65%); /* Base */
+  --gray-600: hsl(var(--gray-h), var(--gray-s), 48%);
+  --gray-700: hsl(var(--gray-h), calc(var(--gray-s) * 1.1), 32%);
+  --gray-800: hsl(var(--gray-h), calc(var(--gray-s) * 1.2), 24%);
+  --gray-900: hsl(var(--gray-h), calc(var(--gray-s) * 1.3), 16%);
 
   /* ========================================
    * Primary Color Palette (Cyan Theme)
+   * Base: hsl(190, 70%, 50%) ≈ #26b7dc
    * ======================================== */
-  --primary-50: #f6fdff;
-  --primary-100: #e0f7fb;
-  --primary-200: #b3eaf4;
-  --primary-300: #80d8ed;
-  --primary-400: #3dccdf;
-  --primary-500: #26b7dc;
-  --primary-600: #1593a9;
-  --primary-700: #1a8d9c;
-  --primary-800: #0b5e6c;
-  --primary-900: #07464e;
+  --primary-h: 190;
+  --primary-s: 70%;
+
+  --primary-50: hsl(var(--primary-h), calc(var(--primary-s) * 0.85), 98%);
+  --primary-100: hsl(var(--primary-h), calc(var(--primary-s) * 0.9), 93%);
+  --primary-200: hsl(var(--primary-h), var(--primary-s), 84%);
+  --primary-300: hsl(var(--primary-h), var(--primary-s), 72%);
+  --primary-400: hsl(var(--primary-h), var(--primary-s), 58%);
+  --primary-500: hsl(var(--primary-h), var(--primary-s), 50%); /* Base */
+  --primary-600: hsl(var(--primary-h), var(--primary-s), 38%);
+  --primary-700: hsl(var(--primary-h), calc(var(--primary-s) * 1.05), 34%);
+  --primary-800: hsl(var(--primary-h), calc(var(--primary-s) * 1.1), 23%);
+  --primary-900: hsl(var(--primary-h), calc(var(--primary-s) * 1.15), 17%);
 
   /* ========================================
    * Secondary Color Palette (Purple Theme)
+   * Base: hsl(255, 80%, 60%) ≈ #6349eb
    * ======================================== */
-  --secondary-50: #f4f3ff;
-  --secondary-100: #f2dbff;
-  --secondary-200: #c7b3ff;
-  --secondary-300: #9b7bff;
-  --secondary-400: #6349eb;
-  --secondary-500: #634eb8;
-  --secondary-600: #6349eb;
-  --secondary-700: #c7b3ff;
-  --secondary-800: #9b7bff;
-  --secondary-900: #6349eb;
+  --secondary-h: 255;
+  --secondary-s: 80%;
+
+  --secondary-50: hsl(var(--secondary-h), calc(var(--secondary-s) * 0.85), 98%);
+  --secondary-100: hsl(var(--secondary-h), calc(var(--secondary-s) * 0.9), 94%);
+  --secondary-200: hsl(var(--secondary-h), var(--secondary-s), 85%);
+  --secondary-300: hsl(var(--secondary-h), var(--secondary-s), 73%);
+  --secondary-400: hsl(var(--secondary-h), var(--secondary-s), 60%);
+  --secondary-500: hsl(var(--secondary-h), var(--secondary-s), 52%); /* Base */
+  --secondary-600: hsl(var(--secondary-h), var(--secondary-s), 42%);
+  --secondary-700: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) * 1.05),
+    35%
+  );
+  --secondary-800: hsl(var(--secondary-h), calc(var(--secondary-s) * 1.1), 24%);
+  --secondary-900: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) * 1.15),
+    17%
+  );
 
   /* ========================================
    * Essential Color Palette
