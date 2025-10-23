@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doakumize Kit - Vanilla JavaScript 컴포넌트 라이브러리</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="components/styles/common.css" />
+    <!-- index.css는 나중에 추가 -->
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Progress Bar -->
+      <div id="progress-bar"></div>
+
+      <!-- Header -->
+      <header id="header">
+        <!-- Logo & Navigation -->
+        <h1 class="text-h1">Akumize Studio</h1>
+        <!-- <nav class="box-gnb">
+          <a href="/vanillia/components.html" class="btn-gnb">Components</a>
+        </nav> -->
+      </header>
+
+      <!-- Main Content -->
+      <main id="main">
+        <!-- Section 1: Hero -->
+        <section id="hero">
+          <div class="container">
+            <!-- Title, Subtitle, Features, CTA -->
+            <h1 class="text-h1">Akumize Studio</h1>
+            <p class="text-body-lg">
+              같은 컴포넌트를 반복해서 만드는 수고를 덜고<br />
+              CSS Variables로 손쉽게 커스터마이징하여<br />
+              빠르게 프로젝트에 적용할 수 있습니다
+            </p>
+            <div class="btn-group">
+              <a href="/vanillia/components.html" class="btn btn--primary">
+                컴포넌트 둘러보기
+              </a>
+              <a href="#quick-start" class="btn btn--secondary"> 시작하기 </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: What is This? -->
+        <!-- <section id="what">
+          <div class="container">
+            Project Introduction 
+          </div>
+        </section> -->
+
+        <!-- Section 3: Key Features -->
+        <section id="features">
+          <div class="container">
+            <h2 class="text-h2">주요 기능</h2>
+
+            <div class="features-grid">
+              <!-- Feature 1: 디자인 시스템 -->
+              <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">일관된 디자인 시스템</h3>
+                <p class="feature-description">
+                  CSS Variables 기반으로 색상, 타이포그래피, 간격을 통합
+                  관리합니다. 디자인 토큰 한 곳만 수정하면 프로젝트 전체에
+                  일관되게 적용되어 브랜드 아이덴티티를 쉽게 유지할 수 있습니다.
+                </p>
+              </div>
+
+              <!-- Feature 2: 컴포넌트 라이브러리 -->
+              <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3 class="feature-title">풍부한 컴포넌트 라이브러리</h3>
+                <p class="feature-description">
+                  Button, Input부터 Modal, Tab까지 15개의 완성된 컴포넌트와
+                  24개의 개발 중인 컴포넌트를 제공합니다. 5개 카테고리로
+                  체계적으로 분류되어 필요한 UI를 빠르게 찾을 수 있습니다.
+                </p>
+              </div>
+
+              <!-- Feature 3: 커스터마이징 -->
+              <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 class="feature-title">자유로운 커스터마이징</h3>
+                <p class="feature-description">
+                  CSS Variables만 수정하면 프로젝트 특성에 맞게 자유롭게 변형할
+                  수 있습니다. 디자인 토큰 구조로 일관성은 유지하면서도 브랜드
+                  컬러와 스타일을 유연하게 조정할 수 있습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Components Preview -->
+        <section id="components">
+          <div class="container">
+            <h2 class="text-h2">컴포넌트 라이브러리</h2>
+
+            <!-- 카테고리 카드들 -->
+            <div class="categories-grid">
+              <!-- Category 1: Foundation -->
+              <div class="category-card">
+                <h3 class="category-title">
+                  Foundation
+                  <span class="category-count">(2/5 완성)</span>
+                </h3>
+                <div class="component-list">
+                  <span class="component-item component-item--completed"
+                    >Typography ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Icon ✅</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Color 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Spacing 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Grid 🚧</span
+                  >
+                </div>
+              </div>
+
+              <!-- Category 2: Form Controls -->
+              <div class="category-card">
+                <h3 class="category-title">
+                  Form Controls
+                  <span class="category-count">(6/11 완성)</span>
+                </h3>
+                <div class="component-list">
+                  <span class="component-item component-item--completed"
+                    >Button ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Input ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Checkbox ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Radio ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Dropdown ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Slider ✅</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Switch 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Textarea 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >File Upload 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Date Picker 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Search Input 🚧</span
+                  >
+                </div>
+              </div>
+
+              <!-- Category 3: Data Display -->
+              <div class="category-card">
+                <h3 class="category-title">
+                  Data Display
+                  <span class="category-count">(3/11 완성)</span>
+                </h3>
+                <div class="component-list">
+                  <span class="component-item component-item--completed"
+                    >Chip ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Table ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >File Card ✅</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Badge 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Tooltip 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Card 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Avatar 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Progress Bar 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >List 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Skeleton 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Empty State 🚧</span
+                  >
+                </div>
+              </div>
+
+              <!-- Category 4: Feedback -->
+              <div class="category-card">
+                <h3 class="category-title">
+                  Feedback
+                  <span class="category-count">(2/6 완성)</span>
+                </h3>
+                <div class="component-list">
+                  <span class="component-item component-item--completed"
+                    >Modal ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Popover ✅</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Toast 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Alert 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Dialog 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Loading Spinner 🚧</span
+                  >
+                </div>
+              </div>
+
+              <!-- Category 5: Navigation -->
+              <div class="category-card">
+                <h3 class="category-title">
+                  Navigation
+                  <span class="category-count">(2/6 완성)</span>
+                </h3>
+                <div class="component-list">
+                  <span class="component-item component-item--completed"
+                    >Tab ✅</span
+                  >
+                  <span class="component-item component-item--completed"
+                    >Accordion ✅</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Breadcrumb 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Pagination 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Menu 🚧</span
+                  >
+                  <span class="component-item component-item--pending"
+                    >Stepper 🚧</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- 진행률 -->
+            <div class="progress-section">
+              <p class="progress-text">
+                진행률: <strong>15/39 Components (38%)</strong>
+              </p>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" style="width: 38%"></div>
+              </div>
+            </div>
+
+            <!-- CTA 버튼 -->
+            <div class="components-cta">
+              <a href="components.html" class="btn btn--primary btn--large">
+                모든 컴포넌트 보기 →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: Quick Start -->
+        <!-- <section id="quick-start">
+          <div class="container">
+             Step-by-step Guide 
+          </div>
+        </section> -->
+
+        <!-- Section 6: Final CTA -->
+        <!-- <section id="cta">
+          <div class="container">
+            Call to Action
+          </div>
+        </section> -->
+      </main>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Section 1: Logo & Info -->
+            <div class="footer-section">
+              <h3 class="footer-logo">Doakumize Kit</h3>
+              <p class="footer-description">
+                반복 작업은 줄이고, 커스터마이징은 자유롭게
+              </p>
+              <p class="footer-version">v1.0.0</p>
+            </div>
+
+            <!-- Section 2: Links -->
+            <div class="footer-section">
+              <h4 class="footer-title">Links</h4>
+              <ul class="footer-links">
+                <li><a href="components.html">Components</a></li>
+                <li><a href="README.md">Documentation</a></li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/projects"
+                    target="_blank"
+                    rel="noopener"
+                    >Roadmap</a
+                  >
+                </li>
+                <li><a href="LICENSE">License</a></li>
+              </ul>
+            </div>
+
+            <!-- Section 3: Community -->
+            <div class="footer-section">
+              <h4 class="footer-title">Community</h4>
+              <ul class="footer-links">
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit"
+                    target="_blank"
+                    rel="noopener"
+                    >GitHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/discussions"
+                    target="_blank"
+                    rel="noopener"
+                    >Discussions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/doakuma/doakumize-kit/issues"
+                    target="_blank"
+                    rel="noopener"
+                    >Issues</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bottom -->
+          <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 Doakumize Kit. MIT License.</p>
+            <p class="footer-credit">Built with ❤️ by Doakuma</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <!-- <script src="resources/js/index.js"></script> -->
+  </body>
+</html>
