@@ -342,10 +342,34 @@ function renderCategoryNavigation() {
 }
 
 /**
- * 컴포넌트 표시 (컨텐츠 전환 방식)
+ * URL 파라미터에서 컴포넌트 ID 추출
+ * @returns {string|null} 컴포넌트 ID 또는 null
+ */
+function getComponentFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("component");
+}
+
+/**
+ * URL에 컴포넌트 파라미터 업데이트
  * @param {string} componentId - 컴포넌트 ID
  */
-function showComponent(componentId) {
+function updateURLParameter(componentId) {
+  const url = new URL(window.location);
+  url.searchParams.set("component", componentId);
+
+  // 브라우저 히스토리에 추가 (뒤로가기 지원)
+  window.history.pushState({ component: componentId }, "", url.toString());
+
+  console.log(`[ComponentsPage] URL updated: ${url.toString()}`);
+}
+
+/**
+ * 컴포넌트 표시 (컨텐츠 전환 방식)
+ * @param {string} componentId - 컴포넌트 ID
+ * @param {boolean} updateURL - URL 업데이트 여부 (기본: true)
+ */
+function showComponent(componentId, updateURL = true) {
   const container = document.getElementById("componentContentContainer");
   if (!container) {
     console.warn("[ComponentsPage] Component container not found");
@@ -356,6 +380,11 @@ function showComponent(componentId) {
   if (!config) {
     console.warn(`[ComponentsPage] Component config not found: ${componentId}`);
     return;
+  }
+
+  // URL 업데이트 (선택적)
+  if (updateURL) {
+    updateURLParameter(componentId);
   }
 
   // 기본 환영 섹션 숨기기
@@ -498,6 +527,81 @@ function initComponentSearch() {
 }
 
 /**
+ * 브라우저 히스토리 이벤트 처리
+ */
+function initHistoryHandling() {
+  // 뒤로가기/앞으로가기 버튼 처리
+  window.addEventListener("popstate", function (event) {
+    console.log("[ComponentsPage] History navigation detected");
+
+    if (event.state && event.state.component) {
+      // 히스토리에서 컴포넌트 정보가 있으면 해당 컴포넌트 표시 (URL 업데이트 없이)
+      showComponent(event.state.component, false);
+    } else {
+      // URL 파라미터 확인
+      const componentFromURL = getComponentFromURL();
+      if (componentFromURL) {
+        showComponent(componentFromURL, false);
+      } else {
+        // 파라미터가 없으면 기본 환영 화면 표시
+        showWelcomeScreen();
+      }
+    }
+  });
+}
+
+/**
+ * 기본 환영 화면 표시
+ */
+function showWelcomeScreen() {
+  const container = document.getElementById("componentContentContainer");
+  const welcomeSection = document.getElementById("defaultWelcomeSection");
+
+  if (container && welcomeSection) {
+    // 기존 컴포넌트 섹션 제거
+    const existingSections = container.querySelectorAll(".component-section");
+    existingSections.forEach((section) => section.remove());
+
+    // 환영 섹션 표시
+    welcomeSection.style.display = "block";
+    container.style.opacity = "1";
+
+    // LNB 활성화 상태 초기화
+    document.querySelectorAll(".lnb-submenu__link").forEach((link) => {
+      link.classList.remove("lnb-submenu__link--active");
+    });
+
+    console.log("[ComponentsPage] Welcome screen displayed");
+  }
+}
+
+/**
+ * URL 파라미터 기반 초기 컴포넌트 로드
+ */
+function loadComponentFromURL() {
+  const componentId = getComponentFromURL();
+
+  if (componentId) {
+    // URL에 컴포넌트 파라미터가 있으면 해당 컴포넌트 표시
+    const config = window.ComponentConfig.getComponentConfig(componentId);
+    if (config && config.enabled !== false) {
+      console.log(
+        `[ComponentsPage] Loading component from URL: ${componentId}`
+      );
+      showComponent(componentId, false); // URL은 이미 설정되어 있으므로 업데이트하지 않음
+    } else {
+      console.warn(
+        `[ComponentsPage] Component not found or disabled: ${componentId}`
+      );
+      showWelcomeScreen();
+    }
+  } else {
+    // URL 파라미터가 없으면 기본 환영 화면 표시
+    showWelcomeScreen();
+  }
+}
+
+/**
  * 페이지 초기화
  */
 function initComponentsPage() {
@@ -507,18 +611,18 @@ function initComponentsPage() {
   renderCategoryNavigation();
   initComponentSearch();
 
-  // 2. 첫 번째 활성화된 컴포넌트 표시 (비활성화 - 사용자가 선택할 때만 표시)
-  // const firstComponent = window.ComponentConfig.getEnabledComponents()[0];
-  // if (firstComponent) {
-  //   showComponent(firstComponent.id);
-  // }
+  // 2. 브라우저 히스토리 관리 초기화
+  initHistoryHandling();
 
-  // 3. 라이브러리 적용 전 원본 소스 보존
+  // 3. URL 파라미터 기반 초기 컴포넌트 로드
+  loadComponentFromURL();
+
+  // 4. 라이브러리 적용 전 원본 소스 보존
   if (typeof window.initComponentSourcePreservation === "function") {
     window.initComponentSourcePreservation();
   }
 
-  // 4. 코드 보기 버튼을 모든 component-item에 동적으로 추가
+  // 5. 코드 보기 버튼을 모든 component-item에 동적으로 추가
   if (typeof window.addCodeToggleButtons === "function") {
     window.addCodeToggleButtons();
   }
@@ -572,6 +676,10 @@ function initComponentsPage() {
 // 전역 함수로 노출
 window.showIconCode = showIconCode;
 window.copyIconCode = copyIconCode;
+window.showComponent = showComponent;
+window.getComponentFromURL = getComponentFromURL;
+window.updateURLParameter = updateURLParameter;
+window.showWelcomeScreen = showWelcomeScreen;
 
 // DOM 로드 시 자동 초기화
 if (document.readyState === "loading") {
