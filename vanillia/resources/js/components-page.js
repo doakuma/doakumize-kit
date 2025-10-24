@@ -454,6 +454,9 @@ function showComponent(componentId, updateURL = true) {
     setTimeout(() => {
       container.style.opacity = "1";
 
+      // 스크롤을 최상단으로 이동
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       // 컴포넌트 전환 완료 이벤트 발생 (라이브러리 초기화용)
       const event = new CustomEvent("component:changed", {
         detail: { componentId: componentId },
