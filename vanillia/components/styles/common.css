@@ -782,7 +782,7 @@ section .text-h2 {
   mask-position: center;
 }
 .content-inner.content-inner--components {
-  max-width: 1200px;
+  max-width: 76dvw;
   width: 100%;
 }
 
