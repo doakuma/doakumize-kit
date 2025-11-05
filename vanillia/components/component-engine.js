@@ -31,7 +31,51 @@ class ComponentEngine {
   }
 
   /**
-   * JSON 데이터 로딩 (전역 데이터 또는 fetch)
+   * 스크립트 파일 동적 로드
+   * @param {string} scriptPath - 스크립트 파일 경로
+   * @returns {Promise<void>}
+   */
+  _loadScript(scriptPath) {
+    return new Promise((resolve, reject) => {
+      // 이미 로드된 스크립트인지 확인
+      const existingScript = document.querySelector(
+        `script[src="${scriptPath}"]`
+      );
+      if (existingScript) {
+        console.log(`[ComponentEngine] Script already loaded: ${scriptPath}`);
+        resolve();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = scriptPath;
+      script.async = true;
+
+      script.onload = () => {
+        console.log(`[ComponentEngine] Script loaded: ${scriptPath}`);
+        resolve();
+      };
+
+      script.onerror = () => {
+        console.error(`[ComponentEngine] Failed to load script: ${scriptPath}`);
+        reject(new Error(`Failed to load script: ${scriptPath}`));
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+
+  /**
+   * 컴포넌트 타입을 파일 경로로 변환
+   * @param {string} componentType - 컴포넌트 타입 (예: 'button')
+   * @returns {string} 파일 경로 (예: 'components/data/button.data.js')
+   */
+  _getDataFilePath(componentType) {
+    return `components/data/${componentType}.data.js`;
+  }
+
+  /**
+   * JSON 데이터 로딩 (전역 데이터 또는 동적 로드)
    * @param {string} path - JSON 파일 경로 또는 컴포넌트 타입
    * @returns {Promise<Object>} - 로드된 데이터
    */
@@ -42,7 +86,7 @@ class ComponentEngine {
       return this.dataCache.get(path);
     }
 
-    // 1. 전역 ComponentData에서 먼저 확인 (로컬 파일 지원)
+    // 1. 전역 ComponentData에서 먼저 확인 (이미 로드된 경우)
     if (typeof window !== "undefined" && window.ComponentData) {
       // path가 컴포넌트 타입인 경우 (예: 'typography')
       if (window.ComponentData[path]) {
@@ -66,25 +110,87 @@ class ComponentEngine {
       }
     }
 
-    // 2. fetch로 JSON 파일 로드 (서버 환경)
-    try {
-      const response = await fetch(path);
-      if (!response.ok) {
-        throw new Error(
-          `Failed to load data from ${path}: ${response.statusText}`
-        );
+    // 2. 파일 경로 파싱
+    let filePath = path;
+    let componentType = path;
+
+    // .data.js 또는 .json 확장자가 있는 경우
+    if (
+      path.includes("/") ||
+      path.endsWith(".data.js") ||
+      path.endsWith(".json")
+    ) {
+      filePath = path;
+      // 파일명에서 컴포넌트 타입 추출
+      const match = path.match(/\/([^/]+)\.(?:json|data\.js)$/);
+      if (match) {
+        componentType = match[1];
       }
-      const data = await response.json();
-      this.dataCache.set(path, data);
-      console.log(`[ComponentEngine] Loaded data via fetch: ${path}`);
-      return data;
-    } catch (error) {
-      console.error(
-        `[ComponentEngine] Error loading data from ${path}:`,
-        error
-      );
-      throw error;
+    } else {
+      // 컴포넌트 타입만 있는 경우 파일 경로 생성
+      filePath = this._getDataFilePath(path);
+      componentType = path;
     }
+
+    // 3. .data.js 파일인 경우 동적으로 스크립트 로드
+    if (filePath.endsWith(".data.js")) {
+      try {
+        // ComponentData 초기화 확인
+        if (typeof window.ComponentData === "undefined") {
+          window.ComponentData = {};
+        }
+
+        // 스크립트 동적 로드
+        await this._loadScript(filePath);
+
+        // 로드 후 ComponentData에서 데이터 확인
+        if (window.ComponentData && window.ComponentData[componentType]) {
+          const data = window.ComponentData[componentType];
+          this.dataCache.set(path, data);
+          console.log(
+            `[ComponentEngine] Loaded data via dynamic script: ${componentType}`
+          );
+          return data;
+        } else {
+          throw new Error(
+            `ComponentData.${componentType} not found after loading ${filePath}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `[ComponentEngine] Error loading script ${filePath}:`,
+          error
+        );
+        throw error;
+      }
+    }
+
+    // 4. .json 파일인 경우 fetch로 로드
+    if (filePath.endsWith(".json")) {
+      try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load data from ${filePath}: ${response.statusText}`
+          );
+        }
+        const data = await response.json();
+        this.dataCache.set(path, data);
+        console.log(`[ComponentEngine] Loaded data via fetch: ${filePath}`);
+        return data;
+      } catch (error) {
+        console.error(
+          `[ComponentEngine] Error loading JSON from ${filePath}:`,
+          error
+        );
+        throw error;
+      }
+    }
+
+    // 5. 지원하지 않는 형식
+    throw new Error(
+      `Unsupported data format: ${path}. Use .data.js or .json files.`
+    );
   }
 
   /**

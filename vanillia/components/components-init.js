@@ -16,23 +16,7 @@ async function initializeComponents() {
     // 1. 제네릭 렌더러 생성
     const genericRenderer = new GenericComponentRenderer();
 
-    // 2. window.ComponentData에 등록된 모든 컴포넌트를 자동으로 등록
-    if (window.ComponentData) {
-      const registeredTypes = Object.keys(window.ComponentData);
-      console.log(
-        `[Init] Auto-registering ${registeredTypes.length} component type(s):`,
-        registeredTypes
-      );
-
-      registeredTypes.forEach((type) => {
-        componentEngine.registerRenderer(type, genericRenderer);
-      });
-    }
-
-    // 3. 기본 제네릭 렌더러 등록 (fallback)
-    componentEngine.registerRenderer("generic", genericRenderer);
-
-    // 4. 복잡한 컴포넌트용 전용 렌더러
+    // 2. 복잡한 컴포넌트용 전용 렌더러 먼저 등록 (우선순위 높음)
     // Modal 컴포넌트: 모달 렌더링 및 팩토리 함수 제공
     const modalRenderer = new ModalRenderer();
     componentEngine.registerRenderer("modal", modalRenderer);
@@ -56,6 +40,28 @@ async function initializeComponents() {
     // 추가 전용 렌더러 (필요시 추가)
     // componentEngine.registerRenderer('tab', new TabRenderer());
 
+    // 3. ComponentConfig 기반으로 컴포넌트 타입별 제네릭 렌더러 등록
+    // 활성화된 컴포넌트와 미래의 컴포넌트 모두 제네릭 렌더러로 등록
+    if (window.ComponentConfig && window.ComponentConfig.COMPONENT_LIST) {
+      const componentTypes = window.ComponentConfig.COMPONENT_LIST.map(
+        (comp) => comp.id
+      );
+      console.log(
+        `[Init] Registering ${componentTypes.length} component type(s) with generic renderer:`,
+        componentTypes
+      );
+
+      componentTypes.forEach((type) => {
+        // 전용 렌더러가 이미 등록되지 않은 경우에만 제네릭 렌더러 등록
+        if (!componentEngine.getRegisteredRenderers().includes(type)) {
+          componentEngine.registerRenderer(type, genericRenderer);
+        }
+      });
+    }
+
+    // 4. 기본 제네릭 렌더러 등록 (fallback)
+    componentEngine.registerRenderer("generic", genericRenderer);
+
     console.log(
       "[Init] Registered renderers:",
       componentEngine.getRegisteredRenderers()
@@ -64,8 +70,8 @@ async function initializeComponents() {
     // 5. data 속성이 있는 모든 컴포넌트 자동 렌더링
     await autoMountComponents();
 
-    // 6. Modal HTML을 body 끝에 자동 추가
-    renderModals();
+    // 6. Modal HTML을 body 끝에 자동 추가 (비동기)
+    await renderModals();
 
     console.log("[Init] Component engine initialized successfully");
     console.log("[Init] Cache stats:", componentEngine.getCacheStats());
@@ -178,41 +184,43 @@ async function autoMountComponents() {
 
 /**
  * Modal HTML을 body 끝에 자동 렌더링
- * modal.data.js의 modals 배열을 읽어서 동적으로 추가
+ * modal.data.js를 동적으로 로드하여 modals 배열을 읽어서 추가
  */
-function renderModals() {
-  if (!window.ComponentData || !window.ComponentData.modal) {
-    console.log("[Init] No modal data found, skipping modal rendering");
-    return;
+async function renderModals() {
+  try {
+    // modal 데이터 동적 로드
+    const modalData = await componentEngine.loadData("modal");
+
+    if (!modalData || !modalData.modals || modalData.modals.length === 0) {
+      console.log("[Init] No modals to render");
+      return;
+    }
+
+    console.log(`[Init] Rendering ${modalData.modals.length} modal(s)...`);
+
+    // 기존 modal-container가 있으면 제거 (재로딩 시)
+    const existingContainer = document.getElementById("modal-container");
+    if (existingContainer) {
+      existingContainer.remove();
+    }
+
+    // 새 modal-container 생성
+    const modalContainer = document.createElement("div");
+    modalContainer.id = "modal-container";
+
+    // 모든 Modal HTML 추가
+    modalData.modals.forEach((modal) => {
+      modalContainer.innerHTML += modal.html;
+      console.log(`[Init] ✓ Modal rendered: ${modal.id} (${modal.type})`);
+    });
+
+    // body 끝에 추가
+    document.body.appendChild(modalContainer);
+    console.log("[Init] All modals rendered successfully");
+  } catch (error) {
+    console.warn("[Init] Failed to load modal data:", error);
+    console.log("[Init] Skipping modal rendering");
   }
-
-  const modalData = window.ComponentData.modal;
-  if (!modalData.modals || modalData.modals.length === 0) {
-    console.log("[Init] No modals to render");
-    return;
-  }
-
-  console.log(`[Init] Rendering ${modalData.modals.length} modal(s)...`);
-
-  // 기존 modal-container가 있으면 제거 (재로딩 시)
-  const existingContainer = document.getElementById("modal-container");
-  if (existingContainer) {
-    existingContainer.remove();
-  }
-
-  // 새 modal-container 생성
-  const modalContainer = document.createElement("div");
-  modalContainer.id = "modal-container";
-
-  // 모든 Modal HTML 추가
-  modalData.modals.forEach((modal) => {
-    modalContainer.innerHTML += modal.html;
-    console.log(`[Init] ✓ Modal rendered: ${modal.id} (${modal.type})`);
-  });
-
-  // body 끝에 추가
-  document.body.appendChild(modalContainer);
-  console.log("[Init] All modals rendered successfully");
 }
 
 /**

@@ -160,7 +160,7 @@ const COMPONENT_LIST = [
     id: "badge",
     name: "Badge",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
-    enabled: false,
+    enabled: true,
     order: 20,
   },
   {
