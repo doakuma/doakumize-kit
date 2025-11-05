@@ -1859,6 +1859,203 @@
 }
 
 /* ========================================
+ * Badge Components
+ * ======================================== */
+
+/* Badge Wrapper - Container for inline elements with badge */
+.badge-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Base Badge */
+.badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-weight: 600;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Badge Variants */
+/* Default variant is standard */
+.badge:not(.badge--dot) {
+  border-radius: 999px;
+  padding: 0 6px;
+  min-width: 18px;
+  height: 18px;
+  font: var(--sub-md-xs);
+  line-height: 1;
+}
+
+.badge--standard {
+  border-radius: 999px;
+  padding: 0 6px;
+  min-width: 18px;
+  height: 18px;
+  font: var(--sub-md-xs);
+  line-height: 1;
+}
+
+.badge--standard:not([class*="badge--align-"]) {
+  position: static;
+  margin-left: 4px;
+}
+
+.badge--dot {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  padding: 0;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+/* Badge Sizes */
+/* Default size is medium */
+.badge:not(.badge--small):not(.badge--large) {
+  font: var(--sub-md-xs);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+}
+
+.badge:not(.badge--small):not(.badge--large).badge--dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  padding: 0;
+}
+
+.badge--small {
+  font: var(--sub-md-xs);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+}
+
+.badge--small.badge--dot {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  padding: 0;
+}
+
+.badge--medium {
+  font: var(--sub-md-xs);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+}
+
+.badge--medium.badge--dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  padding: 0;
+}
+
+.badge--large {
+  font: var(--sub-md-sm);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 8px;
+}
+
+.badge--large.badge--dot {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  padding: 0;
+}
+
+/* Badge Alignment */
+.badge--align-tl {
+  top: 0;
+  left: 0;
+  right: auto;
+  transform: translate(-50%, -50%);
+}
+
+.badge--align-tr {
+  top: 0;
+  right: 0;
+  left: auto;
+  transform: translate(50%, -50%);
+}
+
+.badge--align-br {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  transform: translate(50%, 50%);
+}
+
+.badge--align-bl {
+  bottom: 0;
+  left: 0;
+  top: auto;
+  transform: translate(-50%, 50%);
+}
+
+/* Badge Colors */
+.badge--primary {
+  background-color: var(--primary-600);
+  color: var(--text-inverse);
+}
+
+.badge--secondary {
+  background-color: var(--secondary-600);
+  color: var(--text-inverse);
+}
+
+.badge--error {
+  background-color: var(--error);
+  color: var(--text-inverse);
+}
+
+.badge--warning {
+  background-color: var(--sementic-warning);
+  color: var(--text-inverse);
+}
+
+.badge--success {
+  background-color: var(--sementic-save);
+  color: var(--text-inverse);
+}
+
+/* Default color (when no color class specified) */
+.badge:not([class*="badge--primary"]):not([class*="badge--secondary"]):not(
+    [class*="badge--error"]
+  ):not([class*="badge--warning"]):not([class*="badge--success"]) {
+  background-color: var(--gray-600);
+  color: var(--text-inverse);
+}
+
+/* Badge with Count */
+.badge[data-badge-count]::after {
+  content: attr(data-badge-count);
+}
+
+.badge--dot[data-badge-count]::after {
+  content: "";
+}
+
+/* Badge Visibility */
+.badge--visible {
+  display: inline-flex;
+}
+
+.badge--hidden {
+  display: none;
+}
+
+/* ========================================
  * Typography Utility Classes
  * ======================================== */
 
