@@ -167,7 +167,7 @@ const COMPONENT_LIST = [
     id: "tooltip",
     name: "Tooltip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
-    enabled: false,
+    enabled: true,
     order: 21,
   },
   {

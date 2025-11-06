@@ -4757,3 +4757,141 @@ table.dataTable.no-footer {
   border: none;
   max-width: unset;
 }
+
+/* ========================================
+ * Tooltip Component
+ * ======================================== */
+
+/* Tooltip Wrapper */
+.tooltip-wrapper {
+  display: inline-block;
+}
+
+/* Base Tooltip */
+.tooltip {
+  position: absolute;
+  z-index: 10001;
+  pointer-events: none;
+
+  /* 기본적으로 숨김 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+}
+
+/* Visible State */
+.tooltip--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tooltip Content */
+.tooltip__content {
+  padding: 6px 10px;
+  background-color: var(--gray-900);
+  color: var(--text-inverse);
+  border-radius: 6px;
+  font: var(--body-xs);
+  box-shadow: 0 2px 8px rgba(28, 41, 47, 0.25);
+  max-width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* Tooltip Arrow */
+.tooltip__arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  pointer-events: none;
+}
+
+/* Top Positions - tooltip이 wrapper 위에 있음, 화살표는 tooltip 아래에 위치하고 아래로 향함 */
+.tooltip--tm .tooltip__arrow,
+.tooltip--tl .tooltip__arrow,
+.tooltip--tr .tooltip__arrow {
+  top: 100%;
+  border-width: 6px 6px 0 6px;
+  border-color: var(--gray-900) transparent transparent transparent;
+}
+
+.tooltip--tm .tooltip__arrow {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip--tl .tooltip__arrow {
+  left: 12px;
+}
+
+.tooltip--tr .tooltip__arrow {
+  right: 12px;
+}
+
+/* Bottom Positions - tooltip이 wrapper 아래에 있음, 화살표는 tooltip 위에 위치하고 위로 향함 */
+.tooltip--bm .tooltip__arrow,
+.tooltip--bl .tooltip__arrow,
+.tooltip--br .tooltip__arrow {
+  bottom: 100%;
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent var(--gray-900) transparent;
+}
+
+.tooltip--bm .tooltip__arrow {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip--bl .tooltip__arrow {
+  left: 12px;
+}
+
+.tooltip--br .tooltip__arrow {
+  right: 12px;
+}
+
+/* Right Positions - Arrow on the left */
+.tooltip--rt .tooltip__arrow,
+.tooltip--rm .tooltip__arrow,
+.tooltip--rb .tooltip__arrow {
+  left: -6px;
+  border-width: 6px 6px 6px 0;
+  border-color: transparent var(--gray-900) transparent transparent;
+}
+
+.tooltip--rt .tooltip__arrow {
+  top: 12px;
+}
+
+.tooltip--rm .tooltip__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltip--rb .tooltip__arrow {
+  bottom: 12px;
+}
+
+/* Left Positions - Arrow on the right */
+.tooltip--lt .tooltip__arrow,
+.tooltip--lm .tooltip__arrow,
+.tooltip--lb .tooltip__arrow {
+  right: -6px;
+  border-width: 6px 0 6px 6px;
+  border-color: transparent transparent transparent var(--gray-900);
+}
+
+.tooltip--lt .tooltip__arrow {
+  top: 12px;
+}
+
+.tooltip--lm .tooltip__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltip--lb .tooltip__arrow {
+  bottom: 12px;
+}

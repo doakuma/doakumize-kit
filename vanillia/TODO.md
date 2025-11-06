@@ -2,18 +2,56 @@
 
 > 향후 개선 및 확장 계획
 
+## 📊 프로젝트 현황 요약
+
+### ✅ 완료된 항목
+
+- **컴포넌트 구현**: 20개 컴포넌트 완료
+
+  - Foundation: Typography, Icon, Color, Spacing
+  - Form Controls: Button, Input, Checkbox, Radio, Dropdown, Slider, Switch, Textarea
+  - Data Display: Chip, Table, File Card, Badge
+  - Feedback: Modal, Popover
+  - Navigation: Tab, Accordion
+
+- **HSL 기반 동적 컬러 시스템**: 구현 완료
+
+  - `components/styles/variables.css`에 HSL 기반 동적 스케일 시스템 구현
+  - 기준값(`--primary-h`, `--primary-s`)만 변경하면 전체 스케일 자동 업데이트
+  - CSS `calc()` 함수 활용으로 빌드 도구 없이 동작
+
+- **Semantic 변수 기본 정의**: 완료
+  - `--text-primary`, `--text-secondary`, `--text-tertiary`
+  - `--bg-primary`, `--bg-secondary`, `--bg-tertiary`
+  - `--border-primary`, `--border-secondary`, `--border-focus`
+
+### 🚧 진행 중 / 계획 중
+
+- **SCSS 빌드 환경**: 미구성 (계획 단계)
+- **다크모드**: 미구현 (준비 단계)
+- **레거시 파일 정리**: 필요 (`resources/styles/variables.css`)
+
 ---
 
 ## 🎨 1. SCSS를 통한 컬러 스케일 자동화
 
 **📅 시작일:** 2025-10-23  
-**✅ 완료일:** -
+**✅ 완료일:** -  
+**📊 진행 상태:** 계획 단계
 
 ### 📌 현재 상태
 
-- HSL 기반 CSS 변수로 컬러 스케일 관리
-- 각 스케일(50~900)마다 수동으로 정의 필요
-- 반복적인 코드 패턴 존재
+- ✅ **HSL 기반 동적 컬러 시스템 구현 완료** (`components/styles/variables.css`)
+  - `--primary-h`, `--primary-s` 기준값만 변경하면 전체 스케일 자동 업데이트
+  - `calc()` 함수를 사용한 CSS 네이티브 동적 스케일 생성
+  - Gray, Primary, Secondary 컬러 스케일 모두 구현됨
+- ⚠️ **레거시 파일 존재** (`resources/styles/variables.css`)
+  - 하드코딩된 컬러 값 사용
+  - 마이그레이션 필요 (components/styles/variables.css로 통합)
+- ❌ **SCSS 빌드 환경 미구성**
+  - package.json 없음
+  - 빌드 스크립트 없음
+  - BUILD_SETUP_GUIDE.md 문서만 존재 (실제 설정 안 됨)
 
 ### 🎯 개선 방향
 
@@ -133,25 +171,46 @@ $scale-config: (
 ### 🚀 구현 단계
 
 1. [ ] `package.json` 생성 및 SCSS 패키지 설치
+   - `sass` 또는 `dart-sass` 설치
+   - 빌드 스크립트 추가 (npm scripts)
 2. [ ] `vanillia/components/styles/` 구조 개편
-   - `_color-system.scss` - 컬러 시스템
+   - `_color-system.scss` - 컬러 시스템 믹스인
    - `_mixins.scss` - 믹스인 모음
-   - `variables.scss` - 메인 진입점
+   - `variables.scss` - 메인 진입점 (기존 variables.css 변환)
 3. [ ] 빌드 스크립트 작성
+   - `npm run build:css` - CSS 컴파일
+   - `npm run build:css:watch` - 개발 모드 (watch)
 4. [ ] 기존 `variables.css` → `variables.scss` 마이그레이션
-5. [ ] 테스트 및 검증
+   - HSL 기반 동적 시스템 유지하면서 SCSS로 변환
+   - 믹스인 활용하여 코드 간소화
+5. [ ] 레거시 파일 정리
+   - `resources/styles/variables.css` → `components/styles/variables.css`로 통합
+   - 참조하는 모든 파일 경로 업데이트
+6. [ ] 테스트 및 검증
+   - 빌드된 CSS 파일 확인
+   - 모든 컴포넌트 스타일 정상 동작 확인
 
 ---
 
 ## 🌓 2. 다크모드 구현
 
 **📅 시작일:** 2025-10-23  
-**✅ 완료일:** -
+**✅ 완료일:** -  
+**📊 진행 상태:** 준비 단계
 
 ### 📌 현재 상태
 
-- 라이트 모드만 지원
-- Semantic 변수 일부 사용 중 (`--text-primary`, `--bg-primary` 등)
+- ✅ **Semantic 변수 정의 완료** (`components/styles/variables.css`)
+  - `--text-primary`, `--text-secondary`, `--text-tertiary`
+  - `--bg-primary`, `--bg-secondary`, `--bg-tertiary`
+  - `--border-primary`, `--border-secondary`, `--border-focus`
+- ❌ **다크모드 미구현**
+  - `@media (prefers-color-scheme: dark)` 쿼리 없음
+  - `[data-theme]` 속성 기반 토글 없음
+  - ThemeManager JavaScript 클래스 없음
+- ⚠️ **컴포넌트 스타일 마이그레이션 필요**
+  - 현재 많은 컴포넌트가 하드코딩된 컬러 값 사용 (`--gray-900`, `--gray-0` 등)
+  - Semantic 변수로 교체 필요
 
 ### 🎯 개선 방향
 
@@ -377,11 +436,16 @@ window.themeManager = new ThemeManager();
 
 ### 🚀 구현 단계
 
-#### Phase 1: Semantic Variables 정의
+#### Phase 1: Semantic Variables 확장 (진행 중)
 
-1. [ ] `variables.css`에 Semantic 변수 추가
-2. [ ] 라이트 모드 기본값 설정
-3. [ ] 다크모드 `@media` 쿼리 추가
+1. [x] `variables.css`에 Semantic 변수 기본 정의 완료
+2. [ ] Semantic 변수 확장 (더 많은 용도별 변수 추가)
+   - `--color-bg-page`, `--color-bg-surface`, `--color-bg-elevated`
+   - `--color-bg-overlay`
+   - `--color-interactive-default`, `--color-interactive-hover`, `--color-interactive-active`
+   - `--color-status-*` 변수들
+3. [ ] 라이트 모드 기본값 설정 (현재 일부만 정의됨)
+4. [ ] 다크모드 `@media` 쿼리 추가
 
 #### Phase 2: JavaScript 토글 구현
 
@@ -414,16 +478,30 @@ window.themeManager = new ThemeManager();
 
 ### 🔥 High Priority
 
+- [ ] **레거시 variables.css 파일 통합**
+
+  - `resources/styles/variables.css` → `components/styles/variables.css`로 통합
+  - 모든 참조 경로 업데이트
+  - 중복 제거 및 일관성 확보
+
 - [ ] **다크모드 기본 구현** (Semantic Variables + Media Query)
   - 빠르게 적용 가능
   - 사용자 경험 크게 향상
   - 별도 빌드 도구 불필요
+  - Semantic 변수 확장 후 진행
 
 ### 🟡 Medium Priority
+
+- [ ] **컴포넌트 스타일 Semantic 변수 마이그레이션**
+
+  - 하드코딩된 컬러 값 → Semantic 변수로 교체
+  - `common.css`, `components.css` 전체 점검
+  - 다크모드 대비 선행 작업
 
 - [ ] **토글 버튼 UI 추가**
   - 수동 전환 기능
   - localStorage 저장
+  - OS 설정 감지 기능
 
 ### 🟢 Low Priority
 
@@ -431,6 +509,7 @@ window.themeManager = new ThemeManager();
   - 코드 간소화 효과
   - 빌드 환경 구축 필요
   - 기존 시스템 안정화 후 진행
+  - 현재 HSL 기반 동적 시스템이 잘 작동 중이므로 급하지 않음
 
 ---
 
@@ -501,6 +580,21 @@ const THEMES = {
 ---
 
 ## 📝 변경 이력
+
+### 2025-11-05
+
+- 프로젝트 상태 파악 및 TODO 업데이트
+- 현재 구현 상태 반영:
+  - ✅ HSL 기반 동적 컬러 시스템 구현 완료 (`components/styles/variables.css`)
+  - ✅ Semantic 변수 기본 정의 완료 (text, bg, border)
+  - ✅ 20개 컴포넌트 구현 완료
+  - ❌ SCSS 빌드 환경 미구성 (package.json 없음)
+  - ❌ 다크모드 미구현 (다크모드 쿼리 및 토글 기능 없음)
+  - ⚠️ 레거시 variables.css 파일 존재 (`resources/styles/variables.css`)
+- 우선순위 재정렬:
+  - High: 레거시 파일 통합, 다크모드 기본 구현
+  - Medium: Semantic 변수 마이그레이션, 토글 버튼 UI
+  - Low: SCSS 마이그레이션 (현재 시스템이 잘 작동 중)
 
 ### 2025-10-23
 
