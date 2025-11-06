@@ -155,11 +155,8 @@ async function autoMountComponents() {
         window.addCodeToggleButtons(element);
       }
 
-      // 동적으로 추가된 컴포넌트의 초기 상태 설정
-      // (이벤트는 이미 위임으로 처리되므로 초기 상태만 설정)
-      if (typeof window.initDynamicComponents === "function") {
-        window.initDynamicComponents();
-      }
+      // 동적으로 추가된 컴포넌트의 초기화는 scripts-init.js에서 자동 처리됨
+      // 이벤트는 이미 위임으로 처리되므로 추가 초기화 불필요
     } catch (error) {
       console.error(
         `[Init] Failed to mount ${componentType} component:`,

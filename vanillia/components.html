@@ -375,16 +375,23 @@
     <script src="components/renderers/color.renderer.js"></script>
     <script src="components/renderers/spacing.renderer.js"></script>
     <script src="resources/js/component-code-viewer.js"></script>
-    <!-- common.js를 먼저 로드하여 이벤트 핸들러 함수들이 정의되도록 함 -->
-    <script src="resources/js/common.js"></script>
+    <!-- common.js 제거됨: 모든 컴포넌트는 components/scripts/에서 관리됩니다 -->
     <script src="components/components-init.js"></script>
 
     <!-- 컴포넌트 스크립트 -->
     <script src="components/scripts/tooltip.js"></script>
-    <script>
-      if (window.VanillaComponents && window.VanillaComponents.initTooltip) {
-        window.VanillaComponents.initTooltip();
-      }
-    </script>
+    <script src="components/scripts/popover.js"></script>
+    <script src="components/scripts/dropdown.js"></script>
+    <script src="components/scripts/modal.js"></script>
+    <script src="components/scripts/tab.js"></script>
+    <script src="components/scripts/accordion.js"></script>
+    <script src="components/scripts/input.js"></script>
+    <script src="components/scripts/chip.js"></script>
+    <script src="components/scripts/checkbox-group.js"></script>
+    <script src="components/scripts/slider.js"></script>
+    <script src="components/scripts/lnb.js"></script>
+    <script src="components/scripts/file-card.js"></script>
+    <!-- 컴포넌트 스크립트 자동 초기화 시스템 -->
+    <script src="components/scripts-init.js"></script>
   </body>
 </html>
