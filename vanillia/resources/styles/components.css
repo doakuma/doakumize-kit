@@ -490,6 +490,15 @@
 .icon.icon--file-zip {
   background-image: url(../images/icon_file_zip.png);
 }
+.icon.icon--file-default {
+  background-image: url(../images/icon_file_tool.png);
+}
+.icon.icon--file-doc {
+  background-image: url(../images/icon_file_word.png);
+}
+.icon.icon--file-xls {
+  background-image: url(../images/icon_file_excel.png);
+}
 
 /* Arrow */
 .icon.icon--arrow-right {
@@ -683,6 +692,9 @@
   mask-image: url(../images/icon_aI_talk.png);
 }
 .icon.icon--attached {
+  mask-image: url(../images/icon_attached.png);
+}
+.icon.icon--upload {
   mask-image: url(../images/icon_attached.png);
 }
 .icon.icon--expanding {
@@ -4895,4 +4907,317 @@ table.dataTable.no-footer {
 
 .tooltip--lb .tooltip__arrow {
   bottom: 12px;
+}
+
+/* ========================================
+ * File Upload Components
+ * ======================================== */
+
+/* Base Container */
+.file-upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Input (숨김 처리) */
+.file-upload__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Label (버튼 형태) */
+.file-upload__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  background-color: var(--gray-0);
+  color: var(--text-primary);
+  font: var(--body-sm);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.file-upload__label:hover {
+  border-color: var(--primary-600);
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+}
+
+.file-upload__label:active {
+  background-color: var(--primary-100);
+}
+
+.file-upload__input:focus + .file-upload__label {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.file-upload__input:disabled + .file-upload__label {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-500);
+  cursor: not-allowed;
+}
+
+.file-upload__input:disabled + .file-upload__label:hover {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-500);
+}
+
+/* Field Label */
+.file-upload__field-label {
+  display: block;
+  font: var(--body-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+/* Preview Container */
+.file-upload__preview {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+/* 드롭 존일 때만 min-height 적용 */
+.file-upload__preview--empty {
+  min-height: 120px;
+}
+
+/* Drop Zone (파일이 없을 때) */
+.file-upload__dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-inline: 20px;
+  border: 2px dashed var(--gray-300);
+  border-radius: 8px;
+  background-color: var(--gray-50);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  height: 120px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.file-upload__dropzone-text {
+  font: var(--body-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.file-upload__list {
+  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-height: 120px;
+}
+
+/* File Item */
+.file-upload__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  background-color: var(--gray-0);
+  gap: 12px;
+  cursor: default;
+  width: 100%;
+}
+
+/* Horizontal 모드에서는 자동 너비 */
+.file-upload--horizontal .file-upload__item {
+  width: auto;
+}
+
+.file-upload__item-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.file-upload__item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.file-upload__item-name {
+  font: var(--body-sm);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-upload__item-size {
+  font: var(--body-xs);
+  color: var(--text-secondary);
+}
+
+.file-upload__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.file-upload__remove:hover {
+  color: var(--error);
+}
+
+.file-upload__remove:focus {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ========================================
+ * Size Modifiers
+ * ======================================== */
+
+.file-upload--small .file-upload__label {
+  padding: 5px 12px;
+  font: var(--body-xs);
+  gap: 6px;
+}
+
+.file-upload--small .file-upload__label .icon {
+  mask-size: 16px;
+}
+
+.file-upload--small .file-upload__item {
+  padding: 6px 10px;
+}
+
+.file-upload--small .file-upload__item-name {
+  font: var(--body-xs);
+}
+
+.file-upload--small .file-upload__remove {
+  width: 16px;
+  height: 16px;
+}
+
+.file-upload--medium .file-upload__label {
+  padding: 8px 16px;
+  font: var(--body-sm);
+}
+
+.file-upload--large .file-upload__label {
+  padding: 10px 20px;
+  font: var(--body-md);
+  gap: 10px;
+}
+
+.file-upload--large .file-upload__label .icon {
+  mask-size: 24px;
+}
+
+.file-upload--large .file-upload__item {
+  padding: 10px 16px;
+}
+
+.file-upload--large .file-upload__item-name {
+  font: var(--body-md);
+}
+
+/* ========================================
+ * Orientation Modifiers (리스트 내부 파일 아이템 배치)
+ * ======================================== */
+
+/* Horizontal: 파일 아이템들이 가로로 나열 */
+.file-upload--horizontal .file-upload__list {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.file-upload--horizontal .file-upload__item {
+  width: auto;
+  flex: 0 1 auto;
+}
+
+/* ========================================
+ * Drag and Drop States
+ * ======================================== */
+
+/* Preview 영역 드래그 오버 상태 */
+.file-upload__preview--dragover .file-upload__dropzone {
+  background-color: var(--primary-50);
+  border-color: var(--primary-600);
+  color: var(--primary-700);
+}
+
+.file-upload__preview--dragover .file-upload__dropzone .icon {
+  color: var(--primary-600);
+  background-color: var(--primary-600);
+}
+
+.file-upload__preview--dragover .file-upload__dropzone-text {
+  color: var(--primary-700);
+  font-weight: 500;
+}
+
+/* 파일이 있을 때 드래그 오버 (파일 목록 위에 오버레이) */
+.file-upload__preview--dragover:not(.file-upload__preview--empty) {
+  position: relative;
+}
+
+.file-upload__preview--dragover:not(.file-upload__preview--empty)::before {
+  content: "파일을 여기에 놓으세요";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(37, 183, 220, 0.9);
+  border: 2px dashed var(--primary-600);
+  border-radius: 8px;
+  font: var(--body-md);
+  color: var(--gray-0);
+  font-weight: 500;
+  z-index: 10;
+  pointer-events: none;
 }

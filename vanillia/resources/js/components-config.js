@@ -128,7 +128,7 @@ const COMPONENT_LIST = [
     id: "file-upload",
     name: "File Upload",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: false,
+    enabled: true,
     order: 14,
   },
   {
