@@ -218,11 +218,12 @@
 .lnb-menu-item__submenu {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  transition: max-height 0.1s ease-in-out; /* 닫힐 때 빠르게 */
 }
 
 .lnb-menu-item--expanded .lnb-menu-item__submenu {
-  max-height: 300px;
+  max-height: 999px;
+  transition: max-height 0.3s ease-in-out; /* 열릴 때 천천히 */
 }
 
 .lnb-menu-item--expanded .lnb-menu-item__toggle .icon {
