@@ -17,6 +17,7 @@ window.ComponentData["file-upload"] = {
   variants: [
     {
       title: "Default",
+      gridStyle: "grid-template-columns: repeat(3, 1fr);",
       items: [
         {
           preview: `<div class="file-upload" data-name="fileUpload">
@@ -130,118 +131,8 @@ window.ComponentData["file-upload"] = {
       ],
     },
     {
-      title: "Drag and Drop(기능 구현 예정)",
-      items: [
-        {
-          preview: `<div class="file-upload" data-name="fileUploadDragDrop" data-multiple="true">
-  <input type="file" id="fileUpload10" class="file-upload__input" name="fileUploadDragDrop" multiple>
-  <label for="fileUpload10" class="file-upload__label">
-    <i class="icon icon--medium icon--attached"></i>
-    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
-  </label>
-  <div class="file-upload__preview file-upload__preview--empty">
-    <div class="file-upload__dropzone">
-      <i class="icon icon--large icon--attached"></i>
-      <p class="file-upload__dropzone-text">파일을 드래그하여 놓거나, 버튼을 클릭하여 선택하세요</p>
-    </div>
-  </div>
-</div>`,
-          label: "Multiple with Drag & Drop",
-        },
-        {
-          preview: `<div class="file-upload" data-name="fileUploadDragDropActive">
-  <input type="file" id="fileUpload11" class="file-upload__input" name="fileUploadDragDropActive" multiple>
-  <label for="fileUpload11" class="file-upload__label">
-    <i class="icon icon--medium icon--attached"></i>
-    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
-  </label>
-  <div class="file-upload__preview file-upload__preview--dragover file-upload__preview--empty">
-    <div class="file-upload__dropzone">
-      <i class="icon icon--large icon--attached"></i>
-      <p class="file-upload__dropzone-text">파일을 드래그하여 놓거나, 버튼을 클릭하여 선택하세요</p>
-    </div>
-  </div>
-</div>`,
-          label: "Drag Over State (빈 상태)",
-        },
-        {
-          preview: `<div class="file-upload" data-name="fileUploadDragDropWithFiles">
-  <input type="file" id="fileUpload13" class="file-upload__input" name="fileUploadDragDropWithFiles" multiple>
-  <label for="fileUpload13" class="file-upload__label">
-    <i class="icon icon--medium icon--attached"></i>
-    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
-  </label>
-  <div class="file-upload__preview">
-    <div class="file-upload__list">
-      <div class="file-upload__item">
-        <div class="file-upload__item-content">
-          <i class="icon icon--large icon--file-pdf"></i>
-          <div class="file-upload__item-info">
-            <span class="file-upload__item-name">sample-document.pdf</span>
-            <span class="file-upload__item-size">245.5 KB</span>
-          </div>
-        </div>
-        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
-          <i class="icon icon--small icon--close"></i>
-        </button>
-      </div>
-      <div class="file-upload__item">
-        <div class="file-upload__item-content">
-          <i class="icon icon--large icon--file-pdf"></i>
-          <div class="file-upload__item-info">
-            <span class="file-upload__item-name">sample-document.pdf</span>
-            <span class="file-upload__item-size">245.5 KB</span>
-          </div>
-        </div>
-        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
-          <i class="icon icon--small icon--close"></i>
-        </button>
-      </div>
-      <div class="file-upload__item">
-        <div class="file-upload__item-content">
-          <i class="icon icon--large icon--file-pdf"></i>
-          <div class="file-upload__item-info">
-            <span class="file-upload__item-name">sample-document.pdf</span>
-            <span class="file-upload__item-size">245.5 KB</span>
-          </div>
-        </div>
-        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
-          <i class="icon icon--small icon--close"></i>
-        </button>
-      </div>
-      <div class="file-upload__item">
-        <div class="file-upload__item-content">
-          <i class="icon icon--large icon--file-pdf"></i>
-          <div class="file-upload__item-info">
-            <span class="file-upload__item-name">sample-document.pdf</span>
-            <span class="file-upload__item-size">245.5 KB</span>
-          </div>
-        </div>
-        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
-          <i class="icon icon--small icon--close"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>`,
-          label: "Drag Over State (파일 있을 때)",
-        },
-        {
-          preview: `<div class="file-upload" data-name="fileUploadDragDropSingle">
-  <label class="file-upload__field-label">첨부 파일</label>
-  <input type="file" id="fileUpload12" class="file-upload__input" name="fileUploadDragDropSingle">
-  <label for="fileUpload12" class="file-upload__label">
-    <i class="icon icon--medium icon--attached"></i>
-    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
-  </label>
-  <div class="file-upload__preview"></div>
-</div>`,
-          label: "Single with Label & Drag & Drop",
-        },
-      ],
-    },
-    {
       title: "With Label",
+      gridStyle: "grid-template-columns: repeat(3, 1fr);",
       items: [
         {
           preview: `<div class="file-upload" data-name="fileUploadWithLabel" data-label="첨부 파일">
@@ -286,6 +177,7 @@ window.ComponentData["file-upload"] = {
     },
     {
       title: "Sizes",
+      gridStyle: "grid-template-columns: repeat(3, 1fr);",
       items: [
         {
           preview: `<div class="file-upload file-upload--small" data-name="fileUploadSmall">
@@ -402,6 +294,7 @@ window.ComponentData["file-upload"] = {
     },
     {
       title: "Orientation",
+      gridStyle: "grid-template-columns: repeat(3, 1fr);",
       items: [
         {
           preview: `<div class="file-upload" data-name="fileUploadVertical">
@@ -524,6 +417,118 @@ window.ComponentData["file-upload"] = {
   </div>
 </div>`,
           label: "Horizontal - 파일 있음 (가로 나열)",
+        },
+      ],
+    },
+    {
+      title: "Drag and Drop(기능 구현 예정)",
+      gridStyle: "grid-template-columns: repeat(3, 1fr);",
+      items: [
+        {
+          preview: `<div class="file-upload" data-name="fileUploadDragDrop" data-multiple="true">
+  <input type="file" id="fileUpload10" class="file-upload__input" name="fileUploadDragDrop" multiple>
+  <label for="fileUpload10" class="file-upload__label">
+    <i class="icon icon--medium icon--attached"></i>
+    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
+  </label>
+  <div class="file-upload__preview file-upload__preview--empty">
+    <div class="file-upload__dropzone">
+      <i class="icon icon--large icon--attached"></i>
+      <p class="file-upload__dropzone-text">파일을 드래그하여 놓거나, 버튼을 클릭하여 선택하세요</p>
+    </div>
+  </div>
+</div>`,
+          label: "Multiple with Drag & Drop",
+        },
+        {
+          preview: `<div class="file-upload" data-name="fileUploadDragDropActive">
+  <input type="file" id="fileUpload11" class="file-upload__input" name="fileUploadDragDropActive" multiple>
+  <label for="fileUpload11" class="file-upload__label">
+    <i class="icon icon--medium icon--attached"></i>
+    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
+  </label>
+  <div class="file-upload__preview file-upload__preview--dragover file-upload__preview--empty">
+    <div class="file-upload__dropzone">
+      <i class="icon icon--large icon--attached"></i>
+      <p class="file-upload__dropzone-text">파일을 드래그하여 놓거나, 버튼을 클릭하여 선택하세요</p>
+    </div>
+  </div>
+</div>`,
+          label: "Drag Over State (빈 상태)",
+        },
+        {
+          preview: `<div class="file-upload" data-name="fileUploadDragDropWithFiles">
+  <input type="file" id="fileUpload13" class="file-upload__input" name="fileUploadDragDropWithFiles" multiple>
+  <label for="fileUpload13" class="file-upload__label">
+    <i class="icon icon--medium icon--attached"></i>
+    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
+  </label>
+  <div class="file-upload__preview">
+    <div class="file-upload__list">
+      <div class="file-upload__item">
+        <div class="file-upload__item-content">
+          <i class="icon icon--large icon--file-pdf"></i>
+          <div class="file-upload__item-info">
+            <span class="file-upload__item-name">sample-document.pdf</span>
+            <span class="file-upload__item-size">245.5 KB</span>
+          </div>
+        </div>
+        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
+          <i class="icon icon--small icon--close"></i>
+        </button>
+      </div>
+      <div class="file-upload__item">
+        <div class="file-upload__item-content">
+          <i class="icon icon--large icon--file-pdf"></i>
+          <div class="file-upload__item-info">
+            <span class="file-upload__item-name">sample-document.pdf</span>
+            <span class="file-upload__item-size">245.5 KB</span>
+          </div>
+        </div>
+        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
+          <i class="icon icon--small icon--close"></i>
+        </button>
+      </div>
+      <div class="file-upload__item">
+        <div class="file-upload__item-content">
+          <i class="icon icon--large icon--file-pdf"></i>
+          <div class="file-upload__item-info">
+            <span class="file-upload__item-name">sample-document.pdf</span>
+            <span class="file-upload__item-size">245.5 KB</span>
+          </div>
+        </div>
+        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
+          <i class="icon icon--small icon--close"></i>
+        </button>
+      </div>
+      <div class="file-upload__item">
+        <div class="file-upload__item-content">
+          <i class="icon icon--large icon--file-pdf"></i>
+          <div class="file-upload__item-info">
+            <span class="file-upload__item-name">sample-document.pdf</span>
+            <span class="file-upload__item-size">245.5 KB</span>
+          </div>
+        </div>
+        <button type="button" class="file-upload__remove" aria-label="파일 삭제">
+          <i class="icon icon--small icon--close"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>`,
+          label: "Drag Over State (파일 있을 때)",
+        },
+        {
+          preview: `<div class="file-upload" data-name="fileUploadDragDropSingle">
+  <label class="file-upload__field-label">첨부 파일</label>
+  <input type="file" id="fileUpload12" class="file-upload__input" name="fileUploadDragDropSingle">
+  <label for="fileUpload12" class="file-upload__label">
+    <i class="icon icon--medium icon--attached"></i>
+    <span class="file-upload__label-text">파일 선택 또는 드래그 앤 드롭</span>
+  </label>
+  <div class="file-upload__preview"></div>
+</div>`,
+          label: "Single with Label & Drag & Drop",
         },
       ],
     },
