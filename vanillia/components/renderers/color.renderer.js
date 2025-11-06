@@ -68,7 +68,7 @@ class ColorRenderer {
    * @returns {string} - 렌더링된 HTML 문자열
    */
   _renderVariant(variant) {
-    const { title, description, items, isGuide } = variant;
+    const { title, description, items, isGuide, isThemeSwitcher } = variant;
 
     if (!items || !Array.isArray(items)) {
       console.warn("Color variant without items:", variant);
@@ -84,6 +84,17 @@ class ColorRenderer {
 
     // Guide 섹션은 특별 처리 (HTML을 직접 사용)
     if (isGuide && items.length > 0) {
+      return `
+        <div class="variant-group">
+          <h4 class="component-subtitle">${escapedTitle}</h4>
+          ${descriptionHtml}
+          ${items[0].preview}
+        </div>
+      `;
+    }
+
+    // Theme Switcher 섹션도 특별 처리
+    if (isThemeSwitcher && items.length > 0) {
       return `
         <div class="variant-group">
           <h4 class="component-subtitle">${escapedTitle}</h4>
@@ -137,6 +148,104 @@ class ColorRenderer {
   }
 
   /**
+   * HSL을 HEX로 변환
+   * @param {number} h - Hue (0-360)
+   * @param {number} s - Saturation (0-100)
+   * @param {number} l - Lightness (0-100)
+   * @returns {string} - HEX 색상 코드
+   */
+  _hslToHex(h, s, l) {
+    l /= 100;
+    const a = (s * Math.min(l, 1 - l)) / 100;
+    const f = (n) => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color)
+        .toString(16)
+        .padStart(2, "0");
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
+
+  /**
+   * 색상 값(hex/hsl) 업데이트
+   * @param {HTMLElement} container - 컨테이너 요소
+   */
+  _updateColorValues(container) {
+    const colorItems = container.querySelectorAll(".color-palette-item");
+
+    colorItems.forEach((item) => {
+      const colorSwatch = item.querySelector(".color-swatch");
+      if (!colorSwatch) return;
+
+      // 실제 계산된 색상 가져오기
+      const computedColor =
+        window.getComputedStyle(colorSwatch).backgroundColor;
+
+      // rgb(r, g, b) 파싱
+      const rgbMatch = computedColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+      if (!rgbMatch) return;
+
+      const r = parseInt(rgbMatch[1]);
+      const g = parseInt(rgbMatch[2]);
+      const b = parseInt(rgbMatch[3]);
+
+      // RGB를 HSL로 변환
+      const rNorm = r / 255;
+      const gNorm = g / 255;
+      const bNorm = b / 255;
+
+      const max = Math.max(rNorm, gNorm, bNorm);
+      const min = Math.min(rNorm, gNorm, bNorm);
+      const delta = max - min;
+
+      let h = 0;
+      let s = 0;
+      let l = (max + min) / 2;
+
+      if (delta !== 0) {
+        s = l > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+
+        if (max === rNorm) {
+          h = ((gNorm - bNorm) / delta + (gNorm < bNorm ? 6 : 0)) / 6;
+        } else if (max === gNorm) {
+          h = ((bNorm - rNorm) / delta + 2) / 6;
+        } else {
+          h = ((rNorm - gNorm) / delta + 4) / 6;
+        }
+      }
+
+      h = Math.round(h * 360);
+      s = Math.round(s * 100);
+      l = Math.round(l * 100);
+
+      // HEX 변환
+      const hex =
+        "#" +
+        [r, g, b]
+          .map((x) => {
+            const hexVal = x.toString(16);
+            return hexVal.length === 1 ? "0" + hexVal : hexVal;
+          })
+          .join("");
+
+      // hex 값 업데이트
+      const hexElement = item.querySelector(".color-palette-hex");
+      if (hexElement) {
+        hexElement.textContent = hex;
+      }
+
+      // hsl 값 업데이트
+      const hslElement = item.querySelector(".color-palette-hsl");
+      if (hslElement) {
+        hslElement.textContent = `h:${h}, s:${s}%, l:${l}%`;
+      }
+    });
+
+    console.log("[ColorRenderer] Color values updated");
+  }
+
+  /**
    * 컴포넌트 렌더링 후 이벤트 리스너 등록
    * @param {HTMLElement} container - 컨테이너 요소
    */
@@ -186,6 +295,86 @@ class ColorRenderer {
     console.log(
       `[ColorRenderer] ${colorItems.length} color items initialized with click handlers`
     );
+
+    // 테마 스위처 버튼 클릭 이벤트
+    const themeButtons = container.querySelectorAll(".theme-button");
+
+    themeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const themeName = button.dataset.theme;
+        const primaryH = button.dataset.primaryH;
+        const primaryS = button.dataset.primaryS;
+        const secondaryH = button.dataset.secondaryH;
+        const secondaryS = button.dataset.secondaryS;
+
+        if (!primaryH || !primaryS) {
+          console.warn("[ColorRenderer] Theme button missing data attributes");
+          return;
+        }
+
+        // CSS 변수 업데이트 (Primary & Secondary)
+        document.documentElement.style.setProperty("--primary-h", primaryH);
+        document.documentElement.style.setProperty(
+          "--primary-s",
+          `${primaryS}%`
+        );
+
+        if (secondaryH && secondaryS) {
+          document.documentElement.style.setProperty(
+            "--secondary-h",
+            secondaryH
+          );
+          document.documentElement.style.setProperty(
+            "--secondary-s",
+            `${secondaryS}%`
+          );
+        }
+
+        // hex/hsl 값 업데이트
+        this._updateColorValues(container);
+
+        // 모든 버튼의 active 클래스 제거 후 현재 버튼에만 추가
+        themeButtons.forEach((btn) => {
+          btn.style.transform = "scale(1)";
+          btn.style.boxShadow = btn.style.boxShadow.replace(
+            /0 \d+px \d+px/,
+            "0 2px 8px"
+          );
+        });
+
+        // 클릭된 버튼 강조
+        button.style.transform = "scale(1.05)";
+        button.style.boxShadow = button.style.boxShadow.replace(
+          /0 \d+px \d+px/,
+          "0 4px 16px"
+        );
+
+        console.log(
+          `[ColorRenderer] Theme changed to "${themeName}" (Primary H:${primaryH}, S:${primaryS}% / Secondary H:${secondaryH}, S:${secondaryS}%)`
+        );
+      });
+
+      // 호버 효과
+      button.addEventListener("mouseenter", () => {
+        button.style.transform = "scale(1.05)";
+      });
+
+      button.addEventListener("mouseleave", () => {
+        // active 상태가 아니면 원래대로
+        const isActive =
+          button.style.boxShadow &&
+          button.style.boxShadow.includes("0 4px 16px");
+        if (!isActive) {
+          button.style.transform = "scale(1)";
+        }
+      });
+    });
+
+    if (themeButtons.length > 0) {
+      console.log(
+        `[ColorRenderer] ${themeButtons.length} theme buttons initialized`
+      );
+    }
   }
 
   /**

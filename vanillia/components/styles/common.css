@@ -1025,6 +1025,7 @@ section .text-h2 {
   border-bottom: 1px solid var(--border-secondary);
   position: relative;
   background-color: var(--gray-200);
+  transition: background-color 0.2s ease-in-out;
 }
 
 /* 텍스트 컬러는 체크보드 패턴 배경 */

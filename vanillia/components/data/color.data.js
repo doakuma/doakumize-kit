@@ -29,6 +29,111 @@ window.ComponentData.color = {
       ],
     },
     {
+      title: "🎨 Theme Switcher",
+      description:
+        "아래 테마를 클릭하면 실시간으로 컬러 시스템이 변경됩니다. HSL 기반 동적 컬러 시스템의 강력함을 체험해보세요!",
+      isThemeSwitcher: true,
+      items: [
+        {
+          preview: `
+            <div class="theme-switcher" style="display: flex; gap: 16px; flex-wrap: wrap;">
+              <button class="theme-button" data-theme="cyan" data-primary-h="190" data-primary-s="70" data-secondary-h="255" data-secondary-s="80" style="
+                padding: 16px 24px;
+                border: 2px solid var(--border-primary);
+                border-radius: 8px;
+                background: linear-gradient(135deg, hsl(190, 70%, 50%) 0%, hsl(190, 70%, 35%) 100%);
+                color: white;
+                font: var(--sub-sb-md);
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 2px 8px rgba(38, 183, 217, 0.3);
+              ">
+                <div style="font-size: 20px; margin-bottom: 4px;">🌊</div>
+                <div>Cyan (Default)</div>
+                <div style="font: var(--body-xs); opacity: 0.9; margin-top: 4px;">P:190/70% S:255/80%</div>
+              </button>
+              
+              <button class="theme-button" data-theme="blue" data-primary-h="210" data-primary-s="80" data-secondary-h="270" data-secondary-s="75" style="
+                padding: 16px 24px;
+                border: 2px solid var(--border-primary);
+                border-radius: 8px;
+                background: linear-gradient(135deg, hsl(210, 80%, 50%) 0%, hsl(210, 80%, 35%) 100%);
+                color: white;
+                font: var(--sub-sb-md);
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+              ">
+                <div style="font-size: 20px; margin-bottom: 4px;">💙</div>
+                <div>Blue</div>
+                <div style="font: var(--body-xs); opacity: 0.9; margin-top: 4px;">P:210/80% S:270/75%</div>
+              </button>
+              
+              <button class="theme-button" data-theme="green" data-primary-h="150" data-primary-s="65" data-secondary-h="170" data-secondary-s="70" style="
+                padding: 16px 24px;
+                border: 2px solid var(--border-primary);
+                border-radius: 8px;
+                background: linear-gradient(135deg, hsl(150, 65%, 45%) 0%, hsl(150, 65%, 30%) 100%);
+                color: white;
+                font: var(--sub-sb-md);
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+              ">
+                <div style="font-size: 20px; margin-bottom: 4px;">🍃</div>
+                <div>Green</div>
+                <div style="font: var(--body-xs); opacity: 0.9; margin-top: 4px;">P:150/65% S:170/70%</div>
+              </button>
+              
+              <button class="theme-button" data-theme="red" data-primary-h="0" data-primary-s="75" data-secondary-h="340" data-secondary-s="80" style="
+                padding: 16px 24px;
+                border: 2px solid var(--border-primary);
+                border-radius: 8px;
+                background: linear-gradient(135deg, hsl(0, 75%, 55%) 0%, hsl(0, 75%, 40%) 100%);
+                color: white;
+                font: var(--sub-sb-md);
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+              ">
+                <div style="font-size: 20px; margin-bottom: 4px;">🔥</div>
+                <div>Red</div>
+                <div style="font: var(--body-xs); opacity: 0.9; margin-top: 4px;">P:0/75% S:340/80%</div>
+              </button>
+              
+              <button class="theme-button" data-theme="orange" data-primary-h="25" data-primary-s="80" data-secondary-h="45" data-secondary-s="75" style="
+                padding: 16px 24px;
+                border: 2px solid var(--border-primary);
+                border-radius: 8px;
+                background: linear-gradient(135deg, hsl(25, 80%, 55%) 0%, hsl(25, 80%, 40%) 100%);
+                color: white;
+                font: var(--sub-sb-md);
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+              ">
+                <div style="font-size: 20px; margin-bottom: 4px;">🍊</div>
+                <div>Orange</div>
+                <div style="font: var(--body-xs); opacity: 0.9; margin-top: 4px;">P:25/80% S:45/75%</div>
+              </button>
+            </div>
+            <div class="theme-switcher-info" style="
+              margin-top: 16px;
+              padding: 12px 16px;
+              background: var(--bg-secondary);
+              border-radius: 6px;
+              border-left: 3px solid var(--primary-500);
+              font: var(--body-sm);
+              color: var(--text-secondary);
+            ">
+              💡 <strong>Tip:</strong> 테마를 변경한 후 아래 Primary Color와 Secondary Color 섹션을 확인해보세요. 모든 스케일과 hex/hsl 값이 자동으로 업데이트됩니다!
+            </div>
+          `,
+          label: "Theme Switcher",
+        },
+      ],
+    },
+    {
       title: "Gray Scale",
       description:
         "기본 그레이스케일 컬러 시스템입니다. 텍스트, 배경, 보더 등에 사용됩니다. [Base: hsl(200, 15%, 65%)]",
@@ -132,7 +237,7 @@ window.ComponentData.color = {
       ],
     },
     {
-      title: "Primary Color (Cyan Theme)",
+      title: "Primary Color",
       description:
         "메인 브랜드 컬러입니다. 버튼, 링크, 강조 요소 등에 사용됩니다. [Base: hsl(190, 70%, 50%)]",
       items: [
@@ -219,7 +324,7 @@ window.ComponentData.color = {
       ],
     },
     {
-      title: "Secondary Color (Purple Theme)",
+      title: "Secondary Color",
       description:
         "보조 브랜드 컬러입니다. 액센트, 하이라이트 등에 사용됩니다. [Base: hsl(255, 80%, 60%)] ⚠️ 기존 중복 문제 해결됨",
       items: [
