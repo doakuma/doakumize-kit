@@ -637,7 +637,7 @@ function initComponentsPage() {
     if (componentId === "table") {
       setTimeout(() => initDataTable(), 300);
     }
-    if (componentId === "input") {
+    if (componentId === "datepicker") {
       setTimeout(() => initDatePicker(), 300);
     }
     if (componentId === "dropdown") {

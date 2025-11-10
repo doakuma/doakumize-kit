@@ -132,10 +132,10 @@ const COMPONENT_LIST = [
     order: 14,
   },
   {
-    id: "date-picker",
+    id: "datepicker",
     name: "Date Picker",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: false,
+    enabled: true,
     order: 15,
   },
   {

@@ -1471,6 +1471,7 @@
   top: 0;
   bottom: 0;
   margin: auto;
+  transform: unset;
 }
 
 /* Legacy support for existing .input-with-close */

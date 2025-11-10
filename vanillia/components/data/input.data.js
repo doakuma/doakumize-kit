@@ -211,25 +211,6 @@ window.ComponentData.input = {
         },
       ],
     },
-    {
-      title: "Datepicker",
-      items: [
-        {
-          preview: `<div class="input-field input-with-icon input-field--start-icon">
-  <i class="icon icon--small icon--calendar input-icon"></i>
-  <input type="text" class="input input--datepicker" data-picker-type="range" placeholder="입력 전" value="2025-12-31" />
-</div>`,
-          label: "DateRangePicker",
-        },
-        {
-          preview: `<div class="input-field input-with-icon input-field--start-icon">
-  <i class="icon icon--small icon--calendar input-icon"></i>
-  <input type="text" class="input input--datepicker" placeholder="입력 전" data-picker-type="single" value="2025-12-31" />
-</div>`,
-          label: "Datepicker",
-        },
-      ],
-    },
   ],
 };
 
