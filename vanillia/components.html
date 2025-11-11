@@ -21,11 +21,7 @@
     <div id="wrapper">
       <!-- Header -->
       <header id="header">
-        <!-- Logo & Navigation -->
-        <h1 class="text-h1"><a href="./index.html">Component Studio</a></h1>
-        <!-- <nav class="box-gnb">
-          <a href="/vanillia/components.html" class="btn-gnb">Components</a>
-        </nav> -->
+        <!-- 헤더는 layouts.js로 렌더링됨 -->
       </header>
 
       <!-- lnb -->
@@ -64,7 +60,16 @@
               <p class="text-sub-md-12 text-tertiary">
                 Akumize Design System v1.0
               </p>
-              <a href="generator.html" class="btn btn--primary btn--small" style="margin-top: 12px; width: 100%; text-decoration: none; text-align: center;">
+              <a
+                href="generator.html"
+                class="btn btn--primary btn--small"
+                style="
+                  margin-top: 12px;
+                  width: 100%;
+                  text-decoration: none;
+                  text-align: center;
+                "
+              >
                 ⚡ Component Generator
               </a>
             </div>
@@ -273,75 +278,7 @@
       <!--// content -->
       <!-- Footer -->
       <footer id="footer">
-        <div class="container">
-          <div class="footer-content">
-            <!-- Section 1: Logo & Info -->
-            <div class="footer-section">
-              <h3 class="footer-logo">Component Suudio</h3>
-              <p class="footer-description">
-                반복 작업은 줄이고, 커스터마이징은 자유롭게
-              </p>
-              <p class="footer-version">v1.0.0</p>
-            </div>
-
-            <!-- Section 2: Links -->
-            <div class="footer-section">
-              <h4 class="footer-title">Links</h4>
-              <ul class="footer-links">
-                <li><a href="components.html">Components</a></li>
-                <li><a href="README.md">Documentation</a></li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/projects"
-                    target="_blank"
-                    rel="noopener"
-                    >Roadmap</a
-                  >
-                </li>
-                <li><a href="LICENSE">License</a></li>
-              </ul>
-            </div>
-
-            <!-- Section 3: Community -->
-            <div class="footer-section">
-              <h4 class="footer-title">Community</h4>
-              <ul class="footer-links">
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit"
-                    target="_blank"
-                    rel="noopener"
-                    >GitHub</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/discussions"
-                    target="_blank"
-                    rel="noopener"
-                    >Discussions</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/issues"
-                    target="_blank"
-                    rel="noopener"
-                    >Issues</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Bottom -->
-          <div class="footer-bottom">
-            <p class="footer-copyright">
-              © 2025 Component Suudio. MIT License.
-            </p>
-            <p class="footer-credit">Built with ❤️ by Doakuma</p>
-          </div>
-        </div>
+        <!-- 푸터는 layouts.js로 렌더링됨 -->
       </footer>
     </div>
 
@@ -367,6 +304,9 @@
     <!-- 페이지 전용 스크립트는 resources/js/components-page.js로 이동됨 -->
 
     <!-- Component Data는 주소 기반으로 동적으로 로드됩니다 -->
+
+    <!-- Layout System -->
+    <script src="resources/js/layouts.js"></script>
 
     <!-- Components Page Scripts -->
     <script src="resources/js/components-config.js"></script>
@@ -400,5 +340,11 @@
     <script src="components/scripts/datepicker.js"></script>
     <!-- 컴포넌트 스크립트 자동 초기화 시스템 -->
     <script src="components/scripts-init.js"></script>
+
+    <!-- 레이아웃 렌더링 -->
+    <script>
+      // 레이아웃 렌더링 (기본값 사용)
+      Layouts.renderLayouts();
+    </script>
   </body>
 </html>

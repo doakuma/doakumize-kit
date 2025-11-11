@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Component Suudio - Vanilla JavaScript 컴포넌트 라이브러리</title>
+    <title>Component Studio - Vanilla JavaScript 컴포넌트 라이브러리</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="components/styles/common.css" />
@@ -16,11 +16,7 @@
 
       <!-- Header -->
       <header id="header">
-        <!-- Logo & Navigation -->
-        <h1 class="text-h1"><a href="./index.html">Component Studio</a></h1>
-        <!-- <nav class="box-gnb">
-          <a href="./components.html" class="btn-gnb">Components</a>
-        </nav> -->
+        <!-- 헤더는 layouts.js로 렌더링됨 -->
       </header>
 
       <!-- Main Content -->
@@ -95,9 +91,9 @@
                 <div class="feature-icon">⚡</div>
                 <h3 class="feature-title">Component Generator</h3>
                 <p class="feature-description">
-                  필요한 컴포넌트만 선택하여 프로젝트용 가이드를 자동 생성합니다.
-                  UI 기반 선택으로 쉽고 빠르게 examples.js 파일을 다운로드하여
-                  팀원들과 공유할 수 있습니다.
+                  필요한 컴포넌트만 선택하여 프로젝트용 가이드를 자동
+                  생성합니다. UI 기반 선택으로 쉽고 빠르게 examples.js 파일을
+                  다운로드하여 팀원들과 공유할 수 있습니다.
                 </p>
                 <a href="./generator.html" class="feature-link">
                   Generator 사용하기 →
@@ -149,80 +145,17 @@
 
       <!-- Footer -->
       <footer id="footer">
-        <div class="container">
-          <div class="footer-content">
-            <!-- Section 1: Logo & Info -->
-            <div class="footer-section">
-              <h3 class="footer-logo">Component Suudio</h3>
-              <p class="footer-description">
-                반복 작업은 줄이고, 커스터마이징은 자유롭게
-              </p>
-              <p class="footer-version">v1.0.0</p>
-            </div>
-
-            <!-- Section 2: Links -->
-            <div class="footer-section">
-              <h4 class="footer-title">Links</h4>
-              <ul class="footer-links">
-                <li><a href="components.html">Components</a></li>
-                <li><a href="README.md">Documentation</a></li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/projects"
-                    target="_blank"
-                    rel="noopener"
-                    >Roadmap</a
-                  >
-                </li>
-                <li><a href="LICENSE">License</a></li>
-              </ul>
-            </div>
-
-            <!-- Section 3: Community -->
-            <div class="footer-section">
-              <h4 class="footer-title">Community</h4>
-              <ul class="footer-links">
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit"
-                    target="_blank"
-                    rel="noopener"
-                    >GitHub</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/discussions"
-                    target="_blank"
-                    rel="noopener"
-                    >Discussions</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/doakuma/doakumize-kit/issues"
-                    target="_blank"
-                    rel="noopener"
-                    >Issues</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Bottom -->
-          <div class="footer-bottom">
-            <p class="footer-copyright">
-              © 2025 Component Suudio. MIT License.
-            </p>
-            <p class="footer-credit">Built with ❤️ by Doakuma</p>
-          </div>
-        </div>
+        <!-- 푸터는 layouts.js로 렌더링됨 -->
       </footer>
     </div>
 
     <!-- Scripts -->
+    <script src="resources/js/layouts.js"></script>
     <script src="resources/js/components-config.js"></script>
     <script src="resources/js/index.js"></script>
+    <script>
+      // 레이아웃 렌더링 (기본값 사용)
+      Layouts.renderLayouts();
+    </script>
   </body>
 </html>
