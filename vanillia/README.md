@@ -1,12 +1,35 @@
 # 🎨 Vanillia Component System
 
-- Vanilla JavaScript 기반의 경량 UI 컴포넌트 렌더링 시스템입니다.
-  https://doakuma.github.io/doakumize-kit/vanillia/components.html
+Vanilla JavaScript 기반의 경량 UI 컴포넌트 라이브러리입니다.
+
+**🎭 컴포넌트 스튜디오**: https://doakuma.github.io/doakumize-kit/vanillia/components.html
 
 ## 📌 개요
 
-Vanillia는 JSON 데이터 기반으로 UI 컴포넌트를 렌더링하는 Component Engine 패턴을 사용합니다.
-외부 라이브러리 의존성 없이 순수 JavaScript로 구현되어 있으며, 일관된 디자인 시스템을 제공합니다.
+Vanillia는 외부 라이브러리 의존성 없이 순수 JavaScript로 구현된 UI 컴포넌트 시스템입니다.
+CSS Variables 기반의 디자인 시스템과 함께 제공되어, 쉽게 커스터마이징할 수 있습니다.
+
+### 🎯 두 가지 사용 방법
+
+#### 1️⃣ 실제 프로젝트에서 사용 (Production)
+
+**`core/` 폴더**를 사용하세요! 실제 프로젝트에 필요한 파일만 포함되어 있습니다.
+
+```bash
+# CLI 도구로 프로젝트에 복사
+cd vanillia
+npm run copy ../my-project/assets
+```
+
+📚 **상세 가이드**: [HOW_TO_USE_IN_PROJECT.md](docs/HOW_TO_USE_IN_PROJECT.md)  
+📦 **core 폴더 README**: [core/README.md](core/README.md)
+
+#### 2️⃣ 컴포넌트 스튜디오 (Development)
+
+컴포넌트를 미리보고 개발하려면 Component Engine을 사용하세요.
+JSON 데이터 기반으로 UI 컴포넌트를 자동 렌더링하는 시스템입니다.
+
+📚 **개발 가이드**: [docs/HOW_TO_USE.md](docs/HOW_TO_USE.md)
 
 ## 🚀 주요 기능
 
@@ -20,35 +43,83 @@ Vanillia는 JSON 데이터 기반으로 UI 컴포넌트를 렌더링하는 Compo
 
 ```
 vanillia/
-├── components/
-│   ├── component-engine.js         # 메인 렌더링 엔진
-│   ├── components-init.js          # 컴포넌트 렌더러 등록
-│   ├── data/                       # JSON 데이터 파일
-│   │   ├── button.data.js
-│   │   ├── input.data.js
-│   │   └── ...
-│   └── renderers/                  # 컴포넌트 렌더러
-│       ├── generic.renderer.js     # 범용 렌더러
-│       ├── modal.renderer.js       # 모달 전용 렌더러
-│       └── icon.renderer.js        # 아이콘 전용 렌더러
-├── resources/
+├── core/                           # ⭐ 실제 프로젝트용 (Production)
+│   ├── components.js               # 통합 스크립트 (~90KB)
+│   ├── styles/                     # CSS 파일
+│   │   ├── variables.css           # 디자인 토큰
+│   │   ├── common.css              # 기본 스타일
+│   │   ├── normalize.css           # CSS 리셋
+│   │   └── components.css          # 컴포넌트 스타일 (~180KB)
+│   ├── images/                     # 아이콘 (101개)
+│   └── README.md                   # 사용 가이드
+│
+├── components/                     # 컴포넌트 스튜디오 (Development)
+│   ├── component-engine.js         # 렌더링 엔진
+│   ├── components-init.js          # 렌더러 등록
+│   ├── data/                       # 쇼케이스 데이터
+│   ├── renderers/                  # 렌더러
+│   ├── scripts/                    # 원본 스크립트
+│   └── styles/                     # 원본 스타일
+│
+├── resources/                      # 쇼케이스 리소스
 │   ├── images/                     # 아이콘 이미지
-│   ├── js/
-│   │   ├── common.js               # 공통 스크립트
-│   │   ├── components-config.js    # 컴포넌트 설정
-│   │   └── components-page.js      # 페이지 로직
-│   └── styles/
-│       ├── variables.css           # 디자인 토큰 (색상, 타이포그래피)
-│       ├── common.css              # 공통 스타일
-│       └── components.css          # 컴포넌트 스타일
+│   ├── js/                         # 페이지 로직
+│   └── styles/                     # 스타일
+│
+├── scripts/
+│   ├── build-components.js         # 빌드 도구
+│   └── copy-to-project.js          # CLI 복사 도구
+│
+├── docs/                           # 문서
+│   ├── HOW_TO_USE_IN_PROJECT.md    # 실제 프로젝트 가이드
+│   └── HOW_TO_USE.md               # 개발 가이드
+│
 ├── components.html                 # 컴포넌트 데모 페이지
-└── leftSidebar.html                # 사이드바 예시
-
+├── package.json                    # NPM 설정
+└── README.md                       # 이 파일
 ```
 
-## 🎯 시작하기
+## 🎯 빠른 시작
 
-### 1. HTML에 스크립트 추가
+### 방법 1: 실제 프로젝트에서 사용 (추천)
+
+#### Step 1: 파일 복사
+
+```bash
+cd vanillia
+npm run copy ../my-project/assets
+```
+
+#### Step 2: HTML에 포함
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="assets/styles/normalize.css">
+  <link rel="stylesheet" href="assets/styles/variables.css">
+  <link rel="stylesheet" href="assets/styles/common.css">
+  <link rel="stylesheet" href="assets/styles/components.css">
+</head>
+<body>
+  <!-- 컴포넌트 사용 -->
+  <button class="btn btn--primary">Click me</button>
+  
+  <script src="assets/components.js"></script>
+  <script>
+    window.VanillaComponents.initAll();
+  </script>
+</body>
+</html>
+```
+
+📚 **더 자세한 가이드**: [HOW_TO_USE_IN_PROJECT.md](docs/HOW_TO_USE_IN_PROJECT.md)
+
+---
+
+### 방법 2: 컴포넌트 스튜디오 (개발용)
+
+#### Step 1: HTML에 스크립트 추가
 
 ```html
 <!-- 디자인 시스템 -->
@@ -60,16 +131,18 @@ vanillia/
 <script src="components/components-init.js"></script>
 ```
 
-### 2. 컴포넌트 렌더링
+#### Step 2: 컴포넌트 렌더링
 
 ```javascript
-// 기본 사용법
+// JSON 데이터 기반 렌더링
 await componentEngine.loadAndMount(
-  "button", // 컴포넌트 타입
-  "components/data/button.data.js", // 데이터 소스
-  "#targetElement" // 렌더링 대상
+  "button",
+  "components/data/button.data.js",
+  "#targetElement"
 );
 ```
+
+📚 **개발 가이드**: [docs/HOW_TO_USE.md](docs/HOW_TO_USE.md)
 
 ## 🛠️ 새 컴포넌트 추가하기
 
@@ -258,10 +331,29 @@ await componentEngine.render(type, data, false);
 - 전역 스코프 오염
 - jQuery 등 외부 라이브러리 추가
 
-## 📚 더 알아보기
+## 📚 문서 및 리소스
 
-- [HOW_TO_USE.md](components/HOW_TO_USE.md) - 상세 가이드
-- [components.html](components.html) - 데모 페이지
+### 📖 가이드
+
+- **[HOW_TO_USE_IN_PROJECT.md](docs/HOW_TO_USE_IN_PROJECT.md)** - 실제 프로젝트 적용 가이드 ⭐
+- **[core/README.md](core/README.md)** - Core 패키지 사용법
+- **[docs/HOW_TO_USE.md](docs/HOW_TO_USE.md)** - Component Engine 개발 가이드
+- **[docs/HELPER_API.md](docs/HELPER_API.md)** - Helper API 문서
+
+### 🎭 데모 & 리소스
+
+- **[컴포넌트 스튜디오](https://doakuma.github.io/doakumize-kit/vanillia/components.html)** - 모든 컴포넌트 라이브 데모
+- **[components.html](components.html)** - 로컬 데모 페이지
+
+### 🔧 개발 도구
+
+```bash
+# 컴포넌트 빌드
+npm run build
+
+# 프로젝트로 복사
+npm run copy <destination>
+```
 
 ## 📄 라이선스
 

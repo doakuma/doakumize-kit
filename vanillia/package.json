@@ -1,0 +1,31 @@
+{
+  "name": "doakumize-kit",
+  "version": "1.0.0",
+  "description": "Vanilla JavaScript UI Components Library with Design System",
+  "main": "core/components.js",
+  "scripts": {
+    "build": "node scripts/build-components.js",
+    "copy": "node scripts/copy-to-project.js"
+  },
+  "keywords": [
+    "vanilla",
+    "javascript",
+    "ui",
+    "components",
+    "design-system",
+    "css-variables"
+  ],
+  "author": "Doakuma",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doakuma/doakumize-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/doakuma/doakumize-kit/issues"
+  },
+  "homepage": "https://doakuma.github.io/doakumize-kit/vanillia/components.html",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

@@ -13,6 +13,7 @@ const path = require("path");
 const projectRoot = path.join(__dirname, "..");
 const scriptsDir = path.join(projectRoot, "components", "scripts");
 const outputFile = path.join(projectRoot, "resources", "js", "components.js");
+const coreOutputFile = path.join(projectRoot, "core", "components.js");
 
 /**
  * IIFE 래퍼 제거
@@ -204,14 +205,23 @@ window.VanillaComponents = window.VanillaComponents || {};
 
   // 파일 쓰기
   try {
+    // resources/js/에 쓰기
     fs.writeFileSync(outputFile, finalContent, "utf8");
+
+    // core/에도 쓰기
+    const coreDir = path.dirname(coreOutputFile);
+    if (!fs.existsSync(coreDir)) {
+      fs.mkdirSync(coreDir, { recursive: true });
+    }
+    fs.writeFileSync(coreOutputFile, finalContent, "utf8");
 
     // 파일 크기 확인
     const stats = fs.statSync(outputFile);
     const fileSizeKB = (stats.size / 1024).toFixed(2);
 
     console.log("✅ Build completed successfully!\n");
-    console.log(`Output: ${outputFile}`);
+    console.log(`Output 1: ${outputFile}`);
+    console.log(`Output 2: ${coreOutputFile}`);
     console.log(`Size: ${fileSizeKB} KB`);
     console.log(`Files: ${processedFiles.length} file(s) bundled\n`);
   } catch (error) {
