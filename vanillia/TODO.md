@@ -6,13 +6,19 @@
 
 ### ✅ 완료된 항목
 
-- **컴포넌트 구현**: 20개 컴포넌트 완료
+- **컴포넌트 구현**: 15개 컴포넌트 완료
 
-  - Foundation: Typography, Icon, Color, Spacing
-  - Form Controls: Button, Input, Checkbox, Radio, Dropdown, Slider, Switch, Textarea
-  - Data Display: Chip, Table, File Card, Badge
+  - Foundation: Typography, Icon
+  - Form Controls: Button, Input, Checkbox, Radio, Dropdown, Slider
+  - Data Display: Chip, Table, File Card
   - Feedback: Modal, Popover
   - Navigation: Tab, Accordion
+
+- **컴포넌트 스크립트**: 13개 독립 스크립트 분리 완료
+
+  - accordion.js, checkbox-group.js, chip.js, dropdown.js
+  - file-card.js, file-upload.js, input.js, lnb.js
+  - modal.js, popover.js, slider.js, tab.js, tooltip.js
 
 - **HSL 기반 동적 컬러 시스템**: 구현 완료
 
@@ -24,6 +30,11 @@
   - `--text-primary`, `--text-secondary`, `--text-tertiary`
   - `--bg-primary`, `--bg-secondary`, `--bg-tertiary`
   - `--border-primary`, `--border-secondary`, `--border-focus`
+
+- **빌드 시스템**: 구축 완료
+  - 통합 빌드 스크립트 (`scripts/build-components.js`)
+  - 프로덕션 파일 자동 생성 (`core/components.js`)
+  - 자동 초기화 시스템 (`components/scripts-init.js`)
 
 ### 🚧 진행 중 / 계획 중
 
@@ -580,6 +591,19 @@ const THEMES = {
 ---
 
 ## 📝 변경 이력
+
+### 2025-11-11
+
+- 문서 전체 업데이트 완료
+- 컴포넌트 스크립트 시스템 완성 반영:
+  - ✅ 13개 컴포넌트 스크립트 분리 완료
+  - ✅ 통합 빌드 시스템 구축 완료 (`scripts/build-components.js`)
+  - ✅ 자동 초기화 시스템 구축 완료
+  - ✅ 프로덕션 파일 (`core/`) 준비 완료
+- 문서 업데이트:
+  - `COMPONENT_SCRIPTS_TODO.md` - 전체 완료 상태 반영
+  - `COMPONENT_SCRIPT_GUIDE.md` - 구현 현황 추가
+  - `HOW_TO_USE.md` - 컴포넌트 스크립트 시스템 정보 추가
 
 ### 2025-11-05
 

@@ -1,6 +1,6 @@
 # Component Engine 사용 가이드
 
-> 📅 최종 업데이트: 2025-10-21 (카테고리 시스템 및 LNB 네비게이션 추가)
+> 📅 최종 업데이트: 2025-11-11 (컴포넌트 스크립트 시스템 완성)
 
 ## 📁 파일 구조
 
@@ -32,10 +32,12 @@ resources/js/
 - ✅ **로드맵 가시화**: 준비 중인 컴포넌트 표시 (24개 예정)
 - ✅ **자동 마운트**: HTML에 `data-component` 속성만 추가하면 자동 렌더링
 - ✅ **렌더러 통합**: 14개 렌더러 → 1개로 통합 (93% 감소)
+- ✅ **컴포넌트 스크립트**: 13개 독립 스크립트 분리 완료 (accordion, checkbox-group, chip, dropdown, file-card, file-upload, input, lnb, modal, popover, slider, tab, tooltip)
 - ✅ **데이터 파일**: `.data.js` 파일로 로컬 개발 지원
 - ✅ **코드 분리**: 코드 보기 기능 독립 모듈화
 - ✅ **자동 캐싱**: 성능 최적화를 위한 스마트 캐싱
 - ✅ **검색 기능**: 실시간 컴포넌트 검색
+- ✅ **프로덕션 빌드**: 통합 `components.js` 파일 자동 생성
 
 ## 🚀 사용 방법
 
@@ -446,13 +448,15 @@ window.addCodeToggleButtons();
 9. ✅ **검색 기능** - 실시간 컴포넌트 필터링
 10. ✅ **로드맵 가시화** - 준비 중 컴포넌트 표시 (24개)
 11. ✅ **15개 컴포넌트** - Typography, Button, Icon, Input, Checkbox, Radio, Dropdown, Slider, Chip, Table, File Card, Modal, Popover, Tab, Accordion
+12. ✅ **13개 컴포넌트 스크립트** - 독립적인 스크립트 파일로 분리 완료
+13. ✅ **빌드 시스템** - 통합 빌드 스크립트로 프로덕션 파일 자동 생성
 
 ### 예정된 작업 ⏳
 
-12. ⏳ **24개 컴포넌트 추가** - Badge, Tooltip, Card, Toast, Alert 등
-13. 🔮 **다국어 지원 (i18n)**
-14. 📘 **TypeScript 전환 고려**
-15. 🎨 **다크 모드 지원**
+14. ⏳ **24개 컴포넌트 추가** - Badge, Card, Toast, Alert 등
+15. 🔮 **다국어 지원 (i18n)**
+16. 📘 **TypeScript 전환 고려**
+17. 🎨 **다크 모드 지원**
 
 ---
 

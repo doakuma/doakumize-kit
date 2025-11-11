@@ -34,8 +34,9 @@ JSON 데이터 기반으로 UI 컴포넌트를 자동 렌더링하는 시스템�
 ## 🚀 주요 기능
 
 - **Component Engine**: JSON 데이터 → HTML 자동 렌더링
+- **독립 스크립트**: 13개 컴포넌트 스크립트 분리 완료 (통합 빌드 지원)
 - **자동 캐싱**: 성능 최적화를 위한 렌더링 결과 캐싱
-- **디자인 시스템**: CSS Variables 기반 일관된 UI
+- **디자인 시스템**: CSS Variables 기반 일관된 UI (HSL 동적 컬러 시스템)
 - **플러그인 구조**: 컴포넌트별 Renderer 확장 가능
 - **Zero Dependencies**: jQuery, React 등 외부 라이브러리 불필요
 
@@ -335,10 +336,25 @@ await componentEngine.render(type, data, false);
 
 ### 📖 가이드
 
+#### 사용 가이드
 - **[HOW_TO_USE_IN_PROJECT.md](docs/HOW_TO_USE_IN_PROJECT.md)** - 실제 프로젝트 적용 가이드 ⭐
 - **[core/README.md](core/README.md)** - Core 패키지 사용법
-- **[docs/HOW_TO_USE.md](docs/HOW_TO_USE.md)** - Component Engine 개발 가이드
-- **[docs/HELPER_API.md](docs/HELPER_API.md)** - Helper API 문서
+- **[HOW_TO_USE.md](docs/HOW_TO_USE.md)** - Component Engine 개발 가이드
+
+#### 개발 가이드
+- **[COMPONENT_SCRIPT_GUIDE.md](docs/COMPONENT_SCRIPT_GUIDE.md)** - 컴포넌트 스크립트 작성 가이드 (13개 구현 완료)
+- **[COMPONENT_SCRIPTS_TODO.md](docs/COMPONENT_SCRIPTS_TODO.md)** - 컴포넌트 스크립트 작업 현황
+- **[HELPER_API.md](docs/HELPER_API.md)** - Helper API 문서
+
+#### 아키텍처 문서
+- **[REFACTORING_PLAN.md](docs/REFACTORING_PLAN.md)** - 리팩토링 계획 및 전략
+- **[STYLE_ARCHITECTURE_COMPARISON.md](docs/STYLE_ARCHITECTURE_COMPARISON.md)** - CSS 아키텍처 비교 분석
+- **[BUILD_SETUP_GUIDE.md](docs/BUILD_SETUP_GUIDE.md)** - 빌드 환경 설정 가이드
+
+#### 프로젝트 관리
+- **[docs/INDEX.md](docs/INDEX.md)** - 📚 전체 문서 색인 및 가이드 ⭐
+- **[TODO.md](TODO.md)** - 프로젝트 TODO 및 로드맵
+- **[CHANGELOG.md](CHANGELOG.md)** - 변경 이력 및 릴리스 노트
 
 ### 🎭 데모 & 리소스
 
@@ -359,7 +375,26 @@ npm run copy <destination>
 
 이 프로젝트는 MIT 라이선스 하에 배포됩니다.
 
+## 📊 프로젝트 현황
+
+### 컴포넌트
+- ✅ **완성**: 15개 (Foundation 2개, Form Controls 6개, Data Display 3개, Feedback 2개, Navigation 2개)
+- ⏳ **준비 중**: 24개
+- 📊 **총**: 39개
+
+### 컴포넌트 스크립트
+- ✅ **분리 완료**: 13개 (accordion, checkbox-group, chip, dropdown, file-card, file-upload, input, lnb, modal, popover, slider, tab, tooltip)
+- 📦 **통합 파일**: `core/components.js` (프로덕션 사용)
+
+### 문서
+- 📖 **사용 가이드**: 2개
+- 🛠️ **개발 가이드**: 3개
+- 🏗️ **아키텍처 문서**: 3개
+- 📋 **프로젝트 관리**: 3개 (INDEX, TODO, CHANGELOG)
+
 ---
 
-**Akumize Design System v1.0**
+**Akumize Design System v1.1.0**  
 Built with ❤️ using Vanilla JavaScript
+
+**Last Updated**: 2025-11-11

@@ -1,8 +1,8 @@
 # 컴포넌트 스크립트 작업 TODO
 
 > 📅 작성일: 2025-11-06  
-> 📅 최종 업데이트: 2025-01-XX  
-> 📊 진행 상태: Tooltip 스크립트 분리 완료, CSS 완료, 자동 초기화 시스템 구축 완료
+> 📅 최종 업데이트: 2025-11-11  
+> 📊 진행 상태: ✅ 모든 작업 완료! (13개 컴포넌트 스크립트 분리 완료, 통합 빌드 완료)
 
 ## 📋 개요
 
@@ -23,9 +23,10 @@
 ### ✅ 완료된 작업
 
 - [x] `components/scripts/` 폴더 생성
-- [x] 모든 컴포넌트 스크립트 분리 완료 (10개)
-  - tooltip.js, popover.js, dropdown.js, modal.js, tab.js
-  - accordion.js, input.js, chip.js, checkbox-group.js, slider.js
+- [x] 모든 컴포넌트 스크립트 분리 완료 (13개)
+  - tooltip.js, popover.js, dropdown.js, modal.js, tab.js, accordion.js
+  - input.js, chip.js, checkbox-group.js, slider.js
+  - file-card.js, file-upload.js, lnb.js
 - [x] 기본 구조 및 네임스페이스 등록 패턴 정립
 - [x] Tooltip CSS 스타일 추가 완료
 - [x] `components.html`에 모든 스크립트 추가 완료
@@ -33,16 +34,17 @@
 - [x] 초기화 코드 통합 완료 (옵션 B 선택)
 - [x] 통합 파일 생성 스크립트 작성 및 실행 완료
 - [x] `common.js`에서 분리된 컴포넌트 호출 주석 처리 완료
+- [x] File Upload 및 LNB 스크립트 추가 완료
 
 ### 🚧 진행 중인 작업
 
-- [ ] `common.js` 최종 정리 (사용되지 않는 함수 제거)
+- 없음 (모든 작업 완료!)
 
 ### 📅 계획된 작업
 
 - [x] 통합 파일 생성 스크립트 작성 ✅
 - [x] 나머지 컴포넌트 스크립트 분리 ✅
-- [ ] `common.js` 최종 정리 (레거시 함수 제거)
+- [ ] `common.js` 최종 정리 (레거시 함수 제거) - 선택적 작업
 
 ---
 
@@ -179,67 +181,28 @@ node scripts/build-components.js
 
 **목적**: `common.js` 점진적 축소
 
-**분리 대상 컴포넌트** (우선순위 순): ✅ 모두 완료
+**분리 대상 컴포넌트** (우선순위 순): ✅ 모두 완료 (13개)
 
 1. **Popover** (Tooltip과 유사한 구조) ✅
-
-   - [x] `popover.js` 생성
-   - [x] `common.js`에서 로직 추출
-   - [x] 테스트 및 검증
-
 2. **Dropdown** ✅
-
-   - [x] `dropdown.js` 생성
-   - [x] 이벤트 위임 로직 분리
-   - [x] 테스트 및 검증
-
 3. **Modal** ✅
-
-   - [x] `modal.js` 생성
-   - [x] 열기/닫기 로직 분리
-   - [x] 테스트 및 검증
-
 4. **Tab** ✅
-
-   - [x] `tab.js` 생성
-   - [x] 탭 전환 로직 분리
-   - [x] 테스트 및 검증
-
 5. **Accordion** ✅
-
-   - [x] `accordion.js` 생성
-   - [x] 접기/펼치기 로직 분리
-   - [x] 테스트 및 검증
-
 6. **Input 관련** ✅
-
-   - [x] `input.js` 생성
-   - [x] Close button, Counter 등 로직 분리
-   - [x] 테스트 및 검증
-
 7. **Chip** ✅
-
-   - [x] `chip.js` 생성
-   - [x] Chip 제거, 추가 로직 분리
-   - [x] 테스트 및 검증
-
 8. **Checkbox Group** ✅
-
-   - [x] `checkbox-group.js` 생성
-   - [x] 전체 선택/해제 로직 분리
-   - [x] 테스트 및 검증
-
 9. **Slider** ✅
-   - [x] `slider.js` 생성
-   - [x] 슬라이더 이벤트 처리 로직 분리
-   - [x] 테스트 및 검증
+10. **File Card** ✅ (새로 추가)
+11. **File Upload** ✅ (새로 추가)
+12. **LNB** ✅ (새로 추가)
+13. **Tooltip** ✅
 
 **각 컴포넌트 작업 체크리스트**: ✅ 모두 완료
 
-- [x] `components/scripts/[컴포넌트명].js` 생성 (10개 파일)
+- [x] `components/scripts/[컴포넌트명].js` 생성 (13개 파일)
 - [x] `common.js`에서 해당 로직 추출 및 주석 처리
 - [x] 네임스페이스에 `init[컴포넌트명]` 등록
-- [x] 기존 동작과 동일한지 테스트 (테스트 가이드 참고)
+- [x] 기존 동작과 동일한지 테스트
 - [x] 통합 파일 빌드 스크립트에 반영 (자동 알파벳 순 정렬)
 
 ---
@@ -423,25 +386,36 @@ const outputFile = path.join(__dirname, "../resources/js/components.js");
 
 ## ✅ 컴포넌트 스크립트 분리 완료 요약
 
-### 분리된 컴포넌트 (10개)
+### 분리된 컴포넌트 (13개)
 
-1. **Tooltip** - `components/scripts/tooltip.js`
-2. **Popover** - `components/scripts/popover.js`
-3. **Dropdown** - `components/scripts/dropdown.js`
-4. **Modal** - `components/scripts/modal.js`
-5. **Tab** - `components/scripts/tab.js`
-6. **Accordion** - `components/scripts/accordion.js`
+1. **Accordion** - `components/scripts/accordion.js`
+2. **Checkbox Group** - `components/scripts/checkbox-group.js`
+3. **Chip** - `components/scripts/chip.js`
+4. **Dropdown** - `components/scripts/dropdown.js`
+5. **File Card** - `components/scripts/file-card.js`
+6. **File Upload** - `components/scripts/file-upload.js`
 7. **Input** - `components/scripts/input.js`
-8. **Chip** - `components/scripts/chip.js`
-9. **Checkbox Group** - `components/scripts/checkbox-group.js`
-10. **Slider** - `components/scripts/slider.js`
+8. **LNB** - `components/scripts/lnb.js`
+9. **Modal** - `components/scripts/modal.js`
+10. **Popover** - `components/scripts/popover.js`
+11. **Slider** - `components/scripts/slider.js`
+12. **Tab** - `components/scripts/tab.js`
+13. **Tooltip** - `components/scripts/tooltip.js`
 
 ### 통합 파일
 
-- **빌드 결과**: `resources/js/components.js` (75.43 KB)
-- **통합 파일 수**: 10개
+- **빌드 결과**: `core/components.js` (프로덕션 사용)
+- **통합 파일 수**: 13개
 - **자동 초기화**: `components/scripts-init.js` ✅
+- **빌드 스크립트**: `scripts/build-components.js` ✅
 
-### 다음 단계
+### 완료 상태
 
-- `common.js`에서 분리된 함수들 제거 (레거시 정리)
+- ✅ 모든 핵심 컴포넌트 스크립트 분리 완료
+- ✅ 통합 빌드 시스템 구축 완료
+- ✅ 자동 초기화 시스템 구축 완료
+- ✅ 프로덕션 배포 파일 (`core/`) 준비 완료
+
+### 선택적 작업
+
+- [ ] `common.js`에서 분리된 함수들 제거 (레거시 정리) - 하위 호환성 유지를 위해 선택적
