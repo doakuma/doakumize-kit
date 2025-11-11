@@ -16,6 +16,7 @@
 @import url(layout.css);
 @import url(lnb.css);
 @import url(components.css);
+@import url(studio.css);
 
 /* External Fonts */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");

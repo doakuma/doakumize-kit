@@ -6,10 +6,10 @@
 /* LNB Container */
 .lnb {
   position: fixed;
-  top: 0;
+  top: 96px;
   left: 0;
   width: 300px;
-  height: 100dvh;
+  height: calc(100dvh - 96px);
   padding: 20px;
   background-color: var(--gray-50);
   z-index: 10;
@@ -387,4 +387,3 @@
   text-indent: -999px;
   position: absolute;
 }
-
