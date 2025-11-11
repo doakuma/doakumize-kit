@@ -71,7 +71,7 @@ vanillia/
 │       ├── input.css               # Input (분리 완료)
 │       ├── dropdown.css            # Dropdown (분리 완료)
 │       ├── modal.css               # Modal (분리 완료)
-│       └── _all-other-components.css  # 나머지 (순차 분리 예정)
+│       └── all-other-components.css  # 나머지 (순차 분리 예정)
 │
 ├── 📁 resources/                   # 🎨 Studio 전용 리소스
 │   ├── images/                     # 아이콘 이미지

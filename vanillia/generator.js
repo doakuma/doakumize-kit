@@ -383,14 +383,14 @@
         }
       }
 
-      // 선택되지 않은 컴포넌트는 _all-other-components.css에서 로드
+      // 선택되지 않은 컴포넌트는 all-other-components.css에서 로드
       const hasOtherComponents = Array.from(this.selectedComponents).some(
         (comp) => !componentCSSMap[comp]
       );
 
       if (hasOtherComponents) {
         const otherCSS = await this.loadCSSFile(
-          "components/styles/_all-other-components.css"
+          "components/styles/all-other-components.css"
         );
         if (otherCSS) {
           combinedCSS += `/* ========== Other Components ========== */\n${otherCSS}\n`;

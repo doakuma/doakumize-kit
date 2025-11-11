@@ -11,11 +11,11 @@
 @import url(../../components/styles/modal.css);
 
 /* 나머지 컴포넌트 (임시 통합) */
-@import url(../../components/styles/_all-other-components.css);
+@import url(../../components/styles/all-other-components.css);
 
 /* 
  * TODO: 나머지 컴포넌트들 순차적으로 분리 예정
- * _all-other-components.css에서 필요할 때마다 분리:
+ * all-other-components.css에서 필요할 때마다 분리:
  * - Accordion, Chip, Badge, Typography
  * - Popover, Checkbox, Radio, Tab
  * - Table, File Card, Toggle/Switch
