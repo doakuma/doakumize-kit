@@ -17,8 +17,12 @@
      * 초기화
      */
     async init() {
-      console.log("[Generator] Initializing with", this.components.length, "components");
-      
+      console.log(
+        "[Generator] Initializing with",
+        this.components.length,
+        "components"
+      );
+
       this.renderComponentList();
       this.attachEventListeners();
       this.updatePreview();
@@ -38,7 +42,7 @@
       const byCategory = {};
       this.components.forEach((comp) => {
         if (!comp.enabled) return; // 비활성화된 컴포넌트는 제외
-        
+
         const category = comp.category || "Others";
         if (!byCategory[category]) {
           byCategory[category] = [];
@@ -48,10 +52,12 @@
 
       let html = "";
 
-      Object.keys(byCategory).sort().forEach((category) => {
-        const items = byCategory[category];
-        
-        html += `
+      Object.keys(byCategory)
+        .sort()
+        .forEach((category) => {
+          const items = byCategory[category];
+
+          html += `
           <div class="generator-category">
             <div class="generator-category-title">
               ${category}
@@ -59,19 +65,20 @@
             </div>
         `;
 
-        items.forEach((comp) => {
-          html += `
+          items.forEach((comp) => {
+            html += `
             <div class="generator-item" data-component="${comp.id}">
-              <input type="checkbox" id="comp-${comp.id}" value="${comp.id}">
-              <label class="generator-item-label" for="comp-${comp.id}">
-                ${comp.name}
+              <label class="chk">
+                <input type="checkbox" class="chk__input" id="comp-${comp.id}" value="${comp.id}">
+                <span class="chk__box" aria-hidden="true"></span>
+                <span class="chk__label">${comp.name}</span>
               </label>
             </div>
           `;
-        });
+          });
 
-        html += `</div>`;
-      });
+          html += `</div>`;
+        });
 
       listContainer.innerHTML = html;
     }
@@ -81,11 +88,13 @@
      */
     attachEventListeners() {
       // 체크박스 변경
-      document.querySelectorAll('.generator-item input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.addEventListener("change", (e) => {
-          this.handleSelectionChange(e.target.value, e.target.checked);
+      document
+        .querySelectorAll(".generator-item .chk__input")
+        .forEach((checkbox) => {
+          checkbox.addEventListener("change", (e) => {
+            this.handleSelectionChange(e.target.value, e.target.checked);
+          });
         });
-      });
 
       // Select All
       document.getElementById("selectAllBtn")?.addEventListener("click", () => {
@@ -120,10 +129,12 @@
      * 전체 선택
      */
     selectAll() {
-      document.querySelectorAll('.generator-item input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.checked = true;
-        this.selectedComponents.add(checkbox.value);
-      });
+      document
+        .querySelectorAll(".generator-item .chk__input")
+        .forEach((checkbox) => {
+          checkbox.checked = true;
+          this.selectedComponents.add(checkbox.value);
+        });
       this.updatePreview();
     }
 
@@ -131,9 +142,11 @@
      * 전체 해제
      */
     clearAll() {
-      document.querySelectorAll('.generator-item input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.checked = false;
-      });
+      document
+        .querySelectorAll(".generator-item .chk__input")
+        .forEach((checkbox) => {
+          checkbox.checked = false;
+        });
       this.selectedComponents.clear();
       this.updatePreview();
     }
@@ -143,13 +156,17 @@
      */
     async loadAllComponentData() {
       console.log("[Generator] Loading component data...");
-      
+
       const promises = this.components
-        .filter(comp => comp.enabled)
+        .filter((comp) => comp.enabled)
         .map((comp) => this.loadComponentData(comp.id));
 
       await Promise.all(promises);
-      console.log("[Generator] Loaded", this.componentData.size, "component data files");
+      console.log(
+        "[Generator] Loaded",
+        this.componentData.size,
+        "component data files"
+      );
     }
 
     /**
@@ -159,12 +176,15 @@
       try {
         const script = document.createElement("script");
         script.src = `components/data/${componentId}.data.js`;
-        
+
         return new Promise((resolve, reject) => {
           script.onload = () => {
             // window.ComponentData에서 데이터 가져오기
             if (window.ComponentData && window.ComponentData[componentId]) {
-              this.componentData.set(componentId, window.ComponentData[componentId]);
+              this.componentData.set(
+                componentId,
+                window.ComponentData[componentId]
+              );
               console.log(`[Generator] Loaded: ${componentId}`);
             }
             resolve();
@@ -185,7 +205,7 @@
      */
     updatePreview() {
       const selectedCount = this.selectedComponents.size;
-      const previewContent = document.getElementById("previewContent");
+      const previewArea = document.getElementById("previewArea");
       const downloadBtn = document.getElementById("downloadBtn");
       const selectedCountEl = document.getElementById("selectedCount");
       const estimatedSizeEl = document.getElementById("estimatedSize");
@@ -196,13 +216,21 @@
       }
 
       if (selectedCount === 0) {
-        // 선택 없음
-        previewContent.innerHTML = `
+        // 선택 없음 (빈 상태 표시)
+        previewArea.innerHTML = `
           <div class="generator-empty">
             <div class="generator-empty-icon">📦</div>
             <div class="generator-empty-title">No Components Selected</div>
             <div class="generator-empty-text">
-              왼쪽에서 컴포넌트를 선택하면 여기에 생성된 코드가 표시됩니다.
+              <p style="margin: 0 0 16px;">왼쪽에서 컴포넌트를 선택하면 여기에 생성된 코드가 표시됩니다.</p>
+              <div style="text-align: left; display: inline-block; padding: 16px 24px; background: var(--bg-secondary); border-radius: 8px;">
+                <p style="margin: 0 0 12px; font-weight: 600;">🚀 빠른 시작</p>
+                <p style="margin: 0; font-size: 14px; line-height: 1.6;">
+                  1️⃣ 왼쪽에서 Button, Input 등 필요한 컴포넌트 체크<br>
+                  2️⃣ 여기서 생성된 코드 확인<br>
+                  3️⃣ Download 버튼으로 examples.js 다운로드
+                </p>
+              </div>
             </div>
           </div>
         `;
@@ -215,7 +243,7 @@
         const generatedCode = this.generateExamplesCode();
         const sizeKB = (new Blob([generatedCode]).size / 1024).toFixed(2);
 
-        previewContent.innerHTML = `
+        previewArea.innerHTML = `
           <div class="generator-code-block">
             <pre><code>${this._escapeHtml(generatedCode)}</code></pre>
           </div>
@@ -249,14 +277,18 @@
  * Component Examples
  * 
  * Generated by Doakumize Kit Generator
- * Date: ${new Date().toISOString().split('T')[0]}
+ * Date: ${new Date().toISOString().split("T")[0]}
  * 
- * Selected components: ${Array.from(this.selectedComponents).join(', ')}
+ * Selected components: ${Array.from(this.selectedComponents).join(", ")}
  */
 
 `;
 
-      const code = `window.ComponentExamples = ${JSON.stringify(examples, null, 2)};`;
+      const code = `window.ComponentExamples = ${JSON.stringify(
+        examples,
+        null,
+        2
+      )};`;
 
       return header + code;
     }
@@ -268,7 +300,7 @@
       const example = {
         title: data.title || data.name || "Component",
         description: data.description || "",
-        items: []
+        items: [],
       };
 
       // variants를 items로 변환
@@ -278,7 +310,7 @@
             variant.items.forEach((item) => {
               example.items.push({
                 label: item.label || variant.title || "Example",
-                code: item.preview || item.code || ""
+                code: item.preview || item.code || "",
               });
             });
           }
@@ -309,15 +341,15 @@
       URL.revokeObjectURL(url);
 
       console.log("[Generator] Downloaded examples.js");
-      
+
       // 사용 안내 alert
       setTimeout(() => {
         alert(
           `✅ examples.js 다운로드 완료!\n\n` +
-          `사용 방법:\n` +
-          `1. 다운로드된 파일을 프로젝트의 core/viewer/ 폴더에 복사\n` +
-          `2. core/viewer/index.html을 열어서 확인\n\n` +
-          `선택한 컴포넌트: ${this.selectedComponents.size}개`
+            `사용 방법:\n` +
+            `1. 다운로드된 파일을 프로젝트의 core/viewer/ 폴더에 복사\n` +
+            `2. core/viewer/index.html을 열어서 확인\n\n` +
+            `선택한 컴포넌트: ${this.selectedComponents.size}개`
         );
       }, 100);
     }
@@ -343,4 +375,3 @@
     generator.init();
   }
 })();
-
