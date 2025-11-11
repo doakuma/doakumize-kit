@@ -44,38 +44,61 @@ JSON 데이터 기반으로 UI 컴포넌트를 자동 렌더링하는 시스템�
 
 ```
 vanillia/
-├── core/                           # ⭐ 실제 프로젝트용 (Production)
+├── 📁 core/                        # ⭐ 프로젝트 배포용 (Production)
 │   ├── components.js               # 통합 스크립트 (~90KB)
-│   ├── styles/                     # CSS 파일
-│   │   ├── variables.css           # 디자인 토큰
-│   │   ├── common.css              # 기본 스타일
-│   │   ├── normalize.css           # CSS 리셋
-│   │   └── components.css          # 컴포넌트 스타일 (~180KB)
-│   ├── images/                     # 아이콘 (101개)
+│   ├── styles/                     # 빌드된 CSS 파일
+│   │   ├── common.css              # Import 진입점
+│   │   ├── components.css          # 컴포넌트 스타일 (Generator로 생성)
+│   │   ├── base.css                # 기본 스타일
+│   │   ├── animations.css          # 애니메이션
+│   │   ├── scrollbar.css           # 스크롤바 (선택적)
+│   │   ├── normalize.css           # CSS Reset
+│   │   └── variables.css           # 디자인 토큰
+│   ├── images/                     # 아이콘 이미지 (101개)
+│   ├── viewer/                     # 컴포넌트 가이드 뷰어
 │   └── README.md                   # 사용 가이드
 │
-├── components/                     # 컴포넌트 스튜디오 (Development)
+├── 📁 components/                  # 🧩 컴포넌트 개발/관리
 │   ├── component-engine.js         # 렌더링 엔진
 │   ├── components-init.js          # 렌더러 등록
-│   ├── data/                       # 쇼케이스 데이터
-│   ├── renderers/                  # 렌더러
-│   ├── scripts/                    # 원본 스크립트
-│   └── styles/                     # 원본 스타일
+│   ├── data/                       # 컴포넌트 데이터 (23개)
+│   ├── renderers/                  # 렌더러 (5개)
+│   ├── scripts/                    # 컴포넌트 스크립트 (13개)
+│   └── styles/                     # 🎯 컴포넌트 스타일 (모듈화)
+│       ├── common.css              # Import 진입점
+│       ├── icons.css               # Icons (분리 완료)
+│       ├── button.css              # Button (분리 완료)
+│       ├── input.css               # Input (분리 완료)
+│       ├── dropdown.css            # Dropdown (분리 완료)
+│       ├── modal.css               # Modal (분리 완료)
+│       └── _all-other-components.css  # 나머지 (순차 분리 예정)
 │
-├── resources/                      # 쇼케이스 리소스
+├── 📁 resources/                   # 🎨 Studio 전용 리소스
 │   ├── images/                     # 아이콘 이미지
-│   ├── js/                         # 페이지 로직
-│   └── styles/                     # 스타일
+│   ├── js/                         # Studio 페이지 로직
+│   └── styles/                     # Studio 스타일
+│       ├── common.css              # Studio Import 진입점
+│       ├── base.css                # 기본 스타일
+│       ├── animations.css          # 애니메이션
+│       ├── scrollbar.css           # 스크롤바
+│       ├── layout.css              # Studio 레이아웃
+│       ├── lnb.css                 # Studio LNB
+│       ├── studio.css              # Studio 페이지 스타일
+│       └── components.css          # 컴포넌트 Import 파일
 │
-├── scripts/
-│   ├── build-components.js         # 빌드 도구
+├── 📁 scripts/
+│   ├── build-components.js         # 컴포넌트 빌드 (JS)
+│   ├── build-core.js               # 🆕 Core 빌드 (CSS)
 │   └── copy-to-project.js          # CLI 복사 도구
 │
-├── docs/                           # 문서
-│   ├── HOW_TO_USE_IN_PROJECT.md    # 실제 프로젝트 가이드
-│   └── HOW_TO_USE.md               # 개발 가이드
+├── 📁 docs/                        # 📚 문서
+│   ├── HOW_TO_USE_IN_PROJECT.md    # 프로젝트 적용 가이드
+│   ├── BUILD_SETUP_GUIDE.md        # 빌드 가이드
+│   └── INDEX.md                    # 전체 문서 색인
 │
 ├── components.html                 # 컴포넌트 데모 페이지
+├── generator.html                  # 🆕 컴포넌트 Generator (ZIP 다운로드)
+├── index.html                      # 메인 페이지
 ├── package.json                    # NPM 설정
 └── README.md                       # 이 파일
 ```
@@ -364,12 +387,30 @@ await componentEngine.render(type, data, false);
 ### 🔧 개발 도구
 
 ```bash
-# 컴포넌트 빌드
+# 컴포넌트 빌드 (JS)
 npm run build
 
-# 프로젝트로 복사
+# Core 스타일 빌드 (CSS: resources → core)
+npm run build:core
+
+# 프로젝트로 복사 (core → 외부 프로젝트)
 npm run copy <destination>
 ```
+
+### ⚡ Component Generator
+
+필요한 컴포넌트만 선택하여 다운로드:
+
+1. **[generator.html](generator.html)** 열기
+2. 필요한 컴포넌트 선택
+3. **Download Package (ZIP)** 클릭
+4. 다운로드된 ZIP에 포함:
+   - `examples.js` - 선택한 컴포넌트 예제
+   - `styles/components.css` - 선택한 컴포넌트만!
+   - `styles/common.css, base.css, animations.css` 등 필수 파일
+   - `README.txt` - 사용 가이드
+
+**온라인**: https://doakuma.github.io/doakumize-kit/vanillia/generator.html
 
 ## 📄 라이선스
 

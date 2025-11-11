@@ -5,6 +5,7 @@
   "main": "core/components.js",
   "scripts": {
     "build": "node scripts/build-components.js",
+    "build:core": "node scripts/build-core.js",
     "copy": "node scripts/copy-to-project.js"
   },
   "keywords": [

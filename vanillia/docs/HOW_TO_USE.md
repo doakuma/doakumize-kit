@@ -9,19 +9,47 @@ components/
   ├── component-engine.js          # 메인 렌더링 엔진 (캐싱, 렌더러 관리)
   ├── components-init.js           # 자동 마운트 및 초기화
   ├── data/                        # 컴포넌트 데이터 (.data.js)
-  │   ├── typography.data.js       # 15개 컴포넌트 데이터
+  │   ├── typography.data.js       # 23개 컴포넌트 데이터
   │   ├── button.data.js
   │   ├── icon.data.js
   │   └── ...
-  └── renderers/
-      ├── generic.renderer.js      # 제네릭 렌더러 (대부분 처리)
-      ├── modal.renderer.js        # 복잡한 컴포넌트용 전용 렌더러
-      └── icon.renderer.js
+  ├── renderers/
+  │   ├── generic.renderer.js      # 제네릭 렌더러 (대부분 처리)
+  │   ├── modal.renderer.js        # 복잡한 컴포넌트용 전용 렌더러
+  │   └── icon.renderer.js
+  ├── scripts/                     # 컴포넌트 스크립트 (13개 분리)
+  │   ├── accordion.js
+  │   ├── dropdown.js
+  │   ├── modal.js
+  │   └── ...
+  └── styles/                      # 🆕 컴포넌트 스타일 (모듈화)
+      ├── common.css               # Import 진입점
+      ├── icons.css                # Icons (분리 완료)
+      ├── button.css               # Button (분리 완료)
+      ├── input.css                # Input (분리 완료)
+      ├── dropdown.css             # Dropdown (분리 완료)
+      ├── modal.css                # Modal (분리 완료)
+      └── _all-other-components.css  # 나머지 (순차 분리)
 
-resources/js/
-  ├── components-config.js         # 컴포넌트 리스트 + 카테고리 관리
-  ├── components-page.js           # LNB 네비게이션 + 컨텐츠 전환
-  └── component-code-viewer.js     # 코드 보기/복사 기능
+resources/
+  ├── js/
+  │   ├── components-config.js     # 컴포넌트 리스트 + 카테고리 관리
+  │   ├── components-page.js       # LNB 네비게이션 + 컨텐츠 전환
+  │   └── component-code-viewer.js # 코드 보기/복사 기능
+  └── styles/                      # Studio 전용 스타일
+      ├── common.css               # Studio Import
+      ├── base.css                 # 기본 스타일
+      ├── animations.css           # 애니메이션
+      ├── layout.css               # Studio 레이아웃
+      ├── lnb.css                  # Studio LNB
+      └── studio.css               # Studio 페이지
+
+core/                              # 프로젝트 배포용 (빌드 결과)
+  ├── components.js                # 통합 스크립트
+  └── styles/                      # 빌드된 스타일
+      ├── common.css               # Import 진입점
+      ├── components.css           # Generator로 생성
+      └── ...                      # npm run build:core로 자동 생성
 ```
 
 ## 🎯 시스템 특징

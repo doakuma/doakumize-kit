@@ -6,25 +6,59 @@
 
 ```
 core/
-  ├── components.js          # 모든 컴포넌트 스크립트 통합 파일
-  ├── styles/
-  │   ├── variables.css      # 디자인 토큰 (색상, 타이포그래피)
-  │   ├── common.css         # 공통 기본 스타일
-  │   ├── normalize.css      # CSS 리셋
-  │   └── components.css     # 모든 컴포넌트 스타일
-  └── images/                # 아이콘 이미지 (101개)
-      └── *.png
+  ├── components.js          # 모든 컴포넌트 스크립트 통합 파일 (~90KB)
+  ├── styles/                # 빌드된 스타일 파일
+  │   ├── common.css         # Import 진입점
+  │   ├── components.css     # 컴포넌트 스타일 (Generator로 생성)
+  │   ├── base.css           # 기본 스타일 (*, html, body)
+  │   ├── animations.css     # 애니메이션 (steam, loading)
+  │   ├── scrollbar.css      # 스크롤바 커스터마이징 (선택적)
+  │   ├── normalize.css      # CSS Reset
+  │   └── variables.css      # 디자인 토큰 (색상, 타이포그래피)
+  ├── images/                # 아이콘 이미지 (101개)
+  │   └── *.png
+  ├── viewer/                # 컴포넌트 가이드 뷰어
+  │   ├── index.html         # 뷰어 페이지
+  │   ├── examples.js        # 컴포넌트 예제 데이터
+  │   └── viewer.js          # 뷰어 로직
+  └── README.md              # 이 파일
 ```
 
 ## 🚀 빠른 시작
 
-### 1. 파일 복사
+### 방법 1: Component Generator 사용 (추천) 🆕
 
-이 폴더를 통째로 프로젝트에 복사해:
+필요한 컴포넌트만 선택하여 다운로드:
+
+1. **Generator 페이지** 열기
+   - 온라인: https://doakuma.github.io/doakumize-kit/vanillia/generator.html
+   - 로컬: `vanillia/generator.html`
+
+2. **컴포넌트 선택**
+   - Button, Input, Modal 등 필요한 것만 체크
+
+3. **Download Package (ZIP)** 클릭
+
+4. **압축 해제 후 복사**
+   ```
+   doakumize-components-[timestamp].zip
+   ├── examples.js              → core/viewer/examples.js
+   └── styles/
+       ├── common.css           → core/styles/common.css
+       ├── components.css       → core/styles/components.css
+       ├── base.css             → core/styles/base.css
+       ├── animations.css       → core/styles/animations.css
+       └── ...
+   ```
+
+### 방법 2: CLI 도구 사용 (전체 복사)
+
+전체 core 폴더를 프로젝트에 복사:
 
 ```bash
-# CLI 도구 사용 (추천)
-npx doakumize-kit copy
+# CLI 도구 사용
+cd vanillia
+npm run copy ../my-project/assets
 
 # 또는 수동 복사
 cp -r vanillia/core/* my-project/assets/

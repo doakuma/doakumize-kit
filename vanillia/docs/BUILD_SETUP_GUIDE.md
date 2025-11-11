@@ -4,6 +4,66 @@
 
 CSS 파일을 여러 개로 분리해서 개발하되, 프로덕션에서는 하나의 파일로 번들링하여 성능 최적화
 
+## 🆕 현재 빌드 시스템 (2025-11-11)
+
+### ✅ 구현 완료된 빌드 시스템
+
+Doakumize Kit은 **3단계 빌드 시스템**을 사용합니다:
+
+#### 1️⃣ 개발 (resources/styles/)
+```bash
+# Studio에서 스타일 개발
+resources/styles/
+├── base.css
+├── animations.css
+├── scrollbar.css
+├── layout.css (Studio 전용)
+├── lnb.css (Studio 전용)
+└── studio.css (Studio 페이지 전용)
+```
+
+#### 2️⃣ 빌드 (core/styles/)
+```bash
+# resources → core로 자동 복사
+npm run build:core
+
+# 결과:
+core/styles/
+├── common.css         # Import 진입점 (자동 생성)
+├── base.css           # resources에서 복사
+├── animations.css     # resources에서 복사
+├── scrollbar.css      # resources에서 복사
+├── normalize.css      # components에서 복사
+└── variables.css      # components에서 복사
+```
+
+#### 3️⃣ 배포 (Component Generator)
+```bash
+# 사용자가 Generator에서 선택
+# → ZIP 다운로드 (선택한 컴포넌트만!)
+
+doakumize-components.zip
+├── examples.js
+└── styles/
+    ├── common.css
+    ├── components.css  # 선택한 컴포넌트만 포함!
+    ├── base.css
+    └── ...
+```
+
+### 📋 빌드 명령어
+
+```bash
+# Core 스타일 빌드 (CSS)
+npm run build:core
+
+# 컴포넌트 스크립트 빌드 (JS)
+npm run build
+
+# 전체 빌드
+npm run build:core && npm run build
+```
+
 ---
 
 ## 🎯 추천 방식 비교

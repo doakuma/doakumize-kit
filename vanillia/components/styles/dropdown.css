@@ -1,0 +1,293 @@
+/* ========================================
+ * Dropdown Component Styles
+ * ======================================== */
+
+/* Base Dropdown Container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Dropdown Trigger */
+.dropdown__trigger {
+  /* 기본 레이아웃 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  /* 타이포그래피 */
+  font: var(--body-sm);
+
+  /* 스타일링 */
+  padding: 8px 12px;
+  padding-left: 16px;
+  padding-right: 40px;
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  background-color: var(--gray-0);
+  color: var(--gray-900);
+
+  /* 인터랙션 */
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  user-select: none;
+}
+
+/* Dropdown Text */
+.dropdown__text {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dropdown Text - Placeholder */
+.dropdown__text--placeholder {
+  color: var(--gray-500);
+  font-weight: 400;
+}
+
+/* Dropdown Arrow */
+.dropdown__arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: url(../../resources/images/icon_dropdown_arrow.png) no-repeat
+    center center;
+  background-size: contain;
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* Arrow rotation when open */
+.dropdown--open .dropdown__arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Dropdown States */
+
+/* Focus State */
+.dropdown__trigger:focus,
+.dropdown--open .dropdown__trigger {
+  border-color: var(--primary-600);
+}
+
+/* Filled State */
+.dropdown--filled .dropdown__trigger {
+  border-color: var(--gray-300);
+  background-color: var(--gray-0);
+}
+
+/* Error State */
+.dropdown--error .dropdown__trigger {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}
+
+.dropdown--error .dropdown__trigger:focus {
+  border-color: var(--error);
+}
+
+/* Disabled State */
+.dropdown--disabled .dropdown__trigger {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-500);
+  cursor: not-allowed;
+}
+
+.dropdown--disabled .dropdown__text--placeholder {
+  color: var(--gray-400);
+}
+
+/* Readonly State */
+.dropdown--readonly .dropdown__trigger {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  cursor: default;
+}
+
+/* Dropdown Size Modifiers */
+
+/* Small */
+.dropdown--small .dropdown__trigger {
+  padding: 5px 8px;
+  padding-left: 12px;
+  padding-right: 32px;
+  font: var(--body-xs);
+  min-height: 28px;
+}
+
+.dropdown--small .dropdown__arrow {
+  right: 8px;
+  width: 14px;
+  height: 14px;
+}
+
+/* Medium (기본값) */
+.dropdown--medium .dropdown__trigger {
+  font: var(--body-sm);
+  min-height: 36px;
+}
+
+/* Large */
+.dropdown--large .dropdown__trigger {
+  padding: 10px 16px;
+  padding-left: 20px;
+  padding-right: 48px;
+  font: var(--body-md);
+  min-height: 44px;
+}
+
+.dropdown--large .dropdown__arrow {
+  right: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+.dropdown--large .dropdown__item {
+  padding: 9px 10px;
+  font: var(--body-md);
+}
+
+.dropdown--large .dropdown__item--selected {
+  padding-left: 38px;
+}
+
+.dropdown--large .dropdown__item--selected:before {
+  width: 20px;
+  height: 20px;
+}
+
+/* Dropdown Menu */
+
+/* Menu Container */
+.dropdown__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--gray-0);
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(44, 56, 74, 0.15);
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  /* 기본적으로 숨김 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Menu Open State */
+.dropdown--open .dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown Menu Items */
+
+/* Base Item */
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font: var(--body-sm);
+  color: var(--gray-900);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  border-radius: 4px;
+}
+
+.dropdown__item:last-child {
+  border-bottom: none;
+}
+
+/* Item Hover */
+.dropdown__item:hover {
+  background-color: var(--gray-50);
+}
+
+/* Item Selected */
+.dropdown__item--selected {
+  background-color: var(--primary-100);
+  color: var(--gray-800);
+  font: var(--sub-sb-sm);
+  position: relative;
+  padding-left: 30px;
+}
+
+.dropdown__item--selected:hover {
+  background-color: var(--primary-200);
+}
+
+/* Selected Check Icon */
+.dropdown__item--selected::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 16px;
+  height: 16px;
+  background: url(../../resources/images/icon_dropdown_check.png) no-repeat
+    center center;
+  background-size: contain;
+}
+
+/* Item Focused (키보드 네비게이션용) */
+.dropdown__item--focused {
+  background-color: var(--gray-100);
+  outline: 2px solid var(--primary-600);
+  outline-offset: -2px;
+}
+
+/* Item Disabled */
+.dropdown__item--disabled {
+  color: var(--gray-400);
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.dropdown__item--disabled:hover {
+  background-color: transparent;
+}
+
+/* Dropdown Menu - Special Items */
+
+/* Divider */
+.dropdown__divider {
+  height: 1px;
+  background-color: var(--gray-200);
+  margin: 4px 0;
+}
+
+/* Header */
+.dropdown__header {
+  padding: 8px 16px 4px;
+  font: var(--sub-sb-xs);
+  color: var(--gray-600);
+  background-color: var(--gray-50);
+}
+
