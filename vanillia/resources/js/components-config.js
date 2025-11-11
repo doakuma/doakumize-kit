@@ -138,6 +138,13 @@ const COMPONENT_LIST = [
     enabled: true,
     order: 15,
   },
+  {
+    id: "autocomplete",
+    name: "Autocomplete",
+    category: COMPONENT_CATEGORIES.FORM_CONTROLS,
+    enabled: false,
+    order: 16,
+  },
 
   // ========================================
   // 3️⃣ Data Display (데이터 표시)
@@ -147,21 +154,21 @@ const COMPONENT_LIST = [
     name: "Chip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 16,
+    order: 17,
   },
   {
     id: "table",
     name: "Table",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 17,
+    order: 18,
   },
   {
     id: "file-card",
     name: "File Card",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 18,
+    order: 19,
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
@@ -169,56 +176,56 @@ const COMPONENT_LIST = [
     name: "Badge",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 19,
+    order: 20,
   },
   {
     id: "tooltip",
     name: "Tooltip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 20,
+    order: 21,
   },
   {
     id: "card",
     name: "Card",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 21,
+    order: 22,
   },
   {
     id: "avatar",
     name: "Avatar",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 22,
+    order: 23,
   },
   {
     id: "progress-bar",
     name: "Progress Bar",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 23,
+    order: 24,
   },
   {
     id: "list",
     name: "List",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 24,
+    order: 25,
   },
   {
     id: "skeleton",
     name: "Skeleton",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 25,
+    order: 26,
   },
   {
     id: "empty-state",
     name: "Empty State",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 26,
+    order: 27,
   },
 
   // ========================================
@@ -229,14 +236,14 @@ const COMPONENT_LIST = [
     name: "Modal",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: true,
-    order: 27,
+    order: 28,
   },
   {
     id: "popover",
     name: "Popover",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: true,
-    order: 28,
+    order: 29,
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
@@ -244,28 +251,28 @@ const COMPONENT_LIST = [
     name: "Toast",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
-    order: 29,
+    order: 30,
   },
   {
     id: "alert",
     name: "Alert",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
-    order: 30,
+    order: 31,
   },
   {
     id: "dialog",
     name: "Dialog",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
-    order: 31,
+    order: 32,
   },
   {
     id: "loading-spinner",
     name: "Loading Spinner",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
-    order: 32,
+    order: 33,
   },
 
   // ========================================
@@ -276,14 +283,14 @@ const COMPONENT_LIST = [
     name: "Tab",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: true,
-    order: 33,
+    order: 34,
   },
   {
     id: "accordion",
     name: "Accordion",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: true,
-    order: 34,
+    order: 35,
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
@@ -291,28 +298,28 @@ const COMPONENT_LIST = [
     name: "Breadcrumb",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 35,
+    order: 36,
   },
   {
     id: "pagination",
     name: "Pagination",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 36,
+    order: 37,
   },
   {
     id: "menu",
     name: "Menu",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 37,
+    order: 38,
   },
   {
     id: "stepper",
     name: "Stepper",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 38,
+    order: 39,
   },
 ];
 

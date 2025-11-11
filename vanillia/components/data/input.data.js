@@ -211,6 +211,74 @@ window.ComponentData.input = {
         },
       ],
     },
+    {
+      title: "Search Input",
+      items: [
+        {
+          preview: `<div class="input-field input-field--search input-field--with-close">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" placeholder="검색..." />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "기본 검색 (medium + close)",
+        },
+        {
+          preview: `<div class="input-field input-field--search">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" placeholder="검색..." />
+</div>`,
+          label: "검색 (close 버튼 없음)",
+        },
+        {
+          preview: `<div class="input-field input-field--search input-field--with-close">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" value="검색어 입력됨" />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "검색 (입력 후)",
+        },
+        {
+          preview: `<div class="input-field input-field--small input-field--search input-field--with-close">
+  <i class="icon icon--small icon--search"></i>
+  <input type="search" class="input" placeholder="검색..." />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "small + close",
+        },
+        {
+          preview: `<div class="input-field input-field--large input-field--search input-field--with-close">
+  <i class="icon icon--large icon--search"></i>
+  <input type="search" class="input" placeholder="검색..." />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "large + close",
+        },
+        {
+          preview: `<div class="input-field input-field--search input-field--error input-field--with-close">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" value="잘못된 검색어" />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "error + close",
+        },
+        {
+          preview: `<div class="input-field input-field--search input-field--with-close">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" value="비활성화" disabled />
+  <button type="button" class="input-addon input-addon--close" disabled></button>
+</div>`,
+          label: "disabled + close",
+        },
+        {
+          preview: `<div class="input-field input-field--search input-field--with-close">
+  <i class="icon icon--medium icon--search"></i>
+  <input type="search" class="input" value="읽기전용" readonly />
+  <button type="button" class="input-addon input-addon--close"></button>
+</div>`,
+          label: "readonly + close",
+        },
+      ],
+    },
   ],
 };
 

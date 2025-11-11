@@ -1560,6 +1560,62 @@
 }
 
 /* ========================================
+ * Search Input
+ * ======================================== */
+
+/* Search Input 컨테이너 */
+.input-field--search {
+  position: relative;
+}
+
+/* Search Input의 검색 아이콘 */
+.input-field--search .icon--search {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Search Input 필드 (아이콘 공간 확보) */
+.input-field--search .input {
+  padding-left: 40px;
+}
+
+/* Search Input + Close 버튼 조합 */
+.input-field--search.input-field--with-close .input {
+  padding-right: 40px;
+}
+
+/* Small 사이즈 Search Input */
+.input-field--small.input-field--search .icon--search {
+  left: 8px;
+}
+
+.input-field--small.input-field--search .input {
+  padding-left: 32px;
+}
+
+.input-field--small.input-field--search.input-field--with-close .input {
+  padding-right: 32px;
+}
+
+/* Large 사이즈 Search Input */
+.input-field--large.input-field--search .icon--search {
+  left: 16px;
+}
+
+.input-field--large.input-field--search .input {
+  padding-left: 48px;
+}
+
+.input-field--large.input-field--search.input-field--with-close .input {
+  padding-right: 48px;
+}
+
+/* ========================================
  * Standalone Chip Components
  * ======================================== */
 
@@ -2437,7 +2493,7 @@
   background-color: var(--gray-50);
 }
 
-/* Item Selected */
+/* Item Selected (멀티 선택에서 체크됨 표시) */
 .dropdown__item--selected {
   background-color: var(--primary-100);
   color: var(--gray-800);
@@ -2462,6 +2518,13 @@
   height: 16px;
   background: url(../images/icon_dropdown_check.png) no-repeat center center;
   background-size: contain;
+}
+
+/* Item Focused (키보드 네비게이션용 - 멀티 선택) */
+.dropdown__item--focused {
+  background-color: var(--gray-100);
+  outline: 2px solid var(--primary-600);
+  outline-offset: -2px;
 }
 
 /* Item Disabled */
@@ -2496,26 +2559,132 @@
 }
 
 /* ========================================
- * Dropdown with Search (Input과 통합)
+ * Dropdown with Search (Searchable Dropdown)
  * ======================================== */
 
+/* Searchable Dropdown 메뉴 */
+.dropdown--searchable .dropdown__menu {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 검색 입력 영역 래퍼 */
+.dropdown__search-wrapper {
+  position: relative;
+  padding: 8px;
+  border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+/* 검색 아이콘 */
+.dropdown__search-wrapper .icon--search {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 검색 입력 필드 */
+.dropdown__search {
+  width: 100%;
+  font: var(--body-sm);
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  padding: 8px 12px;
+  padding-left: 32px;
+  background-color: var(--gray-0);
+  color: var(--gray-900);
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.dropdown__search::placeholder {
+  color: var(--gray-500);
+}
+
+.dropdown__search:focus {
+  border-color: var(--primary-600);
+}
+
+/* 아이템 리스트 래퍼 */
+.dropdown__items {
+  padding: 8px;
+  overflow-y: auto;
+  max-height: 192px; /* 200px - 검색창 높이 */
+}
+
+/* 검색 결과 없음 메시지 */
+.dropdown__no-results {
+  padding: 16px;
+  text-align: center;
+  font: var(--body-sm);
+  color: var(--text-tertiary);
+  display: none;
+}
+
+.dropdown__no-results.show {
+  display: block;
+}
+
+/* Searchable + Multi 조합 */
+.dropdown--searchable.dropdown--multi .dropdown__trigger {
+  min-height: auto;
+  padding: 4px 40px 4px 8px;
+}
+
+.dropdown--searchable.dropdown--multi .dropdown__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 28px;
+  align-items: center;
+}
+
+.dropdown--searchable.dropdown--multi.dropdown--small .dropdown__trigger {
+  padding: 2px 32px 2px 6px;
+}
+
+.dropdown--searchable.dropdown--multi.dropdown--large .dropdown__trigger {
+  padding: 6px 48px 6px 12px;
+}
+
+/* Searchable Multi에서 placeholder 텍스트 */
+.dropdown--searchable.dropdown--multi .dropdown__text--placeholder {
+  font: var(--body-sm);
+  color: var(--gray-500);
+  padding: 2px 4px;
+}
+
+/* 선택된 항목이 있을 때 placeholder 숨김 */
+.dropdown--searchable.dropdown--multi
+  .dropdown__chips:not(:empty)
+  ~ .dropdown__text--placeholder {
+  display: none;
+}
+
+/* Legacy 지원 */
 .dropdown--search .dropdown__menu {
   padding-top: 8px;
 }
 
-.dropdown__search {
+.dropdown--search .dropdown__search {
   padding: 8px 12px 4px;
   border-bottom: 1px solid var(--gray-200);
 }
 
-.dropdown__search .input {
+.dropdown--search .dropdown__search .input {
   font: var(--body-sm);
   border: 1px solid var(--gray-300);
   border-radius: 4px;
   padding: 6px 12px;
 }
 
-.dropdown__search .input:focus {
+.dropdown--search .dropdown__search .input:focus {
   border-color: var(--primary-600);
 }
 
@@ -2544,28 +2713,8 @@
   padding: 6px 48px 6px 12px;
 }
 
-/* Multi-select에서 사용되는 chip 스타일 */
-.dropdown__chip {
-  font: var(--sub-md-xs);
-  padding: 1px 8px;
-  border-radius: 9999px;
-  background-color: var(--primary-100);
-  border: 1px solid var(--primary-300);
-  color: var(--primary-600);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.dropdown__chip-remove {
-  width: 12px;
-  height: 12px;
-  background: url(../images/icon_close_chip.png) no-repeat center center;
-  background-size: contain;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
+/* Multi-select에서는 기존 chip 컴포넌트 재사용 */
+/* .chip.chip--rounded.chip--selected 조합 사용 */
 
 /* ========================================
  * Dropdown with Close Button (Input과 동일)

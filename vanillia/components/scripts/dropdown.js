@@ -26,6 +26,7 @@
     // 이벤트 위임 방식 (한 번만 등록, 모든 동적 요소 지원)
     initDropdownHandlers();
     initDropdownCloseButtons();
+    initSearchableDropdowns();
     initDropdowns();
 
     console.log("[Dropdown] Dropdown initialized successfully");
@@ -103,6 +104,14 @@
         e.preventDefault();
         e.stopPropagation();
 
+        // 멀티 선택 드롭다운인지 확인
+        if (dropdown.classList.contains("dropdown--multi")) {
+          handleMultiSelect(dropdown, item);
+          // 멀티 선택에서는 드롭다운을 닫지 않음
+          return;
+        }
+
+        // 단일 선택 드롭다운
         // 기존 선택 해제
         dropdown
           .querySelectorAll(".dropdown__item--selected")
@@ -151,10 +160,10 @@
       const items = dropdown.querySelectorAll(
         ".dropdown__item:not(.dropdown__item--disabled)"
       );
-      const currentSelected = dropdown.querySelector(
-        ".dropdown__item--selected"
-      );
-      let currentIndex = Array.from(items).indexOf(currentSelected);
+
+      // 키보드 포커스는 항상 focused 클래스 사용
+      const currentFocused = dropdown.querySelector(".dropdown__item--focused");
+      let currentIndex = Array.from(items).indexOf(currentFocused);
 
       switch (e.key) {
         case "ArrowDown":
@@ -169,8 +178,8 @@
           break;
         case "Enter":
           e.preventDefault();
-          if (currentSelected) {
-            currentSelected.click();
+          if (currentFocused) {
+            currentFocused.click();
           }
           break;
         case "Escape":
@@ -184,16 +193,23 @@
     // 아이템에 포커스 주기
     function focusItem(item) {
       if (item) {
-        // 기존 선택 해제
-        item
-          .closest(".dropdown")
-          .querySelectorAll(".dropdown__item--selected")
-          .forEach((selected) => {
-            selected.classList.remove("dropdown__item--selected");
+        const dropdown = item.closest(".dropdown");
+
+        // 키보드 포커스는 단일/멀티 모두 focused 클래스 사용
+        dropdown
+          .querySelectorAll(".dropdown__item--focused")
+          .forEach((focused) => {
+            focused.classList.remove("dropdown__item--focused");
           });
-        // 새 아이템 선택
-        item.classList.add("dropdown__item--selected");
+        item.classList.add("dropdown__item--focused");
         item.focus();
+
+        // 스크롤 자동 이동 (아이템이 보이도록)
+        item.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
       }
     }
   }
@@ -332,8 +348,322 @@
     });
   }
 
+  /**
+   * 멀티 선택 처리
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {HTMLElement} item - 선택된 아이템
+   */
+  function handleMultiSelect(dropdown, item) {
+    const value = item.getAttribute("data-value") || item.textContent.trim();
+    const text = item.textContent.trim();
+
+    // 이미 선택되어 있으면 선택 해제
+    if (item.classList.contains("dropdown__item--selected")) {
+      item.classList.remove("dropdown__item--selected");
+      removeChip(dropdown, value);
+
+      // 커스텀 이벤트 발생 (선택 해제)
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:deselect", {
+          detail: { dropdown, item, value, text },
+        })
+      );
+    } else {
+      // 선택
+      item.classList.add("dropdown__item--selected");
+      addChip(dropdown, value, text);
+
+      // 커스텀 이벤트 발생 (선택)
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:select", {
+          detail: { dropdown, item, value, text },
+        })
+      );
+    }
+
+    // filled 상태 업데이트
+    updateMultiDropdownState(dropdown);
+  }
+
+  /**
+   * Chip 추가
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {string} value - 값
+   * @param {string} text - 표시 텍스트
+   */
+  function addChip(dropdown, value, text) {
+    let chipsContainer = dropdown.querySelector(".dropdown__chips");
+
+    // chips 컨테이너가 없으면 생성
+    if (!chipsContainer) {
+      const trigger = dropdown.querySelector(".dropdown__trigger");
+      chipsContainer = document.createElement("div");
+      chipsContainer.className = "dropdown__chips";
+
+      // placeholder 텍스트 앞에 삽입
+      const placeholder = trigger.querySelector(".dropdown__text--placeholder");
+      if (placeholder) {
+        trigger.insertBefore(chipsContainer, placeholder);
+      } else {
+        trigger.insertBefore(chipsContainer, trigger.firstChild);
+      }
+    }
+
+    // 이미 존재하는지 확인
+    const existingChip = chipsContainer.querySelector(
+      `[data-value="${value}"]`
+    );
+    if (existingChip) {
+      return;
+    }
+
+    // Chip 생성 (기존 chip 컴포넌트 재사용)
+    const chip = document.createElement("span");
+    chip.className = "chip chip--rounded chip--selected";
+    chip.setAttribute("data-value", value);
+    chip.innerHTML = `
+      <span class="chip__text">${text}</span>
+      <button type="button" class="chip__remove" aria-label="Remove ${text}"></button>
+    `;
+
+    chipsContainer.appendChild(chip);
+  }
+
+  /**
+   * Chip 제거
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {string} value - 제거할 값
+   */
+  function removeChip(dropdown, value) {
+    const chipsContainer = dropdown.querySelector(".dropdown__chips");
+    if (!chipsContainer) {
+      return;
+    }
+
+    const chip = chipsContainer.querySelector(`.chip[data-value="${value}"]`);
+    if (chip) {
+      chip.remove();
+    }
+  }
+
+  /**
+   * 멀티 드롭다운 상태 업데이트
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function updateMultiDropdownState(dropdown) {
+    const chipsContainer = dropdown.querySelector(".dropdown__chips");
+    const hasChips = chipsContainer && chipsContainer.children.length > 0;
+
+    if (hasChips) {
+      dropdown.classList.add("dropdown--filled");
+    } else {
+      dropdown.classList.remove("dropdown--filled");
+    }
+  }
+
+  /**
+   * Chip 제거 버튼 클릭 이벤트 (이벤트 위임)
+   * dropdown 내부의 chip__remove만 처리
+   */
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("chip__remove")) {
+      const dropdown = e.target.closest(".dropdown");
+
+      // dropdown 내부의 chip만 처리 (input-field와 구분)
+      if (!dropdown) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const chip = e.target.closest(".chip");
+
+      if (!chip) {
+        return;
+      }
+
+      const value = chip.getAttribute("data-value");
+
+      // 해당 아이템의 선택 상태 해제
+      const item = dropdown.querySelector(
+        `.dropdown__item[data-value="${value}"]`
+      );
+      if (item) {
+        item.classList.remove("dropdown__item--selected");
+      }
+
+      // Chip 제거
+      chip.remove();
+
+      // 상태 업데이트
+      updateMultiDropdownState(dropdown);
+
+      // 커스텀 이벤트 발생
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:deselect", {
+          detail: { dropdown, value },
+        })
+      );
+    }
+  });
+
+  /**
+   * Searchable Dropdown 초기화
+   * 검색 가능한 드롭다운의 필터링 기능을 설정합니다.
+   */
+  function initSearchableDropdowns() {
+    // 검색 입력 이벤트 (이벤트 위임)
+    document.addEventListener("input", function (e) {
+      if (e.target.classList.contains("dropdown__search")) {
+        const searchInput = e.target;
+        const dropdown = searchInput.closest(".dropdown");
+
+        if (!dropdown || !dropdown.classList.contains("dropdown--searchable")) {
+          return;
+        }
+
+        handleDropdownSearch(searchInput, dropdown);
+      }
+    });
+
+    // 검색 입력창에 포커스 시 전체 아이템 표시
+    document.addEventListener(
+      "focus",
+      function (e) {
+        if (e.target.classList.contains("dropdown__search")) {
+          const searchInput = e.target;
+          const dropdown = searchInput.closest(".dropdown");
+
+          if (
+            !dropdown ||
+            !dropdown.classList.contains("dropdown--searchable")
+          ) {
+            return;
+          }
+
+          // 검색어가 비어있으면 전체 표시
+          if (!searchInput.value.trim()) {
+            showAllDropdownItems(dropdown);
+          }
+        }
+      },
+      true
+    );
+
+    // 드롭다운이 열릴 때 검색창 초기화 및 포커스
+    document.addEventListener("dropdown:open", function (e) {
+      const dropdown = e.detail.dropdown;
+
+      if (dropdown.classList.contains("dropdown--searchable")) {
+        const searchInput = dropdown.querySelector(".dropdown__search");
+        if (searchInput) {
+          // 검색어 초기화
+          searchInput.value = "";
+          // 모든 아이템 표시
+          showAllDropdownItems(dropdown);
+          // 검색창에 포커스
+          setTimeout(() => searchInput.focus(), 100);
+        }
+      }
+    });
+
+    // 키보드 네비게이션 확장 (검색창에서 아래 화살표 누르면 아이템으로 이동)
+    document.addEventListener("keydown", function (e) {
+      if (e.target.classList.contains("dropdown__search")) {
+        const dropdown = e.target.closest(".dropdown");
+
+        if (!dropdown || !dropdown.classList.contains("dropdown--open")) {
+          return;
+        }
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          const firstVisibleItem = dropdown.querySelector(
+            '.dropdown__item:not([style*="display: none"])'
+          );
+          if (firstVisibleItem) {
+            // 단일/멀티 모두 focused 클래스 사용
+            dropdown
+              .querySelectorAll(".dropdown__item--focused")
+              .forEach((item) =>
+                item.classList.remove("dropdown__item--focused")
+              );
+            firstVisibleItem.classList.add("dropdown__item--focused");
+            firstVisibleItem.focus();
+          }
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          dropdown.classList.remove("dropdown--open");
+          dropdown.querySelector(".dropdown__trigger").focus();
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          const firstVisibleItem = dropdown.querySelector(
+            '.dropdown__item:not([style*="display: none"])'
+          );
+          if (firstVisibleItem) {
+            firstVisibleItem.click();
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * 드롭다운 아이템 필터링
+   * @param {HTMLInputElement} searchInput - 검색 입력 필드
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function handleDropdownSearch(searchInput, dropdown) {
+    const query = searchInput.value.toLowerCase().trim();
+    const items = dropdown.querySelectorAll(".dropdown__item");
+    const noResults = dropdown.querySelector(".dropdown__no-results");
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const text = item.textContent.toLowerCase();
+      const matches = text.includes(query);
+
+      item.style.display = matches ? "" : "none";
+
+      // 숨겨진 아이템의 focused 클래스 제거
+      if (!matches) {
+        item.classList.remove("dropdown__item--focused");
+      }
+
+      if (matches) {
+        visibleCount++;
+      }
+    });
+
+    // No results 표시/숨김
+    if (noResults) {
+      if (visibleCount === 0 && query) {
+        noResults.classList.add("show");
+      } else {
+        noResults.classList.remove("show");
+      }
+    }
+  }
+
+  /**
+   * 모든 드롭다운 아이템 표시
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function showAllDropdownItems(dropdown) {
+    const items = dropdown.querySelectorAll(".dropdown__item");
+    const noResults = dropdown.querySelector(".dropdown__no-results");
+
+    items.forEach((item) => {
+      item.style.display = "";
+    });
+
+    if (noResults) {
+      noResults.classList.remove("show");
+    }
+  }
+
   // 전역 네임스페이스에 등록
   window.VanillaComponents = window.VanillaComponents || {};
   window.VanillaComponents.initDropdown = initDropdown;
 })();
-
