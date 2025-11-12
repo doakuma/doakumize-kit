@@ -230,7 +230,7 @@
   margin: auto;
   width: 20px;
   height: 20px;
-  background: url(../../resources/images/icon_close.png) no-repeat center center;
+  background: url(../../images/icon_close.png) no-repeat center center;
   background-size: 100% 100%;
   cursor: pointer;
   border: none;
@@ -306,4 +306,3 @@
 .input.input--code {
   white-space: pre;
 }
-

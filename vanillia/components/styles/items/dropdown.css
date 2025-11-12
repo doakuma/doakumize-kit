@@ -61,8 +61,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  background: url(../../resources/images/icon_dropdown_arrow.png) no-repeat
-    center center;
+  background: url(../../images/icon_dropdown_arrow.png) no-repeat center center;
   background-size: contain;
   transition: transform 0.2s ease-in-out;
   pointer-events: none;
@@ -251,8 +250,7 @@
   margin: auto;
   width: 16px;
   height: 16px;
-  background: url(../../resources/images/icon_dropdown_check.png) no-repeat
-    center center;
+  background: url(../../images/icon_dropdown_check.png) no-repeat center center;
   background-size: contain;
 }
 
@@ -290,4 +288,3 @@
   color: var(--gray-600);
   background-color: var(--gray-50);
 }
-
