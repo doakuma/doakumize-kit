@@ -10,22 +10,11 @@
 
     <style>
       /* Generator 전용 스타일 */
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
+      #content {
+        display: block;
         padding: 0;
-        font-family: var(--font-family);
-        background: var(--bg-primary);
-        color: var(--text-primary);
-      }
-
-      #wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
+        margin: 0;
+        width: 100%;
       }
 
       .generator {
@@ -45,14 +34,16 @@
       }
 
       .generator-header {
-        padding: 32px 24px 24px;
+        padding: 24px;
         border-bottom: 1px solid var(--border-primary);
         background: linear-gradient(
           135deg,
-          var(--primary-600) 0%,
-          var(--primary-700) 100%
+          var(--interactive-bg-default) 0%,
+          var(--interactive-bg-hover) 100%
         );
-        color: white;
+        color: var(--text-inverse);
+        transition: background 0.2s ease;
+        height: 100px;
       }
 
       .generator-header h1 {
@@ -86,7 +77,7 @@
       }
 
       .generator-actions button:hover {
-        background: var(--gray-100);
+        background: var(--surface-hover);
       }
 
       .generator-list {
@@ -123,7 +114,7 @@
       }
 
       .generator-item:hover {
-        background: var(--gray-100);
+        background: var(--surface-hover);
       }
 
       .generator-item .chk {
@@ -151,6 +142,7 @@
         padding: 24px 32px;
         border-bottom: 1px solid var(--border-primary);
         background: var(--bg-secondary);
+        height: 100px;
       }
 
       .generator-preview-header h2 {
@@ -166,7 +158,7 @@
       }
 
       .generator-preview-stat strong {
-        color: var(--primary-600);
+        color: var(--interactive-text-default);
         font-weight: 600;
       }
 
@@ -186,6 +178,11 @@
         font-size: 13px;
         line-height: 1.6;
         max-height: 600px;
+        transition: background-color 0.2s ease;
+      }
+
+      [data-theme="dark"] .generator-code-block {
+        background: var(--gray-800);
       }
 
       .generator-code-block pre {
@@ -225,20 +222,21 @@
         padding: 16px 24px;
         background: linear-gradient(
           135deg,
-          var(--primary-600) 0%,
-          var(--primary-700) 100%
+          var(--interactive-bg-default) 0%,
+          var(--interactive-bg-hover) 100%
         );
-        color: white;
+        color: var(--text-inverse);
         border: none;
         border-radius: 8px;
         font: var(--h5);
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background 0.2s ease;
       }
 
       .generator-download-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--elevation-3);
       }
 
       .generator-download-btn:active {
@@ -249,6 +247,42 @@
         opacity: 0.5;
         cursor: not-allowed;
         transform: none;
+      }
+
+      /* Generator Empty State - Inline Styles 다크모드 대응 */
+      .generator-empty code {
+        transition: background-color 0.2s ease;
+      }
+
+      [data-theme="dark"] .generator-empty code {
+        background: var(--gray-800) !important;
+      }
+
+      /* Info Box - primary-50 배경 다크모드 대응 */
+      .generator-empty > div > div:nth-child(3) {
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+      }
+
+      [data-theme="dark"] .generator-empty > div > div:nth-child(3) {
+        background: var(--primary-900) !important;
+      }
+
+      [data-theme="dark"]
+        .generator-empty
+        > div
+        > div:nth-child(3)
+        > p:first-child {
+        color: var(--primary-300) !important;
+      }
+
+      /* Tip Box - secondary-50 배경 다크모드 대응 */
+      .generator-empty > div > p:last-child {
+        transition: background-color 0.2s ease;
+      }
+
+      [data-theme="dark"] .generator-empty > div > p:last-child {
+        background: var(--secondary-900) !important;
+        color: var(--secondary-200) !important;
       }
 
       /* ==================== 반응형 ==================== */
@@ -271,53 +305,55 @@
         <!-- 헤더는 layouts.js로 렌더링됨 -->
       </header>
 
-      <!-- Generator -->
-      <div class="generator">
-        <!-- 왼쪽: 컴포넌트 선택 -->
-        <aside class="generator-selector">
-          <div class="generator-header">
-            <h1>Component Generator</h1>
-            <p>프로젝트에서 사용할 컴포넌트를 선택해!</p>
-          </div>
+      <main id="content">
+        <!-- Generator -->
+        <div class="generator">
+          <!-- 왼쪽: 컴포넌트 선택 -->
+          <aside class="generator-selector">
+            <div class="generator-header">
+              <h1>Component Generator</h1>
+              <p>프로젝트에서 사용할 컴포넌트를 선택해!</p>
+            </div>
 
-          <div class="generator-actions">
-            <button id="selectAllBtn">All</button>
-            <button id="clearAllBtn">Clear</button>
-          </div>
+            <div class="generator-actions">
+              <button id="selectAllBtn">All</button>
+              <button id="clearAllBtn">Clear</button>
+            </div>
 
-          <div class="generator-list" id="componentList">
-            <!-- 동적으로 생성됨 -->
-          </div>
-        </aside>
+            <div class="generator-list" id="componentList">
+              <!-- 동적으로 생성됨 -->
+            </div>
+          </aside>
 
-        <!-- 오른쪽: 미리보기 & 다운로드 -->
-        <main class="generator-preview">
-          <div class="generator-preview-header">
-            <h2>Preview & Download</h2>
-            <div class="generator-preview-stats">
-              <div class="generator-preview-stat">
-                <strong id="selectedCount">0</strong> components selected
-              </div>
-              <div class="generator-preview-stat">
-                Size: <strong id="estimatedSize">0 KB</strong>
+          <!-- 오른쪽: 미리보기 & 다운로드 -->
+          <main class="generator-preview">
+            <div class="generator-preview-header">
+              <h2>Preview & Download</h2>
+              <div class="generator-preview-stats">
+                <div class="generator-preview-stat">
+                  <strong id="selectedCount">0</strong> components selected
+                </div>
+                <div class="generator-preview-stat">
+                  Size: <strong id="estimatedSize">0 KB</strong>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="generator-preview-content" id="previewContent">
-            <!-- 빈 상태 또는 미리보기 (generator.js에서 동적 렌더링) -->
-            <div id="previewArea">
-              <!-- JavaScript로 동적 생성됨 -->
+            <div class="generator-preview-content" id="previewContent">
+              <!-- 빈 상태 또는 미리보기 (generator.js에서 동적 렌더링) -->
+              <div id="previewArea">
+                <!-- JavaScript로 동적 생성됨 -->
+              </div>
             </div>
-          </div>
 
-          <div class="generator-download-section">
-            <button class="generator-download-btn" id="downloadBtn" disabled>
-              📦 Download Package (ZIP)
-            </button>
-          </div>
-        </main>
-      </div>
+            <div class="generator-download-section">
+              <button class="generator-download-btn" id="downloadBtn" disabled>
+                📦 Download Package (ZIP)
+              </button>
+            </div>
+          </main>
+        </div>
+      </main>
 
       <!-- Footer -->
       <footer id="footer">
@@ -338,7 +374,7 @@
       Layouts.renderLayouts({
         header: {
           title: "Component Studio",
-          link: "./components.html",
+          link: "./index.html",
         },
         footer: {
           logo: "Component Generator",

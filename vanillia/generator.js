@@ -230,11 +230,11 @@
                 <li style="margin-bottom: 8px;">✅ 왼쪽에서 필요한 컴포넌트를 체크합니다</li>
                 <li style="margin-bottom: 8px;">👀 생성된 코드를 확인합니다</li>
                 <li style="margin-bottom: 8px;">📦 Download 버튼을 클릭합니다</li>
-                <li>📁 압축을 풀고 <code style="background: var(--gray-100); padding: 2px 6px; border-radius: 4px;">core/</code> 폴더에 복사합니다</li>
+                <li>📁 압축을 풀고 <code style="background: var(--surface-base); padding: 2px 6px; border-radius: 4px;">core/</code> 폴더에 복사합니다</li>
               </ul>
 
-              <div style="margin: 0 auto 16px; padding: 16px 20px; background: var(--primary-100); border-radius: 8px; border-left: 3px solid var(--primary-500); max-width: 500px; text-align: left;">
-                <p style="margin: 0 0 10px; font-weight: 600; font-size: 14px; color: var(--primary-700);">
+              <div style="margin: 0 auto 16px; padding: 16px 20px; background: var(--primary-50); border-radius: 8px; border-left: 3px solid var(--border-focus); max-width: 500px; text-align: left;">
+                <p style="margin: 0 0 10px; font-weight: 600; font-size: 14px; color: var(--interactive-text-default);">
                   📦 다운로드 패키지 구성
                 </p>
                 <ul style="margin: 0; padding-left: 0; line-height: 1.8; font-size: 13px; list-style: none; color: var(--text-primary);">
@@ -246,7 +246,7 @@
               </div>
 
               <p style="margin: 0 auto; padding: 14px 20px; background: var(--secondary-50); border-radius: 8px; font-size: 13px; max-width: 500px; color: var(--text-primary);">
-                💡 필요없는 컴포넌트는 <code style="background: var(--gray-100); padding: 2px 6px; border-radius: 4px;">components.css</code>에서 주석 처리하시면 용량이 절감됩니다
+                💡 필요없는 컴포넌트는 <code style="background: var(--surface-base); padding: 2px 6px; border-radius: 4px;">components.css</code>에서 주석 처리하시면 용량이 절감됩니다
               </p>
             </div>
           </div>
