@@ -11,7 +11,6 @@
   width: 300px;
   height: calc(100dvh - 96px);
   padding: 20px;
-  background-color: var(--gray-50);
   z-index: 10;
 }
 
@@ -22,6 +21,13 @@
   height: 100%;
   border-radius: 20px;
   background: var(--gray-900);
+  transition: background-color 0.2s ease;
+}
+
+/* 다크모드에서는 약간 더 밝은 톤 + 테두리 */
+[data-theme="dark"] .lnb-content {
+  background: var(--gray-800);
+  border: 1px solid var(--gray-700);
 }
 
 /* LNB Header */
@@ -36,16 +42,26 @@
 .lnb-header .btn {
   background-color: transparent;
   color: var(--gray-200);
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-header .btn {
+  color: var(--gray-300);
 }
 
 .lnb-header .text-h4 {
   margin-right: auto;
-  color: var(--gray-0);
+  color: var(--text-inverse);
+}
+
+[data-theme="dark"] .lnb-header .text-h4 {
+  color: var(--text-primary);
 }
 
 .lnb-header .icon--lnb {
   position: relative;
-  background-color: var(--gray-700);
+  background-color: var(--border-strong);
+  transition: background-color 0.2s ease;
 }
 
 .lnb-header .icon--lnb:after {
@@ -66,7 +82,11 @@
 
 .lnb-body-util .btn {
   width: 100%;
-  color: var(--gray-0);
+  color: var(--text-inverse);
+}
+
+[data-theme="dark"] .lnb-body-util .btn {
+  color: var(--text-primary);
 }
 
 .lnb-body-menu {
@@ -77,6 +97,11 @@
 .lnb-body-menu .text-body-sm {
   padding: 8px 16px;
   color: var(--gray-400);
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-body-menu .text-body-sm {
+  color: var(--gray-500);
 }
 
 /* LNB Menu List */
@@ -114,19 +139,25 @@
   padding-inline: 0;
   width: 66px;
   justify-content: center;
-  color: var(--gray-0);
-  background-color: var(--gray-600);
-  border-color: var(--gray-600);
+  color: var(--text-inverse);
+  background-color: var(--border-strong);
+  border-color: var(--border-strong);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-menu-item__header .chip {
+  color: var(--text-primary);
 }
 
 .lnb-menu-item__header .chip.chip--premium {
-  background-color: var(--secondary-400);
-  border-color: var(--secondary-400);
+  background-color: var(--semantic-essential);
+  border-color: var(--semantic-essential);
 }
 
 .lnb-menu-item__header .chip.chip--standard {
-  background-color: #49b8e8;
-  border-color: #49b8e8;
+  background-color: var(--semantic-info);
+  border-color: var(--semantic-info);
 }
 
 /* LNB Menu Toggle Button */
@@ -140,13 +171,21 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--gray-0);
-  transition: all 0.2s ease-in-out;
+  color: var(--text-inverse);
+  transition: color 0.2s ease-in-out;
   flex-shrink: 0;
+}
+
+[data-theme="dark"] .lnb-menu-item__toggle {
+  color: var(--text-primary);
 }
 
 .lnb-menu-item__toggle:hover {
   color: var(--gray-200);
+}
+
+[data-theme="dark"] .lnb-menu-item__toggle:hover {
+  color: var(--gray-300);
 }
 
 .lnb-menu-item__toggle .icon {
@@ -162,15 +201,23 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: var(--gray-0);
+  color: var(--text-inverse);
   cursor: pointer;
   padding: 0;
   text-align: left;
-  transition: all 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+[data-theme="dark"] .lnb-menu-item__link {
+  color: var(--text-primary);
 }
 
 .lnb-menu-item__link:hover {
-  color: var(--gray-0);
+  color: var(--text-inverse);
+}
+
+[data-theme="dark"] .lnb-menu-item__link:hover {
+  color: var(--text-primary);
 }
 
 .lnb-menu-item__text {
@@ -213,13 +260,22 @@
   color: var(--gray-200);
   text-decoration: none;
   font: var(--sub-md-xs);
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   border-radius: 4px;
+}
+
+[data-theme="dark"] .lnb-submenu__link {
+  color: var(--gray-300);
 }
 
 .lnb-submenu__link:hover {
   color: var(--gray-50);
-  background-color: #272933;
+  background-color: var(--gray-800);
+}
+
+[data-theme="dark"] .lnb-submenu__link:hover {
+  color: var(--gray-100);
+  background-color: var(--gray-700);
 }
 
 .lnb-submenu__link .icon {
@@ -243,17 +299,28 @@
 .lnb-menu-item--expanded .lnb-menu-item__header,
 .lnb-menu-item--expanded .lnb-menu-item__link,
 .lnb-menu-item--expanded .lnb-menu-item__toggle {
-  color: #1fcfe1;
+  color: var(--primary-300);
+}
+
+[data-theme="dark"] .lnb-menu-item--expanded .lnb-menu-item__header,
+[data-theme="dark"] .lnb-menu-item--expanded .lnb-menu-item__link,
+[data-theme="dark"] .lnb-menu-item--expanded .lnb-menu-item__toggle {
+  color: var(--primary-400);
 }
 
 .lnb-menu-item--active .lnb-menu-item__chip {
   background-color: var(--text-inverse);
-  color: var(--primary-600);
+  color: var(--interactive-bg-default);
   border-color: var(--text-inverse);
 }
 
 .lnb-submenu__link--active {
-  background-color: #272933;
+  background-color: var(--gray-800);
+}
+
+[data-theme="dark"] .lnb-submenu__link--active {
+  background-color: var(--gray-700);
+  color: var(--primary-300);
 }
 
 .lnb-submenu__link--disabled {
@@ -272,6 +339,12 @@
   background-color: var(--gray-700);
   color: var(--gray-400);
   border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-submenu__link--disabled .chip {
+  background-color: var(--gray-600);
+  color: var(--gray-500);
 }
 
 /* LNB Footer */
@@ -279,6 +352,11 @@
   margin-top: auto;
   padding: 12px 16px 16px;
   border-top: 1px solid var(--gray-800);
+  transition: border-color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-footer {
+  border-top-color: var(--gray-700);
 }
 
 .lnb-footer-util {
@@ -300,6 +378,11 @@
   color: var(--gray-200);
   font: var(--body-sm);
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-footer-util__link {
+  color: var(--gray-300);
 }
 
 .lnb-footer-util__link .icon {
@@ -314,7 +397,13 @@
   gap: 8px;
   padding-block: 20px;
   border-top: 1px solid var(--gray-800);
-  color: var(--gray-0);
+  color: var(--text-inverse);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-footer-user {
+  border-top-color: var(--gray-700);
+  color: var(--text-primary);
 }
 
 .lnb-footer-user__text {
@@ -323,6 +412,11 @@
 
 .lnb-footer-user__plan {
   color: var(--gray-600);
+  transition: color 0.2s ease;
+}
+
+[data-theme="dark"] .lnb-footer-user__plan {
+  color: var(--gray-500);
 }
 
 /* LNB Menu Responsive */

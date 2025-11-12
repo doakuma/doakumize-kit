@@ -154,24 +154,48 @@ cp -r vanillia/core/* my-project/assets/
 }
 ```
 
-### 주요 디자인 토큰
+### 주요 디자인 토큰 (총 ~140개)
 
-**색상**
-- `--primary-600`, `--primary-700` - 메인 컬러
-- `--secondary-600`, `--secondary-700` - 보조 컬러
-- `--gray-50` ~ `--gray-900` - 그레이스케일
-- `--text-primary`, `--text-secondary` - 텍스트 색상
-- `--bg-primary`, `--bg-secondary` - 배경 색상
-- `--border-primary`, `--border-secondary` - 테두리 색상
+**Primitive Colors (기본 색상 스케일)**
+- `--gray-0` ~ `--gray-900` - 그레이스케일 (11단계)
+- `--primary-50` ~ `--primary-900` - 메인 컬러 (10단계)
+- `--secondary-50` ~ `--secondary-900` - 보조 컬러 (10단계)
+
+**Semantic Colors (의미 색상 스케일)** 🆕
+- `--success-50` ~ `--success-900` - 성공/완료 (Green, 10단계)
+- `--error-50` ~ `--error-900` - 오류/위험 (Red, 10단계)
+- `--warning-50` ~ `--warning-900` - 경고/주의 (Yellow, 10단계)
+- `--info-50` ~ `--info-900` - 정보/안내 (Blue, 10단계)
+- `--essential-50` ~ `--essential-900` - 브랜드 강조 (Pink, 10단계)
+
+**Surface & Elevation** 🆕
+- `--surface-page`, `--surface-base`, `--surface-raised`, `--surface-overlay`
+- `--surface-hover`, `--surface-active`, `--surface-disabled`
+- `--elevation-0` ~ `--elevation-4` - 그림자 (5단계)
+
+**Text Colors**
+- `--text-primary`, `--text-secondary`, `--text-tertiary` - 계층 구조
+- `--text-link`, `--text-link-hover`, `--text-link-visited` - 링크 🆕
+- `--text-success`, `--text-error`, `--text-warning`, `--text-info` - Semantic 🆕
+
+**Border Colors**
+- `--border-subtle`, `--border-default`, `--border-strong` - 계층 구조 🆕
+- `--border-focus`, `--border-hover` - 상태 🆕
+- `--border-success`, `--border-error`, `--border-warning`, `--border-info` - Semantic 🆕
+
+**Interactive Colors** 🆕
+- `--interactive-default`, `--interactive-hover`, `--interactive-active`
+- `--interactive-bg-*`, `--interactive-text-*` - 상태별 세트
 
 **타이포그래피**
 - `--h1` ~ `--h5` - 제목
 - `--body-lg`, `--body-md`, `--body-sm` - 본문
-- `--sub-sb-14`, `--sub-md-12` - 서브 텍스트
+- `--sub-sb-*`, `--sub-md-*` - 서브 텍스트
 
 **간격**
 - `--spacing-xs` (4px), `--spacing-sm` (8px), `--spacing-md` (16px)
 - `--spacing-lg` (24px), `--spacing-xl` (32px)
+- `--spacing-0` ~ `--spacing-15` - 세밀한 조정 가능
 
 ## 📚 사용 가능한 컴포넌트
 

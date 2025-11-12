@@ -319,14 +319,16 @@ window.VanillaComponents.Modal.close('confirmModal');
 /* assets/css/custom-theme.css */
 
 :root {
-  /* 브랜드 컬러 */
-  --primary-600: #0066cc;
-  --primary-700: #0052a3;
-  --primary-100: #e6f2ff;
+  /* 브랜드 컬러 변경 - HSL 기준값만 바꾸면 전체 스케일 자동 변경! */
+  --primary-h: 220;  /* Blue */
+  --primary-s: 80%;
   
-  --secondary-600: #ff6b35;
-  --secondary-700: #e85a2a;
-  --secondary-100: #ffe8e0;
+  --secondary-h: 20;  /* Orange-Red */
+  --secondary-s: 90%;
+  
+  /* Semantic 컬러 (선택적 조정) */
+  /* Success(142°), Error(356°), Warning(48°)는 표준 고정 */
+  /* Info(210°)는 Primary가 Blue면 충돌 없음 */
   
   /* 폰트 */
   --font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
@@ -336,17 +338,24 @@ window.VanillaComponents.Modal.close('confirmModal');
   --body-md: 400 16px/1.6 var(--font-family);
   
   /* 간격 조정 */
-  --spacing-unit: 4px; /* 기본 단위 변경 가능 */
+  --spacing-base: 4px; /* 기본 단위 변경 가능 */
 }
 
-/* 다크 모드 */
+/* 다크 모드 (Phase 5 - 선택적) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2a2a2a;
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --border-primary: #404040;
+    /* Surface 반전 */
+    --surface-page: hsl(220, 20%, 10%);
+    --surface-base: hsl(220, 20%, 14%);
+    --surface-raised: hsl(220, 20%, 18%);
+    
+    /* Text 반전 */
+    --text-primary: var(--gray-50);
+    --text-secondary: var(--gray-400);
+    
+    /* Border 조정 */
+    --border-subtle: var(--gray-700);
+    --border-default: var(--gray-600);
   }
 }
 ```
@@ -354,23 +363,40 @@ window.VanillaComponents.Modal.close('confirmModal');
 ### 컴포넌트 스타일 확장
 
 ```css
-/* 버튼 커스텀 변형 */
+/* 버튼 커스텀 변형 - 새 토큰 활용 */
 .btn--gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-600) 100%);
   border: none;
-  color: white;
+  color: var(--text-inverse);
 }
 
-/* 카드형 드롭다운 */
+/* 성공 버튼 */
+.btn--success {
+  background: var(--success-600);
+  color: var(--text-inverse);
+}
+
+.btn--success:hover {
+  background: var(--success-700);
+}
+
+/* 카드형 드롭다운 - Elevation 활용 */
 .dropdown__menu--card {
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--elevation-3);
   border-radius: 12px;
-  padding: 8px;
+  padding: var(--spacing-sm);
+  background: var(--surface-overlay);
+  border: 1px solid var(--border-subtle);
 }
 
 .dropdown__menu--card .dropdown__item {
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: var(--spacing-4) var(--spacing-5);
+  background: var(--surface-base);
+}
+
+.dropdown__menu--card .dropdown__item:hover {
+  background: var(--surface-hover);
 }
 ```
 

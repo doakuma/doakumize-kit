@@ -80,9 +80,80 @@
       <h1 class="text-h1">
         <a href="${data.link}">${data.title}</a>
       </h1>
+      <div class="header-actions">
+        <button 
+          id="themeToggleBtn" 
+          class="btn btn--ghost btn--icon-only" 
+          aria-label="테마 전환"
+          title="테마 전환">
+          <i class="icon icon--medium icon--sun" id="themeToggleIcon"></i>
+        </button>
+      </div>
     `;
 
+    // 테마 토글 버튼 이벤트 리스너 추가
+    _initThemeToggle();
+
     console.log("[Layouts] Header rendered:", data.title);
+  }
+
+  /**
+   * 테마 토글 버튼 초기화
+   * @private
+   */
+  function _initThemeToggle() {
+    const toggleBtn = document.getElementById("themeToggleBtn");
+    const toggleIcon = document.getElementById("themeToggleIcon");
+
+    if (!toggleBtn || !toggleIcon) {
+      return;
+    }
+
+    // ThemeManager가 로드될 때까지 대기
+    const checkThemeManager = setInterval(() => {
+      if (window.ThemeManager) {
+        clearInterval(checkThemeManager);
+
+        // 초기 아이콘 설정
+        _updateThemeIcon(toggleIcon, window.ThemeManager.getCurrentTheme());
+
+        // 클릭 이벤트
+        toggleBtn.addEventListener("click", () => {
+          window.ThemeManager.toggle();
+        });
+
+        // 테마 변경 감지
+        document.addEventListener("themechange", (e) => {
+          _updateThemeIcon(toggleIcon, e.detail.theme);
+        });
+
+        console.log("[Layouts] Theme toggle initialized");
+      }
+    }, 50);
+
+    // 5초 후에도 ThemeManager가 없으면 포기
+    setTimeout(() => {
+      clearInterval(checkThemeManager);
+    }, 5000);
+  }
+
+  /**
+   * 테마에 따라 아이콘 업데이트
+   * @private
+   * @param {HTMLElement} icon - 아이콘 엘리먼트
+   * @param {string} theme - 'light' 또는 'dark'
+   */
+  function _updateThemeIcon(icon, theme) {
+    if (!icon) return;
+
+    // 다크모드일 때는 달 아이콘, 라이트모드일 때는 해 아이콘
+    if (theme === "dark") {
+      icon.classList.remove("icon--sun");
+      icon.classList.add("icon--moon");
+    } else {
+      icon.classList.remove("icon--moon");
+      icon.classList.add("icon--sun");
+    }
   }
 
   /**

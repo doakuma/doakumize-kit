@@ -20,7 +20,8 @@
   /* 인터랙션 */
   cursor: pointer;
   user-select: none;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
   /* 기본 상태 */
   border: 1px solid transparent;
@@ -66,55 +67,79 @@
 
 /* Button Variants - Primary */
 .btn--primary {
-  background-color: var(--primary-600);
+  background-color: var(--interactive-bg-default);
   color: var(--text-inverse);
-  border: 1px solid var(--primary-600);
+  border: 1px solid var(--interactive-bg-default);
   font-weight: 600;
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: var(--primary-700);
-  border-color: var(--primary-700);
+  background-color: var(--interactive-bg-hover);
+  border-color: var(--interactive-bg-hover);
 }
 
 .btn--primary:active:not(:disabled) {
-  background-color: var(--primary-700);
-  border-color: var(--primary-700);
+  background-color: var(--interactive-bg-active);
+  border-color: var(--interactive-bg-active);
 }
 
 .btn--transparent {
   background-color: transparent;
-  color: var(--gray-600);
+  color: var(--text-secondary);
+}
+
+/* Button Variants - Ghost */
+.btn--ghost {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--text-primary);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--surface-hover);
+}
+
+.btn--ghost:active:not(:disabled) {
+  background-color: var(--surface-active);
+}
+
+.btn--ghost:disabled,
+.btn--ghost.btn--disabled {
+  color: var(--text-disabled);
+  background-color: transparent;
 }
 
 /* Button Variants - Secondary */
 .btn--secondary {
-  background-color: var(--gray-800);
-  color: var(--gray-0);
-  border: 1px solid var(--gray-800);
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+  border: 1px solid var(--text-primary);
 }
 
 .btn--secondary:hover:not(:disabled) {
-  background-color: var(--gray-900);
-  border-color: var(--gray-900);
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  opacity: 0.9;
 }
 
 .btn--secondary:active:not(:disabled) {
-  background-color: var(--gray-200);
-  border-color: var(--gray-200);
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  opacity: 0.8;
 }
 
 /* Button Variants - Default (Outlined) */
 .btn--default,
 .btn--outlined {
-  background-color: var(--gray-0);
-  border: 1px solid var(--gray-400);
+  background-color: var(--surface-page);
+  border: 1px solid var(--border-default);
   color: var(--text-primary);
 }
 
 .btn--default:hover:not(:disabled),
 .btn--outlined:hover:not(:disabled) {
-  border-color: var(--gray-600);
+  border-color: var(--border-hover);
+  background-color: var(--surface-hover);
 }
 
 /* Button Variants - Point (Gradient) */
@@ -158,7 +183,7 @@
   padding: 0;
   min-height: auto;
   font: var(--sub-md-xs);
-  color: var(--gray-800);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
@@ -166,17 +191,17 @@
 
 .btn--text:hover:not(:disabled),
 .btn--text:active:not(:disabled) {
-  color: var(--primary-900);
+  color: var(--interactive-text-hover);
 }
 
 /* Text Button - Primary */
 .btn--text.btn--primary {
-  color: var(--primary-500);
+  color: var(--interactive-text-default);
 }
 
 .btn--text.btn--primary:hover:not(:disabled),
 .btn--text.btn--primary:active:not(:disabled) {
-  color: var(--primary-700);
+  color: var(--interactive-text-hover);
   background-color: transparent;
 }
 
@@ -190,26 +215,28 @@
 .btn--primary.btn--disabled,
 .btn--primary:disabled:hover,
 .btn--primary.btn--disabled:hover {
-  background-color: var(--gray-400);
-  border-color: var(--gray-400);
-  color: var(--gray-100);
+  background-color: var(--interactive-bg-disabled);
+  border-color: var(--interactive-bg-disabled);
+  color: var(--text-inverse);
+  opacity: 0.6;
 }
 
 .btn--secondary:disabled,
 .btn--secondary.btn--disabled,
 .btn--secondary:disabled:hover,
 .btn--secondary.btn--disabled:hover {
-  background-color: var(--gray-200);
-  border-color: var(--gray-200);
-  color: var(--gray-500);
+  background-color: var(--surface-disabled);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
 }
 
 .btn--default:disabled,
 .btn--default.btn--disabled,
 .btn--default:disabled:hover,
 .btn--default.btn--disabled:hover {
-  border-color: var(--gray-300);
-  color: var(--gray-400);
+  border-color: var(--border-disabled);
+  color: var(--text-disabled);
+  background-color: var(--surface-disabled);
 }
 
 .btn--text:disabled,
@@ -218,7 +245,7 @@
 .btn--text.btn--disabled:hover {
   background-color: transparent;
   border-color: transparent;
-  color: var(--gray-400);
+  color: var(--text-disabled);
 }
 
 .btn--point:disabled,
@@ -324,8 +351,9 @@
 }
 
 .btn.btn--only-icon.btn--primary.btn--disabled {
-  background-color: var(--primary-200);
-  border-color: var(--primary-200);
+  background-color: var(--interactive-bg-disabled);
+  border-color: var(--interactive-bg-disabled);
+  opacity: 0.6;
 }
 
 /* Button Group */
@@ -334,4 +362,3 @@
   align-items: center;
   gap: 8px;
 }
-

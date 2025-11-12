@@ -7,9 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### ✨ Added
+- **Semantic Color 스케일 시스템** (2025-11-12)
+  - Success, Error, Warning, Info, Essential 각 10단계 HSL 스케일
+  - 기존 하드코딩된 HEX 값 → 동적 HSL 스케일로 전환
+  - 다크모드 대응 구조 준비 완료
+- **Surface/Elevation 시스템**
+  - Surface Layer: page, base, raised, overlay, hover, active, disabled (7개)
+  - Elevation Shadow: 0-4 단계 + 특수 그림자 (focus, inner)
+- **Token 시스템 대폭 확장**
+  - Text Token: link, semantic colors 추가 (5개 → 12개)
+  - Border Token: subtle/default/strong 체계 + semantic borders (3개 → 10개)
+  - Interactive Token: default/hover/active/disabled 전체 세트 (12개)
+
+### 🎨 Improved
+- **variables.css 고도화**
+  - Gray Scale 표준화 (gray-150 제거)
+  - 네이밍 오타 수정 (sementic → semantic)
+  - WCAG 2.1 AA/AAA 명도 대비 검증 완료
+  - 상세 주석 및 문서화 추가
+- **color.data.js 업데이트**
+  - 모든 Semantic 컬러 스케일 표시
+  - Base 색상 시각적 강조 (scale + shadow)
+  - Surface/Text/Border/Interactive 토큰 섹션 추가
+
+### 📝 Documentation
+- 컬러 시스템 구조 문서화
+- 토큰 계층 체계 정립 (Primitive → Semantic → Alias)
+- 스케일 규칙 및 접근성 가이드 추가
+
+### 🔧 Changed
+- Info 컬러: Primary 참조 → 독립 Blue(210°)로 변경 (표준 준수)
+
 ### 계획 중
 - SCSS 빌드 환경 구성
-- 다크모드 구현
+- 다크모드 구현 (Phase 5)
 - 24개 추가 컴포넌트 개발
 
 ---

@@ -26,10 +26,13 @@
   - 기준값(`--primary-h`, `--primary-s`)만 변경하면 전체 스케일 자동 업데이트
   - CSS `calc()` 함수 활용으로 빌드 도구 없이 동작
 
-- **Semantic 변수 기본 정의**: 완료
-  - `--text-primary`, `--text-secondary`, `--text-tertiary`
-  - `--bg-primary`, `--bg-secondary`, `--bg-tertiary`
-  - `--border-primary`, `--border-secondary`, `--border-focus`
+- **Semantic 변수 시스템**: 대폭 확장 완료 (2025-11-12)
+  - Semantic Color 스케일: Success, Error, Warning, Info, Essential 각 10단계
+  - Surface/Elevation 시스템: 7개 Surface Layer + 7개 Shadow
+  - Text Token 확장: 12개 (link, semantic colors 포함)
+  - Border Token 확장: 10개 (subtle/default/strong + semantic)
+  - Interactive Token 추가: 12개 (default/hover/active/disabled)
+  - **총 ~140개 디자인 토큰** (기존 40개 → 3.5배 증가)
 
 - **빌드 시스템**: 구축 완료
   - 통합 빌드 스크립트 (`scripts/build-components.js`)
@@ -39,7 +42,10 @@
 ### 🚧 진행 중 / 계획 중
 
 - **SCSS 빌드 환경**: 미구성 (계획 단계)
-- **다크모드**: 미구현 (준비 단계)
+- **다크모드**: 준비 완료 (Phase 1-4 완료, Phase 5 대기 중)
+  - ✅ Semantic Token 시스템 완성
+  - ✅ Surface/Elevation 시스템 구축
+  - ⏳ @media 쿼리 및 색상 반전 정의 (선택적)
 - **레거시 파일 정리**: 필요 (`resources/styles/variables.css`)
 
 ---
@@ -447,16 +453,18 @@ window.themeManager = new ThemeManager();
 
 ### 🚀 구현 단계
 
-#### Phase 1: Semantic Variables 확장 (진행 중)
+#### Phase 1: Semantic Variables 확장 ✅ 완료! (2025-11-12)
 
 1. [x] `variables.css`에 Semantic 변수 기본 정의 완료
-2. [ ] Semantic 변수 확장 (더 많은 용도별 변수 추가)
-   - `--color-bg-page`, `--color-bg-surface`, `--color-bg-elevated`
-   - `--color-bg-overlay`
-   - `--color-interactive-default`, `--color-interactive-hover`, `--color-interactive-active`
-   - `--color-status-*` 변수들
-3. [ ] 라이트 모드 기본값 설정 (현재 일부만 정의됨)
-4. [ ] 다크모드 `@media` 쿼리 추가
+2. [x] Semantic 변수 대폭 확장 완료
+   - [x] `--surface-page`, `--surface-base`, `--surface-raised`, `--surface-overlay`
+   - [x] `--surface-hover`, `--surface-active`, `--surface-disabled`
+   - [x] `--interactive-default`, `--interactive-hover`, `--interactive-active`
+   - [x] `--text-link`, `--text-success`, `--text-error`, `--text-warning`, `--text-info`
+   - [x] `--border-subtle`, `--border-default`, `--border-strong` + semantic borders
+   - [x] Semantic Color 스케일: Success, Error, Warning, Info, Essential 각 10단계
+3. [x] 라이트 모드 기본값 설정 완료 (총 ~140개 토큰)
+4. [ ] 다크모드 `@media` 쿼리 추가 (선택적 - Phase 5)
 
 #### Phase 2: JavaScript 토글 구현
 
@@ -591,6 +599,25 @@ const THEMES = {
 ---
 
 ## 📝 변경 이력
+
+### 2025-11-12
+
+- **variables.css 고도화 완료** ✨
+  - ✅ Gray Scale 표준화 (gray-150 제거)
+  - ✅ 네이밍 오타 수정 (sementic → semantic)
+  - ✅ Semantic Color 스케일 시스템 구축 (Success/Error/Warning/Info/Essential 각 10단계)
+  - ✅ Surface/Elevation 시스템 추가 (7개 Layer + 7개 Shadow)
+  - ✅ Text Token 확장 (5개 → 12개)
+  - ✅ Border Token 확장 (3개 → 10개)
+  - ✅ Interactive Token 추가 (12개)
+  - ✅ WCAG 2.1 AA/AAA 명도 대비 검증 완료
+- **color.data.js 업데이트**
+  - 모든 Semantic 컬러 스케일 표시
+  - Base 색상 시각적 강조 (scale + shadow)
+  - Surface/Text/Border/Interactive 토큰 섹션 추가
+- **다크모드 준비 완료**
+  - Phase 1-4, 6 완료 (Phase 5는 선택적)
+  - 토큰 시스템 완성으로 다크모드 즉시 적용 가능
 
 ### 2025-11-11
 
