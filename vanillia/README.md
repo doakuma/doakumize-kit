@@ -47,8 +47,15 @@ vanillia/
 ├── 📁 core/                        # ⭐ 프로젝트 배포용 (Production)
 │   ├── components.js               # 통합 스크립트 (~90KB)
 │   ├── styles/                     # 빌드된 CSS 파일
-│   │   ├── common.css              # Import 진입점
-│   │   ├── components.css          # 컴포넌트 스타일 (Generator로 생성)
+│   │   ├── common.css              # Import 통합 허브
+│   │   ├── components.css          # 컴포넌트 Import 허브 (자동 생성)
+│   │   ├── items/                  # 개별 컴포넌트 CSS
+│   │   │   ├── button.css
+│   │   │   ├── input.css
+│   │   │   ├── modal.css
+│   │   │   ├── dropdown.css
+│   │   │   ├── icons.css
+│   │   │   └── all-other-components.css
 │   │   ├── base.css                # 기본 스타일
 │   │   ├── animations.css          # 애니메이션
 │   │   ├── scrollbar.css           # 스크롤바 (선택적)
@@ -62,29 +69,29 @@ vanillia/
 │   ├── component-engine.js         # 렌더링 엔진
 │   ├── components-init.js          # 렌더러 등록
 │   ├── data/                       # 컴포넌트 데이터 (23개)
+│   ├── images/                     # 아이콘 이미지 (통합)
 │   ├── renderers/                  # 렌더러 (5개)
 │   ├── scripts/                    # 컴포넌트 스크립트 (13개)
 │   └── styles/                     # 🎯 컴포넌트 스타일 (모듈화)
-│       ├── common.css              # Import 진입점
-│       ├── icons.css               # Icons (분리 완료)
-│       ├── button.css              # Button (분리 완료)
-│       ├── input.css               # Input (분리 완료)
-│       ├── dropdown.css            # Dropdown (분리 완료)
-│       ├── modal.css               # Modal (분리 완료)
-│       └── all-other-components.css  # 나머지 (순차 분리 예정)
+│       ├── common.css              # Import 통합 허브
+│       ├── items/                  # 개별 컴포넌트 파일
+│       │   ├── button.css
+│       │   ├── input.css
+│       │   ├── dropdown.css
+│       │   ├── modal.css
+│       │   ├── icons.css
+│       │   └── all-other-components.css
+│       ├── base.css, animations.css, scrollbar.css
+│       ├── layout.css, lnb.css     # Studio 전용
+│       ├── normalize.css, variables.css
+│       └── ...
 │
 ├── 📁 resources/                   # 🎨 Studio 전용 리소스
-│   ├── images/                     # 아이콘 이미지
 │   ├── js/                         # Studio 페이지 로직
 │   └── styles/                     # Studio 스타일
-│       ├── common.css              # Studio Import 진입점
-│       ├── base.css                # 기본 스타일
-│       ├── animations.css          # 애니메이션
-│       ├── scrollbar.css           # 스크롤바
-│       ├── layout.css              # Studio 레이아웃
-│       ├── lnb.css                 # Studio LNB
+│       ├── components.css          # 컴포넌트 Import 허브
 │       ├── studio.css              # Studio 페이지 스타일
-│       └── components.css          # 컴포넌트 Import 파일
+│       └── [외부 라이브러리]       # datatables, daterangepicker, select2
 │
 ├── 📁 scripts/
 │   ├── build-components.js         # 컴포넌트 빌드 (JS)
@@ -120,10 +127,8 @@ npm run copy ../my-project/assets
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="assets/styles/normalize.css">
-  <link rel="stylesheet" href="assets/styles/variables.css">
+  <!-- 스타일 (common.css 하나면 충분!) -->
   <link rel="stylesheet" href="assets/styles/common.css">
-  <link rel="stylesheet" href="assets/styles/components.css">
 </head>
 <body>
   <!-- 컴포넌트 사용 -->
@@ -207,7 +212,7 @@ componentEngine.registerRenderer("my-component", genericRenderer);
 
 ### Step 3: 스타일 작성
 
-`resources/styles/components.css`에 추가:
+`components/styles/items/my-component.css` 생성:
 
 ```css
 .my-component {
@@ -215,6 +220,12 @@ componentEngine.registerRenderer("my-component", genericRenderer);
   color: var(--text-primary);
   padding: var(--spacing-md);
 }
+```
+
+그리고 `resources/styles/components.css`에 등록:
+
+```css
+@import url(../../components/styles/items/my-component.css);
 ```
 
 ## 🎨 디자인 시스템
@@ -387,11 +398,14 @@ await componentEngine.render(type, data, false);
 ### 🔧 개발 도구
 
 ```bash
-# 컴포넌트 빌드 (JS)
+# 컴포넌트 빌드 (JS 통합)
 npm run build
 
-# Core 스타일 빌드 (CSS: resources → core)
+# Core 스타일 빌드 (CSS: components/styles → core/styles)
 npm run build:core
+  - components/styles/items/ → core/styles/items/ 복사
+  - core/styles/components.css 허브 자동 생성
+  - 자동 정리(Clean) 기능 포함
 
 # 프로젝트로 복사 (core → 외부 프로젝트)
 npm run copy <destination>
@@ -406,9 +420,13 @@ npm run copy <destination>
 3. **Download Package (ZIP)** 클릭
 4. 다운로드된 ZIP에 포함:
    - `examples.js` - 선택한 컴포넌트 예제
-   - `styles/components.css` - 선택한 컴포넌트만!
-   - `styles/common.css, base.css, animations.css` 등 필수 파일
+   - `styles/common.css` - 통합 허브 파일
+   - `styles/components.css` - 컴포넌트 Import 허브
+   - `styles/items/` - 개별 컴포넌트 CSS 파일
+   - `styles/` 기타 - base.css, animations.css, variables.css 등
    - `README.txt` - 사용 가이드
+
+💡 **Import 허브 방식:** 필요없는 컴포넌트는 `components.css`에서 주석 처리하면 용량 절감!
 
 **온라인**: https://doakuma.github.io/doakumize-kit/vanillia/generator.html
 

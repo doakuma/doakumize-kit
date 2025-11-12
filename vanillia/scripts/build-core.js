@@ -1,11 +1,23 @@
 #!/usr/bin/env node
 /**
  * Doakumize Kit - Build Core Tool
- * resources/styles 에서 core/styles 로 필수 파일 빌드/복사
+ * components/styles 에서 core/styles 로 필수 파일 빌드/복사
+ *
+ * 주요 기능:
+ *   - components/styles/items/ → core/styles/items/ 자동 복사
+ *   - core/styles/components.css Import 허브 자동 생성
+ *   - 빌드 전 자동 정리 (Clean) - items 폴더 제외
+ *   - 필수 CSS 파일 복사 (normalize, variables, base, animations, scrollbar)
+ *   - common.css 통합 허브 생성
  *
  * 사용법:
- *   node scripts/build-core.js
+ *   node scripts/build-core.js           # 기본 빌드 (자동 정리)
+ *   node scripts/build-core.js --no-clean  # 정리 없이 빌드
  *   npm run build:core
+ *
+ * 주의:
+ *   - items 폴더는 자동으로 보존됩니다
+ *   - components.css는 items 폴더 기반으로 자동 생성됩니다
  */
 
 const fs = require("fs");
@@ -67,31 +79,169 @@ function copyFile(source, dest) {
 }
 
 /**
+ * 빌드 전 정리 (Clean)
+ * items 디렉토리 제외하고 모두 삭제
+ */
+function cleanCoreStyles(coreStylesPath) {
+  if (!fs.existsSync(coreStylesPath)) {
+    return;
+  }
+
+  const files = fs.readdirSync(coreStylesPath);
+  let deletedCount = 0;
+
+  files.forEach((file) => {
+    const filePath = path.join(coreStylesPath, file);
+
+    // items 디렉토리는 보존 (나중에 개별 처리)
+    if (file === "items") {
+      return;
+    }
+
+    // 디렉토리는 건너뛰기
+    if (fs.statSync(filePath).isDirectory()) {
+      return;
+    }
+
+    // 파일 삭제
+    fs.unlinkSync(filePath);
+    log(`  ✗ ${file} (삭제)`, "yellow");
+    deletedCount++;
+  });
+
+  return deletedCount;
+}
+
+/**
+ * 디렉토리 복사 (재귀)
+ */
+function copyDirectory(source, dest) {
+  const sourceAbs = path.resolve(source);
+  const destAbs = path.resolve(dest);
+
+  if (!fs.existsSync(sourceAbs)) {
+    log(`⚠️  Warning: ${source} not found, skipping`, "yellow");
+    return 0;
+  }
+
+  // 대상 디렉토리 생성
+  if (!fs.existsSync(destAbs)) {
+    fs.mkdirSync(destAbs, { recursive: true });
+  }
+
+  const files = fs.readdirSync(sourceAbs);
+  let copiedCount = 0;
+
+  files.forEach((file) => {
+    const sourcePath = path.join(sourceAbs, file);
+    const destPath = path.join(destAbs, file);
+    const stat = fs.statSync(sourcePath);
+
+    if (stat.isDirectory()) {
+      // 재귀적으로 디렉토리 복사
+      copiedCount += copyDirectory(sourcePath, destPath);
+    } else {
+      // 파일 복사
+      fs.copyFileSync(sourcePath, destPath);
+      const size = fs.statSync(destPath).size;
+      log(`  ✓ ${file} → items/${file} (${formatFileSize(size)})`, "green");
+      copiedCount++;
+    }
+  });
+
+  return copiedCount;
+}
+
+/**
+ * components.css 허브 생성
+ */
+function generateComponentsHub(coreStylesPath) {
+  const itemsPath = path.join(coreStylesPath, "items");
+
+  if (!fs.existsSync(itemsPath)) {
+    log("⚠️  Warning: items 폴더가 없습니다", "yellow");
+    return false;
+  }
+
+  const files = fs
+    .readdirSync(itemsPath)
+    .filter((file) => file.endsWith(".css"));
+
+  let hubContent = `/* ========================================
+ * Components Hub - Auto-generated
+ * Import manager for component styles
+ * 
+ * Built: ${new Date().toISOString().split("T")[0]}
+ * Components: ${files.length}
+ * ======================================== */
+
+`;
+
+  files.forEach((file) => {
+    hubContent += `@import url(items/${file});\n`;
+  });
+
+  hubContent += `
+/* ========================================
+ * 💡 커스터마이징 방법
+ * ========================================
+ * 
+ * 필요없는 컴포넌트는 해당 줄을 주석 처리하세요.
+ * 
+ * 예시: modal을 사용하지 않는 경우
+ *   - 해당 @import 줄 앞에 주석 추가
+ *   - 또는 특정 줄만 선택하여 나머지 주석 처리
+ * 
+ * 용량 최적화:
+ *   - 사용하지 않는 컴포넌트를 주석 처리하면
+ *   - 해당 CSS 파일이 로드되지 않아 용량 절감됩니다
+ */
+`;
+
+  const hubPath = path.join(coreStylesPath, "components.css");
+  fs.writeFileSync(hubPath, hubContent, "utf-8");
+
+  const size = fs.statSync(hubPath).size;
+  log(
+    `  ✓ components.css (허브) → core/styles/components.css (${formatFileSize(
+      size
+    )})`,
+    "green"
+  );
+  log(`     ${files.length}개 컴포넌트 import`, "cyan");
+
+  return true;
+}
+
+/**
  * 메인 함수
  */
 function main() {
   log("\n🎨 Doakumize Kit - Build Core\n", "bright");
-  log("resources/styles → core/styles 빌드 시작...\n", "cyan");
+  log("components/styles → core/styles 빌드 시작...\n", "cyan");
 
   const projectRoot = path.join(__dirname, "..");
+  const coreStylesPath = path.join(projectRoot, "core/styles");
+
+  // CLI 옵션 확인
+  const args = process.argv.slice(2);
+  const shouldClean = !args.includes("--no-clean");
+
+  // 🧹 빌드 전 정리
+  if (shouldClean) {
+    log("🧹 기존 파일 정리 중...\n", "bright");
+    const deletedCount = cleanCoreStyles(coreStylesPath);
+    if (deletedCount > 0) {
+      log(`\n  정리 완료: ${deletedCount}개 파일 삭제됨\n`, "green");
+    } else {
+      log(`\n  정리할 파일 없음\n`, "green");
+    }
+  } else {
+    log("⊙ 정리 건너뜀 (--no-clean)\n", "yellow");
+  }
 
   // 복사할 파일 목록
   const filesToCopy = [
-    {
-      source: "resources/styles/base.css",
-      dest: "core/styles/base.css",
-      description: "기본 스타일 (*, html, body)",
-    },
-    {
-      source: "resources/styles/animations.css",
-      dest: "core/styles/animations.css",
-      description: "애니메이션 (steam, loading)",
-    },
-    {
-      source: "resources/styles/scrollbar.css",
-      dest: "core/styles/scrollbar.css",
-      description: "스크롤바 스타일 (선택적)",
-    },
     {
       source: "components/styles/normalize.css",
       dest: "core/styles/normalize.css",
@@ -100,7 +250,22 @@ function main() {
     {
       source: "components/styles/variables.css",
       dest: "core/styles/variables.css",
-      description: "디자인 토큰",
+      description: "디자인 토큰 (색상, 타이포그래피, 간격)",
+    },
+    {
+      source: "components/styles/base.css",
+      dest: "core/styles/base.css",
+      description: "기본 스타일 (*, html, body)",
+    },
+    {
+      source: "components/styles/animations.css",
+      dest: "core/styles/animations.css",
+      description: "애니메이션 (steam, loading)",
+    },
+    {
+      source: "components/styles/scrollbar.css",
+      dest: "core/styles/scrollbar.css",
+      description: "스크롤바 스타일 (선택적)",
     },
   ];
 
@@ -123,8 +288,33 @@ function main() {
     console.log(""); // 빈 줄
   });
 
+  // items 폴더 복사
+  log("\n📄 컴포넌트 items 복사 중...", "cyan");
+  const itemsSource = path.join(projectRoot, "components/styles/items");
+  const itemsDest = path.join(projectRoot, "core/styles/items");
+  const itemsCount = copyDirectory(itemsSource, itemsDest);
+
+  if (itemsCount > 0) {
+    log(`\n  ✓ items 폴더 복사 완료: ${itemsCount}개 파일\n`, "green");
+    totalSize += fs.readdirSync(itemsDest).reduce((sum, file) => {
+      const filePath = path.join(itemsDest, file);
+      return (
+        sum + (fs.statSync(filePath).isFile() ? fs.statSync(filePath).size : 0)
+      );
+    }, 0);
+  }
+
+  // components.css 허브 생성
+  log("📄 components.css 허브 생성 (Auto-generated)", "cyan");
+  const hubGenerated = generateComponentsHub(coreStylesPath);
+  if (hubGenerated) {
+    successCount++;
+    const hubPath = path.join(coreStylesPath, "components.css");
+    totalSize += fs.statSync(hubPath).size;
+  }
+
   // common.css 생성
-  log("📄 common.css 생성 (Import 파일)", "cyan");
+  log("\n📄 common.css 생성 (Import 파일)", "cyan");
   const commonCSS = `/* ========================================
  * Core Styles - Project Use Only
  * 프로젝트 배포용 최소 스타일셋
@@ -176,6 +366,10 @@ function main() {
   log("\n또는:\n", "yellow");
   log("1. copy-to-project.js로 core 전체를 프로젝트에 복사", "cyan");
   log("   node scripts/copy-to-project.js ../my-project/assets\n", "green");
+
+  log("💡 옵션:\n", "yellow");
+  log("  --no-clean    기존 파일 정리 없이 빌드", "cyan");
+  log("                (components.css 보존하고 싶을 때 사용)\n", "cyan");
 
   log("🎉 Core 빌드 완료!\n", "bright");
 }

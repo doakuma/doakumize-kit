@@ -6,10 +6,7 @@
     <title>Component Generator - Doakumize Kit</title>
 
     <!-- Doakumize Kit Styles -->
-    <link rel="stylesheet" href="components/styles/normalize.css" />
-    <link rel="stylesheet" href="components/styles/variables.css" />
     <link rel="stylesheet" href="components/styles/common.css" />
-    <link rel="stylesheet" href="resources/styles/components.css" />
 
     <style>
       /* Generator 전용 스타일 */
@@ -280,7 +277,7 @@
         <aside class="generator-selector">
           <div class="generator-header">
             <h1>Component Generator</h1>
-            <p>프로젝트에서 사용할 컴포넌트를 선택하세요</p>
+            <p>프로젝트에서 사용할 컴포넌트를 선택해!</p>
           </div>
 
           <div class="generator-actions">
@@ -308,85 +305,9 @@
           </div>
 
           <div class="generator-preview-content" id="previewContent">
-            <!-- 사용 가이드 (접을 수 있음) -->
-            <div class="accordion-group" style="margin-bottom: 24px">
-              <div class="accordion accordion--expanded">
-                <div class="accordion__header">
-                  <button class="accordion__toggle" type="button">
-                    <i class="icon icon--medium icon--chevron-right"></i>
-                  </button>
-                  <div class="accordion__header-content">
-                    <h5 class="accordion__title">💡 사용 방법</h5>
-                  </div>
-                </div>
-                <div class="accordion__body">
-                  <div class="accordion__content">
-                    <ol style="margin: 0; padding-left: 20px; line-height: 1.8">
-                      <li>
-                        <strong>컴포넌트 선택</strong> - 왼쪽에서 필요한
-                        컴포넌트를 체크하세요
-                      </li>
-                      <li>
-                        <strong>코드 미리보기</strong> - 아래에서 생성된 코드를
-                        확인하세요
-                      </li>
-                      <li>
-                        <strong>파일 다운로드</strong> - "Download examples.js"
-                        버튼을 클릭하세요
-                      </li>
-                      <li>
-                        <strong>프로젝트 적용</strong> - 다운로드한 파일을
-                        <code>프로젝트/core/viewer/examples.js</code>에
-                        붙여넣으세요
-                      </li>
-                    </ol>
-                    <p
-                      style="
-                        margin: 16px 0 0;
-                        padding: 12px;
-                        background: var(--primary-100);
-                        border-radius: 6px;
-                        font-size: 14px;
-                      "
-                    >
-                      <strong>💡 Tip:</strong> 익숙해지면 이 안내를 접을 수
-                      있어요!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 빈 상태 또는 미리보기 -->
+            <!-- 빈 상태 또는 미리보기 (generator.js에서 동적 렌더링) -->
             <div id="previewArea">
-              <div class="generator-empty">
-                <div class="generator-empty-icon">📦</div>
-                <div class="generator-empty-title">No Components Selected</div>
-                <div class="generator-empty-text">
-                  <p style="margin: 0 0 16px">
-                    왼쪽에서 컴포넌트를 선택하면 여기에 생성된 코드가
-                    표시됩니다.
-                  </p>
-                  <div
-                    style="
-                      text-align: left;
-                      display: inline-block;
-                      padding: 16px 24px;
-                      background: var(--bg-secondary);
-                      border-radius: 8px;
-                    "
-                  >
-                    <p style="margin: 0 0 12px; font-weight: 600">
-                      🚀 빠른 시작
-                    </p>
-                    <p style="margin: 0; font-size: 14px; line-height: 1.6">
-                      1️⃣ 왼쪽에서 Button, Input 등 필요한 컴포넌트 체크<br />
-                      2️⃣ 여기서 생성된 코드 확인<br />
-                      3️⃣ Download 버튼으로 examples.js 다운로드
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <!-- JavaScript로 동적 생성됨 -->
             </div>
           </div>
 
@@ -455,11 +376,6 @@
           credit: "Built with ❤️ by Doakuma",
         },
       });
-
-      // Accordion 초기화
-      if (window.VanillaComponents && window.VanillaComponents.initAccordion) {
-        window.VanillaComponents.initAccordion();
-      }
     </script>
   </body>
 </html>
