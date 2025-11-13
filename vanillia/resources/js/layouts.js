@@ -176,7 +176,10 @@
         const linksHTML = section.links
           .map((link) => {
             const attrs = link.external ? 'target="_blank" rel="noopener"' : "";
-            return `<li><a href="${link.href}" ${attrs}>${link.text}</a></li>`;
+            const externalIcon = link.external
+              ? '<i class="icon icon--small icon--external"></i>'
+              : "";
+            return `<li><a href="${link.href}" ${attrs}>${link.text}${externalIcon}</a></li>`;
           })
           .join("");
 

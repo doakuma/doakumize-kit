@@ -222,31 +222,36 @@
             <div class="generator-empty-icon">📦</div>
             <div class="generator-empty-title">Component Generator</div>
             <div class="generator-empty-text">
-              <p style="margin: 0 0 32px; color: var(--text-tertiary); font-size: 15px;">
+              <p class="generator-empty__guide-text">
                 왼쪽에서 컴포넌트를 선택하시면 여기에 생성된 코드가 표시됩니다
               </p>
               
-              <ul style="margin: 0 auto 24px; padding-left: 0; line-height: 2; font-size: 15px; max-width: 500px; text-align: left; list-style: none; color: var(--text-primary);">
-                <li style="margin-bottom: 8px;">✅ 왼쪽에서 필요한 컴포넌트를 체크합니다</li>
-                <li style="margin-bottom: 8px;">👀 생성된 코드를 확인합니다</li>
-                <li style="margin-bottom: 8px;">📦 Download 버튼을 클릭합니다</li>
-                <li>📁 압축을 풀고 <code style="background: var(--surface-base); padding: 2px 6px; border-radius: 4px;">core/</code> 폴더에 복사합니다</li>
+              <ul class="generator-empty__steps">
+                <li class="generator-empty__step">✅ 왼쪽에서 필요한 컴포넌트를 체크합니다</li>
+                <li class="generator-empty__step">👀 생성된 코드를 확인합니다</li>
+                <li class="generator-empty__step">📦 Download 버튼을 클릭합니다</li>
+                <li class="generator-empty__step">📁 압축을 풀고 프로젝트에 복사합니다
+                  <br><code class="generator-empty__step-code">examples.js → core/viewer/</code>
+                  <br><code class="generator-empty__step-code">styles/ → core/styles/</code>
+                </li>
+                <li class="generator-empty__step">🌐 <code class="generator-empty__step-code">core/viewer/index.html</code>을 열어 확인합니다</li>
               </ul>
 
-              <div style="margin: 0 auto 16px; padding: 16px 20px; background: var(--primary-50); border-radius: 8px; border-left: 3px solid var(--border-focus); max-width: 500px; text-align: left;">
-                <p style="margin: 0 0 10px; font-weight: 600; font-size: 14px; color: var(--interactive-text-default);">
+              <div class="generator-empty__package-box">
+                <p class="generator-empty__package-title">
                   📦 다운로드 패키지 구성
                 </p>
-                <ul style="margin: 0; padding-left: 0; line-height: 1.8; font-size: 13px; list-style: none; color: var(--text-primary);">
-                  <li style="margin-bottom: 6px;">📄 <code>examples.js</code> - 컴포넌트 예제 데이터</li>
-                  <li style="margin-bottom: 6px;">🔗 <code>styles/common.css</code> - 통합 허브 파일</li>
-                  <li style="margin-bottom: 6px;">📂 <code>styles/items/</code> - 개별 컴포넌트 CSS</li>
-                  <li>📖 <code>README.txt</code> - 상세 사용 가이드</li>
+                <ul class="generator-empty__package-list">
+                  <li class="generator-empty__package-item">📄 <code>examples.js</code> - 컴포넌트 예제 데이터 (viewer용)</li>
+                  <li class="generator-empty__package-item">📂 <code>styles/</code> - CSS 파일 패키지
+                    <br><span class="generator-empty__package-detail">common.css, components.css, items/ 등</span>
+                  </li>
+                  <li class="generator-empty__package-item">📖 <code>README.txt</code> - 상세 사용 가이드</li>
                 </ul>
               </div>
 
-              <p style="margin: 0 auto; padding: 14px 20px; background: var(--secondary-50); border-radius: 8px; font-size: 13px; max-width: 500px; color: var(--text-primary);">
-                💡 필요없는 컴포넌트는 <code style="background: var(--surface-base); padding: 2px 6px; border-radius: 4px;">components.css</code>에서 주석 처리하시면 용량이 절감됩니다
+              <p class="generator-empty__tip">
+                💡 <code class="generator-empty__step-code">core/viewer/index.html</code>을 열면 선택한 컴포넌트 목록과 코드를 확인할 수 있습니다
               </p>
             </div>
           </div>

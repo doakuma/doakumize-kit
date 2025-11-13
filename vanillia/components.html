@@ -80,191 +80,44 @@
       <!-- content -->
       <main id="content">
         <div class="content-inner content-inner--components">
-          <!-- <header
-            class="content-header"
-            style="
-              position: sticky;
-              top: 0px;
-              z-index: 10;
-              padding-top: 20px;
-              background-color: var(--gray-50);
-            ">
-            <h2 class="text-h1" id="currentComponentTitle">
-              Akumize Components
-            </h2>
-            <p class="text-body-lg" id="currentComponentDescription">
-              사용되는 모든 UI 컴포넌트들을 확인하고 테스트할 수 있습니다.<br />
-              각 컴포넌트는 다양한 상태와 변형을 지원하며, 일관된 디자인
-              시스템을 기반으로 구축되었습니다.
-            </p>
-          </header> -->
-
           <!-- Component Content Container -->
           <div
             id="componentContentContainer"
             class="component-content-container"
           >
-            <!-- Default Welcome Section -->
-            <div id="defaultWelcomeSection" class="welcome-section">
-              <div class="welcome-content">
-                <!-- Header -->
-                <div class="welcome-header">
-                  <div class="welcome-icon">
-                    <i
-                      class="icon icon--xlarge icon--code"
-                      style="width: 64px; height: 64px"
-                    ></i>
-                  </div>
-                  <h3 class="text-h2">Component System</h3>
-                  <p
-                    class="text-body-md text-secondary"
-                    style="
-                      margin-top: 12px;
-                      max-width: 600px;
-                      margin-left: auto;
-                      margin-right: auto;
-                    "
-                  >
-                    왼쪽 메뉴에서 확인하고 싶은 컴포넌트를 선택하면<br />
-                    다양한 변형과 사용 예시를 확인할 수 있습니다.
-                  </p>
-                </div>
-
-                <!-- Info Cards Grid -->
-                <div class="welcome-grid">
-                  <!-- Card 1: 시스템 소개 -->
-                  <div class="welcome-card">
-                    <header class="welcome-card__header">
-                      <div class="welcome-card__icon">
-                        <i class="icon icon--large icon--dashboard"></i>
-                      </div>
-                      <h4 class="welcome-card__title">컴포넌트 시스템 소개</h4>
-                    </header>
-                    <p class="welcome-card__description">
-                      일관성 있고 재사용 가능한 UI 컴포넌트 라이브러리로, 빠르고
-                      효율적인 개발을 지원합니다.
-                    </p>
-                    <ul class="welcome-card__list">
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span>디자인 시스템 기반의 일관된 UI/UX</span>
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span>재사용 가능한 모듈형 컴포넌트</span>
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span>접근성과 사용성을 고려한 설계</span>
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span>실시간 미리보기 및 코드 확인</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- Card 2: 컴포넌트 종류 -->
-                  <div class="welcome-card">
-                    <header class="welcome-card__header">
-                      <div class="welcome-card__icon">
-                        <i class="icon icon--large icon--code"></i>
-                      </div>
-                      <h4 class="welcome-card__title">컴포넌트 종류</h4>
-                    </header>
-                    <p class="welcome-card__description">
-                      다양한 UI 요구사항을 충족하는 15가지 이상의 컴포넌트를
-                      제공합니다.
-                    </p>
-                    <ul class="welcome-card__list">
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>기본:</strong> Button, Input, Checkbox,
-                          Radio</span
-                        >
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>선택:</strong> Dropdown, Slider, Tab</span
-                        >
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>표시:</strong> Table, Chip, File Card,
-                          Icon</span
-                        >
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>레이아웃:</strong> Modal, Popover,
-                          Accordion</span
-                        >
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- Card 3: 스타일 변경 방법 -->
-                  <div class="welcome-card">
-                    <header class="welcome-card__header">
-                      <div class="welcome-card__icon">
-                        <i class="icon icon--large icon--settings"></i>
-                      </div>
-                      <h4 class="welcome-card__title">스타일 변경 방법</h4>
-                    </header>
-                    <p class="welcome-card__description">
-                      CSS 변수를 활용하여 전체 시스템의 스타일을
-                      <span class="welcome-highlight">한 곳에서</span> 쉽게
-                      관리할 수 있습니다.
-                    </p>
-                    <ul class="welcome-card__list">
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>Color:</strong> --primary-*, --gray-*,
-                          --success-*</span
-                        >
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>Typography:</strong> --h1~h5, --body-*,
-                          --sub-*</span
-                        >
-                      </li>
-                      <li class="welcome-card__list-item">
-                        <i class="icon icon--small icon--check-primary"></i>
-                        <span
-                          ><strong>Semantic:</strong> --text-*, --bg-*,
-                          --border-*</span
-                        >
-                      </li>
-                    </ul>
-                    <div class="welcome-code-example">
-                      <span class="welcome-code-example__comment"
-                        >/* variables.css에서 변경 */</span
-                      >
-                      <div>
-                        <span class="welcome-code-example__property"
-                          >--primary-500</span
-                        >:
-                        <span class="welcome-code-example__value">#6366f1</span
-                        >;
-                      </div>
-                      <div>
-                        <span class="welcome-code-example__property"
-                          >--text-primary</span
-                        >:
-                        <span class="welcome-code-example__value"
-                          >var(--gray-900)</span
-                        >;
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <!-- Initial Loading Message -->
+            <div
+              id="defaultWelcomeSection"
+              class="welcome-section"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 400px;
+              "
+            >
+              <div style="text-align: center">
+                <i
+                  class="icon icon--xlarge icon--code"
+                  style="
+                    width: 64px;
+                    height: 64px;
+                    margin-bottom: 20px;
+                    opacity: 0.5;
+                  "
+                ></i>
+                <h2
+                  class="text-h3"
+                  style="color: var(--text-tertiary); margin: 0"
+                >
+                  Loading...
+                </h2>
+                <p
+                  class="text-body-sm"
+                  style="color: var(--text-tertiary); margin-top: 8px"
+                >
+                  Component Studio를 불러오는 중입니다
+                </p>
               </div>
             </div>
             <!-- 
@@ -303,6 +156,8 @@
     <!-- 페이지 전용 스크립트는 resources/js/components-page.js로 이동됨 -->
 
     <!-- Component Data는 주소 기반으로 동적으로 로드됩니다 -->
+    <!-- Overview Data -->
+    <script src="components/data/overview.data.js"></script>
 
     <!-- Theme Manager (먼저 로드) -->
     <script src="components/scripts/theme-manager.js"></script>
@@ -321,6 +176,7 @@
     <script src="components/renderers/icon.renderer.js"></script>
     <script src="components/renderers/color.renderer.js"></script>
     <script src="components/renderers/spacing.renderer.js"></script>
+    <!-- Overview는 GenericRenderer에서 처리 -->
     <script src="resources/js/component-code-viewer.js"></script>
     <!-- common.js 제거됨: 모든 컴포넌트는 components/scripts/에서 관리됩니다 -->
     <script src="components/components-init.js"></script>

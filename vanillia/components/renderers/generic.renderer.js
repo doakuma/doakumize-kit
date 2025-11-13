@@ -152,11 +152,25 @@ class GenericComponentRenderer {
    * @returns {string} - 렌더링된 HTML 문자열
    */
   _renderVariant(variant) {
-    const { title, subtitle, description, gridStyle, items } = variant;
+    const { title, subtitle, description, gridStyle, items, content } = variant;
+
     const escapedTitle = this._escapeHtml(title || subtitle || "");
-    const escapedDescription = description
+    const descriptionHtml = description
       ? `<p class="component-description">${this._escapeHtml(description)}</p>`
       : "";
+
+    // content가 있으면 가이드/설명 컨텐츠로 렌더링 (preview는 코드 보기 버튼)
+    if (content) {
+      return `
+        <div class="variant-group">
+          <h4 class="component-subtitle">${escapedTitle}</h4>
+          ${descriptionHtml}
+          ${content}
+        </div>
+      `;
+    }
+
+    // items 기반 렌더링 (기존 컴포넌트 방식)
     const gridStyleAttr = gridStyle ? `style="${gridStyle}"` : "";
 
     if (!items || !Array.isArray(items)) {
@@ -169,7 +183,7 @@ class GenericComponentRenderer {
     return `
       <div class="variant-group">
         <h4 class="component-subtitle">${escapedTitle}</h4>
-        ${escapedDescription}
+        ${descriptionHtml}
         <div class="component-grid" ${gridStyleAttr}>
           ${itemsHtml}
         </div>
@@ -209,6 +223,33 @@ class GenericComponentRenderer {
       ${escapedDescription}
       ${variantsHtml}
     `;
+  }
+
+  /**
+   * 컴포넌트 렌더링 후 이벤트 리스너 등록
+   * @param {HTMLElement} container - 컨테이너 요소
+   */
+  afterRender(container) {
+    // Overview 내부 네비게이션 링크 처리
+    const navLinks = container.querySelectorAll("[data-nav-link]");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const componentId = link.dataset.navLink;
+
+        // 컴포넌트 전환
+        if (typeof window.showComponent === "function") {
+          window.showComponent(componentId);
+        }
+      });
+    });
+
+    if (navLinks.length > 0) {
+      console.log(
+        `[GenericRenderer] ${navLinks.length} navigation links initialized`
+      );
+    }
   }
 
   /**

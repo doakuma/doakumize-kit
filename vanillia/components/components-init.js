@@ -39,6 +39,7 @@ async function initializeComponents() {
 
     // 추가 전용 렌더러 (필요시 추가)
     // componentEngine.registerRenderer('tab', new TabRenderer());
+    // Overview는 GenericRenderer에서 sectionType으로 처리됨
 
     // 3. ComponentConfig 기반으로 컴포넌트 타입별 제네릭 렌더러 등록
     // 활성화된 컴포넌트와 미래의 컴포넌트 모두 제네릭 렌더러로 등록

@@ -16,6 +16,75 @@ window.ComponentData.color = {
   title: "Color Palette",
   variants: [
     {
+      title: "📐 Variable Naming Rule",
+      description: "CSS Variables의 체계적인 네이밍 규칙을 안내합니다",
+      content: ` <div class="overview-section">
+              <h3>네이밍 구조</h3>
+              
+              <div class="overview-naming-pattern">
+                <code class="overview-naming-pattern__prefix">--</code>
+                <code class="overview-naming-pattern__category">{category}</code>
+                <code class="overview-naming-pattern__prefix">-</code>
+                <code class="overview-naming-pattern__property">{property}</code>
+                <code class="overview-naming-pattern__prefix">-</code>
+                <code class="overview-naming-pattern__variant">{variant}</code>
+                <code class="overview-naming-pattern__prefix">-</code>
+                <code class="overview-naming-pattern__state">{state}</code>
+              </div>
+
+              <div class="overview-naming-explanation">
+                <div class="overview-naming-explain-item">
+                  <code class="overview-naming-pattern__category">{category}</code>
+                  <span>변수의 대분류 (color, spacing, typography 등)</span>
+                </div>
+                <div class="overview-naming-explain-item">
+                  <code class="overview-naming-pattern__property">{property}</code>
+                  <span>속성 또는 용도 (text, bg, border, primary, gray 등)</span>
+                </div>
+                <div class="overview-naming-explain-item">
+                  <code class="overview-naming-pattern__variant">{variant}</code>
+                  <span>변형 또는 강도 (primary, secondary, 500, lg 등)</span>
+                </div>
+                <div class="overview-naming-explain-item">
+                  <code class="overview-naming-pattern__state">{state}</code>
+                  <span>상태 (hover, focus, active, disabled 등) - 선택적</span>
+                </div>
+              </div>
+
+              <div class="overview-info-box">
+                <i class="icon icon--small icon--info"></i>
+                <div class="overview-info-box__content">
+                  모든 변수가 4단계 구조를 갖는 건 아니며, 필요에 따라 2~4단계로 유연하게 구성됩니다.
+                  예: <code>--gray-500</code>, <code>--text-primary</code>, <code>--border-focus-ring</code>
+                </div>
+              </div>
+
+              <h3 style="margin: 32px 0 16px;">💡 실제 예시</h3>
+              
+              <div class="overview-code-block">
+                <div class="overview-code-block__header">실제 사용 예시</div>
+                <pre><code>/* Primitive - 기본 팔레트 */
+--gray-500: hsl(200, 15%, 65%);
+--primary-600: hsl(190, 70%, 38%);
+
+/* Semantic - 의미 기반 */
+--success-500: hsl(142, 72%, 47%);
+--error-700: hsl(356, 90%, 42%);
+
+/* Alias - 용도 기반 */
+--text-primary: var(--gray-900);
+--border-focus: var(--primary-500);</code></pre>
+              </div>
+
+              <div class="overview-success-box">
+                <i class="icon icon--small icon--check-primary"></i>
+                <div class="overview-success-box__content">
+                  <strong>디자이너 협업 Tip:</strong> Figma/Sketch에서 정의한 토큰 이름을 그대로 사용하면 디자인-개발 간 소통이 원활해집니다.
+                </div>
+              </div>
+            </div>`,
+    },
+    {
       title: "🎨 Color System Guide",
       description:
         "HSL 기반 동적 컬러 시스템을 사용합니다. 기준 HSL 값만 변경하면 전체 스케일이 자동으로 업데이트됩니다.",

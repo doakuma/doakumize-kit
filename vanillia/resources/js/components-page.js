@@ -237,12 +237,15 @@ function renderCategoryNavigation() {
     const components = componentsByCategory[category];
     if (!components || components.length === 0) return;
 
+    // hasChildren 체크: 카테고리 내 모든 컴포넌트가 hasChildren: false면 단독 링크
+    const hasChildren = components.some((c) => c.hasChildren !== false);
+
     // 카테고리 아이템 생성
     const categoryItem = document.createElement("div");
     categoryItem.className = "lnb-menu-item";
 
-    // 첫 번째 카테고리는 기본으로 열어두기
-    if (index === 0) {
+    // hasChildren이 없으면 expanded 상태로 렌더링
+    if (!hasChildren) {
       categoryItem.classList.add("lnb-menu-item--expanded");
     }
 
@@ -254,77 +257,97 @@ function renderCategoryNavigation() {
     categoryButton.className = "lnb-menu-item__link";
     categoryButton.type = "button";
 
-    // 활성화된 컴포넌트 개수 표시
-    const enabledCount = components.filter((c) => c.enabled !== false).length;
-    const totalCount = components.length;
-    categoryButton.innerHTML = `<span class="lnb-menu-item__text">${category} <span class="text-tertiary">(${enabledCount}/${totalCount})</span></span>`;
-
-    const toggleButton = document.createElement("button");
-    toggleButton.className = "lnb-menu-item__toggle";
-    toggleButton.type = "button";
-    toggleButton.innerHTML = '<i class="icon icon--chevron-down"></i>';
+    // hasChildren이 없으면 (단독 링크) 해당 컴포넌트로 바로 이동
+    if (!hasChildren && components.length === 1) {
+      const comp = components[0];
+      categoryButton.dataset.componentId = comp.id;
+      categoryButton.innerHTML = `
+        <span class="lnb-menu-item__text">${comp.name}</span>
+      `;
+      categoryButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        showComponent(comp.id);
+      });
+    } else {
+      // 활성화된 컴포넌트 개수 표시
+      const enabledCount = components.filter((c) => c.enabled !== false).length;
+      const totalCount = components.length;
+      categoryButton.innerHTML = `<span class="lnb-menu-item__text">${category} <span class="text-tertiary">(${enabledCount}/${totalCount})</span></span>`;
+    }
 
     header.appendChild(categoryButton);
-    header.appendChild(toggleButton);
 
-    // 카테고리 서브메뉴
-    const submenu = document.createElement("div");
-    submenu.className = "lnb-menu-item__submenu";
+    // hasChildren이 있을 때만 토글 버튼 추가
+    if (hasChildren) {
+      const toggleButton = document.createElement("button");
+      toggleButton.className = "lnb-menu-item__toggle";
+      toggleButton.type = "button";
+      toggleButton.innerHTML = '<i class="icon icon--chevron-down"></i>';
+      header.appendChild(toggleButton);
+    }
 
-    const list = document.createElement("ul");
-    list.className = "lnb-submenu";
+    categoryItem.appendChild(header);
 
-    // 컴포넌트 항목 생성
-    components.forEach((comp) => {
-      const item = document.createElement("li");
-      item.className = "lnb-submenu__item";
+    // hasChildren이 있을 때만 서브메뉴 생성
+    if (hasChildren) {
+      const submenu = document.createElement("div");
+      submenu.className = "lnb-menu-item__submenu";
 
-      const link = document.createElement("a");
-      link.href = "#";
-      link.dataset.componentId = comp.id;
+      const list = document.createElement("ul");
+      list.className = "lnb-submenu";
 
-      // enabled 여부에 따라 클래스 및 스타일 적용
-      const isEnabled = comp.enabled !== false;
+      // 컴포넌트 항목 생성
+      components.forEach((comp) => {
+        const item = document.createElement("li");
+        item.className = "lnb-submenu__item";
 
-      if (isEnabled) {
-        link.className = "lnb-submenu__link";
-        link.innerHTML = `<span>${comp.name}</span>`;
+        const link = document.createElement("a");
+        link.href = "#";
+        link.dataset.componentId = comp.id;
 
-        // 클릭 시 해당 컴포넌트 표시
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          showComponent(comp.id);
-        });
-      } else {
-        // 비활성화된 컴포넌트 (공사 중)
-        link.className = "lnb-submenu__link lnb-submenu__link--disabled";
-        link.innerHTML = `
+        // enabled 여부에 따라 클래스 및 스타일 적용
+        const isEnabled = comp.enabled !== false;
+
+        if (isEnabled) {
+          link.className = "lnb-submenu__link";
+          link.innerHTML = `<span>${comp.name}</span>`;
+
+          // 클릭 시 해당 컴포넌트 표시
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            showComponent(comp.id);
+          });
+        } else {
+          // 비활성화된 컴포넌트 (공사 중)
+          link.className = "lnb-submenu__link lnb-submenu__link--disabled";
+          link.innerHTML = `
           <i class="icon icon--small icon--pending" style="opacity: 0.5;"></i>
           <span style="opacity: 0.5;">${comp.name}</span>
           <span class="chip chip--small" style="opacity: 0.5; margin-left: 4px;">준비 중</span>
         `;
 
-        // 클릭 이벤트 막기
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log(
-            `[ComponentsPage] ${comp.name} 컴포넌트는 준비 중입니다.`
-          );
-        });
+          // 클릭 이벤트 막기
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(
+              `[ComponentsPage] ${comp.name} 컴포넌트는 준비 중입니다.`
+            );
+          });
 
-        // 비활성화 스타일
-        link.style.cursor = "not-allowed";
-        link.style.pointerEvents = "auto"; // 클릭 이벤트는 받되 처리만 막음
-      }
+          // 비활성화 스타일
+          link.style.cursor = "not-allowed";
+          link.style.pointerEvents = "auto"; // 클릭 이벤트는 받되 처리만 막음
+        }
 
-      item.appendChild(link);
-      list.appendChild(item);
-    });
+        item.appendChild(link);
+        list.appendChild(item);
+      });
 
-    submenu.appendChild(list);
-    categoryItem.appendChild(header);
-    categoryItem.appendChild(submenu);
+      submenu.appendChild(list);
+      categoryItem.appendChild(submenu);
+    }
+
     nav.appendChild(categoryItem);
   });
 
@@ -365,11 +388,29 @@ function updateURLParameter(componentId) {
 }
 
 /**
+ * URL에서 컴포넌트 파라미터 제거
+ */
+function clearURLParameter() {
+  const url = new URL(window.location);
+  url.searchParams.delete("component");
+
+  // 브라우저 히스토리에 추가 (뒤로가기 지원)
+  window.history.pushState({}, "", url.toString());
+
+  console.log(`[ComponentsPage] URL parameter cleared: ${url.toString()}`);
+}
+
+/**
  * 컴포넌트 표시 (컨텐츠 전환 방식)
  * @param {string} componentId - 컴포넌트 ID
  * @param {boolean} updateURL - URL 업데이트 여부 (기본: true)
  */
 function showComponent(componentId, updateURL = true) {
+  // Overview는 URL 파라미터 제거하지만 일반 컴포넌트처럼 렌더링
+  if (componentId === "overview" && updateURL) {
+    clearURLParameter();
+  }
+
   const container = document.getElementById("componentContentContainer");
   if (!container) {
     console.warn("[ComponentsPage] Component container not found");
@@ -475,17 +516,30 @@ function showComponent(componentId, updateURL = true) {
  */
 function updateLNBActiveState(componentId) {
   // 모든 LNB 링크에서 active 클래스 제거
-  document.querySelectorAll(".lnb-submenu__link").forEach((link) => {
-    link.classList.remove("lnb-submenu__link--active");
-  });
+  document
+    .querySelectorAll(".lnb-submenu__link, .lnb-menu-item__link")
+    .forEach((link) => {
+      link.classList.remove(
+        "lnb-submenu__link--active",
+        "lnb-menu-item__link--active"
+      );
+    });
 
   // 선택된 컴포넌트에 active 클래스 추가
   const activeLink = document.querySelector(
-    `.lnb-submenu__link[data-component-id="${componentId}"]`
+    `[data-component-id="${componentId}"]`
   );
+
   if (activeLink) {
-    activeLink.classList.add("lnb-submenu__link--active");
+    // 서브메뉴 링크인지 1depth 링크인지 확인하고 적절한 클래스 추가
+    if (activeLink.classList.contains("lnb-submenu__link")) {
+      activeLink.classList.add("lnb-submenu__link--active");
+    } else if (activeLink.classList.contains("lnb-menu-item__link")) {
+      activeLink.classList.add("lnb-menu-item__link--active");
+    }
   }
+
+  console.log(`[ComponentsPage] LNB active state updated: ${componentId}`);
 }
 
 /**
@@ -552,28 +606,12 @@ function initHistoryHandling() {
 }
 
 /**
- * 기본 환영 화면 표시
+ * 기본 환영 화면 표시 (Overview 컴포넌트 렌더링)
  */
 function showWelcomeScreen() {
-  const container = document.getElementById("componentContentContainer");
-  const welcomeSection = document.getElementById("defaultWelcomeSection");
-
-  if (container && welcomeSection) {
-    // 기존 컴포넌트 섹션 제거
-    const existingSections = container.querySelectorAll(".component-section");
-    existingSections.forEach((section) => section.remove());
-
-    // 환영 섹션 표시
-    welcomeSection.style.display = "block";
-    container.style.opacity = "1";
-
-    // LNB 활성화 상태 초기화
-    document.querySelectorAll(".lnb-submenu__link").forEach((link) => {
-      link.classList.remove("lnb-submenu__link--active");
-    });
-
-    console.log("[ComponentsPage] Welcome screen displayed");
-  }
+  // Overview 컴포넌트를 렌더링 (URL 업데이트 안 함)
+  showComponent("overview", false);
+  console.log("[ComponentsPage] Welcome screen (Overview) displayed");
 }
 
 /**
@@ -585,19 +623,17 @@ function loadComponentFromURL() {
   if (componentId) {
     // URL에 컴포넌트 파라미터가 있으면 해당 컴포넌트 표시
     const config = window.ComponentConfig.getComponentConfig(componentId);
-    if (config && config.enabled !== false) {
+    if (config) {
       console.log(
         `[ComponentsPage] Loading component from URL: ${componentId}`
       );
       showComponent(componentId, false); // URL은 이미 설정되어 있으므로 업데이트하지 않음
     } else {
-      console.warn(
-        `[ComponentsPage] Component not found or disabled: ${componentId}`
-      );
+      console.warn(`[ComponentsPage] Component not found: ${componentId}`);
       showWelcomeScreen();
     }
   } else {
-    // URL 파라미터가 없으면 기본 환영 화면 표시
+    // URL 파라미터가 없으면 Overview 표시
     showWelcomeScreen();
   }
 }
@@ -680,6 +716,7 @@ window.copyIconCode = copyIconCode;
 window.showComponent = showComponent;
 window.getComponentFromURL = getComponentFromURL;
 window.updateURLParameter = updateURLParameter;
+window.clearURLParameter = clearURLParameter;
 window.showWelcomeScreen = showWelcomeScreen;
 
 // DOM 로드 시 자동 초기화

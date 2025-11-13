@@ -10,6 +10,7 @@
  * 컴포넌트 카테고리
  */
 const COMPONENT_CATEGORIES = {
+  OVERVIEW: "Overview",
   FOUNDATION: "Foundation",
   FORM_CONTROLS: "Form Controls",
   DATA_DISPLAY: "Data Display",
@@ -26,6 +27,7 @@ const COMPONENT_CATEGORIES = {
  * @property {string} [dataSource] - 데이터 소스 (없으면 id 사용)
  * @property {boolean} [enabled] - 활성화 여부 (기본: true)
  * @property {number} [order] - 정렬 순서 (낮을수록 앞에 표시)
+ * @property {boolean} [hasChildren] - 하위 메뉴(카테고리) 여부 (기본: true)
  */
 
 /**
@@ -36,6 +38,14 @@ const COMPONENT_LIST = [
   // ========================================
   // 1️⃣ Foundation (기초)
   // ========================================
+  {
+    id: "overview",
+    name: "Overview",
+    category: COMPONENT_CATEGORIES.OVERVIEW,
+    enabled: true,
+    order: 0,
+    hasChildren: false, // 단독 링크 (서브메뉴 없음)
+  },
   {
     id: "color",
     name: "Color",

@@ -15,6 +15,46 @@ window.ComponentData.typography = {
   title: "Typography System",
   variants: [
     {
+      title: "🔤 Font Family",
+      description: "프로젝트에서 사용하는 폰트와 import 방법을 안내합니다",
+      content: `<div class="overview-section">
+              <h3>현재 프로젝트 구성</h3>
+              
+              <div class="overview-guide-list">
+                <div class="overview-guide-item">
+                  <span class="overview-guide-item__label">Import 방식:</span>
+                  <span class="overview-guide-item__value"> <code>common.css</code>에서 CDN으로 로드</span>
+                </div>
+                <div class="overview-guide-item">
+                  <span class="overview-guide-item__label">변수 정의:</span>
+                  <span class="overview-guide-item__value"> <code>variables.css</code>에서 fallback 체계 정의</span>
+                </div>
+                <div class="overview-guide-item">
+                  <span class="overview-guide-item__label">전역 적용:</span>
+                  <span class="overview-guide-item__value"> <code>base.css</code>에서 모든 요소에 적용</span>
+                </div>
+              </div>
+
+              <div class="overview-code-block">
+                <div class="overview-code-block__header">common.css - CDN Import</div>
+                <pre><code>@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");</code></pre>
+              </div>
+
+              <div class="overview-code-block">
+                <div class="overview-code-block__header">variables.css - Fallback 정의</div>
+                <pre><code>--font: "Pretendard", -apple-system, BlinkMacSystemFont, 
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;</code></pre>
+              </div>
+
+              <div class="overview-info-box">
+                <i class="icon icon--small icon--info"></i>
+                <div class="overview-info-box__content">
+                  <strong>Fallback 순서:</strong> Pretendard가 로드되지 않으면 시스템 기본 폰트(-apple-system, Segoe UI 등)로 자동 대체됩니다.
+                </div>
+              </div>
+            </div>`,
+    },
+    {
       id: "headers",
       title: "Headers (Bold, -2% letter-spacing)",
       gridStyle: "--minmax: 100%",
