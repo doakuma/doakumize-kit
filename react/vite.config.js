@@ -9,12 +9,14 @@ const __dirname = dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
+  // 프로덕션 빌드 시 GitHub Pages 경로 사용
+  const isProduction = mode === "production";
+
   return {
     plugins: [react()],
 
     // GitHub Pages 배포 경로
-    // command === 'build'일 때만 GitHub Pages 경로 사용
-    base: command === "build" ? "/doakumize-kit/react/" : "/",
+    base: isProduction ? "/doakumize-kit/react/" : "/",
 
     // Shared 리소스 접근을 위한 alias
     resolve: {

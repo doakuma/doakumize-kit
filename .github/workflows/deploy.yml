@@ -43,6 +43,8 @@ jobs:
       - name: Build React
         working-directory: ./react
         run: pnpm build
+        env:
+          NODE_ENV: production
 
       - name: Prepare deployment directory
         run: |
