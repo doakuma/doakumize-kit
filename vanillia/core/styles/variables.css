@@ -1,0 +1,215 @@
+/**
+ * AI Prompt Studio - Color Palette Variables
+ * HSL 기반 동적 컬러 시스템
+ * 
+ * 📌 사용법:
+ * - 기준 HSL 값(h, s)만 변경하면 전체 스케일 자동 업데이트
+ * - 개별 색상 오버라이드 가능
+ * - 나중에 SCSS 전환 시 믹스인으로 간소화 가능
+ */
+:root {
+  /* ========================================
+   * Gray Scale Palette
+   * Base: hsl(200, 15%, 65%) ≈ #96a3ab
+   * ======================================== */
+  --gray-h: 200;
+  --gray-s: 15%;
+
+  --gray-0: #ffffff; /* 특수 케이스: 순백색 */
+  --gray-50: hsl(var(--gray-h), calc(var(--gray-s) * 0.8), 98%);
+  --gray-100: hsl(var(--gray-h), calc(var(--gray-s) * 0.9), 95%);
+  --gray-150: hsl(var(--gray-h), var(--gray-s), 93%);
+  --gray-200: hsl(var(--gray-h), var(--gray-s), 90%);
+  --gray-300: hsl(var(--gray-h), var(--gray-s), 85%);
+  --gray-400: hsl(var(--gray-h), var(--gray-s), 75%);
+  --gray-500: hsl(var(--gray-h), var(--gray-s), 65%); /* Base */
+  --gray-600: hsl(var(--gray-h), var(--gray-s), 48%);
+  --gray-700: hsl(var(--gray-h), calc(var(--gray-s) * 1.1), 32%);
+  --gray-800: hsl(var(--gray-h), calc(var(--gray-s) * 1.2), 24%);
+  --gray-900: hsl(var(--gray-h), calc(var(--gray-s) * 1.3), 16%);
+
+  /* ========================================
+   * Primary Color Palette (Cyan Theme)
+   * Base: hsl(190, 70%, 50%) ≈ #26b7dc
+   * ======================================== */
+  --primary-h: 190;
+  --primary-s: 70%;
+
+  --primary-50: hsl(var(--primary-h), calc(var(--primary-s) * 0.85), 98%);
+  --primary-100: hsl(var(--primary-h), calc(var(--primary-s) * 0.9), 93%);
+  --primary-200: hsl(var(--primary-h), var(--primary-s), 84%);
+  --primary-300: hsl(var(--primary-h), var(--primary-s), 72%);
+  --primary-400: hsl(var(--primary-h), var(--primary-s), 58%);
+  --primary-500: hsl(var(--primary-h), var(--primary-s), 50%); /* Base */
+  --primary-600: hsl(var(--primary-h), var(--primary-s), 38%);
+  --primary-700: hsl(var(--primary-h), calc(var(--primary-s) * 1.05), 34%);
+  --primary-800: hsl(var(--primary-h), calc(var(--primary-s) * 1.1), 23%);
+  --primary-900: hsl(var(--primary-h), calc(var(--primary-s) * 1.15), 17%);
+
+  /* ========================================
+   * Secondary Color Palette (Purple Theme)
+   * Base: hsl(255, 80%, 60%) ≈ #6349eb
+   * ======================================== */
+  --secondary-h: 255;
+  --secondary-s: 80%;
+
+  --secondary-50: hsl(var(--secondary-h), calc(var(--secondary-s) * 0.85), 98%);
+  --secondary-100: hsl(var(--secondary-h), calc(var(--secondary-s) * 0.9), 94%);
+  --secondary-200: hsl(var(--secondary-h), var(--secondary-s), 85%);
+  --secondary-300: hsl(var(--secondary-h), var(--secondary-s), 73%);
+  --secondary-400: hsl(var(--secondary-h), var(--secondary-s), 60%);
+  --secondary-500: hsl(var(--secondary-h), var(--secondary-s), 52%); /* Base */
+  --secondary-600: hsl(var(--secondary-h), var(--secondary-s), 42%);
+  --secondary-700: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) * 1.05),
+    35%
+  );
+  --secondary-800: hsl(var(--secondary-h), calc(var(--secondary-s) * 1.1), 24%);
+  --secondary-900: hsl(
+    var(--secondary-h),
+    calc(var(--secondary-s) * 1.15),
+    17%
+  );
+
+  /* ========================================
+   * Essential Color Palette
+   * ======================================== */
+  --essential: #eb1c7f;
+
+  /* Error Colors */
+  --error: #f84f63;
+  --error-bg: #fff9fa;
+
+  /* ========================================
+   * Semantic Color Aliases
+   * ======================================== */
+  --sementic-essential: #eb1c7f;
+  --sementic-info: #1290ff;
+  --sementic-error: #f84f63;
+  --sementic-save: #22c55e;
+  --sementic-warning: #eab308;
+  /* Text Colors */
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-tertiary: var(--gray-500);
+  --text-disabled: var(--gray-400);
+  --text-inverse: var(--gray-0);
+
+  /* Background Colors */
+  --bg-primary: var(--gray-0);
+  --bg-secondary: var(--gray-50);
+  --bg-tertiary: var(--gray-100);
+
+  /* Border Colors */
+  --border-primary: var(--gray-200);
+  --border-secondary: var(--gray-300);
+  --border-focus: var(--primary-500);
+
+  /* ========================================
+   * Legacy Support Variables
+   * (기존 코드와의 호환성을 위해 유지)
+   * ======================================== */
+  --color-primary: var(--primary-500);
+  --color-primary-dimmed: var(--primary-400);
+  --color-secondary: var(--secondary-500);
+
+  /* Status color aliases */
+  --critical: var(--essential);
+  --warning: var(--error);
+  --normal: var(--primary-500);
+  --disabled: var(--gray-400);
+
+  /* ========================================
+   * Typography System
+   * ======================================== */
+
+  /* Font Family */
+  --font: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Headers (Bold, -2% letter-spacing) */
+  --h1: 700 24px/1.35 var(--font);
+  --h2: 700 20px/1.4 var(--font);
+  --h3: 700 18px/1.4 var(--font);
+  --h4: 700 16px/1.4 var(--font);
+  --h5: 700 14px/1.4 var(--font);
+
+  /* Body (Regular, 140% line-height) */
+  --body-xl: 400 18px/1.4 var(--font);
+  --body-lg: 400 16px/1.4 var(--font);
+  --body-md: 400 16px/1.4 var(--font);
+  --body-sm: 400 14px/1.4 var(--font);
+  --body-xs: 400 13px/1.4 var(--font);
+
+  /* Sub-Semibold (600, 140% line-height, -2% letter-spacing) */
+  --sub-sb-xl: 600 18px/1.4 var(--font);
+  --sub-sb-lg: 600 16px/1.4 var(--font);
+  --sub-sb-md: 600 16px/1.4 var(--font);
+  --sub-sb-sm: 600 14px/1.4 var(--font);
+  --sub-sb-xs: 600 13px/1.4 var(--font);
+
+  /* Sub-Medium (500, 140% line-height, -2% letter-spacing) */
+  --sub-md-xl: 500 20px/1.4 var(--font);
+  --sub-md-lg: 500 18px/1.4 var(--font);
+  --sub-md-md: 500 16px/1.4 var(--font);
+  --sub-md-sm: 500 14px/1.4 var(--font);
+  --sub-md-xs: 500 13px/1.4 var(--font);
+
+  /* Letter Spacing Utilities */
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.02em;
+
+  /* ========================================
+   * Spacing System
+   * Base Unit: 4px (--spacing-base)
+   * Scale: 배수 기반 확장 (0.5x ~ 20x)
+   * ======================================== */
+
+  /* Base Unit */
+  --spacing-base: 4px;
+
+  /* Spacing Scale (4px 기반 배수) */
+  --spacing-0: 0;
+  --spacing-1: calc(var(--spacing-base) * 0.5); /* 2px */
+  --spacing-2: var(--spacing-base); /* 4px */
+  --spacing-3: calc(var(--spacing-base) * 2); /* 8px */
+  --spacing-4: calc(var(--spacing-base) * 3); /* 12px */
+  --spacing-5: calc(var(--spacing-base) * 4); /* 16px */
+  --spacing-6: calc(var(--spacing-base) * 5); /* 20px */
+  --spacing-7: calc(var(--spacing-base) * 6); /* 24px */
+  --spacing-8: calc(var(--spacing-base) * 8); /* 32px */
+  --spacing-9: calc(var(--spacing-base) * 10); /* 40px */
+  --spacing-10: calc(var(--spacing-base) * 12); /* 48px */
+  --spacing-11: calc(var(--spacing-base) * 14); /* 56px */
+  --spacing-12: calc(var(--spacing-base) * 16); /* 64px */
+  --spacing-13: calc(var(--spacing-base) * 20); /* 80px */
+  --spacing-14: calc(var(--spacing-base) * 24); /* 96px */
+  --spacing-15: calc(var(--spacing-base) * 32); /* 128px */
+
+  /* Semantic Spacing (용도별 별칭) */
+  /* Component Internal Spacing */
+  --spacing-xs: var(--spacing-2); /* 4px - 아주 작은 여백 (아이콘-텍스트) */
+  --spacing-sm: var(--spacing-3); /* 8px - 작은 여백 (버튼 패딩) */
+  --spacing-md: var(--spacing-5); /* 16px - 중간 여백 (카드 패딩) */
+  --spacing-lg: var(--spacing-7); /* 24px - 큰 여백 (섹션 여백) */
+  --spacing-xl: var(--spacing-8); /* 32px - 아주 큰 여백 (페이지 여백) */
+  --spacing-2xl: var(--spacing-10); /* 48px - 매우 큰 여백 */
+  --spacing-3xl: var(--spacing-12); /* 64px - 초대형 여백 */
+
+  /* Layout Spacing (레이아웃 전용) */
+  --layout-gutter: var(--spacing-5); /* 16px - 그리드 거터 */
+  --layout-container: var(--spacing-8); /* 32px - 컨테이너 패딩 */
+  --layout-section: var(--spacing-10); /* 48px - 섹션 간격 */
+
+  /* Component Specific Spacing */
+  --spacing-input-padding-x: var(--spacing-4); /* 12px - Input 가로 패딩 */
+  --spacing-input-padding-y: var(--spacing-3); /* 8px - Input 세로 패딩 */
+  --spacing-button-padding-x: var(--spacing-5); /* 16px - Button 가로 패딩 */
+  --spacing-button-padding-y: var(--spacing-3); /* 8px - Button 세로 패딩 */
+  --spacing-card-padding: var(--spacing-6); /* 20px - Card 패딩 */
+  --spacing-modal-padding: var(--spacing-7); /* 24px - Modal 패딩 */
+  --spacing-icon-gap: var(--spacing-2); /* 4px - 아이콘과 텍스트 간격 */
+  --spacing-list-item-gap: var(--spacing-4); /* 12px - 리스트 아이템 간격 */
+}

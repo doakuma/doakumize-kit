@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Studio - UI 컴포넌트 라이브러리</title>
+    <link rel="stylesheet" href="shared/styles/base/variables.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero__content">
+          <h1 class="hero__title">Component Studio</h1>
+          <p class="hero__subtitle">
+            동일한 디자인 시스템을 여러 프레임워크로 제공합니다
+          </p>
+          <p class="hero__description">
+            같은 컴포넌트를 반복해서 만드는 수고를 덜고, CSS Variables로 손쉽게
+            커스터마이징하여 빠르게 프로젝트에 적용할 수 있습니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- Framework Selection -->
+      <section class="frameworks">
+        <h2 class="frameworks__title">프레임워크를 선택하세요</h2>
+
+        <div class="framework-cards">
+          <!-- Vanilla JS Card -->
+          <a href="vanillia/index.html" class="card">
+            <div class="card__icon">📦</div>
+            <h3 class="card__title">Vanilla JavaScript</h3>
+            <p class="card__description">
+              순수 HTML, CSS, JavaScript로 구현된 컴포넌트
+            </p>
+            <ul class="card__features">
+              <li>✨ 의존성 없음</li>
+              <li>⚡ 빠른 로딩</li>
+              <li>🎯 어디서나 사용 가능</li>
+              <li>🎨 CSS Variables 기반</li>
+            </ul>
+            <div class="card__status card__status--ready">사용 가능</div>
+          </a>
+
+          <!-- React Card -->
+          <a href="react/" class="card">
+            <div class="card__icon">⚛️</div>
+            <h3 class="card__title">React</h3>
+            <p class="card__description">
+              React 컴포넌트로 제공되는 재사용 가능한 UI
+            </p>
+            <ul class="card__features">
+              <li>🔄 재사용 가능</li>
+              <li>📦 상태 관리 내장</li>
+              <li>🌐 생태계 풍부</li>
+              <li>⚡ Hook 기반</li>
+            </ul>
+            <div class="card__status card__status--ready">사용 가능</div>
+          </a>
+
+          <!-- MUI Card -->
+          <a href="#mui" class="card card--disabled">
+            <div class="card__icon">🎭</div>
+            <h3 class="card__title">Material-UI</h3>
+            <p class="card__description">MUI 기반의 Material Design 컴포넌트</p>
+            <ul class="card__features">
+              <li>🎨 Material Design</li>
+              <li>🎯 테마 커스터마이징</li>
+              <li>♿ 접근성 내장</li>
+              <li>📱 반응형 디자인</li>
+            </ul>
+            <div class="card__status card__status--coming">준비 중</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <h2 class="features__title">✨ 주요 특징</h2>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature__icon">🎨</div>
+            <h3 class="feature__title">일관된 디자인 토큰</h3>
+            <p class="feature__description">
+              색상, 타이포그래피, 간격까지 CSS Variables로 중앙 관리됩니다.
+              하나만 바꾸면 모든 프레임워크에 일관되게 반영됩니다.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature__icon">🔄</div>
+            <h3 class="feature__title">동일한 디자인</h3>
+            <p class="feature__description">
+              Vanilla, React, MUI 모두 동일한 디자인을 제공합니다. 프레임워크가
+              바뀌어도 사용자 경험은 일관되게 유지됩니다.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature__icon">📋</div>
+            <h3 class="feature__title">복사 & 붙여넣기</h3>
+            <p class="feature__description">
+              코드를 보고 바로 복사해서 사용할 수 있습니다. npm 설치 없이
+              프로젝트에 즉시 적용 가능합니다.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature__icon">✨</div>
+            <h3 class="feature__title">자유로운 커스터마이징</h3>
+            <p class="feature__description">
+              CSS Variables만 수정하면 브랜드 컬러와 스타일을 원하는 대로 조정할
+              수 있습니다. 디자인 토큰 구조로 일관성을 유지합니다.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature__icon">🧩</div>
+            <h3 class="feature__title">풍부한 컴포넌트</h3>
+            <p class="feature__description">
+              Button, Input부터 Modal, Tab까지 다양한 컴포넌트를 제공합니다.
+              체계적으로 분류되어 필요한 UI를 쉽게 찾을 수 있습니다.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature__icon">⚡</div>
+            <h3 class="feature__title">빠른 프로토타이핑</h3>
+            <p class="feature__description">
+              화면 뼈대를 빠르게 만들 수 있습니다. 디자인 시스템이 준비되어 있어
+              초기 개발 속도가 빨라집니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer__content">
+          <p class="footer__text">Made with ❤️ by Doakumize Kit</p>
+          <p class="footer__links">
+            <a href="https://github.com/your-repo" class="footer__link"
+              >GitHub</a
+            >
+            ·
+            <a href="vanillia/docs/INDEX.md" class="footer__link">문서</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

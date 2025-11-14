@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Generator - Doakumize Kit</title>
+
+    <!-- Doakumize Kit Styles -->
+    <link rel="stylesheet" href="../shared/styles/common.css" />
+    <link rel="stylesheet" href="../shared/styles/studio.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <!-- 헤더는 layouts.js로 렌더링됨 -->
+      </header>
+
+      <main id="content">
+        <!-- Generator -->
+        <div class="generator">
+          <!-- 왼쪽: 컴포넌트 선택 -->
+          <aside class="generator-selector">
+            <div class="generator-header">
+              <h1>Component Generator</h1>
+              <p>프로젝트에서 사용할 컴포넌트를 선택해!</p>
+            </div>
+
+            <div class="generator-actions">
+              <button id="selectAllBtn">All</button>
+              <button id="clearAllBtn">Clear</button>
+            </div>
+
+            <div class="generator-list" id="componentList">
+              <!-- 동적으로 생성됨 -->
+            </div>
+          </aside>
+
+          <!-- 오른쪽: 미리보기 & 다운로드 -->
+          <main class="generator-preview">
+            <div class="generator-preview-header">
+              <h2>Preview & Download</h2>
+              <div class="generator-preview-stats">
+                <div class="generator-preview-stat">
+                  <strong id="selectedCount">0</strong> components selected
+                </div>
+                <div class="generator-preview-stat">
+                  Size: <strong id="estimatedSize">0 KB</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="generator-preview-content" id="previewArea">
+              <!-- 빈 상태 또는 미리보기 (generator.js에서 동적 렌더링) -->
+            </div>
+
+            <div class="generator-download-section">
+              <button class="generator-download-btn" id="downloadBtn" disabled>
+                📦 Download Package (ZIP)
+              </button>
+            </div>
+          </main>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <!-- 푸터는 layouts.js로 렌더링됨 -->
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <!-- JSZip for packaging files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="components/scripts/theme-manager.js"></script>
+    <script src="resources/js/layouts.js"></script>
+    <script src="resources/js/components.js"></script>
+    <script src="resources/js/components-config.js"></script>
+    <script src="generator.js"></script>
+    <script>
+      // 레이아웃 렌더링 (Generator 전용 커스텀 데이터)
+      Layouts.renderLayouts({
+        header: {
+          title: "Component Studio",
+          link: "./index.html",
+        },
+        footer: {
+          logo: "Component Generator",
+          description: "프로젝트에 필요한 컴포넌트만 선택하세요",
+          sections: [
+            {
+              title: "Links",
+              links: [
+                { text: "Components", href: "components.html" },
+                { text: "Documentation", href: "core/README.md" },
+                {
+                  text: "Viewer Demo",
+                  href: "core/viewer/index.html",
+                  external: true,
+                },
+              ],
+            },
+            {
+              title: "Community",
+              links: [
+                {
+                  text: "GitHub",
+                  href: "https://github.com/doakuma/doakumize-kit",
+                  external: true,
+                },
+                {
+                  text: "Discussions",
+                  href: "https://github.com/doakuma/doakumize-kit/discussions",
+                  external: true,
+                },
+                {
+                  text: "Issues",
+                  href: "https://github.com/doakuma/doakumize-kit/issues",
+                  external: true,
+                },
+              ],
+            },
+          ],
+          copyright: "© 2025 Doakumize Kit. MIT License.",
+          credit: "Built with ❤️ by Doakuma",
+        },
+      });
+    </script>
+  </body>
+</html>

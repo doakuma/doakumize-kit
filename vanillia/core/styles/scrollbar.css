@@ -1,0 +1,95 @@
+/* ========================================
+ * Scrollbar Styles
+ * 스크롤바 스타일 정의
+ * ======================================== */
+
+/* 기본 스크롤바 (Default) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b7c4cc transparent;
+}
+
+/* Webkit 기본 스크롤바 */
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 3px 0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b7c4cc;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #b7c4cc;
+}
+
+/* Vertical 스크롤바 */
+*::-webkit-scrollbar:vertical {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track:vertical {
+  margin-left: 3px;
+  margin-right: 4px;
+}
+
+/* Horizontal 스크롤바 */
+*::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track:horizontal {
+  margin-top: 3px;
+  margin-bottom: 4px;
+}
+
+/* 드롭다운 메뉴 스크롤바 (Select/Hover) */
+.dropdown__menu {
+  scrollbar-width: thin;
+  scrollbar-color: #96a3ab transparent;
+}
+
+.dropdown__menu::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.dropdown__menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown__menu::-webkit-scrollbar-thumb {
+  background-color: #96a3ab;
+  border-radius: 999px;
+}
+
+.dropdown__menu::-webkit-scrollbar-thumb:hover {
+  background-color: #96a3ab;
+}
+
+/* Vertical 스크롤바 */
+.dropdown__menu::-webkit-scrollbar:vertical {
+  width: 5px;
+}
+
+.dropdown__menu::-webkit-scrollbar-track:vertical {
+  margin-left: 3px;
+  margin-right: 4px;
+}
+
+/* Horizontal 스크롤바 */
+.dropdown__menu::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+.dropdown__menu::-webkit-scrollbar-track:horizontal {
+  margin-top: 3px;
+  margin-bottom: 4px;
+}
+
