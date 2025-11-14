@@ -1,116 +1,188 @@
-# Component Studio 📦
+# 🎨 Component Studio
 
-다양한 프레임워크와 라이브러리를 지원하는 **통합 디자인 시스템 & 컴포넌트 가이드** 프로젝트입니다.
+> 동일한 디자인 시스템을 여러 프레임워크로 제공하는 UI 컴포넌트 라이브러리
 
-## 🎯 프로젝트 개요
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)]()
 
-Component Studio은 하나의 디자인 시스템을 여러 기술 스택에서 일관되게 사용할 수 있도록 지원하는 컴포넌트 라이브러리 모음입니다. 각 기술 스택별로 독립적인 가이드를 제공하며, 동일한 디자인 토큰과 원칙을 공유합니다.
+## 📖 소개
 
-## 📚 지원 프레임워크
+Component Studio는 **화면 뼈대 제작을 위한 UI 컴포넌트 라이브러리**입니다.  
+같은 디자인을 Vanilla JS, React, MUI 등 여러 프레임워크로 제공하여 빠른 프로토타이핑과 일관된 사용자 경험을 지원합니다.
 
-### ✅ 현재 지원
+### ✨ 주요 특징
 
-#### Vanilla (HTML + JavaScript)
+- 🎨 **일관된 디자인 토큰**: CSS Variables 기반 중앙 관리
+- 🔄 **동일한 디자인**: 모든 프레임워크에서 같은 UI
+- 📋 **복사 & 붙여넣기**: npm 설치 없이 즉시 사용
+- ⚡ **빠른 프로토타이핑**: 화면 뼈대를 빠르게 구축
+- 🧩 **풍부한 컴포넌트**: 22개 이상의 다양한 UI 컴포넌트
 
-- **경로**: `vanillia/`
-- **상태**: ✅ 사용 가능
-- **설명**: 순수 HTML, CSS, JavaScript 기반의 컴포넌트 시스템
-- **특징**:
-  - Component Engine 패턴 사용
-  - JSON 기반 컴포넌트 렌더링
-  - 프레임워크 의존성 없음
-- **문서**: [vanillia/README.md](./vanillia/README.md)
+## 🚀 빠른 시작
 
-### 🚧 예정
+### 1. 프레임워크 선택
 
-#### React
+프로젝트 루트의 `index.html`을 열어 사용할 프레임워크를 선택하세요:
 
-- **경로**: `react/` (예정)
-- **상태**: 🚧 개발 예정
-- **설명**: React 기반 컴포넌트 라이브러리
+- **Vanilla JavaScript** ✅ 사용 가능
+- **React** 🚧 준비 중
+- **MUI** 📅 계획 중
 
-#### Material-UI (MUI)
+### 2. Vanilla JS 사용 예시
 
-- **경로**: `mui/` (예정)
-- **상태**: 🚧 개발 예정
-- **설명**: MUI 기반 컴포넌트 커스터마이징 가이드
+```html
+<!-- 1. CSS Variables 로드 -->
+<link rel="stylesheet" href="shared/styles/variables.css">
+<link rel="stylesheet" href="vanillia/components/styles/components.css">
 
-## 🎨 디자인 시스템 원칙
+<!-- 2. HTML 컴포넌트 사용 -->
+<button class="btn btn--primary btn--medium">
+  Primary Button
+</button>
 
-모든 프레임워크 구현체는 다음 원칙을 공유합니다:
+<!-- 3. 인터랙티브 컴포넌트 스크립트 -->
+<script src="vanillia/components/scripts/modal.js"></script>
+```
 
-### 1. 디자인 토큰 (Design Tokens)
+### 3. 커스터마이징
 
-- **Color**: Primary, Secondary, Gray Scale, Semantic Colors
-- **Typography**: Heading, Body, Sub 등 일관된 폰트 시스템
-- **Spacing**: 8px 기반 간격 시스템
-- **Border Radius**: 4px, 8px, 12px 등 일관된 라운드 처리
+CSS Variables만 수정하면 전체 디자인을 쉽게 변경할 수 있습니다:
 
-### 2. 컴포넌트 카테고리
+```css
+/* shared/styles/variables.css */
+:root {
+  --primary-h: 190;      /* Cyan → Orange로 변경 */
+  --primary-s: 70%;
+  /* 전체 primary 스케일이 자동으로 업데이트됩니다 */
+}
+```
 
-- **기본 요소**: Button, Input, Checkbox, Radio 등
-- **레이아웃**: Modal, Tab, Accordion 등
-- **데이터 표시**: Table, Card, Typography 등
-- **네비게이션**: Dropdown, Chip 등
-- **피드백**: Popover, Toast 등
+## 📚 문서
 
-### 3. 접근성 (Accessibility)
+### 아키텍처
 
-- WCAG 2.1 AA 수준 준수
-- 키보드 네비게이션 지원
-- 스크린 리더 호환성
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - 프로젝트 전체 구조 및 설계 철학
+- **[vanillia/docs/INDEX.md](vanillia/docs/INDEX.md)** - Vanilla 버전 가이드
+- **[vanillia/docs/COMPONENT_SCRIPT_GUIDE.md](vanillia/docs/COMPONENT_SCRIPT_GUIDE.md)** - 컴포넌트 스크립트 작성법
 
-## 🚀 시작하기
+### 디자인 시스템
 
-각 프레임워크별 디렉토리의 README를 참고하세요:
+- **[shared/styles/variables.css](shared/styles/variables.css)** - 디자인 토큰 정의
+  - 140개 이상의 Semantic Token
+  - HSL 기반 동적 컬러 시스템
+  - 다크모드 지원
+
+### 작업 현황
+
+- **[.work-session.md](.work-session.md)** - 현재 작업 세션 (단기)
+- **[vanillia/TODO.md](vanillia/TODO.md)** - 프로젝트 전체 계획 (장기)
+
+## 🗂️ 프로젝트 구조
+
+```
+component-studio/
+├── index.html                   # 메인 랜딩 페이지
+├── ARCHITECTURE.md              # 아키텍처 문서
+│
+├── shared/                      # 🌟 공통 리소스
+│   ├── styles/
+│   │   ├── variables.css        # 디자인 토큰
+│   │   ├── normalize.css        # CSS Reset
+│   │   └── animations.css       # 공통 애니메이션
+│   └── images/                  # 공통 이미지
+│
+├── vanillia/                    # Vanilla JS 구현
+│   ├── components.html          # 컴포넌트 카탈로그
+│   ├── generator.html           # 컴포넌트 생성기
+│   └── ...
+│
+├── react/                       # React 구현 (예정)
+└── mui/                         # MUI 구현 (예정)
+```
+
+자세한 구조는 [ARCHITECTURE.md](ARCHITECTURE.md)를 참고하세요.
+
+## 🧩 컴포넌트 목록
+
+### Foundation (기초)
+- Color, Spacing, Icon, Typography
+
+### Form Controls (폼 컨트롤)
+- Button, Input, Checkbox, Radio, Dropdown
+- Slider, Switch, Textarea, File Upload, Date Picker
+
+### Data Display (데이터 표시)
+- Chip, Table, File Card, Badge, Tooltip
+
+### Feedback (피드백)
+- Modal, Popover
+
+### Navigation (네비게이션)
+- Tab, Accordion
+
+> 📌 **소스 오브 트루스**: `vanillia/resources/js/components-config.js`
+
+## 🛠️ 개발 환경
+
+### Vanilla JS
 
 ```bash
-# Vanilla 버전 사용
-cd vanillia/
-# vanillia/README.md 참고
+# 의존성 설치 (빌드 스크립트용)
+cd vanillia
+npm install
 
-# React 버전 사용 (예정)
-cd react/
-# react/README.md 참고
+# 컴포넌트 빌드
+npm run build
 
-# MUI 버전 사용 (예정)
-cd mui/
-# mui/README.md 참고
+# 로컬 서버 실행 (선택)
+npx http-server . -p 8080
 ```
 
-## 📂 프로젝트 구조
+### React (예정)
 
+```bash
+cd react
+npm install
+npm run dev
 ```
-doakumize-kit/
-├── README.md                 # 이 파일
-├── vanillia/                 # Vanilla JS 구현체
-│   ├── components/
-│   ├── resources/
-│   └── README.md
-├── react/                    # React 구현체 (예정)
-│   ├── src/
-│   └── README.md
-└── mui/                      # MUI 구현체 (예정)
-    ├── src/
-    └── README.md
-```
+
+## 🎯 로드맵
+
+### Phase 1: Vanilla 완성 (현재)
+- ✅ 22개 컴포넌트 구현 완료
+- 🚧 shared 폴더 구조 변경
+- 🚧 경로 수정 및 테스트
+
+### Phase 2: React 버전 (12월)
+- React 컴포넌트 작성
+- CSS Variables 활용
+- Storybook 또는 독립 페이지
+
+### Phase 3: 공통 구조 추출 (1월)
+- Vanilla + React 비교 후 공통점 파악
+- 메타데이터 추출 고려
+- 자동화 도구 검토
+
+### Phase 4: MUI 버전 (2월)
+- MUI Theme을 variables.css 기반 생성
+- 빠른 구현 (패턴 확립됨)
 
 ## 🤝 기여하기
 
-새로운 프레임워크 지원이나 컴포넌트 추가를 원하시면 이슈를 등록해주세요.
-
-### 개발 원칙
-
-- **일관성**: 모든 구현체는 동일한 디자인 토큰 사용
-- **독립성**: 각 프레임워크는 독립적으로 동작
-- **확장성**: 새로운 프레임워크 추가가 용이한 구조
-- **접근성**: 모든 컴포넌트는 접근성 가이드라인 준수
+현재 개발 중인 프로젝트입니다. 기여 가이드라인은 추후 추가될 예정입니다.
 
 ## 📄 라이선스
 
-이 프로젝트는 [LICENSE](./LICENSE) 파일을 참고하세요.
+MIT License - 자유롭게 사용하세요!
+
+## 👤 만든이
+
+**Doakumize Kit Team**
+
+- GitHub: [your-repo-link]
+- Email: your-email@example.com
 
 ---
 
-**현재 버전**: 1.0.0 (Vanilla만 지원)
-**마지막 업데이트**: 2025-10-21
+**Last Updated:** 2025-11-14  
+**Version:** 1.0.0

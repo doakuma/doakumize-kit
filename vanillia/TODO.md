@@ -6,13 +6,23 @@
 
 - [x] Color/Typography 컴포넌트 데이터 정리 ✅
 - [x] 다크모드 구현 완료 ✅
-- [ ] 디자인 시스템 문서화
+- [x] 멀티 프레임워크 구조 설계 ✅
+  - 메인 index.html 랜딩 페이지 생성 (Vanilla/React/MUI 선택)
+  - ARCHITECTURE.md 문서 작성
+  - shared 폴더 구조 정의
+- [ ] 공통 리소스 분리 작업
+  - shared/ 폴더 생성 ✅
+  - 파일 이동 (CSS Variables, images) - 다음 작업
+  - 경로 수정 및 테스트
+  - 자세한 계획: `/todo/PHASE1-TASKS.md` 참고
 
 ## 💭 최근 메모
 
 - Semantic Token 시스템 완성 (140개 토큰)
 - Component Engine 패턴 안정화
 - "안녕" 워크플로우 룰 설정 완료
+- **멀티 프레임워크 전략**: Vanilla → React → MUI 순차 개발
+- **공통화 원칙**: 진짜 공통인 것만 shared로, 데이터는 나중에
 
 ---
 
@@ -59,6 +69,16 @@
 
 ### 🚧 진행 중 / 계획 중
 
+- **멀티 프레임워크 확장**: 
+  - Phase 1: Vanilla 완성 (현재)
+  - Phase 2: React 개발 & 웹 생성기 (12월 예정)
+  - Phase 3: npm 패키지 배포 (1월 예정)
+  - Phase 4: MUI 버전 & 고도화 (2월 예정)
+  - 자세한 로드맵: `/todo/ROADMAP.md` 참고
+  - 아키텍처 가이드: `/ARCHITECTURE.md` 참고
+- **공통 리소스 분리**: 
+  - shared/ 폴더에 CSS Variables, images 이동
+  - 모든 프레임워크가 동일한 디자인 토큰 사용
 - **Semantic 변수 마이그레이션**: 일부 컴포넌트에서 하드코딩된 색상을 Semantic 변수로 교체 필요
 - **접근성 검증**: WCAG 명도 대비 자동 검사 도구 추가 (선택적)
 - **SCSS 마이그레이션**: Low Priority (현재 시스템 안정적)
