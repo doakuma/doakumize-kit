@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 # GitHub Pages 배포 권한 설정
@@ -19,31 +19,31 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 10
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: 'pnpm'
-          cache-dependency-path: 'react/pnpm-lock.yaml'
-      
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: "react/pnpm-lock.yaml"
+
       - name: Install React dependencies
         working-directory: ./react
         run: pnpm install
-      
+
       - name: Build React
         working-directory: ./react
         run: pnpm build
-      
+
       - name: Prepare deployment directory
         run: |
           mkdir -p deploy
@@ -57,7 +57,7 @@ jobs:
           cp -r vanillia deploy/
           # React 빌드 결과물 복사
           cp -r react/dist deploy/react
-      
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -67,4 +67,3 @@ jobs:
           publish_branch: gh-pages
           # .nojekyll 파일 추가 (GitHub Pages Jekyll 비활성화)
           enable_jekyll: false
-
