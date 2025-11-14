@@ -57,7 +57,7 @@ body.modal--open {
   width: 28px;
   height: 28px;
   border: none;
-  background: transparent url(../../resources/images/icon_close.png) no-repeat
+  background: transparent url(../../../../shared/images/icons/icon_close.png) no-repeat
     center / 18px 18px;
   cursor: pointer;
   border-radius: 6px;
