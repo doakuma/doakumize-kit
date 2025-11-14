@@ -55,8 +55,9 @@ jobs:
           cp -r shared deploy/
           # Vanilla 복사 (빌드 필요 없음)
           cp -r vanillia deploy/
-          # React 빌드 결과물 복사
-          cp -r react/dist deploy/react
+          # React 빌드 결과물 복사 (dist 내부 파일들을 react/ 폴더로)
+          mkdir -p deploy/react
+          cp -r react/dist/* deploy/react/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
