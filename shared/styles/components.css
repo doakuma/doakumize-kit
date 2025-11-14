@@ -4,14 +4,14 @@
  * ======================================== */
 
 /* 핵심 컴포넌트 (모듈화 완료) */
-@import url(../../components/styles/items/icons.css);
-@import url(../../components/styles/items/button.css);
-@import url(../../components/styles/items/input.css);
-@import url(../../components/styles/items/dropdown.css);
-@import url(../../components/styles/items/modal.css);
+@import url(./components/icons.css);
+@import url(./components/button.css);
+@import url(./components/input.css);
+@import url(./components/dropdown.css);
+@import url(./components/modal.css);
 
 /* 나머지 컴포넌트 (임시 통합) */
-@import url(../../components/styles/items/all-other-components.css);
+@import url(./components/all-other-components.css);
 
 /* 
  * TODO: 나머지 컴포넌트들 순차적으로 분리 예정
