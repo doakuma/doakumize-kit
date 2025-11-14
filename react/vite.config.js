@@ -8,15 +8,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // https://vite.dev/config/
-export default defineConfig(({ command, mode }) => {
-  // build 명령어면 GitHub Pages 경로, dev면 루트 경로
-  const base = command === "build" ? "/doakumize-kit/react/" : "/";
-
+export default defineConfig(() => {
   return {
     plugins: [react()],
 
-    // GitHub Pages 배포 경로
-    base: base,
+    // GitHub Pages 배포 경로 (항상 설정)
+    base: "/doakumize-kit/react/",
 
     // Shared 리소스 접근을 위한 alias
     resolve: {
