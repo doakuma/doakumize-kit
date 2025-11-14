@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
@@ -9,14 +9,15 @@ const __dirname = dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
-  // 프로덕션 빌드 시 GitHub Pages 경로 사용
-  const isProduction = mode === "production";
+  // 환경 변수 로드 (__dirname 사용)
+  const env = loadEnv(mode, __dirname, "");
+  const isGitHubPages = env.VITE_GITHUB_PAGES === "true";
 
   return {
     plugins: [react()],
 
     // GitHub Pages 배포 경로
-    base: isProduction ? "/doakumize-kit/react/" : "/",
+    base: isGitHubPages ? "/doakumize-kit/react/" : "/",
 
     // Shared 리소스 접근을 위한 alias
     resolve: {
