@@ -43,9 +43,6 @@ jobs:
       - name: Build React
         working-directory: ./react
         run: pnpm build
-        env:
-          NODE_ENV: production
-          VITE_GITHUB_PAGES: "true"
 
       - name: Prepare deployment directory
         run: |
