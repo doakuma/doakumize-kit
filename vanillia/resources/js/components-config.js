@@ -155,6 +155,13 @@ const COMPONENT_LIST = [
     enabled: false,
     order: 16,
   },
+  {
+    id: "rating",
+    name: "Rating",
+    category: COMPONENT_CATEGORIES.FORM_CONTROLS,
+    enabled: false,
+    order: 17,
+  },
 
   // ========================================
   // 3️⃣ Data Display (데이터 표시)
@@ -164,21 +171,21 @@ const COMPONENT_LIST = [
     name: "Chip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 17,
+    order: 18,
   },
   {
     id: "table",
     name: "Table",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 18,
+    order: 19,
   },
   {
     id: "file-card",
     name: "File Card",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 19,
+    order: 20,
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
@@ -186,56 +193,77 @@ const COMPONENT_LIST = [
     name: "Badge",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 20,
+    order: 21,
   },
   {
     id: "tooltip",
     name: "Tooltip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: true,
-    order: 21,
+    order: 22,
+  },
+  {
+    id: "divider",
+    name: "Divider",
+    category: COMPONENT_CATEGORIES.DATA_DISPLAY,
+    enabled: false,
+    order: 23,
   },
   {
     id: "card",
     name: "Card",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 22,
+    order: 24,
   },
   {
     id: "avatar",
     name: "Avatar",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 23,
+    order: 25,
   },
   {
     id: "progress-bar",
     name: "Progress Bar",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 24,
+    order: 26,
   },
   {
     id: "list",
     name: "List",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 25,
+    order: 27,
   },
   {
     id: "skeleton",
     name: "Skeleton",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 26,
+    order: 28,
   },
   {
     id: "empty-state",
     name: "Empty State",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     enabled: false,
-    order: 27,
+    order: 29,
+  },
+  {
+    id: "timeline",
+    name: "Timeline",
+    category: COMPONENT_CATEGORIES.DATA_DISPLAY,
+    enabled: false,
+    order: 30,
+  },
+  {
+    id: "carousel",
+    name: "Carousel (외부 라이브러리 사용)",
+    category: COMPONENT_CATEGORIES.DATA_DISPLAY,
+    enabled: false,
+    order: 31,
   },
 
   // ========================================
@@ -257,22 +285,22 @@ const COMPONENT_LIST = [
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
-    id: "toast",
-    name: "Toast",
+    id: "drawer",
+    name: "Drawer",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
     order: 30,
   },
   {
-    id: "alert",
-    name: "Alert",
+    id: "toast",
+    name: "Toast",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
     order: 31,
   },
   {
-    id: "dialog",
-    name: "Dialog",
+    id: "notification",
+    name: "Notification",
     category: COMPONENT_CATEGORIES.FEEDBACK,
     enabled: false,
     order: 32,
@@ -284,6 +312,7 @@ const COMPONENT_LIST = [
     enabled: false,
     order: 33,
   },
+  // Note: Alert와 Dialog는 Modal 옵션으로 구현 (별도 컴포넌트 없음)
 
   // ========================================
   // 5️⃣ Navigation (네비게이션)
@@ -293,14 +322,14 @@ const COMPONENT_LIST = [
     name: "Tab",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: true,
-    order: 34,
+    order: 35,
   },
   {
     id: "accordion",
     name: "Accordion",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: true,
-    order: 35,
+    order: 36,
   },
   // TODO: 추가 예정 컴포넌트 (우선순위 순)
   {
@@ -308,28 +337,28 @@ const COMPONENT_LIST = [
     name: "Breadcrumb",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 36,
+    order: 37,
   },
   {
     id: "pagination",
     name: "Pagination",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 37,
+    order: 38,
   },
   {
     id: "menu",
     name: "Menu",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 38,
+    order: 39,
   },
   {
     id: "stepper",
     name: "Stepper",
     category: COMPONENT_CATEGORIES.NAVIGATION,
     enabled: false,
-    order: 39,
+    order: 40,
   },
 ];
 
