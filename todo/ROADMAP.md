@@ -1,15 +1,15 @@
 # Component Studio - 배포 전략 로드맵
 
-> 📅 작성일: 2025-11-14  
+> 📅 작성일: 2025-11-14
 > 🎯 전략: 하이브리드 접근 (웹 생성기 + npm 패키지)
 
 ## 📋 목차
 
 1. [전략 개요](#전략-개요)
 2. [Phase 1: Vanilla 완성](#phase-1-vanilla-완성)
-3. [Phase 2: React 개발 & 웹 생성기](#phase-2-react-개발--웹-생성기)
+3. [Phase 2: React 개발 &amp; 웹 생성기](#phase-2-react-개발--웹-생성기)
 4. [Phase 3: npm 패키지 배포](#phase-3-npm-패키지-배포)
-5. [Phase 4: MUI & 고도화](#phase-4-mui--고도화)
+5. [Phase 4: MUI &amp; 고도화](#phase-4-mui--고도화)
 6. [상세 작업 계획](#상세-작업-계획)
 
 ---
@@ -21,11 +21,13 @@
 **두 가지 사용 방식 병행 제공:**
 
 1. **웹 생성기** (빠른 시작)
+
    - 초보자, 프로토타이핑 대상
    - 브라우저에서 선택 → 코드 생성 → 복사
    - 설치 없이 즉시 사용
 
 2. **npm 패키지** (프로덕션)
+
    - 전문가, 실제 프로젝트 대상
    - `npm install` → import → 사용
    - 버전 관리, 자동 업데이트
@@ -41,12 +43,13 @@
 
 ## Phase 1: Vanilla 완성
 
-> 📅 기간: 2025-11 (현재)  
+> 📅 기간: 2025-11 (현재)
 > 🎯 목표: Vanilla 버전 안정화 & 공통 리소스 분리
 
 ### 1.1 공통 리소스 분리
 
 **작업 항목:**
+
 - [ ] `shared/` 폴더 생성
 - [ ] CSS Variables, normalize.css, animations.css 이동
 - [ ] 이미지/아이콘 파일 이동
@@ -54,23 +57,27 @@
 - [ ] 테스트 (모든 페이지 정상 작동 확인)
 
 **완료 기준:**
+
 - Vanilla 페이지가 shared 리소스로 정상 작동
 - 경로 에러 없음
 
 ### 1.2 Vanilla 웹 생성기 개선
 
 **현재 상태:**
+
 - ✅ `generator.html` 존재 (Vanilla 전용)
 - ✅ 컴포넌트 선택 기능
 - ✅ ZIP 다운로드 기능
 
 **개선 항목:**
+
 - [ ] UI/UX 개선 (카드 방식으로 선택)
 - [ ] 미리보기 기능 추가
 - [ ] 코드 복사 버튼 추가
 - [ ] 다크모드 지원
 
 **완료 기준:**
+
 - 사용자가 직관적으로 컴포넌트 선택 가능
 - 생성된 코드를 바로 복사 가능
 
@@ -78,18 +85,20 @@
 
 ## Phase 2: React 개발 & 웹 생성기
 
-> 📅 기간: 2025-12  
+> 📅 기간: 2025-12
 > 🎯 목표: React 컴포넌트 구현 & 웹 생성기 확장
 
 ### 2.1 React 개발 환경 구축
 
 **작업 항목:**
+
 - [ ] `react/` 폴더 구조 생성
 - [ ] Vite 환경 설정
 - [ ] shared 리소스 연동 확인
 - [ ] 테스트 환경 구축 (Vitest)
 
 **폴더 구조:**
+
 ```
 react/
 ├── package.json
@@ -118,11 +127,13 @@ react/
 **우선순위 컴포넌트:**
 
 #### 단계 1: 기초 (1주)
+
 - [ ] Button (primary, secondary, disabled 등)
 - [ ] Input (text, password, error state)
 - [ ] Typography (heading, body, label)
 
 #### 단계 2: 폼 컨트롤 (2주)
+
 - [ ] Checkbox
 - [ ] Radio
 - [ ] Select/Dropdown
@@ -131,6 +142,7 @@ react/
 - [ ] Slider
 
 #### 단계 3: 데이터 표시 (1주)
+
 - [ ] Table
 - [ ] Badge
 - [ ] Chip
@@ -138,12 +150,14 @@ react/
 - [ ] File Card
 
 #### 단계 4: 피드백 & 네비게이션 (1주)
+
 - [ ] Modal
 - [ ] Popover
 - [ ] Tab
 - [ ] Accordion
 
 **컴포넌트 구현 원칙:**
+
 - CSS Variables 100% 활용
 - TypeScript 타입 정의 (선택)
 - Props validation (PropTypes 또는 TypeScript)
@@ -152,6 +166,7 @@ react/
 ### 2.3 웹 생성기 확장 (React 지원)
 
 **작업 항목:**
+
 - [ ] generator.html에 프레임워크 선택 추가
 - [ ] React 코드 생성 로직 구현
 - [ ] JSX 문법으로 출력
@@ -159,6 +174,7 @@ react/
 - [ ] 설치 가이드 포함
 
 **생성기 UI:**
+
 ```
 ┌────────────────────────────────────┐
 │  🎨 Component Studio Generator     │
@@ -183,10 +199,11 @@ react/
 ```
 
 **출력 예시 (React):**
+
 ```jsx
 // Button.jsx
-import React from 'react';
-import './Button.css';
+import React from "react";
+import "./Button.css";
 
 /**
  * Button Component
@@ -194,21 +211,17 @@ import './Button.css';
  * @param {string} size - small | medium | large
  * @param {boolean} disabled - 비활성화 여부
  */
-export const Button = ({ 
-  variant = 'primary', 
-  size = 'medium',
+export const Button = ({
+  variant = "primary",
+  size = "medium",
   disabled = false,
   children,
-  ...props 
+  ...props
 }) => {
   const className = `btn btn--${variant} btn--${size}`;
-  
+
   return (
-    <button 
-      className={className} 
-      disabled={disabled}
-      {...props}
-    >
+    <button className={className} disabled={disabled} {...props}>
       {children}
     </button>
   );
@@ -216,6 +229,7 @@ export const Button = ({
 ```
 
 **완료 기준:**
+
 - React 선택 시 JSX 코드 생성
 - 생성된 코드가 바로 사용 가능
 - 설치 가이드 자동 포함
@@ -224,12 +238,13 @@ export const Button = ({
 
 ## Phase 3: npm 패키지 배포
 
-> 📅 기간: 2026-01  
+> 📅 기간: 2026-01
 > 🎯 목표: React 컴포넌트를 npm 패키지로 배포
 
 ### 3.1 npm 패키지 준비
 
 **작업 항목:**
+
 - [ ] Monorepo 구조로 전환 (선택)
 - [ ] 빌드 설정 (Rollup 또는 Vite)
 - [ ] package.json 최적화
@@ -237,6 +252,7 @@ export const Button = ({
 - [ ] 라이선스 설정
 
 **패키지 구조:**
+
 ```
 packages/
 ├── react/                        # @doakumize-kit/react
@@ -261,6 +277,7 @@ packages/
 ```
 
 **package.json 예시:**
+
 ```json
 {
   "name": "@doakumize-kit/react",
@@ -270,18 +287,8 @@ packages/
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "keywords": [
-    "react",
-    "components",
-    "ui",
-    "design-system",
-    "css-variables"
-  ],
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": ["react", "components", "ui", "design-system", "css-variables"],
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -297,62 +304,65 @@ packages/
 ### 3.2 빌드 설정
 
 **Rollup 설정:**
+
 ```javascript
 // rollup.config.js
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
-import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import babel from "@rollup/plugin-babel";
+import postcss from "rollup-plugin-postcss";
+import { terser } from "rollup-plugin-terser";
 
 export default {
-  input: 'src/index.js',
+  input: "src/index.js",
   output: [
     {
-      file: 'dist/index.js',
-      format: 'cjs',
-      exports: 'named'
+      file: "dist/index.js",
+      format: "cjs",
+      exports: "named",
     },
     {
-      file: 'dist/index.esm.js',
-      format: 'esm'
+      file: "dist/index.esm.js",
+      format: "esm",
     },
     {
-      file: 'dist/index.umd.js',
-      format: 'umd',
-      name: 'DoakumizeKit',
+      file: "dist/index.umd.js",
+      format: "umd",
+      name: "DoakumizeKit",
       globals: {
-        react: 'React',
-        'react-dom': 'ReactDOM'
-      }
-    }
+        react: "React",
+        "react-dom": "ReactDOM",
+      },
+    },
   ],
   plugins: [
     resolve(),
     commonjs(),
     babel({
-      babelHelpers: 'bundled',
-      exclude: 'node_modules/**'
+      babelHelpers: "bundled",
+      exclude: "node_modules/**",
     }),
     postcss({
       extract: true,
-      minimize: true
+      minimize: true,
     }),
-    terser()
+    terser(),
   ],
-  external: ['react', 'react-dom']
+  external: ["react", "react-dom"],
 };
 ```
 
 ### 3.3 npm 배포
 
 **작업 항목:**
+
 - [ ] npm 계정 생성
 - [ ] 패키지 네임스페이스 확보 (@doakumize-kit)
 - [ ] 버전 1.0.0 배포
 - [ ] CDN 연동 확인 (unpkg.com)
 
 **배포 명령:**
+
 ```bash
 cd packages/react
 
@@ -373,6 +383,7 @@ npm publish
 ### 3.4 문서 작성
 
 **README.md 구성:**
+
 ```markdown
 # @doakumize-kit/react
 
@@ -401,6 +412,7 @@ CSS Variables 수정...
 ```
 
 **완료 기준:**
+
 - `npm install @doakumize-kit/react` 작동
 - 설치 후 바로 사용 가능
 - 문서 완비
@@ -409,21 +421,23 @@ CSS Variables 수정...
 
 ## Phase 4: MUI & 고도화
 
-> 📅 기간: 2026-02~  
+> 📅 기간: 2026-02~
 > 🎯 목표: MUI 버전 추가 & 생태계 확장
 
 ### 4.1 MUI 버전 개발
 
 **작업 항목:**
+
 - [ ] MUI 컴포넌트 구현 (React 패턴 재사용)
 - [ ] Theme을 variables.css 기반으로 생성
 - [ ] 웹 생성기에 MUI 추가
 - [ ] npm 패키지 배포 (@doakumize-kit/mui)
 
 **MUI Theme 생성:**
+
 ```javascript
 // mui/src/theme.js
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 // CSS Variables 읽기
 const getCSSVariable = (name) => {
@@ -435,22 +449,22 @@ const getCSSVariable = (name) => {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: getCSSVariable('--primary-500'),
-      light: getCSSVariable('--primary-300'),
-      dark: getCSSVariable('--primary-700'),
+      main: getCSSVariable("--primary-500"),
+      light: getCSSVariable("--primary-300"),
+      dark: getCSSVariable("--primary-700"),
     },
     secondary: {
-      main: getCSSVariable('--secondary-500'),
+      main: getCSSVariable("--secondary-500"),
     },
     error: {
-      main: getCSSVariable('--error-500'),
+      main: getCSSVariable("--error-500"),
     },
     // ...
   },
   typography: {
-    fontFamily: getCSSVariable('--font'),
+    fontFamily: getCSSVariable("--font"),
     h1: {
-      fontSize: '24px',
+      fontSize: "24px",
       fontWeight: 700,
       lineHeight: 1.35,
     },
@@ -463,12 +477,14 @@ export const theme = createTheme({
 ### 4.2 CLI 도구 개발 (선택)
 
 **작업 항목:**
+
 - [ ] CLI 프로젝트 생성
 - [ ] 템플릿 시스템 구현
 - [ ] Interactive 선택 UI
 - [ ] npm 배포
 
 **CLI 사용 예시:**
+
 ```bash
 # npx로 실행
 npx @doakumize-kit/cli create
@@ -484,7 +500,7 @@ npx @doakumize-kit/cli create
   ◯ Modal
   ◉ Table
 
-? Where to create? 
+? Where to create?
   src/components/
 
 ✓ Created src/components/Button.jsx
@@ -498,17 +514,20 @@ Done! 🎉
 ### 4.3 Storybook 추가
 
 **작업 항목:**
+
 - [ ] Storybook 설정
 - [ ] 모든 컴포넌트 Story 작성
 - [ ] Storybook 배포 (GitHub Pages)
 
 **완료 기준:**
+
 - 온라인에서 컴포넌트 미리보기 가능
 - 인터랙티브 테스트 가능
 
 ### 4.4 생태계 확장
 
 **추가 패키지 (선택):**
+
 - [ ] `@doakumize-kit/icons` - 아이콘 패키지
 - [ ] `@doakumize-kit/hooks` - React Hooks 모음
 - [ ] `@doakumize-kit/utils` - 유틸리티 함수
@@ -523,6 +542,7 @@ Done! 🎉
 #### 기능 명세
 
 **1. 프레임워크 선택 탭**
+
 ```html
 <div class="framework-tabs">
   <button class="tab active" data-framework="vanilla">Vanilla JS</button>
@@ -532,13 +552,14 @@ Done! 🎉
 ```
 
 **2. 컴포넌트 선택 (카드 방식)**
+
 ```html
 <div class="component-grid">
   <div class="component-card" data-component="button">
     <div class="preview">
       <button class="btn btn--primary">Button</button>
     </div>
-    <input type="checkbox" id="comp-button">
+    <input type="checkbox" id="comp-button" />
     <label for="comp-button">Button</label>
   </div>
   <!-- ... -->
@@ -546,6 +567,7 @@ Done! 🎉
 ```
 
 **3. 코드 생성 로직**
+
 ```javascript
 // generator-v2.js
 class CodeGenerator {
@@ -554,28 +576,28 @@ class CodeGenerator {
     this.templates = {
       vanilla: VanillaTemplates,
       react: ReactTemplates,
-      mui: MuiTemplates
+      mui: MuiTemplates,
     };
   }
-  
+
   generateComponent(componentName) {
     const template = this.templates[this.framework];
     return template[componentName]();
   }
-  
+
   generatePackage(components) {
     const files = {};
-    
-    components.forEach(comp => {
+
+    components.forEach((comp) => {
       files[`${comp}.jsx`] = this.generateComponent(comp);
     });
-    
-    files['package.json'] = this.generatePackageJson();
-    files['README.md'] = this.generateReadme();
-    
+
+    files["package.json"] = this.generatePackageJson();
+    files["README.md"] = this.generateReadme();
+
     return files;
   }
-  
+
   downloadAsZip(files) {
     // JSZip 라이브러리 사용
   }
@@ -585,23 +607,27 @@ class CodeGenerator {
 #### 구현 단계
 
 **Phase 2.3.1: UI 개선**
+
 - [ ] 프레임워크 선택 탭 UI
 - [ ] 컴포넌트 카드 방식 레이아웃
 - [ ] 선택 상태 시각화
 - [ ] 반응형 디자인
 
 **Phase 2.3.2: React 템플릿**
+
 - [ ] React 컴포넌트 템플릿 작성
 - [ ] JSX 문법 출력
 - [ ] Props 타입 정의 포함
 - [ ] 예제 코드 생성
 
 **Phase 2.3.3: 코드 복사 기능**
+
 - [ ] Clipboard API 사용
 - [ ] 복사 완료 토스트 메시지
 - [ ] 파일별 개별 복사 지원
 
 **Phase 2.3.4: ZIP 다운로드**
+
 - [ ] JSZip 라이브러리 통합
 - [ ] 폴더 구조 생성
 - [ ] package.json 자동 생성
@@ -616,6 +642,7 @@ class CodeGenerator {
 **Monorepo vs Multi-repo:**
 
 **Option 1: Monorepo (추천)**
+
 ```
 doakumize-kit/
 ├── packages/
@@ -628,11 +655,13 @@ doakumize-kit/
 ```
 
 **장점:**
+
 - 한 번에 빌드/배포
 - 코드 공유 쉬움
 - 버전 관리 일관성
 
 **Option 2: Multi-repo**
+
 ```
 doakumize-kit-react/       # 별도 저장소
 doakumize-kit-mui/         # 별도 저장소
@@ -640,22 +669,26 @@ doakumize-kit-cli/         # 별도 저장소
 ```
 
 **단점:**
+
 - 관리 복잡
 - 버전 동기화 어려움
 
 #### 빌드 전략
 
 **번들링:**
+
 - ESM (ES Module) - 주력
 - CJS (CommonJS) - Node.js 호환
 - UMD (Universal Module Definition) - CDN용
 
 **최적화:**
+
 - Tree-shaking 지원
 - 사이드 이펙트 최소화
 - 번들 사이즈 최적화
 
 **CSS 처리:**
+
 - PostCSS로 변환
 - CSS Variables 유지
 - 별도 파일로 추출
@@ -663,6 +696,7 @@ doakumize-kit-cli/         # 별도 저장소
 #### CI/CD 파이프라인
 
 **GitHub Actions:**
+
 ```yaml
 # .github/workflows/publish.yml
 name: Publish to npm
@@ -670,7 +704,7 @@ name: Publish to npm
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   publish:
@@ -679,9 +713,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
-      
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
+
       - run: npm ci
       - run: npm test
       - run: npm run build
@@ -693,6 +727,11 @@ jobs:
 ---
 
 ## 우선순위 & 타임라인
+
+| col1 | col2 | col3 |
+| ---- | ---- | ---- |
+|      |      |      |
+|      |      |      |
 
 ### 🔴 High Priority (지금 바로)
 
@@ -720,20 +759,24 @@ jobs:
 ### 성공 기준
 
 **Phase 1:**
+
 - ✅ Vanilla 페이지 정상 작동
 - ✅ shared 리소스 분리 완료
 
 **Phase 2:**
+
 - ✅ React 컴포넌트 22개 구현
 - ✅ 웹 생성기에서 React 코드 생성 가능
 - ✅ 생성된 코드가 즉시 사용 가능
 
 **Phase 3:**
+
 - ✅ npm install 작동
 - ✅ 주간 다운로드 100회 이상
 - ✅ GitHub Star 50개 이상
 
 **Phase 4:**
+
 - ✅ MUI 버전 배포
 - ✅ Storybook 온라인 배포
 - ✅ 사용 사례 3개 이상
@@ -759,6 +802,5 @@ jobs:
 
 ---
 
-**Last Updated:** 2025-11-14  
+**Last Updated:** 2025-11-14
 **Next Review:** Phase 2 시작 시 (2025-12)
-
