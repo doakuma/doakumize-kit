@@ -7,7 +7,7 @@ on:
 
 # GitHub Pages 배포 권한 설정
 permissions:
-  contents: read
+  contents: write # gh-pages에 푸시하려면 write 필요!
   pages: write
   id-token: write
 
@@ -59,7 +59,7 @@ jobs:
           cp -r react/dist deploy/react
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./deploy
@@ -67,3 +67,5 @@ jobs:
           publish_branch: gh-pages
           # .nojekyll 파일 추가 (GitHub Pages Jekyll 비활성화)
           enable_jekyll: false
+          # 강제 푸시 (orphan)
+          force_orphan: true
