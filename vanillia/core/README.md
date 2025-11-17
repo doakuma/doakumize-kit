@@ -1,40 +1,48 @@
 # 🎨 Doakumize Kit - Core Package
 
-실제 프로젝트에서 사용할 수 있는 핵심 파일들만 모아놓은 패키지야!
+**프로젝트 진행 시 사용할 Scaffolder 역할**을 하는 패키지입니다.  
+실제 프로젝트에 복사해서 사용할 수 있는 핵심 파일들만 모아놓았습니다.
 
 ## 📦 포함된 파일
 
 ```
 core/
-  ├── components.js          # 모든 컴포넌트 스크립트 통합 파일 (~90KB)
-  ├── styles/                # 빌드된 스타일 파일
-  │   ├── common.css         # Import 통합 허브 (진입점)
-  │   ├── components.css     # 컴포넌트 Import 허브 (자동 생성)
-  │   ├── items/             # 개별 컴포넌트 CSS 파일
-  │   │   ├── button.css
-  │   │   ├── input.css
-  │   │   ├── modal.css
-  │   │   ├── dropdown.css
-  │   │   ├── icons.css
-  │   │   └── all-other-components.css
-  │   ├── base.css           # 기본 스타일 (*, html, body)
-  │   ├── animations.css     # 애니메이션 (steam, loading)
-  │   ├── scrollbar.css      # 스크롤바 커스터마이징 (선택적)
-  │   ├── normalize.css      # CSS Reset
-  │   └── variables.css      # 디자인 토큰 (색상, 타이포그래피, 간격)
-  ├── images/                # 아이콘 이미지 (101개)
-  │   └── *.png
-  ├── viewer/                # 컴포넌트 가이드 뷰어
-  │   ├── index.html         # 뷰어 페이지
-  │   ├── examples.js        # 컴포넌트 예제 데이터
-  │   ├── viewer.js          # 뷰어 로직
-  │   └── viewer.css         # 뷰어 스타일
-  └── README.md              # 이 파일
+  ├── resources/             # 🎯 프로젝트에 복사할 리소스 통합 폴더
+  │   ├── styles/              # 빌드된 스타일 파일
+  │   │   ├── common.css       # Import 통합 허브 (진입점)
+  │   │   ├── components.css   # 컴포넌트 Import 허브 (자동 생성)
+  │   │   ├── items/           # 개별 컴포넌트 CSS 파일
+  │   │   │   ├── button.css
+  │   │   │   ├── input.css
+  │   │   │   ├── modal.css
+  │   │   │   ├── dropdown.css
+  │   │   │   ├── icons.css
+  │   │   │   └── all-other-components.css
+  │   │   ├── base.css         # 기본 스타일 (*, html, body)
+  │   │   ├── animations.css   # 애니메이션 (steam, loading)
+  │   │   ├── scrollbar.css    # 스크롤바 커스터마이징 (선택적)
+  │   │   ├── normalize.css    # CSS Reset
+  │   │   └── variables.css    # 디자인 토큰 (색상, 타이포그래피, 간격)
+  │   ├── scripts/             # 빌드된 JavaScript 파일
+  │   │   └── components.js    # 모든 컴포넌트 스크립트 통합 파일 (~90KB)
+  │   └── images/              # 아이콘 이미지 (101개)
+  │       └── icons/
+  │           └── *.png
+  │
+  ├── viewer/                 # 📖 컴포넌트 가이드 뷰어 (개발 확인용)
+  │   ├── index.html           # 뷰어 페이지
+  │   ├── examples.js          # 컴포넌트 예제 데이터 (빌드 시 자동 생성)
+  │   ├── viewer.js            # 뷰어 로직
+  │   ├── viewer.css           # 뷰어 스타일
+  │   └── README.md            # 뷰어 사용 가이드
+  │
+  ├── README.md                # 이 파일
+  └── FOLDER_STRUCTURE.md      # 폴더 구조 정책 문서
 ```
 
 ## 🚀 빠른 시작
 
-### 방법 1: Component Generator 사용 (추천) 🆕
+### 방법 1: Component Generator 사용 (선택적) 🆕
 
 필요한 컴포넌트만 선택하여 다운로드:
 
@@ -50,8 +58,8 @@ core/
 4. **압축 해제 후 복사**
    ```
    doakumize-components-[timestamp].zip
-   ├── examples.js              → core/viewer/examples.js
-   └── styles/                  → core/styles/
+   ├── examples.js              → core/viewer/examples.js (선택적)
+   └── styles/                  → core/resources/styles/
        ├── common.css           # 통합 허브
        ├── components.css       # 컴포넌트 허브 (선택한 것만)
        ├── items/               # 개별 컴포넌트 파일
@@ -63,18 +71,22 @@ core/
        └── ...
    ```
 
-### 방법 2: CLI 도구 사용 (전체 복사)
+💡 **참고**: `examples.js`는 빌드 시 자동 생성되므로 Generator 사용은 선택적입니다.
 
-전체 core 폴더를 프로젝트에 복사:
+### 방법 2: CLI 도구 사용 (전체 복사) ⭐ **권장**
+
+**`core/resources/` 폴더를 프로젝트에 복사:**
 
 ```bash
-# CLI 도구 사용
+# CLI 도구 사용 (core/resources/ → 프로젝트/assets/)
 cd vanillia
 npm run copy ../my-project/assets
 
 # 또는 수동 복사
-cp -r vanillia/core/* my-project/assets/
+cp -r vanillia/core/resources/* my-project/assets/
 ```
+
+**💡 참고:** `viewer/` 폴더는 프로젝트에 복사하지 않아도 됩니다. (개발 확인용)
 
 ### 2. HTML에 포함
 
@@ -90,7 +102,7 @@ cp -r vanillia/core/* my-project/assets/
   <button class="btn btn--primary">Primary Button</button>
   
   <!-- 스크립트 -->
-  <script src="assets/components.js"></script>
+  <script src="assets/scripts/components.js"></script>
   <script>
     // 컴포넌트 초기화
     window.VanillaComponents.initAll();
@@ -131,7 +143,7 @@ cp -r vanillia/core/* my-project/assets/
 
 ## 🎨 디자인 토큰 사용
 
-`variables.css`에 정의된 CSS 변수를 사용해서 커스터마이징이 쉬워:
+`variables.css`에 정의된 CSS 변수를 사용하여 커스터마이징이 쉽습니다:
 
 ```css
 /* 색상 */
@@ -228,7 +240,7 @@ cp -r vanillia/core/* my-project/assets/
 
 ### 📖 상세 가이드
 
-각 컴포넌트의 사용법은 [컴포넌트 스튜디오](https://doakuma.github.io/doakumize-kit/vanillia/components.html)에서 확인할 수 있어!
+각 컴포넌트의 사용법은 [컴포넌트 스튜디오](https://doakuma.github.io/doakumize-kit/vanillia/components.html)에서 확인할 수 있습니다.
 
 ## 🛠️ 커스터마이징
 
@@ -261,7 +273,7 @@ cp -r vanillia/core/* my-project/assets/
 @import url(items/icons.css);
 ```
 
-**장점:** 사용하지 않는 CSS가 로드되지 않아 용량 절감!
+**장점:** 사용하지 않는 CSS가 로드되지 않아 용량을 절감할 수 있습니다.
 
 ### 3. 개별 컴포넌트 스타일 수정
 
@@ -284,13 +296,13 @@ cp -r vanillia/core/* my-project/assets/
 
 ## 📁 파일 크기
 
-- `components.js` - ~90KB (압축 전)
-- `styles/items/` - ~120KB (6개 컴포넌트 파일)
-- `styles/components.css` - ~1KB (Import 허브)
-- `styles/variables.css` - ~9KB (디자인 토큰)
-- `styles/common.css` - ~1KB (통합 허브)
-- `styles/` 기타 - ~9KB (base, animations, scrollbar, normalize)
-- `images/` - ~500KB (101개 아이콘)
+- `resources/scripts/components.js` - ~90KB (압축 전)
+- `resources/styles/items/` - ~120KB (6개 컴포넌트 파일)
+- `resources/styles/components.css` - ~1KB (Import 허브)
+- `resources/styles/variables.css` - ~9KB (디자인 토큰)
+- `resources/styles/common.css` - ~1KB (통합 허브)
+- `resources/styles/` 기타 - ~9KB (base, animations, scrollbar, normalize)
+- `resources/images/` - ~500KB (101개 아이콘)
 
 **전체**: ~730KB (압축 전), gzip 후 약 ~180KB
 
@@ -306,7 +318,7 @@ cp -r vanillia/core/* my-project/assets/
 
 ## 💡 핵심 개념: Import 허브 방식
 
-이 패키지는 **Import 허브 방식**을 사용해서 유연함과 성능을 동시에 제공해:
+이 패키지는 **Import 허브 방식**을 사용하여 유연함과 성능을 동시에 제공합니다:
 
 **common.css** (통합 허브)
 ```css
@@ -333,10 +345,20 @@ cp -r vanillia/core/* my-project/assets/
 
 ## ⚠️ 주의사항
 
-- `components.js`는 자동 생성 파일이므로 직접 수정하지 마세요
-- 수정이 필요하면 원본 소스(`components/scripts/`)를 수정하고 다시 빌드하세요
-- 아이콘은 mask-image 방식이라 `background-color`로 색상 변경 가능해요
-- `components.css`는 build-core.js 또는 Generator로 자동 생성됩니다
+- `resources/` 폴더 내 파일들은 자동 생성 파일이므로 직접 수정하지 마세요
+- 수정이 필요하면 원본 소스(`shared/styles/`, `components/scripts/`)를 수정하고 다시 빌드하세요
+- 아이콘은 mask-image 방식이라 `background-color`로 색상 변경이 가능합니다
+- `components.css`는 `build-styles.js` 또는 Generator로 자동 생성됩니다
+- **`viewer/examples.js`는 빌드 시 자동 생성**되므로 직접 수정하지 마세요
+- **`viewer/` 폴더의 나머지 파일들**(`index.html`, `viewer.js`, `viewer.css`)은 수동 관리 파일이므로 빌드 시 보존됩니다
+
+## 📋 폴더 구조 정책
+
+자세한 폴더 구조 정책은 [FOLDER_STRUCTURE.md](FOLDER_STRUCTURE.md)를 참고하세요!
+
+**핵심 원칙:**
+- 🎯 **`resources/` 폴더**: 프로젝트에 복사할 빌드 결과물 통합
+- 📖 **`viewer/` 폴더**: 컴포넌트 가이드 페이지 (개발 확인용, 프로젝트 복사 불필요)
 
 ## 💡 도움말
 

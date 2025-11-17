@@ -1,6 +1,6 @@
 /**
  * Component Viewer
- * 경량 컴포넌트 가이드 뷰어
+ * 경량 컴포넌트 가이드 뷰어 (카테고리별 구성)
  */
 
 (function () {
@@ -12,16 +12,24 @@
   class ComponentViewer {
     constructor() {
       this.examples = window.ComponentExamples || {};
+      this.categories = window.ComponentCategories || {};
       this.currentComponent = null;
       this.searchTerm = "";
+      this.modalsLoaded = false;
     }
 
     /**
      * 초기화
      */
-    init() {
+    async init() {
       this.renderSidebar();
       this.attachEventListeners();
+
+      // 모달 HTML 로드 (모달 컴포넌트가 있는 경우)
+      if (this.examples.modal) {
+        await this.loadModals();
+      }
+
       this.showFirstComponent();
       console.log(
         "[Viewer] Initialized with",
@@ -31,16 +39,113 @@
     }
 
     /**
-     * 사이드바 렌더링
+     * 모달 HTML 로드 및 추가
+     */
+    async loadModals() {
+      if (this.modalsLoaded) {
+        return;
+      }
+
+      // examples.js에 포함된 모달 HTML 사용
+      if (!window.ModalHTMLs || !Array.isArray(window.ModalHTMLs)) {
+        console.warn("[Viewer] No modal HTMLs found");
+        return;
+      }
+
+      try {
+        // 기존 modal-container 확인
+        let modalContainer = document.getElementById("modal-container");
+        if (!modalContainer) {
+          modalContainer = document.createElement("div");
+          modalContainer.id = "modal-container";
+          document.body.appendChild(modalContainer);
+        }
+
+        let modalCount = 0;
+        window.ModalHTMLs.forEach((modal) => {
+          // 이미 존재하는 모달은 건너뛰기
+          if (!document.getElementById(modal.id)) {
+            modalContainer.innerHTML += modal.html;
+            modalCount++;
+          }
+        });
+
+        if (modalCount > 0) {
+          console.log(`[Viewer] Loaded ${modalCount} modal(s)`);
+        }
+
+        this.modalsLoaded = true;
+      } catch (error) {
+        console.warn("[Viewer] Failed to load modals:", error);
+      }
+    }
+
+    /**
+     * 컴포넌트를 카테고리별로 그룹핑
+     */
+    groupByCategory() {
+      const grouped = {};
+      const uncategorized = [];
+
+      // 카테고리 순서 정의
+      const categoryOrder = [
+        "Overview",
+        "Foundation",
+        "Form Controls",
+        "Data Display",
+        "Feedback",
+        "Navigation",
+      ];
+
+      Object.keys(this.examples).forEach((id) => {
+        const component = this.examples[id];
+        const category = component.category || "Uncategorized";
+
+        if (!grouped[category]) {
+          grouped[category] = [];
+        }
+
+        grouped[category].push({
+          id,
+          ...component,
+        });
+      });
+
+      // 각 카테고리 내에서 order로 정렬
+      Object.keys(grouped).forEach((category) => {
+        grouped[category].sort((a, b) => {
+          const orderA = a.order !== undefined ? a.order : 999;
+          const orderB = b.order !== undefined ? b.order : 999;
+          return orderA - orderB;
+        });
+      });
+
+      // 카테고리 순서대로 정렬된 객체 생성
+      const sorted = {};
+      categoryOrder.forEach((cat) => {
+        if (grouped[cat]) {
+          sorted[cat] = grouped[cat];
+        }
+      });
+
+      // Uncategorized가 있으면 마지막에 추가
+      if (grouped["Uncategorized"]) {
+        sorted["Uncategorized"] = grouped["Uncategorized"];
+      }
+
+      return sorted;
+    }
+
+    /**
+     * 사이드바 렌더링 (카테고리별)
      */
     renderSidebar() {
       const nav = document.querySelector(".viewer-nav");
       if (!nav) return;
 
-      // 카테고리별로 그룹핑 (간단하게 알파벳순)
-      const componentIds = Object.keys(this.examples).sort();
+      const grouped = this.groupByCategory();
 
-      if (componentIds.length === 0) {
+      if (Object.keys(grouped).length === 0) {
         nav.innerHTML = `
           <div class="viewer-empty">
             <p>No components found</p>
@@ -49,19 +154,29 @@
         return;
       }
 
-      let html = '<div class="viewer-category">';
-      html += '<div class="viewer-category-title">Components</div>';
+      let html = "";
 
-      componentIds.forEach((id) => {
-        const component = this.examples[id];
-        html += `
-          <a href="#${id}" class="viewer-nav-item" data-component="${id}">
-            ${component.title || this._capitalize(id)}
-          </a>
-        `;
+      // 카테고리별로 렌더링
+      Object.keys(grouped).forEach((category) => {
+        const components = grouped[category];
+        if (components.length === 0) return;
+
+        html += `<div class="viewer-category">`;
+        html += `<div class="viewer-category-title">${category}</div>`;
+
+        components.forEach((component) => {
+          const displayName =
+            component.name || component.title || this._capitalize(component.id);
+          html += `
+            <a href="#${component.id}" class="viewer-nav-item" data-component="${component.id}">
+              ${displayName}
+            </a>
+          `;
+        });
+
+        html += `</div>`;
       });
 
-      html += "</div>";
       nav.innerHTML = html;
     }
 
@@ -110,6 +225,8 @@
         const hash = window.location.hash.slice(1);
         if (hash && this.examples[hash]) {
           this.showComponent(hash);
+        } else if (hash === "" || hash === "overview") {
+          this.showComponent("overview");
         }
       });
     }
@@ -118,8 +235,21 @@
      * 컴포넌트 표시
      */
     showComponent(componentId) {
+      // Overview 특별 처리
+      if (
+        componentId === "overview" ||
+        (!componentId && this.examples.overview)
+      ) {
+        this.showOverview();
+        return;
+      }
+
       if (!this.examples[componentId]) {
         console.warn("[Viewer] Component not found:", componentId);
+        // Overview로 폴백
+        if (this.examples.overview) {
+          this.showOverview();
+        }
         return;
       }
 
@@ -137,8 +267,10 @@
       // 헤더 업데이트
       const header = document.querySelector(".viewer-header");
       if (header) {
+        const displayName =
+          component.name || component.title || this._capitalize(componentId);
         header.innerHTML = `
-          <h2>${component.title || this._capitalize(componentId)}</h2>
+          <h2>${displayName}</h2>
           ${component.description ? `<p>${component.description}</p>` : ""}
         `;
       }
@@ -177,6 +309,84 @@
 
       // 해시 업데이트
       window.location.hash = componentId;
+    }
+
+    /**
+     * Overview 표시
+     */
+    showOverview() {
+      if (!this.examples.overview) {
+        this.showEmptyState();
+        return;
+      }
+
+      this.currentComponent = "overview";
+      const overview = this.examples.overview;
+
+      // 네비게이션 활성화
+      document.querySelectorAll(".viewer-nav-item").forEach((item) => {
+        item.classList.remove("is-active");
+        if (item.dataset.component === "overview") {
+          item.classList.add("is-active");
+        }
+      });
+
+      // 헤더 업데이트
+      const header = document.querySelector(".viewer-header");
+      if (header) {
+        header.innerHTML = `
+          <h2>${overview.title || "Component System Overview"}</h2>
+          ${overview.description ? `<p>${overview.description}</p>` : ""}
+        `;
+      }
+
+      // 컨텐츠 렌더링
+      const content = document.querySelector(".viewer-content");
+      const section =
+        content.querySelector(".viewer-section") ||
+        document.createElement("div");
+      section.className = "viewer-section viewer-section--overview";
+
+      let html = "";
+
+      if (overview.items && overview.items.length > 0) {
+        // Overview는 content 필드가 있으면 사용 (HTML 직접 렌더링)
+        overview.items.forEach((item, index) => {
+          if (item.code && item.code.includes("<div")) {
+            // HTML 콘텐츠인 경우
+            html += `
+              <div class="viewer-overview-item">
+                ${
+                  item.label
+                    ? `<h3 class="viewer-overview-title">${item.label}</h3>`
+                    : ""
+                }
+                <div class="viewer-overview-content">${item.code}</div>
+              </div>
+            `;
+          } else {
+            // 일반 예제인 경우
+            html += this.renderExample(item, index);
+          }
+        });
+      } else {
+        html = `
+          <div class="viewer-empty">
+            <div class="viewer-empty-title">Overview</div>
+            <div class="viewer-empty-text">Overview content will be displayed here.</div>
+          </div>
+        `;
+      }
+
+      section.innerHTML = html;
+
+      // 기존 섹션이 없으면 추가
+      if (!content.querySelector(".viewer-section")) {
+        content.appendChild(section);
+      }
+
+      // 해시 업데이트
+      window.location.hash = "overview";
     }
 
     /**
@@ -219,6 +429,15 @@
         const matches = text.includes(this.searchTerm);
         item.style.display = matches ? "block" : "none";
       });
+
+      // 검색어가 있으면 카테고리 제목도 숨김
+      document.querySelectorAll(".viewer-category-title").forEach((title) => {
+        const category = title.parentElement;
+        const hasVisibleItems = Array.from(
+          category.querySelectorAll(".viewer-nav-item")
+        ).some((item) => item.style.display !== "none");
+        category.style.display = hasVisibleItems ? "block" : "none";
+      });
     }
 
     /**
@@ -228,6 +447,18 @@
       const hash = window.location.hash.slice(1);
       if (hash && this.examples[hash]) {
         this.showComponent(hash);
+      } else if (hash === "" || hash === "overview") {
+        // Overview가 있으면 Overview 표시, 없으면 첫 번째 컴포넌트
+        if (this.examples.overview) {
+          this.showOverview();
+        } else {
+          const firstId = Object.keys(this.examples)[0];
+          if (firstId) {
+            this.showComponent(firstId);
+          } else {
+            this.showEmptyState();
+          }
+        }
       } else {
         const firstId = Object.keys(this.examples)[0];
         if (firstId) {
@@ -249,7 +480,7 @@
           <div class="viewer-empty-title">No Components</div>
           <div class="viewer-empty-text">
             examples.js 파일에 컴포넌트를 추가하세요.<br>
-            Generator를 사용하면 쉽게 생성할 수 있습니다.
+            빌드 스크립트를 실행하면 자동으로 생성됩니다.
           </div>
         </div>
       `;

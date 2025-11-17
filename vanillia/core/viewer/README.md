@@ -16,20 +16,50 @@
 프로젝트/assets/doakumize/viewer/index.html
 ```
 
-브라우저에서 바로 열면 끝!
+브라우저에서 바로 열면 끝입니다.
 
 ### 2. 컴포넌트 확인
 
-- 왼쪽 사이드바에서 컴포넌트 선택
-- 미리보기 확인
-- "View Code" 버튼으로 코드 보기
-- "Copy" 버튼으로 코드 복사
+- **Overview 섹션**: 첫 화면에 전체 컴포넌트 개요 표시
+- **카테고리별 구성**: 왼쪽 사이드바에서 카테고리별로 컴포넌트 확인
+  - Foundation (Typography, Icon)
+  - Form Controls (Button, Input, Checkbox, Radio, Dropdown, Slider)
+  - Data Display (Chip, Table, File Card)
+  - Feedback (Modal, Popover)
+  - Navigation (Tab, Accordion)
+- **미리보기**: 각 컴포넌트의 다양한 변형 확인
+- **코드 보기**: "View Code" 버튼으로 HTML 코드 확인
+- **코드 복사**: "Copy" 버튼으로 코드 복사
+- **모달 테스트**: 모달 컴포넌트는 자동으로 로드되어 바로 테스트 가능
 
 ## 📝 컴포넌트 추가/수정 방법
 
-### 방법 1: Generator 사용 (추천) ⭐
+### 방법 1: 빌드 시 자동 생성 (권장) ⭐
 
-가장 쉬운 방법이에요!
+**`examples.js`는 빌드 시 자동으로 생성됩니다!**
+
+```bash
+# 빌드 실행
+cd vanillia
+npm run build
+
+# examples.js가 자동 생성됨
+# → core/viewer/examples.js
+```
+
+**자동 생성 내용:**
+- `components/data/*.data.js` 파일 파싱
+- 카테고리 정보 포함 (`window.ComponentCategories`)
+- 컴포넌트 예제 데이터 (`window.ComponentExamples`)
+- 모달 HTML (`window.ModalHTMLs`)
+
+💡 **참고**: 빌드 후 `index.html`을 새로고침하면 최신 컴포넌트가 표시됩니다.
+
+---
+
+### 방법 2: Generator 사용 (선택적)
+
+필요한 컴포넌트만 선택하여 다운로드:
 
 #### Step 1: Generator 열기
 ```
@@ -39,7 +69,7 @@ https://doakuma.github.io/doakumize-kit/vanillia/generator.html
 #### Step 2: 컴포넌트 선택
 - 사용하는 컴포넌트 체크
 - 미리보기 확인
-- "Download examples.js" 클릭
+- "Download Package (ZIP)" 클릭
 
 #### Step 3: 파일 교체
 ```
@@ -47,16 +77,11 @@ https://doakuma.github.io/doakumize-kit/vanillia/generator.html
 → viewer/examples.js (덮어쓰기)
 ```
 
-#### Step 4: 확인
-```
-index.html 새로고침 → 선택한 컴포넌트만 표시됨!
-```
-
 ---
 
-### 방법 2: 수동 편집
+### 방법 3: 수동 편집
 
-`examples.js` 파일을 직접 수정할 수도 있어요.
+`examples.js` 파일을 직접 수정할 수도 있습니다 (권장하지 않음).
 
 #### 새 컴포넌트 추가
 
@@ -116,6 +141,8 @@ window.ComponentExamples = {
   [componentId]: {
     title: string,        // 컴포넌트 이름
     description: string,  // 설명 (선택사항)
+    category: string,    // 카테고리 (Foundation, Form Controls, 등)
+    order: number,       // 카테고리 내 순서
     items: [              // 예시 배열
       {
         label: string,    // 예시 제목
@@ -124,6 +151,27 @@ window.ComponentExamples = {
     ]
   }
 };
+```
+
+### ComponentCategories 형식
+
+```javascript
+window.ComponentCategories = {
+  "Foundation": "Foundation",
+  "Form Controls": "Form Controls",
+  "Data Display": "Data Display",
+  "Feedback": "Feedback",
+  "Navigation": "Navigation"
+};
+```
+
+### ModalHTMLs 형식
+
+```javascript
+window.ModalHTMLs = [
+  "<div class=\"modal\" id=\"myModal\">...</div>",
+  "<div class=\"modal\" id=\"anotherModal\">...</div>"
+];
 ```
 
 ### 예시
@@ -203,7 +251,7 @@ git add core/viewer/examples.js
 git commit -m "Update component examples"
 git push
 
-# 팀원들은 그냥 index.html 열면 됨!
+# 팀원들은 index.html을 열면 됩니다.
 ```
 
 ### 2. 로컬 서버로 열기
@@ -244,16 +292,27 @@ npx serve
 
 ## 🔄 업데이트 방법
 
-### Generator로 업데이트 (추천)
+### 빌드로 자동 업데이트 (권장) ⭐
 
-새 컴포넌트가 필요할 때:
+새 컴포넌트가 추가되거나 수정되었을 때:
+
+```bash
+# 빌드 실행
+cd vanillia
+npm run build
+
+# examples.js가 자동으로 최신 상태로 업데이트됨
+# index.html을 새로고침하면 반영됩니다.
+```
+
+### Generator로 업데이트 (선택적)
 
 1. Generator 열기
 2. 기존 컴포넌트 + 새 컴포넌트 선택
 3. Download
 4. examples.js 교체
 
-### 수동 업데이트
+### 수동 업데이트 (권장하지 않음)
 
 ```javascript
 // examples.js에 추가만
@@ -264,19 +323,22 @@ window.ComponentExamples.newComponent = { ... };
 
 ### 할 것 ✅
 
-- examples.js만 수정
-- Generator로 생성 (편함)
+- **빌드로 자동 생성** (가장 권장)
+- Generator로 생성 (선택적)
 - 프로젝트에서 실제 사용하는 것만 추가
 
 ### 하지 말 것 ❌
 
+- **examples.js 직접 수정** (빌드 시 덮어쓰기됨)
 - index.html, viewer.js, viewer.css 수정 (특별한 이유 없이)
 - 사용 안 하는 컴포넌트 추가 (혼란)
 - HTML 코드에 `<script>` 태그 포함 (보안)
 
+💡 **중요**: `examples.js`는 빌드 스크립트가 자동 생성하므로 직접 수정하면 빌드 시 덮어쓰기됩니다.
+
 ## 🐛 문제 해결
 
-### 컴포넌트가 안 보여요
+### 컴포넌트가 보이지 않습니다
 
 1. `examples.js` 문법 확인:
    ```javascript
@@ -289,7 +351,7 @@ window.ComponentExamples.newComponent = { ... };
 2. 브라우저 콘솔 확인 (F12)
    - JavaScript 에러 확인
 
-### 스타일이 안 먹혀요
+### 스타일이 적용되지 않습니다
 
 1. CSS 파일 경로 확인:
    ```html
@@ -299,7 +361,7 @@ window.ComponentExamples.newComponent = { ... };
 2. 상대 경로 확인:
    - viewer/ 폴더에서 ../styles/로 접근
 
-### 인터랙티브 기능이 안 돼요
+### 인터랙티브 기능이 작동하지 않습니다
 
 1. components.js 로드 확인:
    ```html
@@ -321,5 +383,5 @@ window.ComponentExamples.newComponent = { ... };
 
 ---
 
-**편하게 사용하세요! 🎉**
+**편하게 사용하시기 바랍니다. 🎉**
 

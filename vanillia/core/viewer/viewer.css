@@ -220,7 +220,7 @@ body {
 
 .viewer-code pre {
   margin: 0;
-  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-family: "Monaco", "Menlo", "Courier New", monospace;
   font-size: 13px;
   line-height: 1.6;
 }
@@ -263,6 +263,55 @@ body {
 .viewer-empty-text {
   font: var(--body-md);
   margin: 0;
+}
+
+/* ==================== Overview ==================== */
+.viewer-section--overview {
+  max-width: 100%;
+}
+
+.viewer-overview-item {
+  margin-bottom: 48px;
+}
+
+.viewer-overview-item:last-child {
+  margin-bottom: 0;
+}
+
+.viewer-overview-title {
+  font: var(--h3);
+  color: var(--text-primary);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-primary);
+}
+
+.viewer-overview-content {
+  font: var(--body-md);
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+.viewer-overview-content h3 {
+  font: var(--h4);
+  color: var(--text-primary);
+  margin: 24px 0 12px;
+}
+
+.viewer-overview-content h4 {
+  font: var(--h5);
+  color: var(--text-primary);
+  margin: 20px 0 8px;
+}
+
+.viewer-overview-content p {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+}
+
+.viewer-overview-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 /* ==================== 반응형 ==================== */
@@ -311,4 +360,3 @@ body {
     grid-template-columns: 1fr;
   }
 }
-

@@ -7,6 +7,7 @@
     "build": "npm run build:scripts && npm run build:styles",
     "build:scripts": "node scripts/build-scripts.js",
     "build:styles": "node scripts/build-styles.js",
+    "clean:core": "node scripts/clean-core.js",
     "copy": "node scripts/copy-to-project.js"
   },
   "keywords": [

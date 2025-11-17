@@ -298,7 +298,7 @@ npm run build           # JS 빌드 (scripts → core)
 #### "새 컴포넌트 스크립트를 작성하고 싶어요"
 → [COMPONENT_SCRIPT_GUIDE.md](COMPONENT_SCRIPT_GUIDE.md)
 
-#### "현재 작업 진행 상황이 궁금해요"
+#### "현재 작업 진행 상황이 궁금합니다"
 → [COMPONENT_SCRIPTS_TODO.md](COMPONENT_SCRIPTS_TODO.md)
 
 #### "CSS 구조를 개선하고 싶어요"
