@@ -1,11 +1,23 @@
 {
-  "name": "react",
-  "private": true,
+  "name": "doakumize-kit-react",
   "version": "0.0.0",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.umd.js",
+  "files": [
+    "dist/index.js",
+    "dist/index.esm.js",
+    "dist/index.umd.js",
+    "dist/styles.css",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vite --base /",
-    "build": "vite build",
+    "build": "vite build && rollup -c && copy dist\\index.css dist\\styles.css",
+    "build:demo": "vite build",
+    "build:package": "rollup -c && copy dist\\index.css dist\\styles.css",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,7 +27,13 @@
     "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
     "@eslint/js": "^9.39.1",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
@@ -23,6 +41,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "rollup": "^4.53.2",
+    "rollup-plugin-postcss": "^4.0.2",
     "vite": "^7.2.2"
   }
 }
