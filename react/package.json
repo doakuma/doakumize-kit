@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "dev": "vite --base /",
-    "build": "vite build && rollup -c && copy dist\\index.css dist\\styles.css",
+    "build": "vite build && rollup -c && node scripts/copy-css.js",
     "build:demo": "vite build",
-    "build:package": "rollup -c && copy dist\\index.css dist\\styles.css",
+    "build:package": "rollup -c && node scripts/copy-css.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
