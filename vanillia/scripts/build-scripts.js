@@ -1,9 +1,13 @@
 /**
- * Components Scripts Build Tool
+ * Build Scripts Tool
  * 컴포넌트 스크립트 통합 파일 생성 스크립트
  *
  * components/scripts/ 폴더의 모든 .js 파일을 읽어서
  * 하나의 resources/js/components.js 파일로 통합합니다.
+ *
+ * 사용법:
+ *   node scripts/build-scripts.js
+ *   npm run build
  */
 
 const fs = require("fs");
@@ -172,7 +176,7 @@ function buildComponents() {
  * Vanilla Components Scripts Bundle
  * 컴포넌트 스크립트 통합 파일 (자동 생성)
  *
- * 이 파일은 scripts/build-components.js에 의해 자동으로 생성되었습니다.
+ * 이 파일은 scripts/build-scripts.js에 의해 자동으로 생성되었습니다.
  * 수동으로 수정하지 마세요. 수정사항은 다음 빌드 시 덮어씁니다.
  *
  * 생성일: ${buildDate} ${buildTime} KST
@@ -193,8 +197,63 @@ window.VanillaComponents = window.VanillaComponents || {};
   // 모든 파일 내용 합치기
   const allContent = processedFiles.map((f) => f.content).join("\n\n");
 
+  // initAll 메서드 생성 (모든 컴포넌트 초기화 함수 자동 감지)
+  const initFunctions = [];
+  processedFiles.forEach((file) => {
+    // 파일 내용에서 window.VanillaComponents.initXXX 패턴 찾기
+    const initMatches = file.content.match(
+      /window\.VanillaComponents\.init(\w+)\s*=/g
+    );
+    if (initMatches) {
+      initMatches.forEach((match) => {
+        const funcName = match.match(/init(\w+)/)[1];
+        const camelCaseName =
+          funcName.charAt(0).toLowerCase() + funcName.slice(1);
+        initFunctions.push({
+          original: `init${funcName}`,
+          camelCase: `init${camelCaseName}`,
+        });
+      });
+    }
+  });
+
+  // 중복 제거 및 정렬
+  const uniqueInitFunctions = Array.from(
+    new Map(initFunctions.map((f) => [f.original, f])).values()
+  ).sort((a, b) => a.original.localeCompare(b.original));
+
+  // initAll 메서드 생성
+  const initAllMethod = `
+// ========================================
+// initAll - 모든 컴포넌트 초기화
+// ========================================
+
+/**
+ * 모든 컴포넌트 초기화
+ * DOM에 있는 모든 컴포넌트를 자동으로 초기화합니다.
+ */
+function initAll() {
+  console.log("[VanillaComponents] Initializing all components...");
+  
+  // 각 컴포넌트 초기화 함수 호출
+${uniqueInitFunctions
+  .map(
+    (f) => `  if (window.VanillaComponents.${f.original}) {
+    window.VanillaComponents.${f.original}();
+  }`
+  )
+  .join("\n")}
+  
+  console.log("[VanillaComponents] All components initialized");
+}
+
+// 전역 네임스페이스에 등록
+window.VanillaComponents = window.VanillaComponents || {};
+window.VanillaComponents.initAll = initAll;
+`;
+
   // 최종 파일 내용 생성
-  const finalContent = header + namespaceInit + allContent;
+  const finalContent = header + namespaceInit + allContent + initAllMethod;
 
   // 출력 디렉토리 생성 (없으면)
   const outputDir = path.dirname(outputFile);
@@ -236,3 +295,4 @@ if (require.main === module) {
 }
 
 module.exports = { buildComponents, removeIIFEWrapper };
+

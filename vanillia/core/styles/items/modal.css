@@ -22,17 +22,17 @@ body.modal--open {
 .modal__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(17, 24, 39, 0.45);
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .modal__dialog {
   position: relative;
   box-sizing: border-box;
   width: min(560px, calc(100% - 32px));
-  background: var(--gray-0);
-  border: 1px solid var(--gray-200);
+  background: var(--surface-overlay);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.25);
+  box-shadow: var(--elevation-4);
   overflow: hidden;
 }
 
@@ -41,13 +41,13 @@ body.modal--open {
   align-items: center;
   gap: 12px;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .modal__title {
   margin: 0;
   font: var(--sub-sb-md);
-  color: var(--gray-900);
+  color: var(--text-primary);
 }
 
 .modal__close {
@@ -57,7 +57,7 @@ body.modal--open {
   width: 28px;
   height: 28px;
   border: none;
-  background: transparent url(../../images/icon_close.png) no-repeat
+  background: transparent url(../../images/icons/icon_close.png) no-repeat
     center / 18px 18px;
   cursor: pointer;
   border-radius: 6px;
@@ -73,7 +73,7 @@ body.modal--open {
   align-items: flex-start;
   padding: 20px 32px;
   font: var(--body-sm);
-  color: var(--gray-800);
+  color: var(--text-primary);
 }
 
 .modal__body-header {
@@ -84,11 +84,11 @@ body.modal--open {
 }
 
 .modal__body-header .text-sub-sb-md {
-  color: var(--gray-900);
+  color: var(--text-primary);
 }
 
 .modal__body-header .text-sub-md-xs {
-  color: var(--primary-600);
+  color: var(--interactive-text-default);
 }
 
 .modal__body-header.header--column {
@@ -108,7 +108,7 @@ body.modal--open {
   justify-content: flex-end;
   gap: 8px;
   padding: 16px 20px;
-  border-top: 1px solid var(--gray-200);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .modal__footer-count {
@@ -116,11 +116,11 @@ body.modal--open {
   align-items: center;
   gap: 4px;
   font: var(--sub-md-xs);
-  color: var(--gray-600);
+  color: var(--text-secondary);
 }
 
 .modal__footer-count strong {
-  color: var(--primary-600);
+  color: var(--interactive-text-default);
 }
 
 /* Message Modal (compact content) */
@@ -153,4 +153,3 @@ body.modal--open {
 body.modal-open {
   overflow: hidden;
 }
-

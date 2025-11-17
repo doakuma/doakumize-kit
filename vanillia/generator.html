@@ -55,6 +55,22 @@
             </div>
 
             <div class="generator-download-section">
+              <div class="generator-build-notice">
+                <p class="generator-build-notice__text">
+                  💡 <strong>최신 빌드를 원하면</strong> ZIP 생성 전에 <code class="generator-build-notice__inline-code">vanillia/</code> 폴더에서 다음 명령어를 실행하세요:
+                </p>
+                <code class="generator-build-notice__code">npm run build</code>
+                <p class="generator-build-notice__subtext">
+                  (JavaScript + CSS 모두 빌드됩니다)
+                </p>
+                <details class="generator-build-notice__details">
+                  <summary class="generator-build-notice__summary">개별 빌드 명령어 보기</summary>
+                  <div class="generator-build-notice__commands">
+                    <code>npm run build:scripts</code> - JavaScript만 빌드<br>
+                    <code>npm run build:styles</code> - CSS만 빌드
+                  </div>
+                </details>
+              </div>
               <button class="generator-download-btn" id="downloadBtn" disabled>
                 📦 Download Package (ZIP)
               </button>

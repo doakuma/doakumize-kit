@@ -48,10 +48,10 @@
   /* 스타일링 */
   padding: 8px 12px;
   padding-left: 16px;
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--border-default);
   border-radius: 4px;
-  background-color: var(--gray-0);
-  color: var(--gray-900);
+  background-color: var(--surface-page);
+  color: var(--text-primary);
 
   /* 인터랙션 */
   transition: all 0.2s ease-in-out;
@@ -74,19 +74,19 @@
 }
 
 .input::placeholder {
-  color: var(--gray-500);
+  color: var(--text-tertiary);
   font-weight: 400;
 }
 
 /* Input States */
 .input:focus {
-  border-color: var(--primary-600);
+  border-color: var(--border-focus);
 }
 
 /* 값이 있을 때 스타일 */
 .input[placeholder]:not(:placeholder-shown):not(.input--error) {
-  border-color: var(--gray-300);
-  background-color: var(--gray-0);
+  border-color: var(--border-default);
+  background-color: var(--surface-page);
 }
 
 /* Error State */
@@ -101,22 +101,22 @@
 
 /* Readonly State */
 .input:read-only {
-  background-color: var(--gray-100);
-  border-color: var(--gray-300);
-  color: var(--gray-700);
+  background-color: var(--surface-disabled);
+  border-color: var(--border-default);
+  color: var(--text-primary);
   cursor: default;
 }
 
 /* Disabled State */
 .input:disabled {
-  background-color: var(--gray-100);
-  border-color: var(--gray-300);
-  color: var(--gray-500);
+  background-color: var(--surface-disabled);
+  border-color: var(--border-default);
+  color: var(--text-disabled);
   cursor: not-allowed;
 }
 
 .input:disabled::placeholder {
-  color: var(--gray-400);
+  color: var(--text-disabled);
 }
 
 /* Size Modifiers */
@@ -153,7 +153,7 @@
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
-  color: var(--gray-600);
+  color: var(--text-secondary);
   min-width: 120px;
 }
 
@@ -200,7 +200,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  color: var(--gray-500);
+  color: var(--text-tertiary);
   pointer-events: none;
 }
 
@@ -230,7 +230,7 @@
   margin: auto;
   width: 20px;
   height: 20px;
-  background: url(../../images/icon_close.png) no-repeat center center;
+  background: url(../../images/icons/icon_close.png) no-repeat center center;
   background-size: 100% 100%;
   cursor: pointer;
   border: none;
@@ -287,7 +287,7 @@
   font: var(--body-xs);
   color: var(--text-secondary);
   white-space: nowrap;
-  background-color: var(--gray-0);
+  background-color: var(--surface-page);
   padding: 2px 4px;
   border-radius: 2px;
   pointer-events: none;
@@ -295,7 +295,7 @@
 
 /* Focused state for counter input */
 .input-field--focused .input {
-  border-color: var(--primary-600);
+  border-color: var(--border-focus);
 }
 
 /* Ensure textarea has enough padding for counter */
@@ -306,4 +306,3 @@
 .input.input--code {
   white-space: pre;
 }
-

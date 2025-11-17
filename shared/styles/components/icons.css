@@ -59,288 +59,288 @@
 
 /* File Type Icons */
 .icon.icon--file-attatch {
-  background-image: url(../../../../shared/images/icons/icon_file_attatch.png);
+  background-image: url(../../images/icons/icon_file_attatch.png);
 }
 .icon.icon--file-ppt {
-  background-image: url(../../../../shared/images/icons/icon_file_ppt.png);
+  background-image: url(../../images/icons/icon_file_ppt.png);
 }
 .icon.icon--file-outlook {
-  background-image: url(../../../../shared/images/icons/icon_file_outlook.png);
+  background-image: url(../../images/icons/icon_file_outlook.png);
 }
 .icon.icon--file-html {
-  background-image: url(../../../../shared/images/icons/icon_file_html.png);
+  background-image: url(../../images/icons/icon_file_html.png);
 }
 .icon.icon--file-pdf {
-  background-image: url(../../../../shared/images/icons/icon_file_pdf.png);
+  background-image: url(../../images/icons/icon_file_pdf.png);
 }
 .icon.icon--file-text {
-  background-image: url(../../../../shared/images/icons/icon_file_text.png);
+  background-image: url(../../images/icons/icon_file_text.png);
 }
 .icon.icon--file-image {
-  background-image: url(../../../../shared/images/icons/icon_file_image.png);
+  background-image: url(../../images/icons/icon_file_image.png);
 }
 .icon.icon--file-hangul {
-  background-image: url(../../../../shared/images/icons/icon_file_hangul.png);
+  background-image: url(../../images/icons/icon_file_hangul.png);
 }
 .icon.icon--file-excel {
-  background-image: url(../../../../shared/images/icons/icon_file_excel.png);
+  background-image: url(../../images/icons/icon_file_excel.png);
 }
 .icon.icon--file-word {
-  background-image: url(../../../../shared/images/icons/icon_file_word.png);
+  background-image: url(../../images/icons/icon_file_word.png);
 }
 .icon.icon--file-tool {
-  background-image: url(../../../../shared/images/icons/icon_file_tool.png);
+  background-image: url(../../images/icons/icon_file_tool.png);
 }
 .icon.icon--file-zip {
-  background-image: url(../../../../shared/images/icons/icon_file_zip.png);
+  background-image: url(../../images/icons/icon_file_zip.png);
 }
 .icon.icon--file-default {
-  background-image: url(../../../../shared/images/icons/icon_file_tool.png);
+  background-image: url(../../images/icons/icon_file_tool.png);
 }
 .icon.icon--file-doc {
-  background-image: url(../../../../shared/images/icons/icon_file_word.png);
+  background-image: url(../../images/icons/icon_file_word.png);
 }
 .icon.icon--file-xls {
-  background-image: url(../../../../shared/images/icons/icon_file_excel.png);
+  background-image: url(../../images/icons/icon_file_excel.png);
 }
 
 /* Arrow Icons */
 .icon.icon--arrow-right {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_right.png);
+  mask-image: url(../../images/icons/icon_arrow_right.png);
 }
 .icon.icon--arrow-left {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_left.png);
+  mask-image: url(../../images/icons/icon_arrow_left.png);
 }
 .icon.icon--arrow-up {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_up.png);
+  mask-image: url(../../images/icons/icon_arrow_up.png);
 }
 .icon.icon--arrow-down {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_down.png);
+  mask-image: url(../../images/icons/icon_arrow_down.png);
 }
 .icon.icon--arrow-right-double {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_right_double.png);
+  mask-image: url(../../images/icons/icon_arrow_right_double.png);
 }
 .icon.icon--arrow-left-double {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_left_double.png);
+  mask-image: url(../../images/icons/icon_arrow_left_double.png);
 }
 .icon.icon--arrow-down-small {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_down_small.png);
+  mask-image: url(../../images/icons/icon_arrow_down_small.png);
 }
 .icon.icon--arrow-up-small {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_up_small.png);
+  mask-image: url(../../images/icons/icon_arrow_up_small.png);
 }
 .icon.icon--arrow-back {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_back.png);
+  mask-image: url(../../images/icons/icon_arrow_back.png);
 }
 .icon.icon--arrow-back-end {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_back_end.png);
+  mask-image: url(../../images/icons/icon_arrow_back_end.png);
 }
 .icon.icon--arrow-foward {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_foward.png);
+  mask-image: url(../../images/icons/icon_arrow_foward.png);
 }
 .icon.icon--arrow-foward-end {
-  mask-image: url(../../../../shared/images/icons/icon_arrow_foward_end.png);
+  mask-image: url(../../images/icons/icon_arrow_foward_end.png);
 }
 
 /* Common UI Icons */
 .icon.icon--addpjt {
-  mask-image: url(../../../../shared/images/icons/icon_addpjt.png);
+  mask-image: url(../../images/icons/icon_addpjt.png);
 }
 .icon.icon--calendar {
-  mask-image: url(../../../../shared/images/icons/icon_calendar.png);
+  mask-image: url(../../images/icons/icon_calendar.png);
 }
 .icon.icon--close {
-  mask-image: url(../../../../shared/images/icons/icon_close.png);
+  mask-image: url(../../images/icons/icon_close.png);
 }
 .icon.icon--check {
-  mask-image: url(../../../../shared/images/icons/icon_check.png);
+  mask-image: url(../../images/icons/icon_check.png);
 }
 .icon.icon--check-default {
-  mask-image: url(../../../../shared/images/icons/icon_check_default.png);
+  mask-image: url(../../images/icons/icon_check_default.png);
 }
 .icon.icon--check-primary {
-  mask-image: url(../../../../shared/images/icons/icon_check_primary.png);
+  mask-image: url(../../images/icons/icon_check_primary.png);
 }
 .icon.icon--plus {
-  mask-image: url(../../../../shared/images/icons/icon_plus.png);
+  mask-image: url(../../images/icons/icon_plus.png);
 }
 .icon.icon--minus {
-  mask-image: url(../../../../shared/images/icons/icon_minus.png);
+  mask-image: url(../../images/icons/icon_minus.png);
 }
 .icon.icon--search {
-  mask-image: url(../../../../shared/images/icons/icon_search.png);
+  mask-image: url(../../images/icons/icon_search.png);
 }
 .icon.icon--edit {
-  mask-image: url(../../../../shared/images/icons/icon_edit.png);
+  mask-image: url(../../images/icons/icon_edit.png);
 }
 .icon.icon--edit-chip {
-  mask-image: url(../../../../shared/images/icons/icon_edit_chip.png);
+  mask-image: url(../../images/icons/icon_edit_chip.png);
 }
 .icon.icon--delete {
-  mask-image: url(../../../../shared/images/icons/icon_delete.png);
+  mask-image: url(../../images/icons/icon_delete.png);
 }
 .icon.icon--lnb {
-  mask-image: url(../../../../shared/images/icons/icon_lnb.png);
+  mask-image: url(../../images/icons/icon_lnb.png);
 }
 .icon.icon--lock {
-  mask-image: url(../../../../shared/images/icons/icon_lock.png);
+  mask-image: url(../../images/icons/icon_lock.png);
 }
 .icon.icon--trash {
-  mask-image: url(../../../../shared/images/icons/icon_trash.png);
+  mask-image: url(../../images/icons/icon_trash.png);
 }
 .icon.icon--settings {
-  mask-image: url(../../../../shared/images/icons/icon_settings.png);
+  mask-image: url(../../images/icons/icon_settings.png);
 }
 .icon.icon--more {
-  mask-image: url(../../../../shared/images/icons/icon_more.png);
+  mask-image: url(../../images/icons/icon_more.png);
 }
 .icon.icon--move {
-  mask-image: url(../../../../shared/images/icons/icon_move.png);
+  mask-image: url(../../images/icons/icon_move.png);
 }
 .icon.icon--play {
-  mask-image: url(../../../../shared/images/icons/icon_play.png);
+  mask-image: url(../../images/icons/icon_play.png);
 }
 .icon.icon--send {
-  mask-image: url(../../../../shared/images/icons/icon_send.png);
+  mask-image: url(../../images/icons/icon_send.png);
 }
 .icon.icon--save {
-  mask-image: url(../../../../shared/images/icons/icon_save.png);
+  mask-image: url(../../images/icons/icon_save.png);
 }
 .icon.icon--eye {
-  mask-image: url(../../../../shared/images/icons/icon_eye.png);
+  mask-image: url(../../images/icons/icon_eye.png);
 }
 
 /* Info / Status Icons */
 .icon.icon--info-circle {
-  mask-image: url(../../../../shared/images/icons/icon_info_circle.png);
+  mask-image: url(../../images/icons/icon_info_circle.png);
 }
 .icon.icon--info {
-  mask-image: url(../../../../shared/images/icons/icon_Info.png);
+  mask-image: url(../../images/icons/icon_Info.png);
 }
 .icon.icon--security {
-  mask-image: url(../../../../shared/images/icons/icon_security.png);
+  mask-image: url(../../images/icons/icon_security.png);
 }
 .icon.icon--key {
-  mask-image: url(../../../../shared/images/icons/icon_key.png);
+  mask-image: url(../../images/icons/icon_key.png);
 }
 
 /* Message Icons */
 .icon.icon--msg-confirm {
-  background-image: url(../../../../shared/images/icons/icon_msg_confirm.png);
+  background-image: url(../../images/icons/icon_msg_confirm.png);
 }
 .icon.icon--msg-confirm-in {
-  background-image: url(../../../../shared/images/icons/icon_msg_confirm_in.png);
+  background-image: url(../../images/icons/icon_msg_confirm_in.png);
 }
 .icon.icon--msg-error {
-  background-image: url(../../../../shared/images/icons/icon_msg_error.png);
+  background-image: url(../../images/icons/icon_msg_error.png);
 }
 .icon.icon--msg-info {
-  background-image: url(../../../../shared/images/icons/icon_msg_info.png);
+  background-image: url(../../images/icons/icon_msg_info.png);
 }
 .icon.icon--msg-success {
-  background-image: url(../../../../shared/images/icons/icon_msg_success.png);
+  background-image: url(../../images/icons/icon_msg_success.png);
 }
 .icon.icon--msg-warning {
-  background-image: url(../../../../shared/images/icons/icon_msg_warning.png);
+  background-image: url(../../images/icons/icon_msg_warning.png);
 }
 
 /* Dropdown Icons */
 .icon.icon--dropdown-arrow {
-  mask-image: url(../../../../shared/images/icons/icon_dropdown_arrow.png);
+  mask-image: url(../../images/icons/icon_dropdown_arrow.png);
 }
 .icon.icon--dropdown-check {
-  mask-image: url(../../../../shared/images/icons/icon_dropdown_check.png);
+  mask-image: url(../../images/icons/icon_dropdown_check.png);
 }
 .icon.icon--chevron-down {
-  mask-image: url(../../../../shared/images/icons/icon_chevron_down.png);
+  mask-image: url(../../images/icons/icon_chevron_down.png);
 }
 .icon.icon--chevron-up {
-  mask-image: url(../../../../shared/images/icons/icon_chevron_up.png);
+  mask-image: url(../../images/icons/icon_chevron_up.png);
 }
 .icon.icon--chevron-left {
-  mask-image: url(../../../../shared/images/icons/icon_chevron_left.png);
+  mask-image: url(../../images/icons/icon_chevron_left.png);
 }
 .icon.icon--chevron-right {
-  mask-image: url(../../../../shared/images/icons/icon_chevron_right.png);
+  mask-image: url(../../images/icons/icon_chevron_right.png);
 }
 
 /* App Specific Icons */
 .icon.icon--dashboard {
-  mask-image: url(../../../../shared/images/icons/icon_dashboard.png);
+  mask-image: url(../../images/icons/icon_dashboard.png);
 }
 .icon.icon--code {
-  mask-image: url(../../../../shared/images/icons/icon_code.png);
+  mask-image: url(../../images/icons/icon_code.png);
 }
 .icon.icon--chart {
-  mask-image: url(../../../../shared/images/icons/icon_chart.png);
+  mask-image: url(../../images/icons/icon_chart.png);
 }
 .icon.icon--user {
-  mask-image: url(../../../../shared/images/icons/icon_member.png);
+  mask-image: url(../../images/icons/icon_member.png);
 }
 .icon.icon--members {
-  mask-image: url(../../../../shared/images/icons/icon_members.png);
+  mask-image: url(../../images/icons/icon_members.png);
 }
 .icon.icon--premium {
-  mask-image: url(../../../../shared/images/icons/icon_premium.png);
+  mask-image: url(../../images/icons/icon_premium.png);
 }
 .icon.icon--docbased {
-  mask-image: url(../../../../shared/images/icons/icon_filebased.png);
+  mask-image: url(../../images/icons/icon_filebased.png);
 }
 .icon.icon--webbased {
-  mask-image: url(../../../../shared/images/icons/icon_webbased.png);
+  mask-image: url(../../images/icons/icon_webbased.png);
 }
 .icon.icon--api-history {
-  mask-image: url(../../../../shared/images/icons/icon_api_history.png);
+  mask-image: url(../../images/icons/icon_api_history.png);
 }
 .icon.icon--aI-talk {
-  mask-image: url(../../../../shared/images/icons/icon_aI_talk.png);
+  mask-image: url(../../images/icons/icon_aI_talk.png);
 }
 .icon.icon--attached {
-  mask-image: url(../../../../shared/images/icons/icon_attached.png);
+  mask-image: url(../../images/icons/icon_attached.png);
 }
 .icon.icon--upload {
-  mask-image: url(../../../../shared/images/icons/icon_attached.png);
+  mask-image: url(../../images/icons/icon_attached.png);
 }
 .icon.icon--expanding {
-  mask-image: url(../../../../shared/images/icons/icon_expanding.png);
+  mask-image: url(../../images/icons/icon_expanding.png);
 }
 .icon.icon--folding {
-  mask-image: url(../../../../shared/images/icons/icon_folding.png);
+  mask-image: url(../../images/icons/icon_folding.png);
 }
 .icon.icon--rag-add {
-  mask-image: url(../../../../shared/images/icons/icon_rag_add.png);
+  mask-image: url(../../images/icons/icon_rag_add.png);
 }
 .icon.icon--rag-card {
-  background-image: url(../../../../shared/images/icons/icon_rag_card.png);
+  background-image: url(../../images/icons/icon_rag_card.png);
   background-color: transparent;
 }
 .icon.icon--rag-security {
-  mask-image: url(../../../../shared/images/icons/icon_rag_security.png);
+  mask-image: url(../../images/icons/icon_rag_security.png);
 }
 .icon.icon--copy {
-  mask-image: url(../../../../shared/images/icons/icon_copy.png);
+  mask-image: url(../../images/icons/icon_copy.png);
 }
 .icon.icon--good {
-  mask-image: url(../../../../shared/images/icons/icon_good.png);
+  mask-image: url(../../images/icons/icon_good.png);
 }
 .icon.icon--bad {
-  mask-image: url(../../../../shared/images/icons/icon_bad.png);
+  mask-image: url(../../images/icons/icon_bad.png);
 }
 .icon.icon--refresh {
-  mask-image: url(../../../../shared/images/icons/icon_refresh.png);
+  mask-image: url(../../images/icons/icon_refresh.png);
 }
 .icon.icon--pending {
-  background-image: url(../../../../shared/images/icons/icon_pending.png);
+  background-image: url(../../images/icons/icon_pending.png);
 }
 .icon.icon--chat-edit {
-  mask-image: url(../../../../shared/images/icons/icon_chat_edit.png);
+  mask-image: url(../../images/icons/icon_chat_edit.png);
 }
 .icon.icon--dictionary {
-  mask-image: url(../../../../shared/images/icons/icon_dictionary.png);
+  mask-image: url(../../images/icons/icon_dictionary.png);
 }
 .icon.icon--download {
-  mask-image: url(../../../../shared/images/icons/icon_download.png);
+  mask-image: url(../../images/icons/icon_download.png);
 }
 .icon.icon--external {
-  mask-image: url(../../../../shared/images/icons/icon_external.png);
+  mask-image: url(../../images/icons/icon_external.png);
 }

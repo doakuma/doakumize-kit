@@ -428,14 +428,14 @@
     }
 
     /**
-     * items 폴더용 CSS 파일들 로드
+     * items 폴더용 CSS 파일들 로드 (shared/styles/components/ 기준)
      */
     async loadItemsCSS(cssFiles) {
       const items = {};
 
       for (const filename of cssFiles) {
         const content = await this.loadCSSFile(
-          `components/styles/items/${filename}`
+          `../shared/styles/components/${filename}`
         );
         if (content) {
           items[filename] = content;
@@ -446,15 +446,15 @@
     }
 
     /**
-     * 필수 CSS 파일들 로드 (components/styles 기준)
+     * 필수 CSS 파일들 로드 (shared/styles/base/ 기준)
      */
     async loadEssentialCSS() {
       const files = {
-        "normalize.css": "components/styles/normalize.css",
-        "variables.css": "components/styles/variables.css",
-        "base.css": "components/styles/base.css",
-        "animations.css": "components/styles/animations.css",
-        "scrollbar.css": "components/styles/scrollbar.css",
+        "normalize.css": "../shared/styles/base/normalize.css",
+        "variables.css": "../shared/styles/base/variables.css",
+        "base.css": "../shared/styles/base/base.css",
+        "animations.css": "../shared/styles/base/animations.css",
+        "scrollbar.css": "../shared/styles/base/scrollbar.css",
       };
 
       const loadedFiles = {};
@@ -510,6 +510,20 @@
         console.error("[Generator] JSZip not loaded");
         alert("다운로드 기능을 사용할 수 없습니다. 페이지를 새로고침해주세요.");
         return;
+      }
+
+      // 최신 빌드 확인 (선택적)
+      const shouldCheckBuild = confirm(
+        "💡 최신 빌드를 사용하시나요?\n\n" +
+          "최신 빌드를 원하면 먼저 vanillia/ 폴더에서 다음을 실행하세요:\n" +
+          "  cd vanillia\n" +
+          "  npm run build\n\n" +
+          "(JavaScript + CSS 모두 빌드됩니다)\n\n" +
+          "계속하시겠습니까?"
+      );
+
+      if (!shouldCheckBuild) {
+        return; // 사용자가 취소
       }
 
       try {

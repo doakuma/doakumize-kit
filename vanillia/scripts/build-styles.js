@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 /**
- * Doakumize Kit - Build Core Tool
- * components/styles 에서 core/styles 로 필수 파일 빌드/복사
+ * Doakumize Kit - Build Styles Tool
+ * shared/styles 에서 core/styles 로 필수 파일 빌드/복사
  *
  * 주요 기능:
- *   - components/styles/items/ → core/styles/items/ 자동 복사
+ *   - shared/styles/components/ → core/styles/items/ 자동 복사
  *   - core/styles/components.css Import 허브 자동 생성
  *   - 빌드 전 자동 정리 (Clean) - items 폴더 제외
  *   - 필수 CSS 파일 복사 (normalize, variables, base, animations, scrollbar)
  *   - common.css 통합 허브 생성
+ *   - shared/images/ → core/images/ 자동 복사
  *
  * 사용법:
- *   node scripts/build-core.js           # 기본 빌드 (자동 정리)
- *   node scripts/build-core.js --no-clean  # 정리 없이 빌드
- *   npm run build:core
+ *   node scripts/build-styles.js           # 기본 빌드 (자동 정리)
+ *   node scripts/build-styles.js --no-clean  # 정리 없이 빌드
+ *   npm run build:styles
  *
  * 주의:
  *   - items 폴더는 자동으로 보존됩니다
@@ -113,6 +114,39 @@ function cleanCoreStyles(coreStylesPath) {
 }
 
 /**
+ * core/images 폴더 정리 (모든 파일 삭제)
+ */
+function cleanCoreImages(coreImagesPath) {
+  if (!fs.existsSync(coreImagesPath)) {
+    return 0;
+  }
+
+  const files = fs.readdirSync(coreImagesPath);
+  let deletedCount = 0;
+
+  files.forEach((file) => {
+    const filePath = path.join(coreImagesPath, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      // 디렉토리는 재귀적으로 삭제
+      const subFiles = fs.readdirSync(filePath);
+      subFiles.forEach((subFile) => {
+        fs.unlinkSync(path.join(filePath, subFile));
+        deletedCount++;
+      });
+      fs.rmdirSync(filePath);
+    } else {
+      // 파일 삭제
+      fs.unlinkSync(filePath);
+      deletedCount++;
+    }
+  });
+
+  return deletedCount;
+}
+
+/**
  * 디렉토리 복사 (재귀)
  */
 function copyDirectory(source, dest) {
@@ -141,7 +175,7 @@ function copyDirectory(source, dest) {
       // 재귀적으로 디렉토리 복사
       copiedCount += copyDirectory(sourcePath, destPath);
     } else {
-      // 파일 복사
+      // 모든 파일은 그대로 복사 (CSS도 경로 변환 불필요)
       fs.copyFileSync(sourcePath, destPath);
       const size = fs.statSync(destPath).size;
       log(`  ✓ ${file} → items/${file} (${formatFileSize(size)})`, "green");
@@ -217,8 +251,8 @@ function generateComponentsHub(coreStylesPath) {
  * 메인 함수
  */
 function main() {
-  log("\n🎨 Doakumize Kit - Build Core\n", "bright");
-  log("components/styles → core/styles 빌드 시작...\n", "cyan");
+  log("\n🎨 Doakumize Kit - Build Styles\n", "bright");
+  log("shared/styles → core/styles 빌드 시작...\n", "cyan");
 
   const projectRoot = path.join(__dirname, "..");
   const coreStylesPath = path.join(projectRoot, "core/styles");
@@ -230,9 +264,20 @@ function main() {
   // 🧹 빌드 전 정리
   if (shouldClean) {
     log("🧹 기존 파일 정리 중...\n", "bright");
-    const deletedCount = cleanCoreStyles(coreStylesPath);
-    if (deletedCount > 0) {
-      log(`\n  정리 완료: ${deletedCount}개 파일 삭제됨\n`, "green");
+
+    // styles 폴더 정리
+    const deletedStylesCount = cleanCoreStyles(coreStylesPath);
+
+    // images 폴더 정리
+    const coreImagesPath = path.join(projectRoot, "core/images");
+    const deletedImagesCount = cleanCoreImages(coreImagesPath);
+
+    const totalDeleted = deletedStylesCount + deletedImagesCount;
+    if (totalDeleted > 0) {
+      log(
+        `\n  정리 완료: ${totalDeleted}개 파일 삭제됨 (styles: ${deletedStylesCount}, images: ${deletedImagesCount})\n`,
+        "green"
+      );
     } else {
       log(`\n  정리할 파일 없음\n`, "green");
     }
@@ -240,30 +285,30 @@ function main() {
     log("⊙ 정리 건너뜀 (--no-clean)\n", "yellow");
   }
 
-  // 복사할 파일 목록
+  // 복사할 파일 목록 (shared/styles/base/ 기준)
   const filesToCopy = [
     {
-      source: "components/styles/normalize.css",
+      source: "../shared/styles/base/normalize.css",
       dest: "core/styles/normalize.css",
       description: "CSS Reset",
     },
     {
-      source: "components/styles/variables.css",
+      source: "../shared/styles/base/variables.css",
       dest: "core/styles/variables.css",
       description: "디자인 토큰 (색상, 타이포그래피, 간격)",
     },
     {
-      source: "components/styles/base.css",
+      source: "../shared/styles/base/base.css",
       dest: "core/styles/base.css",
       description: "기본 스타일 (*, html, body)",
     },
     {
-      source: "components/styles/animations.css",
+      source: "../shared/styles/base/animations.css",
       dest: "core/styles/animations.css",
       description: "애니메이션 (steam, loading)",
     },
     {
-      source: "components/styles/scrollbar.css",
+      source: "../shared/styles/base/scrollbar.css",
       dest: "core/styles/scrollbar.css",
       description: "스크롤바 스타일 (선택적)",
     },
@@ -288,9 +333,15 @@ function main() {
     console.log(""); // 빈 줄
   });
 
-  // items 폴더 복사
+  // items 폴더 복사 (shared/styles/components/ → core/styles/items/)
   log("\n📄 컴포넌트 items 복사 중...", "cyan");
-  const itemsSource = path.join(projectRoot, "components/styles/items");
+  const itemsSource = path.join(
+    projectRoot,
+    "..",
+    "shared",
+    "styles",
+    "components"
+  );
   const itemsDest = path.join(projectRoot, "core/styles/items");
   const itemsCount = copyDirectory(itemsSource, itemsDest);
 
@@ -350,13 +401,39 @@ function main() {
   );
   successCount++;
 
+  // 이미지 폴더 복사 (shared/images/ → core/images/)
+  log("\n📄 이미지 파일 복사 중...", "cyan");
+  const imagesSource = path.join(projectRoot, "..", "shared", "images");
+  const imagesDest = path.join(projectRoot, "core/images");
+  const imagesCount = copyDirectory(imagesSource, imagesDest);
+
+  if (imagesCount > 0) {
+    log(`\n  ✓ images 폴더 복사 완료: ${imagesCount}개 파일\n`, "green");
+    // 이미지 크기 계산 (재귀적으로)
+    const calculateDirSize = (dir) => {
+      let size = 0;
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          size += calculateDirSize(fullPath);
+        } else {
+          size += fs.statSync(fullPath).size;
+        }
+      }
+      return size;
+    };
+    const imagesSize = calculateDirSize(imagesDest);
+    totalSize += imagesSize;
+  }
+
   // 완료 메시지
   log("\n" + "=".repeat(50), "cyan");
   log(`\n✅ 빌드 완료!\n`, "bright");
   log(`📊 통계:`, "cyan");
   log(`   복사된 파일: ${successCount}개`, "green");
   log(`   전체 크기: ${formatFileSize(totalSize)}`, "green");
-  log(`   저장 위치: core/styles/\n`, "green");
+  log(`   저장 위치: core/styles/, core/images/\n`, "green");
 
   // 다음 단계 안내
   log("📖 다음 단계:\n", "yellow");
@@ -371,7 +448,7 @@ function main() {
   log("  --no-clean    기존 파일 정리 없이 빌드", "cyan");
   log("                (components.css 보존하고 싶을 때 사용)\n", "cyan");
 
-  log("🎉 Core 빌드 완료!\n", "bright");
+  log("🎉 Styles 빌드 완료!\n", "bright");
 }
 
 // 스크립트 실행

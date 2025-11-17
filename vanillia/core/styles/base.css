@@ -11,6 +11,7 @@
 html,
 body {
   height: 100dvh;
-  background-color: var(--gray-50);
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-

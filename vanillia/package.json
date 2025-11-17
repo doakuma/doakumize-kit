@@ -4,8 +4,9 @@
   "description": "Vanilla JavaScript UI Components Library with Design System",
   "main": "core/components.js",
   "scripts": {
-    "build": "node scripts/build-components.js",
-    "build:core": "node scripts/build-core.js",
+    "build": "npm run build:scripts && npm run build:styles",
+    "build:scripts": "node scripts/build-scripts.js",
+    "build:styles": "node scripts/build-styles.js",
     "copy": "node scripts/copy-to-project.js"
   },
   "keywords": [

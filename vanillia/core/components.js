@@ -2,11 +2,11 @@
  * Vanilla Components Scripts Bundle
  * 컴포넌트 스크립트 통합 파일 (자동 생성)
  *
- * 이 파일은 scripts/build-components.js에 의해 자동으로 생성되었습니다.
+ * 이 파일은 scripts/build-scripts.js에 의해 자동으로 생성되었습니다.
  * 수동으로 수정하지 마세요. 수정사항은 다음 빌드 시 덮어씁니다.
  *
- * 생성일: 2025-11-06 오후 1:31:20 KST
- * 통합 파일 수: 12
+ * 생성일: 2025-11-17 오전 9:45:48 KST
+ * 통합 파일 수: 14
  * 
  * 통합된 컴포넌트:
  *   - accordion.js
@@ -14,12 +14,14 @@
  *   - chip.js
  *   - dropdown.js
  *   - file-card.js
+ *   - file-upload.js
  *   - input.js
  *   - lnb.js
  *   - modal.js
  *   - popover.js
  *   - slider.js
  *   - tab.js
+ *   - theme-manager.js
  *   - tooltip.js
  */
 
@@ -653,6 +655,7 @@ window.VanillaComponents = window.VanillaComponents || {};
     // 이벤트 위임 방식 (한 번만 등록, 모든 동적 요소 지원)
     initDropdownHandlers();
     initDropdownCloseButtons();
+    initSearchableDropdowns();
     initDropdowns();
 
     console.log("[Dropdown] Dropdown initialized successfully");
@@ -730,6 +733,14 @@ window.VanillaComponents = window.VanillaComponents || {};
         e.preventDefault();
         e.stopPropagation();
 
+        // 멀티 선택 드롭다운인지 확인
+        if (dropdown.classList.contains("dropdown--multi")) {
+          handleMultiSelect(dropdown, item);
+          // 멀티 선택에서는 드롭다운을 닫지 않음
+          return;
+        }
+
+        // 단일 선택 드롭다운
         // 기존 선택 해제
         dropdown
           .querySelectorAll(".dropdown__item--selected")
@@ -778,10 +789,10 @@ window.VanillaComponents = window.VanillaComponents || {};
       const items = dropdown.querySelectorAll(
         ".dropdown__item:not(.dropdown__item--disabled)"
       );
-      const currentSelected = dropdown.querySelector(
-        ".dropdown__item--selected"
-      );
-      let currentIndex = Array.from(items).indexOf(currentSelected);
+
+      // 키보드 포커스는 항상 focused 클래스 사용
+      const currentFocused = dropdown.querySelector(".dropdown__item--focused");
+      let currentIndex = Array.from(items).indexOf(currentFocused);
 
       switch (e.key) {
         case "ArrowDown":
@@ -796,8 +807,8 @@ window.VanillaComponents = window.VanillaComponents || {};
           break;
         case "Enter":
           e.preventDefault();
-          if (currentSelected) {
-            currentSelected.click();
+          if (currentFocused) {
+            currentFocused.click();
           }
           break;
         case "Escape":
@@ -811,16 +822,23 @@ window.VanillaComponents = window.VanillaComponents || {};
     // 아이템에 포커스 주기
     function focusItem(item) {
       if (item) {
-        // 기존 선택 해제
-        item
-          .closest(".dropdown")
-          .querySelectorAll(".dropdown__item--selected")
-          .forEach((selected) => {
-            selected.classList.remove("dropdown__item--selected");
+        const dropdown = item.closest(".dropdown");
+
+        // 키보드 포커스는 단일/멀티 모두 focused 클래스 사용
+        dropdown
+          .querySelectorAll(".dropdown__item--focused")
+          .forEach((focused) => {
+            focused.classList.remove("dropdown__item--focused");
           });
-        // 새 아이템 선택
-        item.classList.add("dropdown__item--selected");
+        item.classList.add("dropdown__item--focused");
         item.focus();
+
+        // 스크롤 자동 이동 (아이템이 보이도록)
+        item.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
       }
     }
   }
@@ -959,6 +977,321 @@ window.VanillaComponents = window.VanillaComponents || {};
     });
   }
 
+  /**
+   * 멀티 선택 처리
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {HTMLElement} item - 선택된 아이템
+   */
+  function handleMultiSelect(dropdown, item) {
+    const value = item.getAttribute("data-value") || item.textContent.trim();
+    const text = item.textContent.trim();
+
+    // 이미 선택되어 있으면 선택 해제
+    if (item.classList.contains("dropdown__item--selected")) {
+      item.classList.remove("dropdown__item--selected");
+      removeChip(dropdown, value);
+
+      // 커스텀 이벤트 발생 (선택 해제)
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:deselect", {
+          detail: { dropdown, item, value, text },
+        })
+      );
+    } else {
+      // 선택
+      item.classList.add("dropdown__item--selected");
+      addChip(dropdown, value, text);
+
+      // 커스텀 이벤트 발생 (선택)
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:select", {
+          detail: { dropdown, item, value, text },
+        })
+      );
+    }
+
+    // filled 상태 업데이트
+    updateMultiDropdownState(dropdown);
+  }
+
+  /**
+   * Chip 추가
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {string} value - 값
+   * @param {string} text - 표시 텍스트
+   */
+  function addChip(dropdown, value, text) {
+    let chipsContainer = dropdown.querySelector(".dropdown__chips");
+
+    // chips 컨테이너가 없으면 생성
+    if (!chipsContainer) {
+      const trigger = dropdown.querySelector(".dropdown__trigger");
+      chipsContainer = document.createElement("div");
+      chipsContainer.className = "dropdown__chips";
+
+      // placeholder 텍스트 앞에 삽입
+      const placeholder = trigger.querySelector(".dropdown__text--placeholder");
+      if (placeholder) {
+        trigger.insertBefore(chipsContainer, placeholder);
+      } else {
+        trigger.insertBefore(chipsContainer, trigger.firstChild);
+      }
+    }
+
+    // 이미 존재하는지 확인
+    const existingChip = chipsContainer.querySelector(
+      `[data-value="${value}"]`
+    );
+    if (existingChip) {
+      return;
+    }
+
+    // Chip 생성 (기존 chip 컴포넌트 재사용)
+    const chip = document.createElement("span");
+    chip.className = "chip chip--rounded chip--selected";
+    chip.setAttribute("data-value", value);
+    chip.innerHTML = `
+      <span class="chip__text">${text}</span>
+      <button type="button" class="chip__remove" aria-label="Remove ${text}"></button>
+    `;
+
+    chipsContainer.appendChild(chip);
+  }
+
+  /**
+   * Chip 제거
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   * @param {string} value - 제거할 값
+   */
+  function removeChip(dropdown, value) {
+    const chipsContainer = dropdown.querySelector(".dropdown__chips");
+    if (!chipsContainer) {
+      return;
+    }
+
+    const chip = chipsContainer.querySelector(`.chip[data-value="${value}"]`);
+    if (chip) {
+      chip.remove();
+    }
+  }
+
+  /**
+   * 멀티 드롭다운 상태 업데이트
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function updateMultiDropdownState(dropdown) {
+    const chipsContainer = dropdown.querySelector(".dropdown__chips");
+    const hasChips = chipsContainer && chipsContainer.children.length > 0;
+
+    if (hasChips) {
+      dropdown.classList.add("dropdown--filled");
+    } else {
+      dropdown.classList.remove("dropdown--filled");
+    }
+  }
+
+  /**
+   * Chip 제거 버튼 클릭 이벤트 (이벤트 위임)
+   * dropdown 내부의 chip__remove만 처리
+   */
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("chip__remove")) {
+      const dropdown = e.target.closest(".dropdown");
+
+      // dropdown 내부의 chip만 처리 (input-field와 구분)
+      if (!dropdown) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const chip = e.target.closest(".chip");
+
+      if (!chip) {
+        return;
+      }
+
+      const value = chip.getAttribute("data-value");
+
+      // 해당 아이템의 선택 상태 해제
+      const item = dropdown.querySelector(
+        `.dropdown__item[data-value="${value}"]`
+      );
+      if (item) {
+        item.classList.remove("dropdown__item--selected");
+      }
+
+      // Chip 제거
+      chip.remove();
+
+      // 상태 업데이트
+      updateMultiDropdownState(dropdown);
+
+      // 커스텀 이벤트 발생
+      dropdown.dispatchEvent(
+        new CustomEvent("dropdown:deselect", {
+          detail: { dropdown, value },
+        })
+      );
+    }
+  });
+
+  /**
+   * Searchable Dropdown 초기화
+   * 검색 가능한 드롭다운의 필터링 기능을 설정합니다.
+   */
+  function initSearchableDropdowns() {
+    // 검색 입력 이벤트 (이벤트 위임)
+    document.addEventListener("input", function (e) {
+      if (e.target.classList.contains("dropdown__search")) {
+        const searchInput = e.target;
+        const dropdown = searchInput.closest(".dropdown");
+
+        if (!dropdown || !dropdown.classList.contains("dropdown--searchable")) {
+          return;
+        }
+
+        handleDropdownSearch(searchInput, dropdown);
+      }
+    });
+
+    // 검색 입력창에 포커스 시 전체 아이템 표시
+    document.addEventListener(
+      "focus",
+      function (e) {
+        if (e.target.classList.contains("dropdown__search")) {
+          const searchInput = e.target;
+          const dropdown = searchInput.closest(".dropdown");
+
+          if (
+            !dropdown ||
+            !dropdown.classList.contains("dropdown--searchable")
+          ) {
+            return;
+          }
+
+          // 검색어가 비어있으면 전체 표시
+          if (!searchInput.value.trim()) {
+            showAllDropdownItems(dropdown);
+          }
+        }
+      },
+      true
+    );
+
+    // 드롭다운이 열릴 때 검색창 초기화 및 포커스
+    document.addEventListener("dropdown:open", function (e) {
+      const dropdown = e.detail.dropdown;
+
+      if (dropdown.classList.contains("dropdown--searchable")) {
+        const searchInput = dropdown.querySelector(".dropdown__search");
+        if (searchInput) {
+          // 검색어 초기화
+          searchInput.value = "";
+          // 모든 아이템 표시
+          showAllDropdownItems(dropdown);
+          // 검색창에 포커스
+          setTimeout(() => searchInput.focus(), 100);
+        }
+      }
+    });
+
+    // 키보드 네비게이션 확장 (검색창에서 아래 화살표 누르면 아이템으로 이동)
+    document.addEventListener("keydown", function (e) {
+      if (e.target.classList.contains("dropdown__search")) {
+        const dropdown = e.target.closest(".dropdown");
+
+        if (!dropdown || !dropdown.classList.contains("dropdown--open")) {
+          return;
+        }
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          const firstVisibleItem = dropdown.querySelector(
+            '.dropdown__item:not([style*="display: none"])'
+          );
+          if (firstVisibleItem) {
+            // 단일/멀티 모두 focused 클래스 사용
+            dropdown
+              .querySelectorAll(".dropdown__item--focused")
+              .forEach((item) =>
+                item.classList.remove("dropdown__item--focused")
+              );
+            firstVisibleItem.classList.add("dropdown__item--focused");
+            firstVisibleItem.focus();
+          }
+        } else if (e.key === "Escape") {
+          e.preventDefault();
+          dropdown.classList.remove("dropdown--open");
+          dropdown.querySelector(".dropdown__trigger").focus();
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          const firstVisibleItem = dropdown.querySelector(
+            '.dropdown__item:not([style*="display: none"])'
+          );
+          if (firstVisibleItem) {
+            firstVisibleItem.click();
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * 드롭다운 아이템 필터링
+   * @param {HTMLInputElement} searchInput - 검색 입력 필드
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function handleDropdownSearch(searchInput, dropdown) {
+    const query = searchInput.value.toLowerCase().trim();
+    const items = dropdown.querySelectorAll(".dropdown__item");
+    const noResults = dropdown.querySelector(".dropdown__no-results");
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const text = item.textContent.toLowerCase();
+      const matches = text.includes(query);
+
+      item.style.display = matches ? "" : "none";
+
+      // 숨겨진 아이템의 focused 클래스 제거
+      if (!matches) {
+        item.classList.remove("dropdown__item--focused");
+      }
+
+      if (matches) {
+        visibleCount++;
+      }
+    });
+
+    // No results 표시/숨김
+    if (noResults) {
+      if (visibleCount === 0 && query) {
+        noResults.classList.add("show");
+      } else {
+        noResults.classList.remove("show");
+      }
+    }
+  }
+
+  /**
+   * 모든 드롭다운 아이템 표시
+   * @param {HTMLElement} dropdown - 드롭다운 컨테이너
+   */
+  function showAllDropdownItems(dropdown) {
+    const items = dropdown.querySelectorAll(".dropdown__item");
+    const noResults = dropdown.querySelector(".dropdown__no-results");
+
+    items.forEach((item) => {
+      item.style.display = "";
+    });
+
+    if (noResults) {
+      noResults.classList.remove("show");
+    }
+  }
+
   // 전역 네임스페이스에 등록
   window.VanillaComponents = window.VanillaComponents || {};
   window.VanillaComponents.initDropdown = initDropdown;
@@ -1057,6 +1390,273 @@ window.VanillaComponents = window.VanillaComponents || {};
 
   // 초기화 함수 등록
   window.VanillaComponents.initFileCard = initFileCard;
+
+
+
+// ========================================
+// file-upload.js
+// ========================================
+
+/**
+ * File Upload Component Script
+ * 파일 업로드 컴포넌트: 파일 선택, 미리보기, 삭제 기능
+ *
+ * 사용법:
+ * <div class="file-upload" data-name="fileUpload">
+ *   <input type="file" id="fileUpload" class="file-upload__input" name="fileUpload">
+ *   <label for="fileUpload" class="file-upload__label">
+ *     <i class="icon icon--medium icon--upload"></i>
+ *     <span class="file-upload__label-text">파일 선택</span>
+ *   </label>
+ *   <div class="file-upload__preview"></div>
+ * </div>
+ */
+
+  /**
+   * File Upload 초기화 함수
+   */
+  function initFileUpload() {
+    console.log("[FileUpload] Initializing File Upload...");
+
+    // 이벤트 위임 방식 (한 번만 등록, 모든 동적 요소 지원)
+    initFileUploadEventDelegation();
+
+    // 초기 상태 설정
+    initFileUploads();
+
+    console.log("[FileUpload] File Upload initialized successfully");
+  }
+
+  /**
+   * File Upload 초기 상태 설정
+   */
+  function initFileUploads() {
+    const fileUploads = document.querySelectorAll(
+      ".file-upload:not([data-fileupload-initialized])"
+    );
+
+    fileUploads.forEach((fileUpload) => {
+      const input = fileUpload.querySelector(".file-upload__input");
+      const preview = fileUpload.querySelector(".file-upload__preview");
+
+      if (!input || !preview) return;
+
+      // 초기 파일 목록이 있으면 미리보기 업데이트
+      if (input.files && input.files.length > 0) {
+        updateFilePreview(fileUpload, input.files);
+      }
+
+      // 초기화 완료 표시
+      fileUpload.setAttribute("data-fileupload-initialized", "true");
+    });
+
+    console.log(
+      `[FileUpload] Initialized ${fileUploads.length} file upload(s)`
+    );
+  }
+
+  /**
+   * File Upload 이벤트 위임 (동적으로 추가된 요소에도 적용)
+   */
+  function initFileUploadEventDelegation() {
+    // 파일 선택 이벤트
+    document.addEventListener("change", function (e) {
+      if (e.target.classList.contains("file-upload__input")) {
+        const input = e.target;
+        const fileUpload = input.closest(".file-upload");
+        if (!fileUpload) return;
+
+        const files = input.files;
+        updateFilePreview(fileUpload, files);
+
+        // 커스텀 이벤트 발생
+        fileUpload.dispatchEvent(
+          new CustomEvent("fileUpload:change", {
+            detail: {
+              files: files,
+              value: files, // FileList 객체
+              name: fileUpload.dataset.name || input.name,
+            },
+            bubbles: true,
+          })
+        );
+      }
+    });
+
+    // 파일 삭제 버튼 클릭 이벤트
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("file-upload__remove")) {
+        const removeBtn = e.target;
+        const fileItem = removeBtn.closest(".file-upload__item");
+        const fileUpload = removeBtn.closest(".file-upload");
+        const input = fileUpload?.querySelector(".file-upload__input");
+
+        if (!fileItem || !fileUpload || !input) return;
+
+        const fileIndex = parseInt(removeBtn.dataset.index || "0", 10);
+
+        // FileList는 변경 불가능하므로 DataTransfer 사용
+        const dataTransfer = new DataTransfer();
+
+        // 삭제할 파일을 제외한 나머지 파일들 추가
+        Array.from(input.files).forEach((file, index) => {
+          if (index !== fileIndex) {
+            dataTransfer.items.add(file);
+          }
+        });
+
+        // input의 files 속성 업데이트
+        input.files = dataTransfer.files;
+
+        // 미리보기 업데이트
+        updateFilePreview(fileUpload, input.files);
+
+        // 커스텀 이벤트 발생
+        fileUpload.dispatchEvent(
+          new CustomEvent("fileUpload:remove", {
+            detail: {
+              removedIndex: fileIndex,
+              files: input.files,
+              value: input.files,
+              name: fileUpload.dataset.name || input.name,
+            },
+            bubbles: true,
+          })
+        );
+
+        // change 이벤트도 발생 (폼 제출 시 반영되도록)
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    });
+  }
+
+  /**
+   * 파일 미리보기 업데이트
+   * @param {HTMLElement} fileUpload - 파일 업로드 컨테이너
+   * @param {FileList} files - 파일 목록
+   */
+  function updateFilePreview(fileUpload, files) {
+    const preview = fileUpload.querySelector(".file-upload__preview");
+    if (!preview) return;
+
+    // 기존 미리보기 제거
+    preview.innerHTML = "";
+
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    // 파일 목록 생성
+    const fileList = document.createElement("div");
+    fileList.className = "file-upload__list";
+
+    Array.from(files).forEach((file, index) => {
+      const fileItem = createFileItem(file, index);
+      fileList.appendChild(fileItem);
+    });
+
+    preview.appendChild(fileList);
+  }
+
+  /**
+   * 파일 아이템 생성
+   * @param {File} file - 파일 객체
+   * @param {number} index - 파일 인덱스
+   * @returns {HTMLElement} 파일 아이템 요소
+   */
+  function createFileItem(file, index) {
+    const fileItem = document.createElement("div");
+    fileItem.className = "file-upload__item";
+    fileItem.dataset.index = index;
+
+    // 파일 아이콘
+    const fileIcon = getFileIcon(file.name);
+    const iconHtml = `<i class="icon ${fileIcon.iconClass} ${fileIcon.iconName}"></i>`;
+
+    // 파일 정보
+    const fileName = escapeHtml(file.name);
+    const fileSize = formatFileSize(file.size);
+
+    // 삭제 버튼
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "file-upload__remove";
+    removeBtn.dataset.index = index;
+    removeBtn.setAttribute("aria-label", "파일 삭제");
+    removeBtn.innerHTML = '<i class="icon icon--small icon--close"></i>';
+
+    fileItem.innerHTML = `
+      <div class="file-upload__item-content">
+        ${iconHtml}
+        <div class="file-upload__item-info">
+          <span class="file-upload__item-name">${fileName}</span>
+          <span class="file-upload__item-size">${fileSize}</span>
+        </div>
+      </div>
+    `;
+
+    fileItem.appendChild(removeBtn);
+    return fileItem;
+  }
+
+  /**
+   * 파일 확장자에 따른 아이콘 반환
+   * @param {string} fileName - 파일명
+   * @returns {Object} 아이콘 클래스와 이름
+   */
+  function getFileIcon(fileName) {
+    const extension = fileName.split(".").pop()?.toLowerCase() || "";
+    const iconMap = {
+      pdf: { iconClass: "icon--large", iconName: "icon--file-pdf" },
+      doc: { iconClass: "icon--large", iconName: "icon--file-doc" },
+      docx: { iconClass: "icon--large", iconName: "icon--file-doc" },
+      xls: { iconClass: "icon--large", iconName: "icon--file-xls" },
+      xlsx: { iconClass: "icon--large", iconName: "icon--file-xls" },
+      ppt: { iconClass: "icon--large", iconName: "icon--file-ppt" },
+      pptx: { iconClass: "icon--large", iconName: "icon--file-ppt" },
+      jpg: { iconClass: "icon--large", iconName: "icon--file-image" },
+      jpeg: { iconClass: "icon--large", iconName: "icon--file-image" },
+      png: { iconClass: "icon--large", iconName: "icon--file-image" },
+      gif: { iconClass: "icon--large", iconName: "icon--file-image" },
+      zip: { iconClass: "icon--large", iconName: "icon--file-zip" },
+      txt: { iconClass: "icon--large", iconName: "icon--file-text" },
+    };
+
+    return (
+      iconMap[extension] || {
+        iconClass: "icon--large",
+        iconName: "icon--file-default",
+      }
+    );
+  }
+
+  /**
+   * 파일 크기 포맷팅
+   * @param {number} bytes - 바이트 크기
+   * @returns {string} 포맷된 크기 문자열
+   */
+  function formatFileSize(bytes) {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+  }
+
+  /**
+   * HTML 이스케이프 함수
+   * @param {string} text - 이스케이프할 텍스트
+   * @returns {string} 이스케이프된 텍스트
+   */
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // 전역 네임스페이스에 등록
+  window.VanillaComponents = window.VanillaComponents || {};
+  window.VanillaComponents.initFileUpload = initFileUpload;
 
 
 
@@ -2386,6 +2986,271 @@ window.VanillaComponents = window.VanillaComponents || {};
 
 
 // ========================================
+// theme-manager.js
+// ========================================
+
+/**
+ * Theme Manager
+ * 라이트/다크 모드 전환 및 관리
+ *
+ * 📋 기능:
+ * - 테마 전환 (light ↔ dark)
+ * - localStorage에 사용자 선택 저장
+ * - 시스템 테마 자동 감지 (prefers-color-scheme)
+ * - 테마 변경 이벤트 발생
+ *
+ * 🎨 사용법:
+ * ```javascript
+ * // 테마 전환
+ * ThemeManager.toggle();
+ *
+ * // 특정 테마 설정
+ * ThemeManager.setTheme('dark');
+ *
+ * // 현재 테마 확인
+ * const theme = ThemeManager.getCurrentTheme();
+ *
+ * // 테마 변경 감지
+ * document.addEventListener('themechange', (e) => {
+ *   console.log('테마 변경됨:', e.detail.theme);
+ * });
+ * ```
+ *
+ * 📅 Created: 2025-11-12
+ */
+
+(function (window) {
+  "use strict";
+
+  const STORAGE_KEY = "doakumize-theme";
+  const THEME_ATTRIBUTE = "data-theme";
+  const THEME_LIGHT = "light";
+  const THEME_DARK = "dark";
+
+  /**
+   * ThemeManager 클래스
+   * 싱글톤 패턴으로 구현
+   */
+  class ThemeManager {
+    constructor() {
+      if (ThemeManager.instance) {
+        return ThemeManager.instance;
+      }
+
+      this.currentTheme = null;
+      this.systemPreference = null;
+      this.mediaQuery = null;
+
+      ThemeManager.instance = this;
+    }
+
+    /**
+     * 초기화
+     * 페이지 로드 시 자동 호출됨
+     */
+    init() {
+      console.log("[ThemeManager] 초기화 시작");
+
+      // 시스템 테마 감지 설정
+      this._setupSystemThemeDetection();
+
+      // 저장된 테마 또는 시스템 테마 적용
+      const savedTheme = this._getSavedTheme();
+      const initialTheme = savedTheme || this._getSystemTheme();
+
+      this.setTheme(initialTheme, false); // 초기화 시에는 저장하지 않음
+
+      console.log(`[ThemeManager] 초기 테마: ${initialTheme}`);
+    }
+
+    /**
+     * 시스템 테마 감지 설정
+     * prefers-color-scheme 미디어 쿼리 사용
+     * @private
+     */
+    _setupSystemThemeDetection() {
+      // 미디어 쿼리 생성
+      this.mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+      // 시스템 테마 변경 감지
+      this.mediaQuery.addEventListener("change", (e) => {
+        console.log(
+          `[ThemeManager] 시스템 테마 변경: ${e.matches ? "dark" : "light"}`
+        );
+
+        // 사용자가 명시적으로 선택하지 않은 경우만 자동 변경
+        const savedTheme = this._getSavedTheme();
+        if (!savedTheme) {
+          this.setTheme(e.matches ? THEME_DARK : THEME_LIGHT, false);
+        }
+      });
+    }
+
+    /**
+     * 시스템 테마 확인
+     * @private
+     * @returns {string} 'light' 또는 'dark'
+     */
+    _getSystemTheme() {
+      if (!this.mediaQuery) {
+        this.mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      }
+      return this.mediaQuery.matches ? THEME_DARK : THEME_LIGHT;
+    }
+
+    /**
+     * 저장된 테마 가져오기
+     * @private
+     * @returns {string|null} 저장된 테마 또는 null
+     */
+    _getSavedTheme() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved === THEME_LIGHT || saved === THEME_DARK) {
+          return saved;
+        }
+      } catch (e) {
+        console.warn("[ThemeManager] localStorage 접근 실패:", e);
+      }
+      return null;
+    }
+
+    /**
+     * 테마 저장
+     * @private
+     * @param {string} theme - 저장할 테마
+     */
+    _saveTheme(theme) {
+      try {
+        localStorage.setItem(STORAGE_KEY, theme);
+        console.log(`[ThemeManager] 테마 저장됨: ${theme}`);
+      } catch (e) {
+        console.warn("[ThemeManager] localStorage 저장 실패:", e);
+      }
+    }
+
+    /**
+     * 테마 설정
+     * @param {string} theme - 'light' 또는 'dark'
+     * @param {boolean} [save=true] - localStorage에 저장할지 여부
+     */
+    setTheme(theme, save = true) {
+      // 유효성 검사
+      if (theme !== THEME_LIGHT && theme !== THEME_DARK) {
+        console.error(`[ThemeManager] 유효하지 않은 테마: ${theme}`);
+        return;
+      }
+
+      // 같은 테마면 무시
+      if (this.currentTheme === theme) {
+        return;
+      }
+
+      const previousTheme = this.currentTheme;
+      this.currentTheme = theme;
+
+      // DOM에 테마 적용
+      if (theme === THEME_DARK) {
+        document.documentElement.setAttribute(THEME_ATTRIBUTE, THEME_DARK);
+      } else {
+        document.documentElement.removeAttribute(THEME_ATTRIBUTE);
+      }
+
+      // 저장
+      if (save) {
+        this._saveTheme(theme);
+      }
+
+      // 커스텀 이벤트 발생
+      this._dispatchThemeChangeEvent(theme, previousTheme);
+
+      console.log(`[ThemeManager] 테마 적용됨: ${theme}`);
+    }
+
+    /**
+     * 테마 전환 (토글)
+     * light ↔ dark
+     */
+    toggle() {
+      const newTheme =
+        this.currentTheme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+      this.setTheme(newTheme);
+    }
+
+    /**
+     * 현재 테마 확인
+     * @returns {string} 'light' 또는 'dark'
+     */
+    getCurrentTheme() {
+      return this.currentTheme || THEME_LIGHT;
+    }
+
+    /**
+     * 다크모드 여부 확인
+     * @returns {boolean}
+     */
+    isDarkMode() {
+      return this.currentTheme === THEME_DARK;
+    }
+
+    /**
+     * 테마 변경 이벤트 발생
+     * @private
+     * @param {string} newTheme - 새 테마
+     * @param {string|null} previousTheme - 이전 테마
+     */
+    _dispatchThemeChangeEvent(newTheme, previousTheme) {
+      const event = new CustomEvent("themechange", {
+        detail: {
+          theme: newTheme,
+          previousTheme: previousTheme,
+          isDark: newTheme === THEME_DARK,
+        },
+        bubbles: true,
+      });
+
+      document.dispatchEvent(event);
+    }
+
+    /**
+     * 저장된 테마 초기화 (시스템 기본값으로 복귀)
+     */
+    reset() {
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        console.log("[ThemeManager] 저장된 테마 초기화");
+      } catch (e) {
+        console.warn("[ThemeManager] localStorage 초기화 실패:", e);
+      }
+
+      // 시스템 테마로 변경
+      const systemTheme = this._getSystemTheme();
+      this.setTheme(systemTheme, false);
+    }
+  }
+
+  // 싱글톤 인스턴스 생성
+  const themeManager = new ThemeManager();
+
+  // 전역 객체로 노출
+  window.ThemeManager = themeManager;
+
+  // DOM 준비되면 자동 초기화
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      themeManager.init();
+    });
+  } else {
+    // 이미 로드된 경우 즉시 초기화
+    themeManager.init();
+  }
+
+  console.log("[ThemeManager] 로드 완료");
+})(window);
+
+
+
+// ========================================
 // tooltip.js
 // ========================================
 
@@ -2699,3 +3564,61 @@ window.VanillaComponents = window.VanillaComponents || {};
   // 전역 네임스페이스에 등록
   window.VanillaComponents = window.VanillaComponents || {};
   window.VanillaComponents.initTooltip = initTooltip;
+// ========================================
+// initAll - 모든 컴포넌트 초기화
+// ========================================
+
+/**
+ * 모든 컴포넌트 초기화
+ * DOM에 있는 모든 컴포넌트를 자동으로 초기화합니다.
+ */
+function initAll() {
+  console.log("[VanillaComponents] Initializing all components...");
+  
+  // 각 컴포넌트 초기화 함수 호출
+  if (window.VanillaComponents.initAccordion) {
+    window.VanillaComponents.initAccordion();
+  }
+  if (window.VanillaComponents.initCheckboxGroup) {
+    window.VanillaComponents.initCheckboxGroup();
+  }
+  if (window.VanillaComponents.initChip) {
+    window.VanillaComponents.initChip();
+  }
+  if (window.VanillaComponents.initDropdown) {
+    window.VanillaComponents.initDropdown();
+  }
+  if (window.VanillaComponents.initFileCard) {
+    window.VanillaComponents.initFileCard();
+  }
+  if (window.VanillaComponents.initFileUpload) {
+    window.VanillaComponents.initFileUpload();
+  }
+  if (window.VanillaComponents.initInput) {
+    window.VanillaComponents.initInput();
+  }
+  if (window.VanillaComponents.initLnb) {
+    window.VanillaComponents.initLnb();
+  }
+  if (window.VanillaComponents.initModal) {
+    window.VanillaComponents.initModal();
+  }
+  if (window.VanillaComponents.initPopover) {
+    window.VanillaComponents.initPopover();
+  }
+  if (window.VanillaComponents.initSlider) {
+    window.VanillaComponents.initSlider();
+  }
+  if (window.VanillaComponents.initTab) {
+    window.VanillaComponents.initTab();
+  }
+  if (window.VanillaComponents.initTooltip) {
+    window.VanillaComponents.initTooltip();
+  }
+  
+  console.log("[VanillaComponents] All components initialized");
+}
+
+// 전역 네임스페이스에 등록
+window.VanillaComponents = window.VanillaComponents || {};
+window.VanillaComponents.initAll = initAll;

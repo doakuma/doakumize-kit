@@ -63,7 +63,7 @@
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  background: url(../../../../shared/images/icons/icon_dropdown_arrow.png) no-repeat center center;
+  background: url(../../images/icons/icon_dropdown_arrow.png) no-repeat center center;
   background-size: contain;
   transition: transform 0.2s ease-in-out;
   pointer-events: none;
@@ -271,7 +271,7 @@
   margin: auto;
   width: 16px;
   height: 16px;
-  background: url(../../../../shared/images/icons/icon_dropdown_check.png) no-repeat center center;
+  background: url(../../images/icons/icon_dropdown_check.png) no-repeat center center;
   background-size: contain;
 }
 
@@ -488,7 +488,7 @@
   margin: auto;
   width: 20px;
   height: 20px;
-  background: url(../../../../shared/images/icons/icon_close.png) no-repeat center center;
+  background: url(../../images/icons/icon_close.png) no-repeat center center;
   background-size: 100% 100%;
   cursor: pointer;
   border: none;
