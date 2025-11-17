@@ -15,9 +15,10 @@ export default defineConfig(() => {
     // GitHub Pages 배포 경로 (항상 설정)
     base: "/doakumize-kit/react/",
 
-    // Shared 리소스 접근을 위한 alias
+    // 경로 alias 설정
     resolve: {
       alias: {
+        "@": resolve(__dirname, "./src"),
         "@shared": resolve(__dirname, "../shared"),
       },
     },

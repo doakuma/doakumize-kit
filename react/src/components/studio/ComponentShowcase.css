@@ -1,0 +1,130 @@
+/* Component Showcase Styles */
+.component-showcase {
+  padding: 32px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.showcase-header {
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.showcase-title {
+  font: var(--h2);
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.showcase-description {
+  font: var(--body-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.showcase-section {
+  margin-bottom: 48px;
+}
+
+.showcase-section-title {
+  font: var(--h4);
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.showcase-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.showcase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.showcase-preview {
+  padding: 16px;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  width: 100%;
+}
+
+.showcase-label {
+  font: var(--sub-md-xs);
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
+.props-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+}
+
+.props-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface-elevated);
+}
+
+.props-table thead {
+  background-color: var(--surface-base);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.props-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font: var(--sub-sb-sm);
+  color: var(--text-primary);
+}
+
+.props-table td {
+  padding: 12px 16px;
+  font: var(--body-md);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.props-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.props-code {
+  background-color: var(--surface-base);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--interactive-text-default);
+}
+
+.showcase-not-found {
+  padding: 40px;
+  text-align: center;
+}
+
+.showcase-not-found h2 {
+  font: var(--h3);
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.showcase-not-found p {
+  font: var(--body-md);
+  color: var(--text-secondary);
+  margin: 0;
+}
+

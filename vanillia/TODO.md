@@ -28,8 +28,9 @@
 
 ## 📊 프로젝트 현황 요약
 
-> 📌 **소스 오브 트루스**: `vanillia/resources/js/components-config.js`
+> 📌 **소스 오브 트루스**: `shared/data/components-config.js`
 > 컴포넌트 현황은 components-config.js의 COMPONENT_LIST 기준입니다.
+> 프레임워크별 enabled 상태: `enabled: { vanilla: boolean, react: boolean, mui: boolean }`
 
 ### ✅ 완료된 항목 (enabled: true)
 
@@ -177,7 +178,7 @@ SCSS 믹스인으로 코드 간소화 (3줄로 전체 컬러 스케일 생성 �
 
 ## 🎨 신규 컴포넌트 계획 (enabled: false → true 전환 예정)
 
-> 📌 components-config.js의 `enabled: false` 컴포넌트 기준
+> 📌 `shared/data/components-config.js`의 `enabled: { vanilla: false, react: false, mui: false }` 컴포넌트 기준
 
 ### 📦 Form Controls (2개)
 

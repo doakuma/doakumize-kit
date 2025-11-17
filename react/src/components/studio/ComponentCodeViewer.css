@@ -1,0 +1,55 @@
+/* Component Code Viewer Styles */
+.code-viewer {
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--surface-elevated);
+}
+
+.code-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--surface-base);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.code-viewer-language {
+  font: var(--sub-md-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.code-viewer-copy {
+  padding: 4px 12px;
+  background-color: var(--surface-hover);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  font: var(--sub-md-xs);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.code-viewer-copy:hover {
+  background-color: var(--surface-active);
+  border-color: var(--border-hover);
+}
+
+.code-viewer-content {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  background-color: var(--surface-elevated);
+}
+
+.code-viewer-content code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre;
+}
+

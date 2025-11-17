@@ -1,6 +1,6 @@
 /**
  * Index Page Script
- * components-config.js 데이터를 기반으로 동적으로 컴포넌트 리스트 생성
+ * shared/data/components-config.js 데이터를 기반으로 동적으로 컴포넌트 리스트 생성
  */
 
 (function () {
@@ -16,7 +16,7 @@
       return;
     }
 
-    // components-config.js에서 데이터 가져오기
+    // shared/data/components-config.js에서 데이터 가져오기
     if (
       !window.ComponentConfig ||
       !window.ComponentConfig.COMPONENT_CATEGORIES
@@ -36,12 +36,15 @@
       };
     });
 
-    // 컴포넌트 분류
+    // 컴포넌트 분류 (Vanilla 기준)
     COMPONENT_LIST.forEach((comp) => {
       const category = comp.category;
       if (!categoryGroups[category]) return;
 
-      const isCompleted = comp.enabled !== false;
+      const isCompleted = window.ComponentConfig.isComponentEnabled(
+        comp,
+        "vanilla"
+      );
 
       if (isCompleted) {
         categoryGroups[category].completed.push(comp);
@@ -120,9 +123,9 @@
 
     const { COMPONENT_LIST } = window.ComponentConfig;
 
-    // 완성/전체 개수 계산
-    const completedCount = COMPONENT_LIST.filter(
-      (comp) => comp.enabled !== false
+    // 완성/전체 개수 계산 (Vanilla 기준)
+    const completedCount = COMPONENT_LIST.filter((comp) =>
+      window.ComponentConfig.isComponentEnabled(comp, "vanilla")
     ).length;
     const totalCount = COMPONENT_LIST.length;
     const percentage = Math.round((completedCount / totalCount) * 100);

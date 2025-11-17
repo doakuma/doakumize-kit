@@ -33,7 +33,7 @@ components/
 
 resources/
   ├── js/
-  │   ├── components-config.js     # 컴포넌트 리스트 + 카테고리 관리
+  │   └── (components-config.js는 shared/data/로 이동됨)
   │   ├── components-page.js       # LNB 네비게이션 + 컨텐츠 전환
   │   └── component-code-viewer.js # 코드 보기/복사 기능
   └── styles/                      # Studio 전용 스타일
@@ -166,7 +166,7 @@ const COMPONENT_CATEGORIES = {
 
 ### 🔧 컴포넌트 추가하기
 
-`resources/js/components-config.js`의 `COMPONENT_LIST`에 추가:
+`shared/data/components-config.js`의 `COMPONENT_LIST`에 추가:
 
 ```javascript
 const COMPONENT_LIST = [
@@ -176,7 +176,11 @@ const COMPONENT_LIST = [
     name: "My Component",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
     order: 20,
-    enabled: true, // 또는 false (준비 중)
+    enabled: { 
+      vanilla: true,  // Vanilla 구현 여부
+      react: false,   // React 구현 여부
+      mui: false      // MUI 구현 여부
+    },
   },
 ];
 ```
@@ -276,12 +280,17 @@ ComponentConfig.COMPONENT_LIST;
 
 #### 1. 컴포넌트 리스트 등록
 
-먼저 `resources/js/components-config.js`에 추가하세요:
+먼저 `shared/data/components-config.js`에 추가하세요:
 
 ```javascript
 const COMPONENT_LIST = [
   // 기존 컴포넌트들...
-  { id: "my-component", name: "My Component", order: 16 },
+  { 
+    id: "my-component", 
+    name: "My Component", 
+    order: 16,
+    enabled: { vanilla: true, react: false, mui: false }
+  },
 ];
 ```
 
@@ -469,7 +478,7 @@ window.addCodeToggleButtons();
 2. ✅ **자동 마운트 시스템** - `data-component` 기반
 3. ✅ **데이터 파일 시스템** - `.data.js` 로컬 개발 지원
 4. ✅ **코드 보기 모듈** - 독립 분리 및 전역 함수 제공
-5. ✅ **컴포넌트 리스트 관리** - `components-config.js` 중앙 관리
+5. ✅ **컴포넌트 리스트 관리** - `shared/data/components-config.js` 중앙 관리 (프레임워크별 enabled 지원)
 6. ✅ **카테고리 시스템** - 5개 카테고리로 체계적 분류
 7. ✅ **LNB 네비게이션** - 사이드바 기반 탐색 시스템
 8. ✅ **컨텐츠 전환 방식** - 탭 네비게이션 제거, 부드러운 전환
@@ -528,7 +537,7 @@ window.addCodeToggleButtons();
     └── components-init.js           (237 lines)
   - resources/js/
     ├── component-code-viewer.js     (285 lines)
-    ├── components-config.js         (393 lines) - 카테고리 관리
+    └── (components-config.js는 shared/data/로 이동됨)
     └── components-page.js           (567 lines) - LNB + 전환
 
 ✅ 사용법

@@ -306,9 +306,10 @@ cd framework-name/
 ```
 
 #### 3단계: 컴포넌트 구현
-- `vanillia/resources/js/components-config.js` 참고
+- `shared/data/components-config.js` 참고
 - 동일한 컴포넌트 목록 구현
 - CSS Variables 활용
+- 프레임워크별 `enabled` 상태 업데이트
 
 #### 4단계: 메인 index.html 업데이트
 ```html
@@ -328,7 +329,7 @@ window.ComponentData.newComponent = { ... };
 
 #### 2단계: components-config.js 등록
 ```javascript
-// vanillia/resources/js/components-config.js
+// shared/data/components-config.js
 const COMPONENT_LIST = [
   // ...
   {

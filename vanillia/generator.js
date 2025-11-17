@@ -38,10 +38,12 @@
       const listContainer = document.getElementById("componentList");
       if (!listContainer) return;
 
-      // 카테고리별로 그룹핑
+      // 카테고리별로 그룹핑 (Vanilla 기준)
       const byCategory = {};
       this.components.forEach((comp) => {
-        if (!comp.enabled) return; // 비활성화된 컴포넌트는 제외
+        if (!window.ComponentConfig?.isComponentEnabled?.(comp, "vanilla")) {
+          return; // 비활성화된 컴포넌트는 제외
+        }
 
         const category = comp.category || "Others";
         if (!byCategory[category]) {

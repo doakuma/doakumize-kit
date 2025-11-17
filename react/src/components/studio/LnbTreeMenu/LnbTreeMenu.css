@@ -1,0 +1,8 @@
+/* LNB Tree Menu Styles
+ * 바닐라의 lnb.css 스타일을 리액트에서 사용하기 위한 임포트
+ * 실제 스타일은 shared/styles/base/lnb.css에 정의되어 있음
+ */
+
+/* 이 파일은 스타일 오버라이드가 필요한 경우에만 사용 */
+/* 기본 스타일은 shared/styles/base/lnb.css를 import 해서 사용 */
+

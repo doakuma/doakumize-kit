@@ -269,8 +269,10 @@ function renderCategoryNavigation() {
         showComponent(comp.id);
       });
     } else {
-      // 활성화된 컴포넌트 개수 표시
-      const enabledCount = components.filter((c) => c.enabled !== false).length;
+      // 활성화된 컴포넌트 개수 표시 (Vanilla 기준)
+      const enabledCount = components.filter((c) =>
+        window.ComponentConfig.isComponentEnabled(c, "vanilla")
+      ).length;
       const totalCount = components.length;
       categoryButton.innerHTML = `<span class="lnb-menu-item__text">${category} <span class="text-tertiary">(${enabledCount}/${totalCount})</span></span>`;
     }
@@ -305,8 +307,11 @@ function renderCategoryNavigation() {
         link.href = "#";
         link.dataset.componentId = comp.id;
 
-        // enabled 여부에 따라 클래스 및 스타일 적용
-        const isEnabled = comp.enabled !== false;
+        // enabled 여부에 따라 클래스 및 스타일 적용 (Vanilla 기준)
+        const isEnabled = window.ComponentConfig.isComponentEnabled(
+          comp,
+          "vanilla"
+        );
 
         if (isEnabled) {
           link.className = "lnb-submenu__link";
@@ -351,11 +356,11 @@ function renderCategoryNavigation() {
     nav.appendChild(categoryItem);
   });
 
-  // 컴포넌트 총 개수 업데이트 (활성화/전체)
+  // 컴포넌트 총 개수 업데이트 (활성화/전체, Vanilla 기준)
   const componentCount = document.getElementById("componentCount");
   if (componentCount) {
-    const enabledComponents = allComponents.filter(
-      (c) => c.enabled !== false
+    const enabledComponents = allComponents.filter((c) =>
+      window.ComponentConfig.isComponentEnabled(c, "vanilla")
     ).length;
     const totalComponents = allComponents.length;
     componentCount.innerHTML = `<strong>${enabledComponents}</strong>/${totalComponents} Components`;

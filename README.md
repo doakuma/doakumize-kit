@@ -120,7 +120,7 @@ component-studio/
 ### Navigation (네비게이션)
 - Tab, Accordion
 
-> 📌 **소스 오브 트루스**: `vanillia/resources/js/components-config.js`
+> 📌 **소스 오브 트루스**: `shared/data/components-config.js`
 
 ## 🛠️ 개발 환경
 

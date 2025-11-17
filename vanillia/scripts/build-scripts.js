@@ -27,8 +27,9 @@ const scriptsDir = path.join(projectRoot, "components", "scripts");
 const dataDir = path.join(projectRoot, "components", "data");
 const configFile = path.join(
   projectRoot,
-  "resources",
-  "js",
+  "..",
+  "shared",
+  "data",
   "components-config.js"
 );
 const outputFile = path.join(projectRoot, "resources", "js", "components.js");
@@ -184,7 +185,7 @@ function loadComponentConfig() {
 
   if (!fs.existsSync(configFile)) {
     console.warn(
-      "⚠ Warning: components-config.js not found, categories will be missing"
+      "⚠ Warning: shared/data/components-config.js not found, categories will be missing"
     );
     return configMap;
   }
