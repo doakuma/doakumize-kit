@@ -9,6 +9,7 @@
 @import url(./components/input.css);
 @import url(./components/dropdown.css);
 @import url(./components/modal.css);
+@import url(./components/tree-menu.css);
 
 /* 나머지 컴포넌트 (임시 통합) */
 @import url(./components/all-other-components.css);

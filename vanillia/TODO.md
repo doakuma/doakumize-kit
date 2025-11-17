@@ -276,7 +276,18 @@ SCSS 믹스인으로 코드 간소화 (3줄로 전체 컬러 스케일 생성 �
 
 > 💡 **Note**: Alert와 Dialog는 Modal 컴포넌트의 옵션/variant로 구현 (별도 컴포넌트 없음)
 
-### 🧭 Navigation (4개)
+### 🧭 Navigation (5개)
+
+- [x] **Tree Menu** ✅
+  - 계층적 메뉴 구조
+  - 펼치기/접기 기능
+  - Accordion/Multi-expand 모드
+  - Active 상태 관리
+  - Semantic HTML 구조
+  - 키보드 접근성 지원
+  - [ ] **헬퍼 함수 추가 (예정)**
+    - JSON 데이터를 HTML로 변환하는 `renderTreeMenu()` 함수
+    - 동적 메뉴 생성 시 필요
 
 - [ ] **Breadcrumb**
 
@@ -305,7 +316,7 @@ SCSS 믹스인으로 코드 간소화 (3줄로 전체 컬러 스케일 생성 �
 
 ### 📊 신규 컴포넌트 통계
 
-- **총 18개** 추가 예정 (기존 13개 → 18개)
+- **총 19개** 추가 예정 (기존 13개 → 19개, Tree Menu 완료)
 - **외부 라이브러리 필요**: 1개 (Carousel)
 - **우선순위 높음** ⭐⭐⭐: Divider, Drawer
 - **우선순위 중간** ⭐⭐: Rating, Timeline, Carousel, Notification

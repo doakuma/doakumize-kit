@@ -360,6 +360,13 @@ const COMPONENT_LIST = [
     enabled: false,
     order: 40,
   },
+  {
+    id: "tree-menu",
+    name: "Tree Menu",
+    category: COMPONENT_CATEGORIES.NAVIGATION,
+    enabled: true,
+    order: 41,
+  },
 ];
 
 /**
