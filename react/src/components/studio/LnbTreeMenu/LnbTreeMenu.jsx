@@ -17,6 +17,9 @@ function LnbMenuItem({
   children,
   defaultExpanded = false,
   showToggle = true,
+  hasChildren = true,
+  isActive = false,
+  onClick,
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
@@ -26,17 +29,24 @@ function LnbMenuItem({
     setIsExpanded((prev) => !prev);
   };
 
-  const hasChildren = children && children.length > 0;
+  const handleClick = (e) => {
+    if (hasChildren && showToggle) {
+      handleToggle(e);
+    }
+    onClick?.(e);
+  };
 
   return (
     <div
-      className={`lnb-menu-item ${isExpanded ? "lnb-menu-item--expanded" : ""}`}
+      className={`lnb-menu-item ${
+        hasChildren && isExpanded ? "lnb-menu-item--expanded" : ""
+      } ${isActive ? "lnb-menu-item--active" : ""}`}
     >
       <div className="lnb-menu-item__header">
         <button
           className="lnb-menu-item__link"
           type="button"
-          onClick={hasChildren && showToggle ? handleToggle : undefined}
+          onClick={handleClick}
         >
           <span className="lnb-menu-item__text">{label}</span>
         </button>
@@ -126,47 +136,56 @@ function LnbTreeMenu({
 }) {
   return (
     <div className="lnb-body-menu">
+      <h2 className="text-body-sm">Component Categories</h2>
       <div className="lnb-body-menu-list-wrapper">
         <nav className="lnb-body-menu-list">
-          {items.map((item) => (
-            <LnbMenuItem
-              key={
-                item.id ||
-                (typeof item.label === "string"
-                  ? item.label
-                  : `item-${items.indexOf(item)}`)
-              }
-              label={item.label}
-              defaultExpanded={item.defaultExpanded ?? defaultExpanded}
-              showToggle={item.showToggle !== false}
-            >
-              {item.children?.map((child) => (
-                <LnbSubmenuItem
-                  key={child.id}
-                  id={child.id}
-                  label={child.label}
-                  disabled={child.disabled}
-                  isActive={activeItemId === child.id}
-                  onClick={onItemClick}
-                >
-                  {child.disabled && (
-                    <>
-                      <i
-                        className="icon icon--small icon--pending"
-                        style={{ opacity: 0.5 }}
-                      />
-                      <span
-                        className="chip chip--small"
-                        style={{ opacity: 0.5, marginLeft: "4px" }}
-                      >
-                        준비 중
-                      </span>
-                    </>
-                  )}
-                </LnbSubmenuItem>
-              ))}
-            </LnbMenuItem>
-          ))}
+          {items.map((item) => {
+            const hasActiveChild =
+              item.hasChildren &&
+              activeItemId &&
+              item.children?.some((child) => child.id === activeItemId);
+            const shouldExpand =
+              hasActiveChild || (item.defaultExpanded ?? defaultExpanded);
+            return (
+              <LnbMenuItem
+                key={
+                  item.id ||
+                  (typeof item.label === "string"
+                    ? item.label
+                    : `item-${items.indexOf(item)}`)
+                }
+                label={item.label}
+                defaultExpanded={shouldExpand}
+                showToggle={item.showToggle !== false}
+                hasChildren={item.hasChildren}
+                isActive={activeItemId === item.id}
+                onClick={(e) =>
+                  !item.hasChildren ? onItemClick?.(e, item.id) : undefined
+                }
+              >
+                {item.children?.map((child) => (
+                  <LnbSubmenuItem
+                    key={child.id}
+                    id={child.id}
+                    label={child.label}
+                    disabled={child.disabled}
+                    isActive={activeItemId === child.id}
+                    onClick={onItemClick}
+                  >
+                    {child.disabled && (
+                      <>
+                        {/* <i
+                          className="icon icon--small icon--pending"
+                          style={{ opacity: 0.5 }}
+                        /> */}
+                        <span className="chip chip--small">준비 중</span>
+                      </>
+                    )}
+                  </LnbSubmenuItem>
+                ))}
+              </LnbMenuItem>
+            );
+          })}
         </nav>
       </div>
     </div>
@@ -175,4 +194,3 @@ function LnbTreeMenu({
 
 export default LnbTreeMenu;
 export { LnbMenuItem, LnbSubmenuItem };
-

@@ -215,9 +215,9 @@ body {
 }
 
 /* Section Common */
-section {
+/* section {
   padding: 80px 0;
-}
+} */
 
 section .text-h2 {
   text-align: center;
@@ -3170,7 +3170,8 @@ section .text-h2 {
   font-size: 10px;
 }
 
-.generator-build-notice__details[open] .generator-build-notice__summary::before {
+.generator-build-notice__details[open]
+  .generator-build-notice__summary::before {
   transform: rotate(90deg);
 }
 
