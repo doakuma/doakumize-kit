@@ -16,11 +16,14 @@ function toComponentName(id) {
 
 /**
  * 컴포넌트 showcase 파일 경로 생성
- * 예: "button" -> "@/components/ui/Button/Button.showcase.jsx"
+ * 예: "button" -> "../ui/Button/Button.showcase.jsx"
+ * 동적 import에서는 alias(@)가 작동하지 않으므로 상대 경로 사용
  */
 function getShowcasePath(componentId) {
   const componentName = toComponentName(componentId);
-  return `@/components/ui/${componentName}/${componentName}.showcase.jsx`;
+  // ComponentShowcase.jsx는 src/components/studio/에 있으므로
+  // src/components/ui/로 가려면 ../ui/ 사용
+  return `../ui/${componentName}/${componentName}.showcase.jsx`;
 }
 
 /**
