@@ -58,6 +58,13 @@ jobs:
           # React 빌드 결과물 복사 (dist 내부 파일들을 react/ 폴더로)
           mkdir -p deploy/react
           cp -r react/dist/* deploy/react/
+          # 404.html 생성: SPA 라우팅 처리
+          # 1. react/404.html: index.html과 동일하게 (서브디렉토리 내부 라우팅용)
+          cp deploy/react/index.html deploy/react/404.html
+          # 2. 루트 404.html: React 앱 경로인 경우 React 앱 로드
+          # GitHub Pages는 루트의 404.html만 인식하므로, 여기서 React 앱 경로를 처리
+          # React Router가 현재 URL을 읽어서 라우팅 처리 (basename: "/doakumize-kit/react" 설정됨)
+          cp deploy/react/index.html deploy/404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
