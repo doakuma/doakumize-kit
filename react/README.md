@@ -177,18 +177,24 @@ pnpm build
 react/
 ├── src/
 │   ├── components/
-│   │   ├── ui/          # 패키지에 포함될 컴포넌트
-│   │   ├── layout/      # 데모 전용 레이아웃
-│   │   └── sections/   # 데모 전용 섹션
-│   ├── styles/         # 스타일 파일 (variables.css, normalize.css)
-│   ├── index.js        # 패키지 진입점
+│   │   ├── ui/              # 📦 패키지에 포함될 컴포넌트
+│   │   ├── studio/          # 🌐 스튜디오 데모 전용
+│   │   │   ├── layout/      # 레이아웃 (Header, Footer, Layout)
+│   │   │   ├── ComponentsSidebar.jsx
+│   │   │   ├── ComponentShowcase.jsx
+│   │   │   └── ...
+│   │   └── sections/        # 🌐 스튜디오 데모 전용 (홈페이지 섹션)
+│   │       ├── Hero.jsx
+│   │       └── Features.jsx
+│   ├── styles/             # 스타일 파일 (variables.css, normalize.css)
+│   ├── index.js            # 패키지 진입점
 │   └── ...
-├── dist/               # 빌드 결과물
-│   ├── index.js        # CommonJS
-│   ├── index.esm.js    # ES Module
-│   ├── index.umd.js    # UMD
-│   └── styles.css     # 통합 CSS
-├── rollup.config.js    # Rollup 설정
+├── dist/                   # 빌드 결과물
+│   ├── index.js            # CommonJS
+│   ├── index.esm.js        # ES Module
+│   ├── index.umd.js        # UMD
+│   └── styles.css          # 통합 CSS
+├── rollup.config.js        # Rollup 설정
 └── package.json
 ```
 

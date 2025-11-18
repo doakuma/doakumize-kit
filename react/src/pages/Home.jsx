@@ -1,7 +1,6 @@
-import Layout from "../components/layout/Layout";
+import Layout from "../components/studio/layout/Layout";
 import Hero from "../components/sections/Hero";
 import Features from "../components/sections/Features";
-import ButtonDemo from "../components/sections/ButtonDemo";
 
 /**
  * Home Page
@@ -12,7 +11,6 @@ function Home() {
     <Layout>
       <Hero />
       <Features />
-      <ButtonDemo />
     </Layout>
   );
 }

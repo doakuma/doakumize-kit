@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/studio/layout/Layout";
 import ComponentsSidebar from "../components/studio/ComponentsSidebar";
 import ComponentShowcase from "../components/studio/ComponentShowcase";
 import {

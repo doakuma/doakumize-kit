@@ -51,32 +51,28 @@ function Footer() {
 
   return (
     <footer id="footer" className="footer">
-      <div className="footer-content">
-        <div className="footer-main">
-          <div className="footer-brand">
-            <h3 className="text-h3">{footerData.logo}</h3>
-            <p className="text-body-sm text-secondary">
-              {footerData.description}
-            </p>
-            <p className="text-sub-md-12 text-tertiary">{footerData.version}</p>
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3 className="footer-logo">{footerData.logo}</h3>
+            <p className="footer-description">{footerData.description}</p>
+            <p className="footer-version">{footerData.version}</p>
           </div>
-
           {footerData.sections.map((section, idx) => (
             <div key={idx} className="footer-section">
-              <h4 className="text-sub-sb-14 footer-section-title">
-                {section.title}
-              </h4>
+              <h4 className="footer-title">{section.title}</h4>
               <ul className="footer-links">
                 {section.links.map((link, linkIdx) => (
                   <li key={linkIdx}>
                     <a
                       href={link.href}
-                      className="text-body-sm footer-link"
                       target={link.external ? "_blank" : undefined}
                       rel={link.external ? "noopener noreferrer" : undefined}
                     >
                       {link.text}
-                      {link.external && " ↗"}
+                      {link.external && (
+                        <i class="icon icon--small icon--external"></i>
+                      )}
                     </a>
                   </li>
                 ))}
@@ -86,8 +82,8 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p className="text-sub-md-12 text-tertiary">{footerData.copyright}</p>
-          <p className="text-sub-md-12 text-tertiary">{footerData.credit}</p>
+          <p className="footer-copyright">{footerData.copyright}</p>
+          <p className="footer-credit">{footerData.credit}</p>
         </div>
       </div>
     </footer>
@@ -95,3 +91,4 @@ function Footer() {
 }
 
 export default Footer;
+
