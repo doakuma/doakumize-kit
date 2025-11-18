@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Layout from "../components/studio/layout/Layout";
-import ComponentsSidebar from "../components/studio/ComponentsSidebar";
-import ComponentShowcase from "../components/studio/ComponentShowcase";
+import Layout from "@/components/studio/layout/Layout";
+import ComponentsSidebar from "@/components/studio/ComponentsSidebar";
+import ComponentShowcase from "@/components/studio/ComponentShowcase";
 import {
   COMPONENT_LIST,
   COMPONENT_CATEGORIES,
-} from "../data/components-config";
+} from "@/data/components-config";
 import "./Components.css";
 
 /**

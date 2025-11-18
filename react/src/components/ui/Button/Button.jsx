@@ -1,8 +1,9 @@
+import PropTypes from "prop-types";
 import "./Button.css";
 
 /**
  * Button Component
- * 
+ *
  * @param {string} variant - 버튼 스타일: 'primary' | 'secondary' | 'default' | 'ghost' | 'text' | 'point' | 'point-secondary'
  * @param {string} size - 버튼 크기: 'small' | 'medium' | 'large'
  * @param {boolean} disabled - 비활성화 여부
@@ -45,3 +46,30 @@ export const Button = ({
   );
 };
 
+Button.propTypes = {
+  variant: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "default",
+    "ghost",
+    "text",
+    "point",
+    "point-secondary",
+  ]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  disabled: PropTypes.bool,
+  circle: PropTypes.bool,
+  startIcon: PropTypes.node,
+  endIcon: PropTypes.node,
+  children: PropTypes.node,
+};
+
+Button.defaultProps = {
+  variant: "primary",
+  size: "medium",
+  disabled: false,
+  circle: false,
+  startIcon: null,
+  endIcon: null,
+  children: null,
+};

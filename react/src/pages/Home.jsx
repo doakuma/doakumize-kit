@@ -1,7 +1,7 @@
-import Layout from "../components/studio/layout/Layout";
-import Hero from "../components/sections/Hero";
-import Features from "../components/sections/Features";
-import Components from "../components/sections/Components";
+import Layout from "@/components/studio/layout/Layout";
+import Hero from "@/components/sections/Hero";
+import Features from "@/components/sections/Features";
+import Components from "@/components/sections/Components";
 
 /**
  * Home Page

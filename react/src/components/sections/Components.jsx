@@ -4,7 +4,7 @@ import {
   COMPONENT_LIST,
   COMPONENT_CATEGORIES,
   isComponentEnabled,
-} from "../../data/components-config";
+} from "@/data/components-config";
 
 /**
  * Components Section
