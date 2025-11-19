@@ -7,7 +7,7 @@
 
 .components-content {
   flex: 1;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background-color: var(--surface-page);
 }
 
@@ -32,4 +32,3 @@
   color: var(--text-secondary);
   margin: 0;
 }
-

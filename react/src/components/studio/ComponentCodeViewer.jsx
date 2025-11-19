@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./ComponentCodeViewer.css";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 /**
  * Component Code Viewer
@@ -22,20 +24,29 @@ function ComponentCodeViewer({ code, language = "jsx" }) {
     <div className="code-viewer">
       <div className="code-viewer-header">
         <span className="code-viewer-language">{language}</span>
-        <button 
-          className="code-viewer-copy" 
+        <button
+          className="code-viewer-copy"
           onClick={handleCopy}
           aria-label="Copy code"
         >
           {copied ? "✓ Copied!" : "Copy"}
         </button>
       </div>
-      <pre className="code-viewer-content">
-        <code>{code}</code>
-      </pre>
+      <SyntaxHighlighter
+        language={language}
+        style={materialDark}
+        customStyle={{
+          border: 0,
+          margin: 0,
+        }}
+        showLineNumbers
+        wrapLines
+        wrapLongLines
+      >
+        {code}
+      </SyntaxHighlighter>
     </div>
   );
 }
 
 export default ComponentCodeViewer;
-

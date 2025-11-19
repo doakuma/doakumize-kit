@@ -356,10 +356,25 @@
   opacity: 0.6;
 }
 
+.btn--circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+}
+.btn--circle.btn--small {
+  min-width: 30px;
+}
+.btn--circle.btn--medium {
+  min-width: 36px;
+}
+.btn--circle.btn--large {
+  min-width: 40px;
+}
+
 /* Button Group */
 .btn-group {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./Button.css";
+import Icon from "../Icon/Icon";
 
 /**
  * Button Component
@@ -39,9 +40,9 @@ export const Button = ({
 
   return (
     <button className={className} disabled={disabled} {...props}>
-      {startIcon && <span className="icon">{startIcon}</span>}
+      {startIcon && <Icon name={startIcon.props.name} size={size} />}
       {children && <span>{children}</span>}
-      {endIcon && <span className="icon">{endIcon}</span>}
+      {endIcon && <Icon name={endIcon.props.name} size={size} />}
     </button>
   );
 };

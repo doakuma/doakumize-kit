@@ -1,8 +1,16 @@
 /* Component Showcase Styles */
 .component-showcase {
+  display: flex;
+  gap: var(--spacing-10);
   padding: 32px 40px;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: flex-start;
+}
+
+.showcase-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .showcase-header {
@@ -24,20 +32,31 @@
 }
 
 .showcase-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
   margin-bottom: 48px;
 }
 
 .showcase-section-title {
+  margin-top: var(--spacing-6);
   font: var(--h4);
   color: var(--text-primary);
-  margin: 0 0 16px;
+}
+
+.showcase-section-description {
+  font: var(--body-md);
+  color: var(--text-secondary);
 }
 
 .showcase-items {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 24px;
-  margin-bottom: 24px;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 16px;
 }
 
 .showcase-item {
@@ -45,18 +64,13 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  min-width: 120px;
 }
 
 .showcase-preview {
-  padding: 16px;
   background-color: var(--surface-elevated);
-  border: 1px solid var(--border-default);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60px;
   width: 100%;
 }
 
@@ -106,7 +120,7 @@
   background-color: var(--surface-base);
   padding: 2px 6px;
   border-radius: 4px;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
   font-size: 12px;
   color: var(--interactive-text-default);
 }
@@ -127,4 +141,3 @@
   color: var(--text-secondary);
   margin: 0;
 }
-
