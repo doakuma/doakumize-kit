@@ -16,27 +16,37 @@ export const buttonShowcase = {
         {
           name: "Primary",
           component: <Button variant="primary">Primary</Button>,
+          code: `<Button variant="primary">Primary</Button>`,
         },
         {
           name: "Secondary",
           component: <Button variant="secondary">Secondary</Button>,
+          code: `<Button variant="secondary">Secondary</Button>`,
         },
         {
           name: "Default",
           component: <Button variant="default">Default</Button>,
+          code: `<Button variant="default">Default</Button>`,
         },
         {
           name: "Ghost",
           component: <Button variant="ghost">Ghost</Button>,
+          code: `<Button variant="ghost">Ghost</Button>`,
         },
-        { name: "Text", component: <Button variant="text">Text</Button> },
+        {
+          name: "Text",
+          component: <Button variant="text">Text</Button>,
+          code: `<Button variant="text">Text</Button>`,
+        },
         {
           name: "Point",
           component: <Button variant="point">Point</Button>,
+          code: `<Button variant="point">Point</Button>`,
         },
         {
           name: "Point Secondary",
           component: <Button variant="point-secondary">Point Secondary</Button>,
+          code: `<Button variant="point-secondary">Point Secondary</Button>`,
         },
       ],
     },
@@ -45,12 +55,21 @@ export const buttonShowcase = {
       description:
         "버튼의 크기를 조절할 수 있습니다. small, medium, large 세 가지 크기를 지원합니다.",
       items: [
-        { name: "Small", component: <Button size="small">Small</Button> },
+        {
+          name: "Small",
+          component: <Button size="small">Small</Button>,
+          code: `<Button size="small">Small</Button>`,
+        },
         {
           name: "Medium",
           component: <Button size="medium">Medium</Button>,
+          code: `<Button size="medium">Medium</Button>`,
         },
-        { name: "Large", component: <Button size="large">Large</Button> },
+        {
+          name: "Large",
+          component: <Button size="large">Large</Button>,
+          code: `<Button size="large">Large</Button>`,
+        },
       ],
     },
     {
@@ -81,8 +100,16 @@ export const buttonShowcase = {
       description:
         "버튼의 상태를 제어할 수 있습니다. disabled로 비활성화하거나, circle로 원형 버튼을 만들 수 있습니다.",
       items: [
-        { name: "Disabled", component: <Button disabled>Disabled</Button> },
-        { name: "Circle", component: <Button circle>○</Button> },
+        {
+          name: "Disabled",
+          component: <Button disabled>Disabled</Button>,
+          code: `<Button disabled>Disabled</Button>`,
+        },
+        {
+          name: "Circle",
+          component: <Button circle>○</Button>,
+          code: `<Button circle>○</Button>`,
+        },
       ],
     },
   ],
