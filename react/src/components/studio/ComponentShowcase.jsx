@@ -1,6 +1,6 @@
 import React from "react";
 import ComponentCodeViewer from "./ComponentCodeViewer";
-import { COMPONENT_LIST, isComponentEnabled } from "@/data/components-config";
+import { getShowcase } from "@/components/ui/showcases";
 import "./ComponentShowcase.css";
 
 /**
@@ -15,115 +15,55 @@ function toComponentName(id) {
 }
 
 /**
- * 컴포넌트 showcase 파일 경로 생성
- * 예: "button" -> "../ui/Button/Button.showcase.jsx"
- * 동적 import에서는 alias(@)가 작동하지 않으므로 상대 경로 사용
- */
-function getShowcasePath(componentId) {
-  const componentName = toComponentName(componentId);
-  // ComponentShowcase.jsx는 src/components/studio/에 있으므로
-  // src/components/ui/로 가려면 ../ui/ 사용
-  return `../ui/${componentName}/${componentName}.showcase.jsx`;
-}
-
-/**
- * 자동 등록된 showcase 맵 생성
- * components-config.js의 enabled된 컴포넌트들만 자동으로 등록
- */
-function createShowcaseMap() {
-  const map = {};
-
-  COMPONENT_LIST.forEach((comp) => {
-    // React가 enabled된 컴포넌트만 등록
-    if (isComponentEnabled(comp, "react")) {
-      const showcasePath = getShowcasePath(comp.id);
-      map[comp.id] = () =>
-        import(/* @vite-ignore */ showcasePath)
-          .then((module) => {
-            // export 이름 규칙: {componentId}Showcase (camelCase) 또는 default
-            // 예: "button" -> "buttonShowcase"
-            const exportName = `${comp.id}Showcase`;
-
-            // 디버깅: 모듈에 어떤 export가 있는지 확인
-            if (import.meta.env.DEV) {
-              console.log(`[ComponentShowcase] Loading ${comp.id}:`, {
-                path: showcasePath,
-                exportName,
-                availableExports: Object.keys(module),
-                hasExport: exportName in module,
-              });
-            }
-
-            const data = module[exportName] || module.default || module;
-
-            // 함수인 경우 호출
-            if (typeof data === "function") {
-              return data();
-            }
-
-            return data;
-          })
-          .catch((err) => {
-            console.warn(
-              `[ComponentShowcase] Showcase not found for ${comp.id}:`,
-              err
-            );
-            return null;
-          });
-    }
-  });
-
-  return map;
-}
-
-// 자동 등록된 showcase 맵 (한 번만 생성)
-const showcaseMap = createShowcaseMap();
-
-/**
  * Component Showcase
  * 개별 컴포넌트 쇼케이스 (Variants, Props, 코드 미리보기)
  */
 function ComponentShowcase({ componentId }) {
   const [data, setData] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    const loadShowcase = async () => {
+    if (!componentId) {
+      setData(null);
+      setError(null);
+      setLoading(false);
+      return;
+    }
+
+    const loadShowcase = () => {
       setLoading(true);
       setError(null);
 
       try {
-        const loader = showcaseMap[componentId];
-        if (!loader) {
-          throw new Error(
-            `Showcase not registered for component: ${componentId}`
-          );
-        }
-
-        const showcaseData = await loader();
+        // 정적 import된 showcase 데이터 가져오기
+        const showcaseData = getShowcase(componentId);
 
         if (!showcaseData) {
-          throw new Error(
-            `Showcase file exists but no data exported for: ${componentId}`
-          );
+          throw new Error(`Showcase not found for component: ${componentId}`);
         }
 
-        setData(showcaseData);
+        // 함수인 경우 호출
+        const data =
+          typeof showcaseData === "function" ? showcaseData() : showcaseData;
+
+        setData(data);
+        setError(null);
       } catch (err) {
         console.error(
           `[ComponentShowcase] Failed to load showcase for ${componentId}:`,
           err
         );
         setError(err.message);
+        setData(null);
       } finally {
         setLoading(false);
       }
     };
 
-    if (componentId) {
-      loadShowcase();
-    }
+    // 다음 틱에서 실행하여 로딩 상태가 잠깐 보이도록
+    const timeoutId = setTimeout(loadShowcase, 0);
+    return () => clearTimeout(timeoutId);
   }, [componentId]);
 
   if (loading) {
