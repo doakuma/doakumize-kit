@@ -73,7 +73,7 @@
 
 /* LNB Body */
 .lnb-body {
-  height: calc(100% - 60px - 156px - 60px);
+  height: calc(100% - 60px - 60px);
 }
 
 .lnb-body-util {

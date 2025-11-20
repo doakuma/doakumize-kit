@@ -2,7 +2,6 @@ import React, { useMemo, useEffect, useState, useRef, Fragment } from "react";
 import ComponentCodeViewer from "./ComponentCodeViewer";
 import ComponentNavigation from "./ComponentNavigation";
 import { getShowcase } from "@/components/ui/showcases";
-import { parsePropTypes } from "@/utils/propTypesParser";
 import { elementToCode } from "@/utils/elementToCode";
 import "./ComponentShowcase.css";
 import { Chip } from "../ui/Chip/Chip";
@@ -78,23 +77,18 @@ function ComponentShowcase({ componentId }) {
     return () => clearTimeout(timeoutId);
   }, [componentId]);
 
-  // Props 파싱 (propTypes, defaultProps, propDescriptions로부터)
+  // Props 파싱 (showcase에서 제공한 props 배열을 문서화용 형식으로 변환)
   const parsedProps = useMemo(() => {
-    if (!data) return null;
-    if (
-      data.propTypes &&
-      data.defaultProps !== undefined &&
-      data.propDescriptions
-    ) {
-      // console.debug("parsedProps data", data);
-      return parsePropTypes(
-        data.propTypes,
-        data.defaultProps,
-        data.propDescriptions,
-        data.propTypesString
-      );
-    }
-    return null;
+    if (!data || !data.props || !Array.isArray(data.props)) return null;
+
+    return data.props.map((prop) => ({
+      name: prop.propName,
+      type: prop.type || "unknown",
+      default:
+        prop.defaultValue !== undefined ? String(prop.defaultValue) : "-",
+      required: prop.isRequired || false,
+      description: prop.description || "-",
+    }));
   }, [data]);
 
   // 네비게이션에 전달할 구조 (title, description 제외)

@@ -113,16 +113,56 @@ export const buttonShowcase = {
       ],
     },
   ],
-  propTypes: Button.propTypes,
-  defaultProps: Button.defaultProps,
-  propDescriptions: {
-    variant:
-      "버튼 스타일 (primary, secondary, default, ghost, text, point, point-secondary)",
-    size: "버튼 크기 (small, medium, large)",
-    disabled: "비활성화 여부",
-    circle: "원형 버튼 여부",
-    startIcon: "시작 아이콘",
-    endIcon: "끝 아이콘",
-    children: "버튼 텍스트",
-  },
+  props: [
+    {
+      propName: "variant",
+      type: "oneOf",
+      isRequired: true,
+      defaultValue: "primary",
+      description:
+        "버튼 스타일 (primary, secondary, default, ghost, text, point, point-secondary)",
+    },
+    {
+      propName: "size",
+      type: "oneOf",
+      isRequired: true,
+      defaultValue: "medium",
+      description: "버튼 크기 (small, medium, large)",
+    },
+    {
+      propName: "disabled",
+      type: "boolean",
+      isRequired: false,
+      defaultValue: false,
+      description: "비활성화 여부",
+    },
+    {
+      propName: "circle",
+      type: "boolean",
+      isRequired: false,
+      defaultValue: false,
+      description: "원형 버튼 여부",
+    },
+    {
+      propName: "startIcon",
+      type: "ReactNode",
+      isRequired: false,
+      defaultValue: null,
+      description: "시작 아이콘",
+    },
+    {
+      propName: "endIcon",
+      type: "ReactNode",
+      isRequired: false,
+      defaultValue: null,
+      description: "끝 아이콘",
+    },
+    {
+      propName: "children",
+      type: "ReactNode",
+      isRequired: false,
+      defaultValue: null,
+      description: "버튼 텍스트",
+    },
+  ],
 };

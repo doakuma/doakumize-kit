@@ -68,11 +68,21 @@ export const iconShowcase = {
       ],
     },
   ],
-  propTypes: Icon.propTypes,
-  defaultProps: Icon.defaultProps,
-  propDescriptions: {
-    name: "아이콘 이름 (arrow-left, arrow-right, arrow-up, arrow-down, arrow-up-right, arrow-down-right)",
-    size: "아이콘 크기 (small, medium, large)",
-  },
+  props: [
+    {
+      propName: "name",
+      type: "oneOf",
+      isRequired: false,
+      defaultValue: "icon",
+      description:
+        "아이콘 이름 (arrow-left, arrow-right, arrow-up, arrow-down, arrow-up-right, arrow-down-right)",
+    },
+    {
+      propName: "size",
+      type: "oneOf",
+      isRequired: false,
+      defaultValue: "medium",
+      description: "아이콘 크기 (small, medium, large)",
+    },
+  ],
 };
-
