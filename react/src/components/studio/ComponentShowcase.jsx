@@ -5,6 +5,7 @@ import { getShowcase } from "@/components/ui/showcases";
 import { parsePropTypes } from "@/utils/propTypesParser";
 import { elementToCode } from "@/utils/elementToCode";
 import "./ComponentShowcase.css";
+import { Chip } from "../ui/Chip/Chip";
 
 /**
  * 컴포넌트 ID를 컴포넌트 이름으로 변환
@@ -85,10 +86,12 @@ function ComponentShowcase({ componentId }) {
       data.defaultProps !== undefined &&
       data.propDescriptions
     ) {
+      // console.debug("parsedProps data", data);
       return parsePropTypes(
         data.propTypes,
         data.defaultProps,
-        data.propDescriptions
+        data.propDescriptions,
+        data.propTypesString
       );
     }
     return null;
@@ -287,20 +290,27 @@ function ComponentShowcase({ componentId }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {parsedProps.map((prop, idx) => (
-                    <tr key={idx}>
-                      <td>
-                        <code className="props-code">{prop.name}</code>
-                      </td>
-                      <td>
-                        <code className="props-code">{prop.type}</code>
-                      </td>
-                      <td>
-                        <code className="props-code">{prop.default}</code>
-                      </td>
-                      <td>{prop.description}</td>
-                    </tr>
-                  ))}
+                  {parsedProps.map((prop, idx) => {
+                    return (
+                      <tr key={idx}>
+                        <td>
+                          <code className="props-code">{prop.name}</code>
+                          {prop.required && (
+                            <Chip variant="default" color="green" size="small">
+                              Required
+                            </Chip>
+                          )}
+                        </td>
+                        <td>
+                          <code className="props-code">{prop.type}</code>
+                        </td>
+                        <td>
+                          <code className="props-code">{prop.default}</code>
+                        </td>
+                        <td>{prop.description}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

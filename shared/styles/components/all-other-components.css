@@ -548,7 +548,8 @@
   width: 16px;
   height: 16px;
   border: none;
-  background: url(../../images/icons/icon_close_chip.png) no-repeat center center;
+  background: url(../../images/icons/icon_close_chip.png) no-repeat center
+    center;
   background-size: contain;
   cursor: pointer;
   flex-shrink: 0;
@@ -823,6 +824,24 @@
   flex-wrap: wrap;
   gap: 4px;
   align-items: center;
+}
+
+/* ========================================
+ * Chip Size Modifiers
+ * ======================================== */
+.chip--small {
+  font: var(--sub-md-xs);
+  padding: 0 4px;
+}
+
+.chip--medium {
+  font: var(--sub-md-sm);
+  padding: 0 6px;
+}
+
+.chip--large {
+  font: var(--sub-md-md);
+  padding: 0 8px;
 }
 
 /* ========================================
@@ -1452,8 +1471,8 @@ body.modal--open {
   width: 28px;
   height: 28px;
   border: none;
-  background: transparent url(../../images/icons/icon_close.png) no-repeat center /
-    18px 18px;
+  background: transparent url(../../images/icons/icon_close.png) no-repeat
+    center / 18px 18px;
   cursor: pointer;
   border-radius: 6px;
 }
@@ -1591,7 +1610,8 @@ body.modal-open {
   position: absolute;
   inset: 0;
   background-color: var(--surface-page);
-  -webkit-mask: url(../../images/icons/icon_checkbox.png) no-repeat center / 16px 16px;
+  -webkit-mask: url(../../images/icons/icon_checkbox.png) no-repeat center /
+    16px 16px;
   mask: url(../../images/icons/icon_checkbox.png) no-repeat center / 16px 16px;
 }
 
@@ -2951,7 +2971,8 @@ table.dataTable.no-footer {
   margin: auto;
   width: 16px;
   height: 16px;
-  background: url(../../images/icons/icon_dropdown_arrow.png) no-repeat center center;
+  background: url(../../images/icons/icon_dropdown_arrow.png) no-repeat center
+    center;
   background-size: contain;
   transition: transform 0.2s ease-in-out;
   pointer-events: none;
@@ -2986,7 +3007,8 @@ table.dataTable.no-footer {
   content: "";
   width: 16px;
   height: 16px;
-  background: url(../../images/icons/icon_dropdown_check.png) no-repeat center center;
+  background: url(../../images/icons/icon_dropdown_check.png) no-repeat center
+    center;
   background-size: contain;
   display: none;
 }

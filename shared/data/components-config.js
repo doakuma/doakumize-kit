@@ -94,7 +94,7 @@ const COMPONENT_LIST = [
     id: "icon",
     name: "Icon",
     category: COMPONENT_CATEGORIES.FOUNDATION,
-    enabled: { vanilla: true, react: false, mui: false },
+    enabled: { vanilla: true, react: true, mui: false },
     order: 2,
   },
   {
@@ -200,7 +200,7 @@ const COMPONENT_LIST = [
     id: "chip",
     name: "Chip",
     category: COMPONENT_CATEGORIES.DATA_DISPLAY,
-    enabled: { vanilla: true, react: false, mui: false },
+    enabled: { vanilla: true, react: true, mui: false },
     order: 18,
   },
   {
