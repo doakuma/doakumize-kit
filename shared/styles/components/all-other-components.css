@@ -513,6 +513,35 @@
 }
 
 /* ========================================
+ * Input Addon Modifiers
+ * ======================================== */
+.input-field--addon {
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+}
+.input-field--addon .input {
+  border: none;
+}
+.input-field--addon .input-field--first-addon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+}
+.input-field--addon .input-field--end-addon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 12px;
+}
+.input-field--addon:has(.input-field--first-addon) .input {
+  padding-left: 0;
+}
+.input-field--addon:has(.input-field--end-addon) .input {
+  padding-right: 0;
+}
+
+/* ========================================
  * Standalone Chip Components
  * ======================================== */
 

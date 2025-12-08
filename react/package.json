@@ -14,6 +14,9 @@
     "LICENSE"
   ],
   "scripts": {
+    "sync:config": "node scripts/sync-components-config.js",
+    "predev": "npm run sync:config",
+    "prebuild": "npm run sync:config",
     "dev": "vite --base /",
     "build": "vite build && rollup -c && node scripts/copy-css.js",
     "build:demo": "vite build",

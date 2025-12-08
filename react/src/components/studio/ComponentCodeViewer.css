@@ -46,10 +46,12 @@
 }
 
 .code-viewer-content code {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
   font-size: 13px;
   line-height: 1.6;
   color: var(--text-primary);
   white-space: pre;
 }
-
+.code-viewer-content code > span {
+  display: block;
+}

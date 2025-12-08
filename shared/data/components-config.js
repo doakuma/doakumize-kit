@@ -119,7 +119,7 @@ const COMPONENT_LIST = [
     id: "input",
     name: "Input",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: { vanilla: true, react: false, mui: false },
+    enabled: { vanilla: true, react: true, mui: false },
     order: 7,
   },
   {

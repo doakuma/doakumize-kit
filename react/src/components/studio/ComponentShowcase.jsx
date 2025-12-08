@@ -250,7 +250,7 @@ function ComponentShowcase({ componentId }) {
               <div className="showcase-items">
                 {property.items.map((item, itemIdx) => (
                   <div key={itemIdx} className="showcase-item">
-                    <div className="showcase-preview">{item.component}</div>
+                    {item.component}
                     {/* <p className="showcase-label">{item.name}</p> */}
                   </div>
                 ))}

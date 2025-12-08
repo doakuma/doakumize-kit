@@ -5,6 +5,7 @@
 /* Base Container */
 .input-field {
   position: relative;
+  flex-direction: column;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -305,4 +306,8 @@
 
 .input.input--code {
   white-space: pre;
+}
+.input-field--error {
+  font: var(--body-xs);
+  color: var(--error);
 }

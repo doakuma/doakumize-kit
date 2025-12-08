@@ -1,0 +1,188 @@
+.interactive-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+/* 컴포넌트 프리뷰 영역 */
+.interactive-showcase__preview {
+  padding: 20px;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background-color: var(--surface-base);
+  width: 100%;
+}
+
+/* 컨트롤 패널 */
+.interactive-showcase__controls {
+  padding: 16px;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background-color: var(--surface-base);
+  flex: 1;
+}
+
+.interactive-showcase__controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.interactive-showcase__controls-title {
+  font: var(--sub-sb-sm);
+  color: var(--text-primary);
+}
+
+.interactive-showcase__controls-reset {
+  padding: 4px 12px;
+  font: var(--sub-md-xs);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interactive-showcase__controls-reset:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  background-color: var(--surface-elevated);
+}
+
+.interactive-showcase__controls-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 컨트롤 아이템 */
+.interactive-showcase__control-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.interactive-showcase__control-label {
+  min-width: 100px;
+  font: var(--sub-md-sm);
+  color: var(--text-secondary);
+}
+
+.interactive-showcase__control-input {
+  flex: 1;
+  padding: 6px 12px;
+  font: var(--body-sm);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  background-color: var(--surface-base);
+  transition: all 0.2s ease;
+}
+
+.interactive-showcase__control-input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+}
+
+.interactive-showcase__control-input:hover:not(:focus) {
+  border-color: var(--border-hover);
+}
+
+/* 체크박스 스타일 */
+.interactive-showcase__control-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* 이벤트 로그 패널 */
+.interactive-showcase__logs {
+  padding: 16px;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  background-color: var(--surface-base);
+  flex: 1;
+}
+
+.interactive-showcase__logs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.interactive-showcase__logs-title {
+  font: var(--sub-sb-sm);
+  color: var(--text-primary);
+}
+
+.interactive-showcase__logs-clear {
+  padding: 4px 12px;
+  font: var(--sub-md-xs);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interactive-showcase__logs-clear:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  background-color: var(--surface-elevated);
+}
+
+.interactive-showcase__logs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.interactive-showcase__logs-empty {
+  padding: 12px;
+  font: var(--sub-md-sm);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.interactive-showcase__log-item {
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: var(--surface-elevated);
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.interactive-showcase__log-event {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--primary-500);
+}
+
+.interactive-showcase__log-timestamp {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.interactive-showcase__log-payload {
+  margin: 0;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
