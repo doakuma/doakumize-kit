@@ -17,3 +17,6 @@ export { Input } from "./Input/Input";
 // Radio
 export { Radio } from "./Radio/Radio";
 export { RadioGroup } from "./Radio/RadioGroup";
+
+// Dropdown
+export { Dropdown } from "./Dropdown/Dropdown";
