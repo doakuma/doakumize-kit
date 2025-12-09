@@ -1,4 +1,4 @@
-import { Chip } from "@/components/ui/Chip";
+import { Chip } from "@/components/ui";
 
 /**
  * Chip Component Showcase Data

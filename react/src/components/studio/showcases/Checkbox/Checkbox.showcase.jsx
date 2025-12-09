@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Checkbox } from "@/components/ui";
 import { CheckboxGroupExample } from "./CheckboxGroupExample";
 
 export const checkboxShowcase = {
@@ -124,6 +124,64 @@ export const checkboxShowcase = {
           ]} />`,
         },
       ],
+    },
+  ],
+  props: [
+    {
+      propName: "name",
+      type: "string",
+      isRequired: true,
+      defaultValue: "",
+      description: "체크박스의 이름입니다.",
+    },
+    {
+      propName: "id",
+      type: "string",
+      isRequired: true,
+      defaultValue: "",
+      description: "체크박스의 id입니다.",
+    },
+    {
+      propName: "value",
+      type: "string",
+      isRequired: true,
+      defaultValue: "",
+      description: "체크박스의 값입니다.",
+    },
+    {
+      propName: "onChange",
+      type: "function",
+      isRequired: true,
+      defaultValue: () => {},
+      description: "체크박스의 값이 변경될 때 호출되는 함수입니다.",
+    },
+    {
+      propName: "checked",
+      type: "boolean",
+      isRequired: false,
+      defaultValue: false,
+      description: "체크박스의 체크 상태입니다.",
+    },
+    {
+      propName: "disabled",
+      type: "boolean",
+      isRequired: false,
+      defaultValue: false,
+      description: "체크박스의 비활성화 상태입니다.",
+    },
+    {
+      propName: "label",
+      type: "string",
+      isRequired: true,
+      defaultValue: "",
+      description: "체크박스의 라벨입니다.",
+    },
+    {
+      propName: "size",
+      type: "oneOf",
+      isRequired: false,
+      defaultValue: "medium",
+      description: "체크박스의 크기입니다. small, medium, large 중 하나입니다.",
     },
   ],
 };

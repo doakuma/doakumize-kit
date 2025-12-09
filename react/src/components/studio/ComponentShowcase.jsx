@@ -4,7 +4,7 @@ import ComponentNavigation from "./ComponentNavigation";
 import { getShowcase } from "./showcases";
 import { elementToCode } from "@/utils/elementToCode";
 import "./ComponentShowcase.css";
-import { Chip } from "../ui/Chip/Chip";
+import { Chip } from "../ui";
 
 /**
  * 컴포넌트 ID를 컴포넌트 이름으로 변환

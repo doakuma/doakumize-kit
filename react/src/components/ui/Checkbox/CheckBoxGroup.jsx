@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Checkbox } from "./index";
+import { Checkbox } from "./Checkbox";
 
 export const CheckBoxGroup = (props) => {
   const {

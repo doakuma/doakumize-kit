@@ -10,7 +10,13 @@
 import "./styles/variables.css";
 import "./styles/normalize.css";
 
-// UI Components
-export { Button } from "./components/ui/Button";
-
-export { Input } from "./components/ui/Input";
+// UI Components (중앙화된 export)
+export {
+  Button,
+  Checkbox,
+  CheckBoxGroup,
+  Chip,
+  Icon,
+  Input,
+  Radio,
+} from "./components/ui";

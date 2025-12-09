@@ -1862,14 +1862,24 @@ body.modal-open {
   height: 16px;
 }
 
-.radio--large .radio__circle {
+.radio--medium .radio__circle {
   width: 20px;
   height: 20px;
 }
 
-.radio--large .radio__input:checked + .radio__circle::after {
+.radio--large .radio__circle {
+  width: 24px;
+  height: 24px;
+}
+
+.radio--medium .radio__input:checked + .radio__circle::after {
   width: 10px;
   height: 10px;
+}
+
+.radio--large .radio__input:checked + .radio__circle::after {
+  width: 12px;
+  height: 12px;
 }
 
 /* ========================================

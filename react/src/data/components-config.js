@@ -142,7 +142,7 @@ export const COMPONENT_LIST = [
     id: "radio",
     name: "Radio",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: { vanilla: true, react: false, mui: false },
+    enabled: { vanilla: true, react: true, mui: false },
     order: 9,
   },
   {

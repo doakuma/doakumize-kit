@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckBoxGroup } from "@/components/ui/Checkbox";
+import { CheckBoxGroup } from "@/components/ui";
 
 export const CheckboxGroupExample = (props) => {
   const { direction = "vertical" } = props;
