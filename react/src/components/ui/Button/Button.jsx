@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import "./Button.css";
-import Icon from "../Icon/Icon";
+import { Icon } from "../Icon";
 
 /**
  * Button Component

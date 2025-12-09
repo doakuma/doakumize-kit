@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Icon = ({ name, size = "medium" }) => {
+export const Icon = ({ name, size = "medium" }) => {
   return <i className={`icon icon--${size} icon--${name}`}></i>;
 };
 
@@ -110,6 +110,3 @@ Icon.propTypes = {
 Icon.defaultProps = {
   name: "icon",
 };
-
-export default Icon;
-export { Icon };

@@ -126,7 +126,7 @@ const COMPONENT_LIST = [
     id: "checkbox",
     name: "Checkbox",
     category: COMPONENT_CATEGORIES.FORM_CONTROLS,
-    enabled: { vanilla: true, react: false, mui: false },
+    enabled: { vanilla: true, react: true, mui: false },
     order: 8,
   },
   {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../../ui/Input/Input";
+import { Input } from "../../ui/Input";
 import { useShowcaseActionPanel } from "./useShowcaseActionPanel";
 
 const ValidationWithActionPanel = () => {

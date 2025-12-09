@@ -1,7 +1,7 @@
-import Input from "./Input";
-import { Icon } from "../Icon/Icon";
-import { Button } from "../Button/Button";
-import InteractiveShowcase from "../../studio/common/InteractiveShowcase";
+import { Input } from "@/components/ui/Input";
+import { Icon } from "@/components/ui/Icon";
+import { Button } from "@/components/ui/Button";
+import InteractiveShowcase from "../../common/InteractiveShowcase";
 
 /**
  * Input Component Showcase Data

@@ -1,4 +1,4 @@
-import { Icon } from "./Icon";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Icon Component Showcase Data

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Input = (props) => {
+export const Input = (props) => {
   const {
     type = "text",
     size = "medium",
@@ -47,8 +47,6 @@ const Input = (props) => {
     </div>
   );
 };
-
-export default Input;
 
 Input.propTypes = {
   type: PropTypes.oneOf([

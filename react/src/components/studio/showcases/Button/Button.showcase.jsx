@@ -1,5 +1,5 @@
-import { Button } from "./Button";
-import { Icon } from "../Icon/Icon";
+import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 /**
  * Button Component Showcase Data
  */

@@ -13,5 +13,4 @@ import "./styles/normalize.css";
 // UI Components
 export { Button } from "./components/ui/Button";
 
-// TODO: 컴포넌트 구현 후 export 추가
-// export { Input } from "./components/ui/Input";
+export { Input } from "./components/ui/Input";

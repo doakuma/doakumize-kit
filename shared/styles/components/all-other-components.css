@@ -1686,9 +1686,13 @@ body.modal-open {
   width: 16px;
   height: 16px;
 }
-.chk--large .chk__box {
+.chk--medium .chk__box {
   width: 20px;
   height: 20px;
+}
+.chk--large .chk__box {
+  width: 24px;
+  height: 24px;
 }
 
 /* ========================================
@@ -1709,6 +1713,7 @@ body.modal-open {
   color: var(--text-primary);
   margin-bottom: 4px;
   padding: 0;
+  width: 100%;
 }
 
 .chk-group__items {
@@ -1723,7 +1728,7 @@ body.modal-open {
 }
 
 /* 가로 정렬 */
-.chk-group--horizontal .chk-group__items {
+.chk-group--horizontal {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 16px;

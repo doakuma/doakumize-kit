@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState, useRef, Fragment } from "react";
 import ComponentCodeViewer from "./ComponentCodeViewer";
 import ComponentNavigation from "./ComponentNavigation";
-import { getShowcase } from "@/components/ui/showcases";
+import { getShowcase } from "./showcases";
 import { elementToCode } from "@/utils/elementToCode";
 import "./ComponentShowcase.css";
 import { Chip } from "../ui/Chip/Chip";

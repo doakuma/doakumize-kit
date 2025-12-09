@@ -11,8 +11,8 @@
  * 3. 끝! 자동으로 인식됨 ✨
  *
  * 파일 경로 규칙:
- * - src/components/ui/{ComponentName}/{ComponentName}.showcase.jsx
- * - 예: src/components/ui/Button/Button.showcase.jsx
+ * - src/components/studio/showcases/{ComponentName}/{ComponentName}.showcase.jsx
+ * - 예: src/components/studio/showcases/Button/Button.showcase.jsx
  */
 
 /**
@@ -23,7 +23,7 @@
  *
  * eager: true 옵션으로 빌드 시점에 모든 파일을 미리 로드합니다.
  */
-const showcaseModules = import.meta.glob("../**/*.showcase.jsx", {
+const showcaseModules = import.meta.glob("./**/*.showcase.jsx", {
   eager: true,
 });
 
@@ -38,7 +38,7 @@ function createShowcaseMap() {
   // 모든 showcase 모듈 순회
   Object.entries(showcaseModules).forEach(([path, module]) => {
     // 경로에서 컴포넌트 이름 추출
-    // 예: "../Button/Button.showcase.jsx" -> "Button"
+    // 예: "./Button/Button.showcase.jsx" -> "Button"
     const match = path.match(/\/([^/]+)\/\1\.showcase\.jsx$/);
     if (!match) {
       console.warn(`[Showcase] Invalid showcase path: ${path}`);
