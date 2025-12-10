@@ -1,0 +1,308 @@
+/* ========================================
+ * Input Component Styles
+ * ======================================== */
+
+/* Base Container */
+.input-field {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-field--content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.input-field:has(.input-field--content) {
+  column-gap: 16px;
+}
+
+.input-field--info {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.input-field--info .icon {
+  mask-size: 16px;
+}
+
+/* Base Input Element */
+.input {
+  /* 기본 레이아웃 */
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* 타이포그래피 */
+  font: var(--body-sm);
+
+  /* 스타일링 */
+  padding: 8px 12px;
+  padding-left: 16px;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+
+  /* 인터랙션 */
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input.input--no-border {
+  border: none;
+  background-color: transparent;
+}
+
+/* Base Addon Element */
+.input-addon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* Input States */
+.input:focus {
+  border-color: var(--border-focus);
+}
+
+/* 값이 있을 때 스타일 */
+.input[placeholder]:not(:placeholder-shown):not(.input--error) {
+  border-color: var(--border-default);
+  background-color: var(--surface-page);
+}
+
+/* Error State */
+.input.input--error {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}
+
+.input--error:focus {
+  border-color: var(--error);
+}
+
+/* Readonly State */
+.input:read-only {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  cursor: default;
+}
+
+/* Disabled State */
+.input:disabled {
+  background-color: var(--surface-disabled);
+  border-color: var(--border-default);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.input:disabled::placeholder {
+  color: var(--text-disabled);
+}
+
+/* Size Modifiers */
+.input-field--small .input {
+  padding: 5px 8px;
+  padding-left: 12px;
+  font: var(--body-xs);
+  min-height: 28px;
+}
+
+.input-field--medium .input {
+  font: var(--body-sm);
+  min-height: 36px;
+}
+
+.input-field--large .input,
+.input--large {
+  padding: 10px 16px;
+  padding-left: 20px;
+  font: var(--body-md);
+  min-height: 44px;
+}
+
+/* Input Container */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.input-label {
+  position: relative;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 120px;
+}
+
+.input-label.required::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background-color: var(--error);
+}
+
+.input-helper {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.input-error {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--error);
+}
+
+.input-label.input-label--small {
+  min-width: 80px;
+}
+
+/* Input with Icon */
+.input-with-icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-with-icon .input {
+  padding-left: 36px;
+}
+
+.input-with-icon .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+/* State Modifiers */
+.input-field--error .input,
+.input.input--error {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}
+
+.input-field--error .input:focus,
+.input--error:focus {
+  border-color: var(--error);
+}
+
+/* Input with Close Button */
+.input-field--with-close .input,
+.input-with-close .input {
+  padding-right: 36px;
+}
+
+.input-field--with-close .input-addon--close,
+.input-close-btn {
+  right: 12px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: url(../../images/icons/icon_close.png) no-repeat center center;
+  background-size: 100% 100%;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.input-field--with-close .input-addon--close:disabled,
+.input-close-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Small 사이즈에서의 Close 버튼 조정 */
+.input-field--small.input-field--with-close .input {
+  padding-right: 32px;
+}
+
+.input-field--small .input-addon--close {
+  right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.input-field--start-icon .input {
+  padding-left: 36px;
+}
+
+.input-field--start-icon .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  transform: unset;
+}
+
+/* Legacy support */
+.input-with-close {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Input with Counter */
+.input-field--with-counter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font: var(--body-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  background-color: var(--surface-page);
+  padding: 2px 4px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Focused state for counter input */
+.input-field--focused .input {
+  border-color: var(--border-focus);
+}
+
+/* Ensure textarea has enough padding for counter */
+.input-field--with-counter textarea.input {
+  padding-bottom: 32px;
+}
+
+.input.input--code {
+  white-space: pre;
+}

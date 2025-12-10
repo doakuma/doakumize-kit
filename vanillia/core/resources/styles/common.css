@@ -1,0 +1,23 @@
+/* ========================================
+ * Core Styles - Project Use Only
+ * 프로젝트 배포용 최소 스타일셋
+ * 
+ * Built: 2025-11-17
+ * ======================================== */
+
+/* Base Styles */
+@import url(normalize.css);
+@import url(variables.css);
+@import url(base.css);
+
+/* Animation & Effects */
+@import url(animations.css);
+
+/* Optional: 스크롤바 커스터마이징이 필요하면 아래 주석 해제 */
+/* @import url(scrollbar.css); */
+
+/* Component Styles */
+@import url(components.css);
+
+/* External Fonts */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");

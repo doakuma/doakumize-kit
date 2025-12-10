@@ -1,0 +1,17 @@
+/* ========================================
+ * Base Styles
+ * 전역 기본 스타일 정의
+ * ======================================== */
+
+* {
+  font-family: Pretendard;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100dvh;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

@@ -1,0 +1,24 @@
+/* ========================================
+ * Components Styles - Import Manager
+ * 개별 컴포넌트 스타일을 통합 관리
+ * ======================================== */
+
+/* 핵심 컴포넌트 (모듈화 완료) */
+@import url(./components/icons.css);
+@import url(./components/button.css);
+@import url(./components/input.css);
+@import url(./components/dropdown.css);
+@import url(./components/modal.css);
+@import url(./components/tree-menu.css);
+
+/* 나머지 컴포넌트 (임시 통합) */
+@import url(./components/all-other-components.css);
+
+/* 
+ * TODO: 나머지 컴포넌트들 순차적으로 분리 예정
+ * all-other-components.css에서 필요할 때마다 분리:
+ * - Accordion, Chip, Badge, Typography
+ * - Popover, Checkbox, Radio, Tab
+ * - Table, File Card, Toggle/Switch
+ * - Slider, Tooltip, File Upload
+ */

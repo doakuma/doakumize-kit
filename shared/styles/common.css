@@ -1,0 +1,23 @@
+/* ========================================
+ * Components Common Styles - Import Only
+ * 컴포넌트 시스템 전체 스타일 통합 관리
+ * ======================================== */
+
+/* External Fonts */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+
+/* Base Styles */
+@import url(./base/normalize.css);
+@import url(./base/variables.css);
+@import url(./base/base.css);
+
+/* Animation & Effects */
+@import url(./base/animations.css);
+@import url(./base/scrollbar.css);
+
+/* Layout & Navigation */
+@import url(./base/layout.css);
+@import url(./base/lnb.css);
+
+/* Component Styles */
+@import url(./components.css);

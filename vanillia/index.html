@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Studio - Vanilla JavaScript 컴포넌트 라이브러리</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../shared/styles/common.css" />
+    <link rel="stylesheet" href="../shared/styles/studio.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Progress Bar -->
+      <div id="progress-bar"></div>
+
+      <!-- Header -->
+      <header id="header">
+        <!-- 헤더는 layouts.js로 렌더링됨 -->
+      </header>
+
+      <!-- Main Content -->
+      <main id="main">
+        <!-- Section 1: Hero -->
+        <section id="hero">
+          <div class="container">
+            <!-- Title, Subtitle, Features, CTA -->
+            <h1 class="text-h1">Component Studio</h1>
+            <p class="text-body-lg">
+              같은 컴포넌트를 반복해서 만드는 수고를 덜고<br />
+              CSS Variables로 손쉽게 커스터마이징하여<br />
+              빠르게 프로젝트에 적용할 수 있습니다
+            </p>
+            <div class="btn-group">
+              <a href="./components.html" class="btn btn--primary">
+                컴포넌트 둘러보기
+              </a>
+              <!-- <a href="#quick-start" class="btn btn--secondary"> 시작하기 </a> -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: What is This? -->
+        <!-- <section id="what">
+          <div class="container">
+            Project Introduction 
+          </div>
+        </section> -->
+
+        <!-- Section 3: Key Features -->
+        <section id="features">
+          <div class="container">
+            <h2 class="text-h2">주요 기능</h2>
+
+            <div class="features-grid">
+              <!-- Feature 1: 디자인 시스템 -->
+              <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">일관된 디자인 시스템</h3>
+                <p class="feature-description">
+                  색상, 타이포그래피, 간격까지 CSS Variables로 중앙 관리됩니다.
+                  디자인 토큰 하나만 바꾸면 전체 프로젝트에 즉시 반영되어 브랜드
+                  아이덴티티를 일관되게 유지할 수 있습니다.
+                </p>
+              </div>
+
+              <!-- Feature 2: 컴포넌트 라이브러리 -->
+              <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3 class="feature-title">풍부한 컴포넌트 라이브러리</h3>
+                <p class="feature-description">
+                  Button, Input부터 Modal, Tab까지 다양한 컴포넌트를 제공합니다.
+                  5개 카테고리로 체계적으로 분류되어 있어 필요한 UI를 쉽고
+                  빠르게 찾아 사용할 수 있습니다.
+                </p>
+              </div>
+
+              <!-- Feature 3: 커스터마이징 -->
+              <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3 class="feature-title">자유로운 커스터마이징</h3>
+                <p class="feature-description">
+                  CSS Variables만 수정하면 프로젝트 특성에 맞게 자유롭게 변형할
+                  수 있습니다. 디자인 토큰 구조 덕분에 일관성을 유지하면서도
+                  브랜드 컬러와 스타일을 원하는 대로 조정할 수 있습니다.
+                </p>
+              </div>
+
+              <!-- Feature 4: Component Generator -->
+              <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Component Generator</h3>
+                <p class="feature-description">
+                  필요한 컴포넌트만 선택하여 패키지를 다운로드할 수 있습니다.
+                  생성된 패키지의 viewer를 열면 선택한 컴포넌트 리스트와 코드를
+                  바로 확인할 수 있어 프로젝트에 적용하거나 팀원들과 공유하기
+                  편리합니다.
+                </p>
+                <a href="./generator.html" class="feature-link">
+                  Generator 사용하기 →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: Components Preview -->
+        <section id="components">
+          <div class="container">
+            <h2 class="text-h2">컴포넌트 라이브러리</h2>
+
+            <!-- 카테고리 카드들 -->
+            <!-- 카테고리 카드들 (동적 생성) -->
+            <div class="categories-grid" id="categoriesGrid">
+              <!-- JavaScript로 동적 생성됨 -->
+            </div>
+
+            <!-- 진행률 (동적 생성) -->
+            <div class="progress-section" id="progressSection">
+              <!-- JavaScript로 동적 생성됨 -->
+            </div>
+
+            <!-- CTA 버튼 -->
+            <div class="components-cta">
+              <a href="./components.html" class="btn btn--primary btn--large">
+                모든 컴포넌트 보기 →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: Quick Start -->
+        <!-- <section id="quick-start">
+          <div class="container">
+             Step-by-step Guide 
+          </div>
+        </section> -->
+
+        <!-- Section 6: Final CTA -->
+        <!-- <section id="cta">
+          <div class="container">
+            Call to Action
+          </div>
+        </section> -->
+      </main>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <!-- 푸터는 layouts.js로 렌더링됨 -->
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="components/scripts/theme-manager.js"></script>
+    <script src="resources/js/layouts.js"></script>
+    <script src="../shared/data/components-config.js"></script>
+    <script src="resources/js/index.js"></script>
+    <script>
+      // 레이아웃 렌더링 (기본값 사용)
+      Layouts.renderLayouts();
+    </script>
+  </body>
+</html>

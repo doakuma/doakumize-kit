@@ -1,0 +1,79 @@
+/* ========================================
+ * Layout Styles
+ * 페이지 레이아웃 구조 정의
+ * ======================================== */
+
+#wrapper {
+  display: flex;
+  min-height: 100dvh;
+  background-color: var(--surface-base);
+  transition: background-color 0.2s ease;
+}
+
+#content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: calc(100% - 300px);
+  min-height: 100vh;
+  margin-left: 300px;
+  padding-top: 96px;
+  padding-bottom: 52px;
+}
+
+.lnb.isShrink + #content {
+  margin-left: 110px;
+  width: calc(100% - 110px);
+}
+
+.content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 860px;
+  height: 100%;
+}
+
+.content-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--surface-page);
+  border-radius: 8px;
+  padding: 30px 40px;
+  border: 1px solid var(--border-default);
+  box-shadow: var(--elevation-2);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.content-body-line {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.content-body-line.half {
+  width: calc(50% - 20px);
+}
+
+.content-body-item {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.content-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}

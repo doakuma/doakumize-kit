@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Component Studio</title>
+    <link
+      rel="stylesheet"
+      href="resources/styles/datatables/datatables.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="resources/styles/daterangepicker/daterangepicker.css"
+    />
+    <link rel="stylesheet" href="resources/styles/select/select2.min.css" />
+    <link rel="stylesheet" href="../shared/styles/common.css" />
+    <link rel="stylesheet" href="../shared/styles/studio.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <!-- 헤더는 layouts.js로 렌더링됨 -->
+      </header>
+
+      <!-- lnb -->
+      <aside class="lnb">
+        <!-- isShrink 추가 삭제  -->
+        <div class="lnb-content">
+          <header class="lnb-header">
+            <h1 class="text-h4">Component Studio</h1>
+          </header>
+          <main class="lnb-body">
+            <div class="lnb-body-util">
+              <div class="input-field input-field--start-icon">
+                <i class="icon icon--medium icon--search input-icon"></i>
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="컴포넌트 검색..."
+                  id="componentSearchInput"
+                />
+              </div>
+            </div>
+            <div class="lnb-body-menu">
+              <h2 class="text-body-sm">Component Categories</h2>
+              <div class="lnb-body-menu-list-wrapper">
+                <nav class="lnb-body-menu-list" id="componentCategoryNav">
+                  <!-- 카테고리별 컴포넌트 네비게이션이 동적으로 생성됩니다 -->
+                </nav>
+              </div>
+            </div>
+          </main>
+          <footer class="lnb-footer">
+            <div class="lnb-footer-info">
+              <p class="text-sub-md-12 text-secondary">
+                <span id="componentCount">15</span> Components
+              </p>
+              <p class="text-sub-md-12 text-tertiary">
+                Akumize Design System v1.0
+              </p>
+              <a
+                href="generator.html"
+                class="btn btn--primary btn--small"
+                style="
+                  margin-top: 12px;
+                  width: 100%;
+                  text-decoration: none;
+                  text-align: center;
+                "
+              >
+                ⚡ Component Generator
+              </a>
+            </div>
+          </footer>
+        </div>
+      </aside>
+      <!--// lnb -->
+
+      <!-- content -->
+      <main id="content">
+        <div class="content-inner content-inner--components">
+          <!-- Component Content Container -->
+          <div
+            id="componentContentContainer"
+            class="component-content-container"
+          >
+            <!-- Initial Loading Message -->
+            <div
+              id="defaultWelcomeSection"
+              class="welcome-section"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 400px;
+              "
+            >
+              <div style="text-align: center">
+                <i
+                  class="icon icon--xlarge icon--code"
+                  style="
+                    width: 64px;
+                    height: 64px;
+                    margin-bottom: 20px;
+                    opacity: 0.5;
+                  "
+                ></i>
+                <h2
+                  class="text-h3"
+                  style="color: var(--text-tertiary); margin: 0"
+                >
+                  Loading...
+                </h2>
+                <p
+                  class="text-body-sm"
+                  style="color: var(--text-tertiary); margin-top: 8px"
+                >
+                  Component Studio를 불러오는 중입니다
+                </p>
+              </div>
+            </div>
+            <!-- 
+              ⚙️ 컴포넌트 섹션은 ComponentConfig에서 자동 생성됩니다.
+              LNB에서 선택한 컴포넌트만 표시됩니다.
+            -->
+          </div>
+        </div>
+      </main>
+      <!--// content -->
+      <!-- Footer -->
+      <footer id="footer">
+        <!-- 푸터는 layouts.js로 렌더링됨 -->
+      </footer>
+    </div>
+
+    <!-- Modals will be auto-rendered here by components-init.js -->
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="resources/styles/datatables/datatables.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.js"></script>
+    <script
+      type="text/javascript"
+      src="resources/styles/daterangepicker/daterangepicker.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="resources/styles/select/select2_custom.js"
+    ></script>
+
+    <!-- 페이지 전용 스크립트는 resources/js/components-page.js로 이동됨 -->
+
+    <!-- Component Data는 주소 기반으로 동적으로 로드됩니다 -->
+    <!-- Overview Data -->
+    <script src="components/data/overview.data.js"></script>
+
+    <!-- Theme Manager (먼저 로드) -->
+    <script src="components/scripts/theme-manager.js"></script>
+
+    <!-- Layout System -->
+    <script src="resources/js/layouts.js"></script>
+
+    <!-- Components Page Scripts -->
+    <script src="../shared/data/components-config.js"></script>
+    <script src="resources/js/components-page.js"></script>
+
+    <!-- Component Engine Scripts -->
+    <script src="components/component-engine.js"></script>
+    <script src="components/renderers/generic.renderer.js"></script>
+    <script src="components/renderers/modal.renderer.js"></script>
+    <script src="components/renderers/icon.renderer.js"></script>
+    <script src="components/renderers/color.renderer.js"></script>
+    <script src="components/renderers/spacing.renderer.js"></script>
+    <!-- Overview는 GenericRenderer에서 처리 -->
+    <script src="resources/js/component-code-viewer.js"></script>
+    <!-- common.js 제거됨: 모든 컴포넌트는 components/scripts/에서 관리됩니다 -->
+    <script src="components/components-init.js"></script>
+
+    <!-- 컴포넌트 스크립트 -->
+    <script src="components/scripts/tooltip.js"></script>
+    <script src="components/scripts/popover.js"></script>
+    <script src="components/scripts/dropdown.js"></script>
+    <script src="components/scripts/modal.js"></script>
+    <script src="components/scripts/tab.js"></script>
+    <script src="components/scripts/accordion.js"></script>
+    <script src="components/scripts/input.js"></script>
+    <script src="components/scripts/chip.js"></script>
+    <script src="components/scripts/checkbox-group.js"></script>
+    <script src="components/scripts/slider.js"></script>
+    <script src="components/scripts/lnb.js"></script>
+    <script src="components/scripts/file-card.js"></script>
+    <script src="components/scripts/file-upload.js"></script>
+    <script src="components/scripts/tree-menu.js"></script>
+    <!-- <script src="components/scripts/datepicker.js"></script> -->
+    <!-- 컴포넌트 스크립트 자동 초기화 시스템 -->
+    <script src="components/scripts-init.js"></script>
+
+    <!-- 레이아웃 렌더링 -->
+    <script>
+      // 레이아웃 렌더링 (기본값 사용)
+      Layouts.renderLayouts();
+    </script>
+  </body>
+</html>
