@@ -20,3 +20,6 @@ export { RadioGroup } from "./Radio/RadioGroup";
 
 // Dropdown
 export { Dropdown } from "./Dropdown/Dropdown";
+
+// Slider
+export { Slider } from "./Slider/Slider";

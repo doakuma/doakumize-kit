@@ -2787,7 +2787,7 @@ table.dataTable.no-footer {
   appearance: none;
   width: 24px;
   height: 24px;
-  background: #ffa033;
+  background: var(--info-300);
   border: 5px solid var(--surface-page);
   border-radius: 50%;
   cursor: pointer;
@@ -2844,7 +2844,11 @@ table.dataTable.no-footer {
   right: 0;
   height: 10px;
   transform: translateY(-50%);
-  background: linear-gradient(to right, #ffa033 50%, var(--gray-200) 50%);
+  background: linear-gradient(
+    to right,
+    var(--info-300) 50%,
+    var(--gray-200) 50%
+  );
   border-radius: 4px;
   pointer-events: none;
   z-index: 1;
