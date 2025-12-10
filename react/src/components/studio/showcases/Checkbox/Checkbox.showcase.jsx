@@ -25,14 +25,14 @@ export const checkboxShowcase = {
           code: `<Checkbox name="checkbox-default" id="checkbox-default" value="checkbox" onChange={() => {}} label="체크박스" />`,
         },
         {
-          name: "Checked",
+          name: "Default Checked",
           component: (
             <Checkbox
               name="checkbox-checked"
               id="checkbox-checked"
               value="checkbox"
               onChange={() => {}}
-              checked={true}
+              defaultChecked={true}
               label="Checked"
             />
           ),

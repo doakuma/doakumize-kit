@@ -23,3 +23,6 @@ export { Dropdown } from "./Dropdown/Dropdown";
 
 // Slider
 export { Slider } from "./Slider/Slider";
+
+// Switch
+export { Switch } from "./Switch/Switch";

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-export const Checkbox = (props) => {
+export const Switch = (props) => {
   const {
-    name,
     id,
+    name,
     value,
     onChange,
     disabled = false,
@@ -10,6 +10,7 @@ export const Checkbox = (props) => {
     defaultChecked,
     label,
     size = "medium",
+    labelPosition = "right",
     ...rest
   } = props;
 
@@ -19,14 +20,17 @@ export const Checkbox = (props) => {
     defaultChecked: _defaultChecked,
     ...safeRest
   } = rest;
-
-  const className = ["chk", disabled && "chk--disabled", size && `chk--${size}`]
+  const className = [
+    "toggle-field",
+    disabled && "toggle-field--disabled",
+    size && `toggle-field--${size}`,
+  ]
     .filter(Boolean)
     .join(" ");
   return (
     <span className={className}>
       <input
-        className="chk__input"
+        className="toggle-input"
         type="checkbox"
         name={name}
         id={id}
@@ -39,26 +43,42 @@ export const Checkbox = (props) => {
           : {})}
         {...safeRest}
       />
-      <span className="chk__box" aria-hidden="true"></span>
-      <label htmlFor={id} className="chk__label">
-        {label}
-      </label>
+      <label htmlFor={id} className="toggle"></label>
+      {label && (
+        <>
+          {label.map((item, idx) => {
+            const isBoth = labelPosition === "both";
+            const bothCase = ["left", "right"];
+            return (
+              <span
+                className={`toggle-label__${
+                  isBoth ? bothCase[idx] : labelPosition
+                }`}
+                key={idx}
+              >
+                {item}
+              </span>
+            );
+          })}
+        </>
+      )}
     </span>
   );
 };
-
-Checkbox.propTypes = {
+Switch.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
-  label: PropTypes.string,
   defaultChecked: PropTypes.bool,
+  label: PropTypes.arrayOf(PropTypes.string),
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  labelPosition: PropTypes.oneOf(["left", "right", "both"]),
 };
-Checkbox.defaultProps = {
+Switch.defaultProps = {
   disabled: false,
   size: "medium",
+  labelPosition: "right",
 };
