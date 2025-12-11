@@ -249,10 +249,14 @@ function ComponentShowcase({ componentId }) {
               )}
               <div className="showcase-items">
                 {property.items.map((item, itemIdx) => (
-                  <div key={itemIdx} className="showcase-item">
-                    {item.component}
-                    {/* <p className="showcase-label">{item.name}</p> */}
-                  </div>
+                  <>
+                    <div key={itemIdx} className="showcase-item">
+                      {item.useTitle && (
+                        <p className="showcase-label">{item.name}</p>
+                      )}
+                      {item.component}
+                    </div>
+                  </>
                 ))}
               </div>
               <div className="showcase-section-code">

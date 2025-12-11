@@ -64,14 +64,16 @@
 .showcase-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .showcase-label {
   font: var(--sub-md-xs);
   color: var(--text-secondary);
   margin: 0;
+  font-weight: 600;
   text-align: center;
 }
 
