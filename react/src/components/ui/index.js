@@ -29,3 +29,6 @@ export { Switch } from "./Switch/Switch";
 
 // TextArea
 export { TextArea } from "./TextArea/TextArea";
+
+// FileUpload
+export { FileUpload } from "./Fileupload/FIleUpload";

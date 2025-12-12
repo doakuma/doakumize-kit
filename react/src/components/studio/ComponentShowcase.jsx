@@ -97,6 +97,7 @@ function ComponentShowcase({ componentId }) {
     const structure = {};
     if (data.useage) structure.useage = data.useage;
     if (data.property) structure.property = data.property;
+    if (data.features) structure.features = data.features;
     if (parsedProps) structure.props = parsedProps;
     return structure;
   }, [data, parsedProps]);
@@ -230,44 +231,118 @@ function ComponentShowcase({ componentId }) {
           ref={(el) => (sectionRefs.current[`showcaseProperty`] = el)}
         >
           <h2 className="text-h1">Properties</h2>
-          {data.property?.map((property, idx) => (
-            <Fragment key={idx}>
-              <h2
-                className="showcase-section-title"
-                id={`showcaseProperty${property.title}`}
-                ref={(el) =>
-                  (sectionRefs.current[`showcaseProperty${property.title}`] =
-                    el)
-                }
-              >
-                {property.title}
-              </h2>
-              {property.description && (
-                <p className="showcase-section-description">
-                  {property.description}
-                </p>
-              )}
-              <div className="showcase-items">
-                {property.items.map((item, itemIdx) => (
-                  <>
-                    <div key={itemIdx} className="showcase-item">
-                      {item.useTitle && (
-                        <p className="showcase-label">{item.name}</p>
-                      )}
-                      {item.component}
-                    </div>
-                  </>
-                ))}
-              </div>
-              <div className="showcase-section-code">
-                <ComponentCodeViewer
-                  code={property.code || createCodeInfo(property.items)}
-                  language="jsx"
-                />
-              </div>
-            </Fragment>
-          ))}
+          {data.property?.map((property, idx) => {
+            return (
+              <Fragment key={idx}>
+                <h2
+                  className="showcase-section-title"
+                  id={`showcaseProperty${property.title}`}
+                  ref={(el) =>
+                    (sectionRefs.current[`showcaseProperty${property.title}`] =
+                      el)
+                  }
+                >
+                  {property.title}
+                </h2>
+                {property.description && (
+                  <p className="showcase-section-description">
+                    {property.description}
+                  </p>
+                )}
+                <div
+                  className={`showcase-items ${
+                    property.grid ? "showcase-items-grid" : ""
+                  }`}
+                  style={
+                    property.gridProps?.cols
+                      ? { "--cols": property.gridProps.cols }
+                      : {}
+                  }
+                >
+                  {property.items.map((item, itemIdx) => (
+                    <>
+                      <div key={itemIdx} className="showcase-item">
+                        {item.useTitle && (
+                          <p className="showcase-label">{item.name}</p>
+                        )}
+                        {item.component}
+                      </div>
+                    </>
+                  ))}
+                </div>
+                <div className="showcase-section-code">
+                  <ComponentCodeViewer
+                    code={property.code || createCodeInfo(property.items)}
+                    language="jsx"
+                  />
+                </div>
+              </Fragment>
+            );
+          })}
         </section>
+
+        {/* Features 섹션 */}
+        {data.features && (
+          <section
+            className="showcase-section"
+            id="showcaseFeatures"
+            ref={(el) => (sectionRefs.current["showcaseFeatures"] = el)}
+          >
+            <h2 className="text-h1">Features</h2>
+            {data.features.map((feature, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <h2
+                    className="showcase-section-title"
+                    id={`showcaseFeatures${feature.title}`}
+                    ref={(el) =>
+                      (sectionRefs.current[`showcaseFeatures${feature.title}`] =
+                        el)
+                    }
+                  >
+                    {feature.title}
+                    {feature.subTitle && (
+                      <span className="showcase-section-subtitle">
+                        {" "}
+                        - {feature.subTitle}
+                      </span>
+                    )}
+                  </h2>
+                  {feature.description && (
+                    <p className="showcase-section-description">
+                      {feature.description}
+                    </p>
+                  )}
+                  <div
+                    className={`showcase-items ${
+                      feature.grid ? "showcase-items-grid" : ""
+                    }`}
+                    style={
+                      feature.gridProps?.cols
+                        ? { "--cols": feature.gridProps.cols }
+                        : {}
+                    }
+                  >
+                    {feature.items.map((item, itemIdx) => (
+                      <div key={itemIdx} className="showcase-item">
+                        {item.useTitle && (
+                          <p className="showcase-label">{item.name}</p>
+                        )}
+                        {item.component}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="showcase-section-code">
+                    <ComponentCodeViewer
+                      code={feature.code || createCodeInfo(feature.items)}
+                      language="jsx"
+                    />
+                  </div>
+                </Fragment>
+              );
+            })}
+          </section>
+        )}
 
         {/* Props 섹션 */}
         {parsedProps && (

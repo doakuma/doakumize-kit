@@ -47,17 +47,19 @@ const ComponentNavigation = (props) => {
             {key}
           </NavLink>
         </li>
-        {key !== "props" && <li>{renderItems(value)}</li>}
+        {key !== "props" && <li>{renderItems(value, key)}</li>}
       </ul>
     );
   };
 
-  const renderItems = (items) => {
+  const renderItems = (items, parentKey) => {
     if (typeof items === "string") return;
+    const prefix =
+      parentKey === "features" ? "showcaseFeatures" : "showcaseProperty";
     return (
       <ul className="showcase-list-items">
         {items.map((item, idx) => {
-          const sectionId = `showcaseProperty${item.title}`;
+          const sectionId = `${prefix}${item.title}`;
           return (
             <li key={idx}>
               <NavLink

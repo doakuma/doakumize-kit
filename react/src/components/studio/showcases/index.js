@@ -26,6 +26,13 @@
 const showcaseModules = import.meta.glob("./**/*.showcase.jsx", {
   eager: true,
 });
+/**
+ * kebab-case를 camelCase로 변환
+ * 예: "file-upload" -> "fileUpload"
+ */
+function toCamelCase(kebabCase) {
+  return kebabCase.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+}
 
 /**
  * showcase 맵 생성
@@ -52,7 +59,9 @@ function createShowcaseMap() {
       .replace(/^-/, ""); // "Button" -> "button"
 
     // export 이름 규칙: {componentId}Showcase (camelCase)
-    const exportName = `${componentId}Showcase`;
+    // componentId가 하이픈 포함이면 camelCase로 변환
+    const camelCaseId = toCamelCase(componentId);
+    const exportName = `${camelCaseId}Showcase`;
 
     // 모듈에서 showcase 데이터 찾기
     const showcaseData = module[exportName] || module.default || module;
